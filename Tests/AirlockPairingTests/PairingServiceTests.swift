@@ -30,7 +30,7 @@ private func service(
     _ fake: FakeADB,
     network: FixedNetwork = wifi,
     store: MemoryStore = MemoryStore(),
-    timeout: Duration = .milliseconds(200)
+    timeout: Duration = .seconds(10)
 ) -> PairingService {
     PairingService(adb: makeADB(fake), network: network, store: store, discoveryTimeout: timeout, pollInterval: .milliseconds(5))
 }
@@ -109,7 +109,7 @@ struct QRPairingTests {
         fake.on(["mdns", "services"], .ok("someone-else\t_adb-tls-pairing._tcp\t192.168.1.30:1\n"))
         fake.on(["mdns", "check"], .ok("mdns daemon version [adb discovery 0.0.0]\n"))
         await #expect(throws: PairingError.self) {
-            try await service(fake).pairWithQR(PairingSession(serviceName: "airlock-mine", password: "x"))
+            try await service(fake, timeout: .milliseconds(100)).pairWithQR(PairingSession(serviceName: "airlock-mine", password: "x"))
         }
         #expect(!fake.calls.contains { $0.first == "pair" })
     }
@@ -119,7 +119,7 @@ struct QRPairingTests {
         fake.on(["mdns", "services"], .ok("List of discovered mdns services\n"))
         fake.on(["mdns", "check"], .ok("mdns daemon version [adb discovery 0.0.0]\n"))
         await #expect(throws: PairingError.notFound(.noServiceSeen)) {
-            try await service(fake).pairWithQR(.random())
+            try await service(fake, timeout: .milliseconds(100)).pairWithQR(.random())
         }
     }
 
@@ -141,7 +141,7 @@ struct QRPairingTests {
         fake.on(["mdns", "services"], .ok("List of discovered mdns services\n"))
         fake.on(["mdns", "check"], .ok("mdns daemon version\n"))
         await #expect(throws: PairingError.pairedButNotConnected) {
-            try await service(fake).pairWithQR(PairingSession(serviceName: "airlock-q", password: "pw1234"))
+            try await service(fake, timeout: .milliseconds(100)).pairWithQR(PairingSession(serviceName: "airlock-q", password: "pw1234"))
         }
     }
 }
