@@ -8,7 +8,9 @@ import Testing
 
 @Suite("DeviceShell quoting")
 struct DeviceShellTests {
-    @Test(arguments: ["pm", "list", "--user", "0", "com.example.app", "/sdcard/Android/obb/a.b/main.1.a.b.obb", "-S", "1234", "a=b:c,d@e%f+g"])
+    @Test(arguments: [
+        "pm", "list", "--user", "0", "com.example.app", "/sdcard/Android/obb/a.b/main.1.a.b.obb", "-S", "1234", "a=b:c,d@e%f+g",
+    ])
     func safeArgumentsPassThroughUnquoted(_ argument: String) throws {
         #expect(try DeviceShell.quote(argument) == argument)
     }

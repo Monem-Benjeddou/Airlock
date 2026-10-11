@@ -30,6 +30,8 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - yoda_condition
 disabled_rules:
+  # Device and process output must always decode; lossy `String(decoding:as:)` is intended.
+  - optional_data_string_conversion
   - todo
   - trailing_comma
   - nesting
@@ -58,7 +60,7 @@ large_tuple:
 custom_rules:
   no_shell_strings:
     name: "No shell command strings"
-    regex: '(\"/bin/(ba|z)?sh\"|\"-c\")'
+    regex: '("/(usr/)?bin/(ba|z|da|k)?sh"|"(ba|z|da|k)?sh"\s*,\s*"-c")'
     message: "Never run commands through a shell; pass argument arrays to ProcessRunner."
     severity: error
   spdx_header:

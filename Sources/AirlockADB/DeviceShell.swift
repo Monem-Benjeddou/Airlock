@@ -78,6 +78,8 @@ public struct RemotePath: Hashable, Sendable, CustomStringConvertible {
         return try RemotePath(rawValue + "/" + fileName)
     }
 
+    public static let data = RemotePath(trusted: "/data")
+
     /// `/sdcard/Android/obb/<package>`.
     public static func obbDirectory(for package: PackageName) -> RemotePath {
         RemotePath(trusted: "/sdcard/Android/obb/" + package.rawValue)
