@@ -92,6 +92,7 @@ struct ReviewSheet: View {
 /// F3: the report itself. Verdicts are Low, Medium or High risk, never "safe".
 struct SafetyReportView: View {
     let report: SafetyReport
+    @State private var showsTechnicalDetails = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -141,9 +142,9 @@ struct SafetyReportView: View {
             }
             GroupBox("VirusTotal") { ReputationSummary(result: report.reputation) }
             // Verdict first, details on request: hashes matter to experts, not to the install decision.
-            DisclosureGroup("Technical details") {
+            DisclosureGroup(isExpanded: $showsTechnicalDetails) {
                 VStack(alignment: .leading, spacing: 4) {
-                    // Callout size: caption-sized monospaced digits failed the contrast audit in any colour.
+                    // Callout size: long hex strings are hard to read at caption size.
                     LabeledContent("File SHA-256") {
                         Text(report.sha256).font(.callout.monospaced()).textSelection(.enabled)
                     }
@@ -156,6 +157,10 @@ struct SafetyReportView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 4)
+            } label: {
+                // macOS only toggles a DisclosureGroup from its triangle; people click the words too.
+                Button("Technical details") { showsTechnicalDetails.toggle() }
+                    .buttonStyle(.plain)
             }
             .accessibilityIdentifier("technicalDetails")
         }

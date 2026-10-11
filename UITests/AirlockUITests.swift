@@ -115,9 +115,7 @@ final class AirlockUITests: XCTestCase {
         XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
         XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
         XCTAssertFalse(appears(containing: "cdcdcdcd", timeout: 0), "hashes stay out of the way until asked for")
-        // On macOS only the disclosure triangle expands a DisclosureGroup, not its label; the sidebar has its
-        // own triangles, so look inside the sheet.
-        app.sheets.firstMatch.disclosureTriangles.firstMatch.click()
+        wait(for: "Technical details").click()
         if !appears(containing: "cdcdcdcd", timeout: 3) {
             fail("Technical details did not show the hash", file: #filePath, line: #line)
         }
@@ -260,7 +258,7 @@ final class AirlockUITests: XCTestCase {
     /// in the title bar, which AppKit draws, and contrast of system-coloured sidebar text.
     /// With `region`, only findings on its own elements count: under a sheet, macOS dims the window on purpose.
     private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
-        if let region { settle(region) }
+        settleAnimations(expectingSheet: region != nil)
         let regionFrames = try region.map { try Self.frames(in: $0.snapshot()) }
         app.activate()
         let window = app.windows.firstMatch.frame
@@ -281,16 +279,15 @@ final class AirlockUITests: XCTestCase {
         }
     }
 
-    /// Waits until `element` stops moving: auditing a sheet mid-animation measures half-transparent text.
-    private func settle(_ element: XCUIElement, timeout: TimeInterval = 5) {
-        var last = element.frame
-        let deadline = Date().addingTimeInterval(timeout)
-        while Date() < deadline {
-            RunLoop.current.run(until: Date().addingTimeInterval(0.4))
-            let now = element.frame
-            if now == last { return }
-            last = now
+    /// Waits for sheet animations to finish. A sheet fades in and out over the window and dims it meanwhile, so
+    /// an audit taken mid-fade measures regular-weight text against a dimmed window. A sheet's frame does not
+    /// change while it fades, so this waits on the sheet's presence and then a fixed settling time.
+    private func settleAnimations(expectingSheet: Bool) {
+        let deadline = Date().addingTimeInterval(5)
+        while app.sheets.firstMatch.exists != expectingSheet, Date() < deadline {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.1))
         }
+        RunLoop.current.run(until: Date().addingTimeInterval(1))
     }
 
     /// The frames of every element in a snapshot, as strings so they can go in a set.
