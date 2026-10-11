@@ -251,6 +251,7 @@ final class AirlockUITests: XCTestCase {
     /// in the title bar, which AppKit draws, and contrast of system-coloured sidebar text.
     /// With `region`, only findings on its own elements count: under a sheet, macOS dims the window on purpose.
     private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
+        if let region { settle(region) }
         let regionFrames = try region.map { try Self.frames(in: $0.snapshot()) }
         app.activate()
         let window = app.windows.firstMatch.frame
@@ -268,6 +269,18 @@ final class AirlockUITests: XCTestCase {
             fail("\(screen): \(issue.auditType) \(issue.compactDescription) on \(issue.element?.debugDescription ?? "the window")",
                  file: #filePath, line: #line)
             return true
+        }
+    }
+
+    /// Waits until `element` stops moving: auditing a sheet mid-animation measures half-transparent text.
+    private func settle(_ element: XCUIElement, timeout: TimeInterval = 5) {
+        var last = element.frame
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+            let now = element.frame
+            if now == last { return }
+            last = now
         }
     }
 
