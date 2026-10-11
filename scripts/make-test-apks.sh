@@ -49,7 +49,8 @@ fi
 
 # --- Stub Java sources under tracker-like packages ----------------------------------------------------
 SRC="$WORK/src"
-mkdir -p "$SRC/com/facebook/ads" "$SRC/com/google/firebase/analytics" "$SRC/org/airlock/fixture/deep/inner"
+mkdir -p "$SRC/com/facebook/ads" "$SRC/com/google/firebase/analytics" "$SRC/com/google/android/gms/ads" \
+  "$SRC/org/airlock/fixture/deep/inner/most"
 cat > "$SRC/com/facebook/ads/AdView.java" <<'JAVA'
 package com.facebook.ads;
 /** Stub with a tracker-like name; contains no third-party code. */
@@ -64,13 +65,21 @@ public final class FirebaseAnalytics {
     public static int count() { return 1; }
 }
 JAVA
-cat > "$SRC/org/airlock/fixture/deep/inner/Leaf.java" <<'JAVA'
-package org.airlock.fixture.deep.inner;
+cat > "$SRC/com/google/android/gms/ads/MobileAds.java" <<'JAVA'
+package com.google.android.gms.ads;
+/** Stub five package segments deep, like real ad SDK prefixes; contains no third-party code. */
+public final class MobileAds {
+    public static int count() { return 2; }
+}
+JAVA
+cat > "$SRC/org/airlock/fixture/deep/inner/most/Leaf.java" <<'JAVA'
+package org.airlock.fixture.deep.inner.most;
 import com.facebook.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
-/** Five package levels deep, to exercise the depth cap of the prefix scan. */
+/** Six package segments deep, to exercise the depth cap (5) of the prefix scan. */
 public final class Leaf {
-    public String run() { return new AdView().describe() + FirebaseAnalytics.count(); }
+    public String run() { return new AdView().describe() + FirebaseAnalytics.count() + MobileAds.count(); }
 }
 JAVA
 mkdir -p "$WORK/classes" "$WORK/dex"
