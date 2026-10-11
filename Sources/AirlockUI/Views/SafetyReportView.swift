@@ -90,6 +90,7 @@ struct SafetyReportView: View {
                             .foregroundStyle(color(for: reason.level))
                     }
                 }
+                .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("riskReasons")
             }
             GroupBox("Developer") { SignerSummary(check: report.signer, match: report.signerMatch) }

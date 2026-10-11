@@ -24,8 +24,15 @@ extension AppEnvironment {
             startupProblem: nil
         )
         if !queuedFiles.isEmpty {
-            queue.targetDevice = DemoDeviceService.serial
-            queue.add(queuedFiles.map { URL(fileURLWithPath: "/demo/\($0)") })
+            // Enqueue once the window has seen the phone as ready, like a user dropping files would; adding
+            // earlier races the window, which clears the install target until the phone is ready.
+            let files = queuedFiles.map { URL(fileURLWithPath: "/demo/\($0)") }
+            Task { @MainActor in
+                while environment.devices.stage != .ready || queue.targetDevice == nil {
+                    try? await Task.sleep(for: .milliseconds(50))
+                }
+                queue.add(files)
+            }
         }
         return environment
     }

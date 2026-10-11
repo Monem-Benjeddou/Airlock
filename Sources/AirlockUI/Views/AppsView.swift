@@ -74,7 +74,7 @@ struct AppsView: View {
 
     @ViewBuilder private func confirmationActions(_ change: AppsModel.PendingChange) -> some View {
         Button(change.operation.isDestructive ? "Confirm" : "Continue", role: change.operation.isDestructive ? .destructive : nil) {
-            Task { await model.confirmPendingChange() }
+            Task { await model.confirm(change) }
         }
         .accessibilityIdentifier("confirmChange")
         Button("Cancel", role: .cancel) { model.cancelPendingChange() }
@@ -121,6 +121,7 @@ struct ResultsBanner: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(8)
             .background(failures.isEmpty ? Color.green.opacity(0.12) : Color.orange.opacity(0.15))
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("resultsBanner")
         }
     }

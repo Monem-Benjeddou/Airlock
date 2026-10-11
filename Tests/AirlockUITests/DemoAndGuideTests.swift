@@ -74,9 +74,17 @@ struct DemoEnvironmentTests {
         #expect(await none.next() == [])
     }
 
+    /// A demo queue after the window has done its part: the phone is ready and is the install target.
+    private func readyQueue(_ files: [String]) async -> InstallQueueModel {
+        let environment = AppEnvironment.demo(queuedFiles: files)
+        #expect(environment.installQueue.items.isEmpty, "nothing is queued before the phone is ready")
+        await environment.devices.apply([ConnectedDevice(serial: DemoDeviceService.serial, state: .ready)])
+        environment.installQueue.targetDevice = environment.devices.selectedSerial
+        return environment.installQueue
+    }
+
     @Test func lowRiskFileInstallsWithoutReview() async {
-        let environment = AppEnvironment.demo(queuedFiles: ["notes.apk"])
-        let queue = environment.installQueue
+        let queue = await readyQueue(["notes.apk"])
         #expect(await eventually { queue.items.first?.state.isFinished == true })
         guard case .installed(let outcome) = queue.items[0].state else {
             Issue.record("expected installed, got \(queue.items[0].state)")
@@ -87,28 +95,28 @@ struct DemoEnvironmentTests {
     }
 
     @Test func riskyFileWaitsForReviewAndNeverSaysSafe() async {
-        let queue = AppEnvironment.demo(queuedFiles: ["risky.apk"]).installQueue
-        #expect(await eventually { if case .needsReview = queue.items[0].state { true } else { false } })
+        let queue = await readyQueue(["risky.apk"])
+        #expect(await eventually { if case .needsReview = queue.items.first?.state { true } else { false } })
         guard case .needsReview(let plan) = queue.items[0].state else { return }
         #expect(plan.report.level == .high)
         #expect(!plan.report.reasons.isEmpty)
         let words = plan.report.reasons.map(\.message) + plan.report.permissions.map(\.plainLanguage)
         #expect(words.allSatisfy { !$0.localizedCaseInsensitiveContains("safe") })
         queue.skipReview()
-        #expect(await eventually { queue.items[0].state == .skipped })
+        #expect(await eventually { queue.items.first?.state == .skipped })
     }
 
     @Test func riskyFileInstallsAfterApproval() async {
-        let queue = AppEnvironment.demo(queuedFiles: ["risky.apk"]).installQueue
-        #expect(await eventually { if case .needsReview = queue.items[0].state { true } else { false } })
+        let queue = await readyQueue(["risky.apk"])
+        #expect(await eventually { if case .needsReview = queue.items.first?.state { true } else { false } })
         guard case .needsReview(let plan) = queue.items[0].state else { return }
         queue.approve(plan)
-        #expect(await eventually { if case .installed = queue.items[0].state { true } else { false } })
+        #expect(await eventually { if case .installed = queue.items.first?.state { true } else { false } })
     }
 
     @Test func severalFilesInstallInOrder() async {
-        let queue = AppEnvironment.demo(queuedFiles: ["one.apk", "two.apk", "three.apk"]).installQueue
-        #expect(await eventually { queue.items.allSatisfy { $0.state.isFinished } })
+        let queue = await readyQueue(["one.apk", "two.apk", "three.apk"])
+        #expect(await eventually { queue.items.count == 3 && queue.items.allSatisfy { $0.state.isFinished } })
         let names = queue.items.compactMap { item -> String? in
             if case .installed(let outcome) = item.state { outcome.packageName.rawValue } else { nil }
         }
@@ -122,7 +130,7 @@ struct DemoEnvironmentTests {
         let bloat = try #require(PackageName(rawValue: "com.example.bloat"))
         apps.request(.disableForUser, for: [bloat])
         #expect(apps.apps.first { $0.packageName == bloat }?.state == .enabled, "nothing changes before confirmation")
-        await apps.confirmPendingChange()
+        await apps.confirm(try #require(apps.pendingChange))
         #expect(apps.results == [AppsModel.ChangeResult(package: bloat, error: nil)])
         #expect(apps.apps.first { $0.packageName == bloat }?.state == .disabled)
         let entry = try #require(apps.history.first)
@@ -139,7 +147,7 @@ struct DemoEnvironmentTests {
         await apps.reload()
         let settings = try #require(PackageName(rawValue: "com.android.settings"))
         apps.request(.disableForUser, for: [settings])
-        await apps.confirmPendingChange()
+        await apps.confirm(try #require(apps.pendingChange))
         let error = try #require(apps.results.first?.error)
         #expect(error.contains("core part of Android"))
         #expect(apps.apps.first { $0.packageName == settings }?.state == .enabled)

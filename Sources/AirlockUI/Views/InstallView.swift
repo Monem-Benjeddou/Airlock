@@ -112,6 +112,9 @@ struct DropZone: View {
                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [8]))
                 .foregroundStyle(isTargeted ? Color.accentColor : .secondary.opacity(0.5))
         )
+        // `.contain` keeps the identifier on the container; without it SwiftUI copies it onto every child,
+        // replacing the button's own identifier.
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("dropZone")
     }
 }
@@ -134,6 +137,7 @@ struct QueueRow: View {
             }
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("queueItem")
     }
 

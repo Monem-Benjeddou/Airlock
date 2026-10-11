@@ -105,7 +105,7 @@ public final class AppsModel {
 
     // MARK: Changes
 
-    /// Step 1: ask. Nothing touches the phone until ``confirmPendingChange()``.
+    /// Step 1: ask. Nothing touches the phone until ``confirm(_:)``.
     public func request(_ operation: DeviceOperation, for packages: [PackageName]) {
         guard !packages.isEmpty else { return }
         pendingChange = PendingChange(operation: operation, packages: packages)
@@ -115,9 +115,10 @@ public final class AppsModel {
         pendingChange = nil
     }
 
-    /// Step 2: the user pressed the confirm button in the dialog.
-    public func confirmPendingChange() async {
-        guard let change = pendingChange, let device else { return }
+    /// Step 2: the user pressed the confirm button for `change`, the one the dialog presented. It is passed in
+    /// rather than read back from ``pendingChange`` because dismissing the dialog clears that first.
+    public func confirm(_ change: PendingChange) async {
+        guard let device else { return }
         pendingChange = nil
         var outcomes: [ChangeResult] = []
         for package in change.packages {

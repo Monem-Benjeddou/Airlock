@@ -207,17 +207,30 @@ struct AppsModelTests {
         #expect(manager.performed.get().isEmpty)
         model.cancelPendingChange()
         #expect(model.pendingChange == nil)
-        await model.confirmPendingChange()
         #expect(manager.performed.get().isEmpty)
     }
 
-    @Test func confirmedBatchRunsEachChangeAndReportsResults() async {
+    @Test func confirmingStillAppliesAfterTheDialogDismissesItself() async throws {
+        // Regression: pressing Confirm also dismisses the dialog, whose binding cleared the pending change
+        // before the confirm task ran, so confirmed changes were silently dropped.
+        let manager = FakeAppManager(apps: apps)
+        let model = model(manager)
+        model.request(.disableForUser, for: [pkg("com.samsung.bloat.safe")])
+        let change = try #require(model.pendingChange)
+        model.cancelPendingChange()
+        await model.confirm(change)
+        #expect(manager.performed.get().map(\.package.rawValue) == ["com.samsung.bloat.safe"])
+        #expect(model.results == [AppsModel.ChangeResult(package: pkg("com.samsung.bloat.safe"), error: nil)])
+    }
+
+    @Test func confirmedBatchRunsEachChangeAndReportsResults() async throws {
         let manager = FakeAppManager(apps: apps)
         manager.blocked = ["com.samsung.bloat.expert"]
         let model = model(manager)
         model.request(.uninstallForUser, for: [pkg("com.samsung.bloat.safe"), pkg("com.samsung.bloat.expert")])
-        #expect(model.pendingChange?.title == "Remove 2 apps for this user?")
-        await model.confirmPendingChange()
+        let change = try #require(model.pendingChange)
+        #expect(change.title == "Remove 2 apps for this user?")
+        await model.confirm(change)
         #expect(manager.performed.get().map(\.package.rawValue) == ["com.samsung.bloat.safe"])
         #expect(model.results.count == 2)
         #expect(model.results[1].error?.contains("core part of Android") == true)
