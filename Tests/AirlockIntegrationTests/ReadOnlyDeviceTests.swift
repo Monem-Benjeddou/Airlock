@@ -3,6 +3,10 @@
 
 import AirlockADB
 import AirlockCore
+import AirlockJournal
+import AirlockSafety
+import AirlockServices
+import AirlockTestSupport
 import Foundation
 import Testing
 
@@ -61,5 +65,46 @@ struct ReadOnlyDeviceTests {
             for _ in 0..<8 { group.addTask { _ = try await channel.density() } }
             try await group.waitForAll()
         }
+    }
+}
+
+@Suite("Integration: read-only services", .enabled(if: IntegrationEnvironment.enabled && IntegrationEnvironment.serial != nil))
+struct ReadOnlyServiceTests {
+    @Test func deviceServiceReadsInfo() async throws {
+        let serial = try #require(IntegrationEnvironment.serial)
+        let info = try await DefaultDeviceService(adb: try IntegrationEnvironment.client()).info(for: serial)
+        #expect(!info.model.isEmpty)
+        #expect(!info.properties.abis.isEmpty)
+        #expect(info.properties.densityDPI > 100)
+    }
+
+    @Test func appManagerListsEveryApp() async throws {
+        let serial = try #require(IntegrationEnvironment.serial)
+        let manager = DefaultAppManager(
+            adb: try IntegrationEnvironment.client(), journal: try SQLiteJournalStore.inMemory(),
+            presets: try PresetLibrary.bundled(), backupRoot: FileManager.default.temporaryDirectory
+        )
+        let apps = try await manager.listApps(on: serial)
+        #expect(apps.count > 50)
+        #expect(apps.contains { $0.packageName.rawValue == "com.android.settings" && $0.isSystem })
+        #expect(apps.contains { !$0.isSystem })
+    }
+
+    /// Plans (but does not install) a real signed fixture against the real phone.
+    @Test func plansAnInstallWithoutTouchingThePhone() async throws {
+        let serial = try #require(IntegrationEnvironment.serial)
+        let adb = try IntegrationEnvironment.client()
+        let safety = DefaultSafetyEngine(catalog: try SafetyCatalog.bundled(), reputation: nil)
+        let pipeline = DefaultInstallPipeline(
+            adb: adb, inspector: LocalPackageInspector(), safety: safety,
+            devices: DefaultDeviceService(adb: adb), journal: try SQLiteJournalStore.inMemory()
+        )
+        let package = try await pipeline.inspect(try FixtureAPKs.url(.v123RSA))
+        defer { Task { await pipeline.discard(package) } }
+        let plan = try await pipeline.plan(package, for: serial)
+        #expect(plan.package.packageName == "org.airlock.fixture")
+        #expect(plan.report.level >= .medium, "the fixture asks for SMS access")
+        #expect(plan.existing == nil)
+        #expect(plan.problems.isEmpty || plan.problems.allSatisfy { if case .deviceSDKTooOld = $0 { true } else { false } })
     }
 }

@@ -68,7 +68,14 @@ let package = Package(
             resources: [.copy("Resources/presets")],
             swiftSettings: strict
         ),
-        .target(name: "AirlockUI", dependencies: ["AirlockCore", "AirlockServices", "AirlockPairing", "AirlockReputation"], swiftSettings: strict),
+        .target(
+            name: "AirlockUI",
+            dependencies: [
+                "AirlockCore", "AirlockADB", "AirlockJournal", "AirlockSafety", "AirlockServices",
+                "AirlockPairing", "AirlockReputation",
+            ],
+            swiftSettings: strict
+        ),
 
         // Runs the SwiftUI app straight from SwiftPM for development (`swift run AirlockDev`).
         // The shipping app is the Xcode target in App/, generated from project.yml.
@@ -119,7 +126,7 @@ let package = Package(
         // Talks to a real emulator; skipped unless AIRLOCK_INTEGRATION=1.
         .testTarget(
             name: "AirlockIntegrationTests",
-            dependencies: ["AirlockServices", "AirlockTestSupport"],
+            dependencies: ["AirlockServices", "AirlockJournal", "AirlockSafety", "AirlockTestSupport"],
             swiftSettings: strict
         ),
     ]
