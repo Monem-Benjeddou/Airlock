@@ -88,6 +88,20 @@ public final class FakeADB: ProcessRunning, @unchecked Sendable {
     /// Every argument array received, in order.
     public var calls: [[String]] { lock.withLock { log } }
 
+    /// Waits until a command containing `word` has been received, so tests can act at a precise point
+    /// instead of guessing with sleeps. Fails after `timeout`.
+    public func waitForCall(containing word: String, timeout: Duration = .seconds(10)) async throws {
+        let deadline = ContinuousClock.now + timeout
+        while !calls.contains(where: { $0.contains(word) }) {
+            guard ContinuousClock.now < deadline else { throw WaitTimeout(word: word) }
+            try await Task.sleep(for: .milliseconds(5))
+        }
+    }
+
+    public struct WaitTimeout: Error {
+        public let word: String
+    }
+
     /// Highest number of commands that ran at the same time (to verify per-device serialisation).
     public var maxConcurrentCalls: Int { lock.withLock { maxActive } }
 

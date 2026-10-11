@@ -52,7 +52,7 @@ public struct KeychainKeyStore: APIKeyProvider {
         [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service, kSecAttrAccount as String: account]
     }
 
-    private static func map(_ status: OSStatus) -> KeychainError {
+    static func map(_ status: OSStatus) -> KeychainError {
         switch status {
         case errSecInteractionNotAllowed, errSecNotAvailable, errSecAuthFailed, errSecNoSuchKeychain: .unavailable
         default: .unexpected(status)

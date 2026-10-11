@@ -6,7 +6,7 @@ import AirlockCore
 import Foundation
 import Testing
 
-private let hash = String(repeating: "a1", count: 32)
+let hash = String(repeating: "a1", count: 32)
 
 /// Records requests and replies with canned responses; never touches the network.
 final class FakeHTTP: HTTPClient, @unchecked Sendable {
@@ -41,7 +41,7 @@ struct FixedKey: APIKeyProvider {
     func apiKey() -> String? { key }
 }
 
-private let foundBody = """
+let foundBody = """
 {"data": {"id": "\(hash)", "type": "file", "attributes": {
   "last_analysis_stats": {"malicious": 3, "suspicious": 1, "undetected": 60, "harmless": 0, "timeout": 2,
                           "type-unsupported": 4, "failure": 0, "confirmed-timeout": 0},
@@ -168,5 +168,53 @@ struct KeychainKeyStoreTests {
     @Test func emptyKeyIsRejected() {
         let store = KeychainKeyStore(service: "dev.airlock.tests.\(UUID().uuidString)")
         #expect(throws: KeychainError.emptyKey) { try store.save("  ") }
+    }
+}
+
+@Suite("Keychain status mapping")
+struct KeychainStatusTests {
+    @Test(arguments: [errSecInteractionNotAllowed, errSecNotAvailable, errSecAuthFailed, errSecNoSuchKeychain])
+    func lockedKeychainIsUnavailable(_ status: OSStatus) {
+        #expect(KeychainKeyStore.map(status) == .unavailable)
+    }
+
+    @Test func otherStatusesAreUnexpected() {
+        #expect(KeychainKeyStore.map(errSecParam) == .unexpected(errSecParam))
+    }
+}
+
+/// Serves canned responses to URLSession without touching the network.
+final class StubURLProtocol: URLProtocol, @unchecked Sendable {
+    nonisolated(unsafe) static var status = 200
+    nonisolated(unsafe) static var body = Data()
+
+    override static func canInit(with request: URLRequest) -> Bool { true }
+    override static func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        guard let url = request.url,
+              let response = HTTPURLResponse(url: url, statusCode: Self.status, httpVersion: nil, headerFields: nil) else { return }
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didLoad: Self.body)
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
+}
+
+@Suite("URLSession as HTTPClient", .serialized)
+struct URLSessionHTTPClientTests {
+    @Test func realSessionPathParsesAReport() async {
+        StubURLProtocol.status = 200
+        StubURLProtocol.body = Data(foundBody.utf8)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [StubURLProtocol.self]
+        let client = VirusTotalClient(http: URLSession(configuration: configuration), keys: FixedKey(key: "k"))
+        let result = await client.lookup(sha256: hash)
+        guard case .found(let malicious, _, _, _) = result else {
+            Issue.record("expected found, got \(result)")
+            return
+        }
+        #expect(malicious == 3)
     }
 }

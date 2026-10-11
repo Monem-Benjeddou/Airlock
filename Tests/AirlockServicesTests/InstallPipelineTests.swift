@@ -349,7 +349,7 @@ struct InstallExecutionTests {
                              FakeADB.Response(delay: .seconds(30)))
         let plan = try await harness.pipeline.plan(harness.job.package, for: harness.serial)
         let task = Task { try await harness.pipeline.install(plan) { _ in } }
-        try await Task.sleep(for: .milliseconds(150))
+        try await harness.fake.waitForCall(containing: harness.job.package.obbFiles[0].localURL.path)
         task.cancel()
         let result = await task.result
         #expect(throws: InstallError.cancelled) { try result.get() }
@@ -364,11 +364,11 @@ struct InstallExecutionTests {
         harness.fake.onPrefix(shell("pm", "install-write"), FakeADB.Response(stdout: "Success\n", delay: .seconds(30)))
         let plan = try await harness.pipeline.plan(harness.job.package, for: harness.serial)
         let task = Task { try await harness.pipeline.install(plan) { _ in } }
-        try await Task.sleep(for: .milliseconds(150))
+        try await harness.fake.waitForCall(containing: "install-write")
         task.cancel()
         let result = await task.result
         #expect(throws: InstallError.cancelled) { try result.get() }
-        try await Task.sleep(for: .milliseconds(100)) // cleanup runs detached
+        try await harness.fake.waitForCall(containing: "install-abandon")
         #expect(harness.commands("install-abandon").count == 1)
         #expect(harness.commands("install-commit").isEmpty)
         #expect(harness.commands("rm").contains { $0.last?.hasPrefix("/data/local/tmp/airlock-") == true })
