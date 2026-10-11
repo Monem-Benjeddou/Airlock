@@ -52,9 +52,12 @@ jobs:
           lipo -archs "$APP/Contents/MacOS/Airlock" | grep -q x86_64
           codesign --verify --deep --strict "$APP"
           codesign -d --entitlements - --xml "$XPC" > xpc.plist
+          plutil -p xpc.plist
           /usr/libexec/PlistBuddy -c 'Print :com.apple.security.app-sandbox' xpc.plist | grep -q true
           if grep -q 'com.apple.security.network' xpc.plist; then echo "helper has network access"; exit 1; fi
-          if grep -q 'get-task-allow' xpc.plist; then echo "helper is debuggable"; exit 1; fi
+          if [ "$(/usr/libexec/PlistBuddy -c 'Print :com.apple.security.get-task-allow' xpc.plist 2>/dev/null)" = true ]; then
+            echo "helper is debuggable"; exit 1
+          fi
       - name: Package
         run: |
           ditto -c -k --keepParent build/Build/Products/Release/Airlock.app "Airlock-$VERSION.zip"
