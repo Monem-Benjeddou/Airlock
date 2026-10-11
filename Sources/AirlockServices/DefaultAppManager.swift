@@ -77,7 +77,12 @@ public struct DefaultAppManager: AppManager {
         let restore: RestoreAction
         switch confirmed.operation {
         case .uninstall: restore = .reinstallFromBackup(apkPaths: try await backupAPKs(package, channel: channel, serial: serial))
-        case .uninstallForUser: restore = .installExisting
+        case .uninstallForUser:
+            // Only system apps survive `pm uninstall --user 0`; a user app is deleted outright, so it
+            // needs a backup to be restorable (found on a real Android 15 device).
+            restore = try await isSystemApp(package, channel: channel)
+                ? .installExisting
+                : .reinstallFromBackup(apkPaths: try await backupAPKs(package, channel: channel, serial: serial))
         case .disableForUser: restore = .enable
         case .enable, .installExisting: restore = .notRestorable
         }
@@ -167,6 +172,14 @@ public struct DefaultAppManager: AppManager {
         )
         if case .blocked(let reason) = denylist.check(package, operation: operation, context: context) {
             throw AppManagerError.blockedByDenylist(package, reason)
+        }
+    }
+
+    private func isSystemApp(_ package: PackageName, channel: DeviceChannel) async throws -> Bool {
+        do {
+            return try await channel.dump(package).isSystem
+        } catch {
+            throw AppManagerError.commandFailed(Self.message(error))
         }
     }
 

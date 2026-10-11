@@ -31,6 +31,19 @@ struct AppManagerHarness {
         "cmd", "package", "query-activities", "--brief", "-a", "android.intent.action.MAIN", "-c", "android.intent.category.HOME"
     )
 
+    /// Makes `dumpsys package <name>` describe a system or a user app.
+    func describe(_ name: String, system: Bool) {
+        let flags = system ? "[ SYSTEM HAS_CODE ]" : "[ HAS_CODE ]"
+        fake.replace(shell("dumpsys", "package", name), .ok("""
+        Packages:
+          Package [\(name)] (1):
+            versionCode=1 minSdk=24 targetSdk=34
+            flags=\(flags)
+            User 0: ceDataInode=1 installed=true hidden=false enabled=0
+
+        """))
+    }
+
     func confirm(_ operation: DeviceOperation, _ name: String) -> ConfirmedOperation {
         ConfirmedOperation(userConfirmed: operation, on: pkg(name))
     }
@@ -105,6 +118,7 @@ struct AppManagerChangeTests {
     @Test func uninstallForUserRestoresWithInstallExisting() async throws {
         let harness = try AppManagerHarness()
         let name = "com.samsung.android.game.gos"
+        harness.describe(name, system: true)
         harness.fake.on(shell("pm", "uninstall", "-k", "--user", "0", name), .ok("Success\n"))
         harness.fake.on(shell("cmd", "package", "install-existing", "--user", "0", name), .ok("Package \(name) installed for user: 0\n"))
         let entry = try await harness.manager.perform(harness.confirm(.uninstallForUser, name), on: harness.serial)
@@ -117,6 +131,24 @@ struct AppManagerChangeTests {
         #expect(history.count == 2, "the restore itself is journaled")
         #expect(history.contains { $0.id == entry.id && $0.status == .restored })
         #expect(history.contains { $0.kind == .operation(.installExisting) && $0.status == .applied })
+    }
+
+    @Test func removingAUserAppForTheUserBacksItUpFirst() async throws {
+        // Regression from a real Android 15 emulator: `pm uninstall -k --user 0` deletes a user app
+        // completely, so `install-existing` cannot bring it back.
+        let harness = try AppManagerHarness()
+        let name = "com.example.userapp1"
+        harness.describe(name, system: false)
+        harness.fake.on(shell("pm", "path", name), .ok("package:/data/app/~~a==/x-b==/base.apk\n"))
+        harness.fake.onPrefix(["-s", s24Serial, "pull"], .ok("1 file pulled\n"))
+        harness.fake.on(shell("pm", "uninstall", "-k", "--user", "0", name), .ok("Success\n"))
+        let entry = try await harness.manager.perform(harness.confirm(.uninstallForUser, name), on: harness.serial)
+        guard case .reinstallFromBackup(let paths) = entry.restore else {
+            Issue.record("a user app must be backed up, got \(entry.restore)")
+            return
+        }
+        #expect(paths.count == 1)
+        #expect(harness.commands(containing: "pull").count == 1)
     }
 
     @Test func restoredEntryCannotBeRestoredTwice() async throws {
