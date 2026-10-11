@@ -42,6 +42,30 @@ class SanitizeTests(unittest.TestCase):
             self.assertNotIn(OWNER, text, name)
             self.assertNotIn(SERIAL, text, name)
 
+    def test_a_device_name_that_is_only_the_model_code_is_kept(self):
+        model = "sdk_gphone64_arm64"
+        result = self.record({
+            "settings-device-name.txt": model + "\n",
+            "getprop.txt": f"[ro.product.model]: [{model}]\n[ro.product.name]: [{model}]\n",
+            "devices-l.txt": f"List of devices attached\n{SERIAL} device product:{model} model:{model}\n",
+        })
+        self.assertEqual(result["settings-device-name.txt"], model + "\n")
+        self.assertIn(f"[ro.product.model]: [{model}]", result["getprop.txt"])
+        self.assertIn(f"model:{model}", result["devices-l.txt"])
+
+    def test_profile_names_are_replaced(self):
+        result = self.record({
+            "pm-list-users.txt": "Users:\n\tUserInfo{0:Alex Smith:4c13} running\n\tUserInfo{150:Alex's Secure Folder:61010} running\n",
+        })
+        self.assertEqual(
+            result["pm-list-users.txt"],
+            "Users:\n\tUserInfo{0:Owner:4c13} running\n\tUserInfo{150:User 150:61010} running\n",
+        )
+
+    def test_a_profile_name_with_a_colon_is_replaced_whole(self):
+        result = self.record({"pm-list-users.txt": "Users:\n\tUserInfo{0:Alex: Work}:4c13} running\n"})
+        self.assertEqual(result["pm-list-users.txt"], "Users:\n\tUserInfo{0:Owner:4c13} running\n")
+
     def test_an_unset_device_name_stays_null(self):
         result = self.record({"settings-device-name.txt": "null\n"})
         self.assertEqual(result["settings-device-name.txt"], "null\n")
