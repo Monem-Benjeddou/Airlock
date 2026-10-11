@@ -37,6 +37,8 @@ public final class InstallQueueModel {
         public let file: URL
         public var state: State
         public var package: InspectedPackage?
+        /// The safety verdict, kept after the install so the row still shows it.
+        public var riskLevel: RiskLevel?
 
         public var displayName: String { file.lastPathComponent }
     }
@@ -82,7 +84,9 @@ public final class InstallQueueModel {
         guard finished.count == items.count else { return "Installing \(finished.count + 1) of \(items.count)" }
         let installed = items.filter { if case .installed = $0.state { true } else { false } }.count
         let missed = items.count - installed
-        return "\(installed) of \(items.count) installed" + (missed > 0 ? ", \(missed) not installed" : "")
+        if missed == 0 { return items.count == 1 ? "Installed" : "All \(items.count) installed" }
+        if installed == 0 { return items.count == 1 ? "Not installed" : "None of the \(items.count) installed" }
+        return "\(installed) of \(items.count) installed, \(missed) not installed"
     }
 
     // MARK: Adding
@@ -91,7 +95,7 @@ public final class InstallQueueModel {
         let open = items.filter { !$0.state.isFinished }.count
         let room = max(Self.maximumItems - open, 0)
         let accepted = files.prefix(room)
-        items += accepted.map { Item(id: UUID(), file: $0, state: .waiting) }
+        items += accepted.map { Item(id: UUID(), file: $0, state: .waiting, riskLevel: nil) }
         notice = files.count > accepted.count
             ? "Airlock installs up to \(Self.maximumItems) files at a time. \(files.count - accepted.count) file(s) were not added."
             : nil
@@ -169,6 +173,7 @@ public final class InstallQueueModel {
                 update(id) { $0.package = package }
             }
             var plan = try await pipeline.plan(package, for: serial)
+            update(id) { $0.riskLevel = plan.report.level }
             if plan.report.level.requiresConfirmation || !plan.problems.isEmpty {
                 update(id) { $0.state = .needsReview(plan) }
                 guard let approved = await waitForReview() else {

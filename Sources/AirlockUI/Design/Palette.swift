@@ -26,6 +26,15 @@ enum Palette {
         level == .low ? .secondary : verdict(level)
     }
 
+    /// The verdict itself: a shield that is checked, marked or crossed.
+    static func verdictSymbol(_ level: RiskLevel) -> String {
+        switch level {
+        case .low: "checkmark.shield.fill"
+        case .medium: "exclamationmark.shield.fill"
+        case .high: "xmark.shield.fill"
+        }
+    }
+
     static func reasonSymbol(_ level: RiskLevel) -> String {
         switch level {
         case .low: "info.circle"

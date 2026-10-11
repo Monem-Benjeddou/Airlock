@@ -122,7 +122,7 @@ final class AirlockUITests: XCTestCase {
 
     func testLowRiskFileInstallsWithoutQuestions() {
         launch(queue: ["notes.apk"])
-        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "Installed", timeout: 30)
         XCTAssertFalse(element("approveInstall").exists, "a Low risk file is not held for review")
     }
 
@@ -156,13 +156,13 @@ final class AirlockUITests: XCTestCase {
         launch(queue: ["risky.apk"])
         wait(for: "acknowledgeRisk").click()
         wait(for: "approveInstall").click()
-        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "Installed", timeout: 30)
     }
 
     func testQueueInstallsSeveralFilesInOrder() {
         launch(queue: ["one.apk", "two.apk", "three.apk"])
-        wait(for: "3 of 3 installed", timeout: 30)
-        let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed version 3' OR label == 'Installed version 3'"))
+        wait(for: "All 3 installed", timeout: 30)
+        let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed' OR label == 'Installed'"))
         let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
         if installed.count != 3 { fail("expected 3 installed rows, saw \(installed.count)", file: #filePath, line: #line) }
@@ -178,8 +178,10 @@ final class AirlockUITests: XCTestCase {
         // The shipped path: the app hands the file to AirlockParser.xpc, which parses it inside its sandbox and
         // hands the extracted files back. Only the phone is simulated.
         launch(queue: [try fixture("app-v2-rsa").path])
-        wait(for: "org.airlock.fixture", timeout: 30)
-        wait(for: "Installed version 3", timeout: 30)
+        if !appears(containing: "org.airlock.fixture", timeout: 30) {
+            fail("the parsed package never showed", file: #filePath, line: #line)
+        }
+        wait(for: "Installed", timeout: 30)
     }
 
     func testAFolderOfSplitAPKsIsParsedByTheSandboxedHelper() throws {
@@ -190,8 +192,10 @@ final class AirlockUITests: XCTestCase {
         try FileManager.default.copyItem(at: try fixture("split-arm64-v2-rsa"),
                                          to: folder.appendingPathComponent("split_config.arm64_v8a.apk"))
         launch(queue: [folder.path])
-        wait(for: "org.airlock.fixture", timeout: 30)
-        wait(for: "Installed version 3", timeout: 30)
+        if !appears(containing: "org.airlock.fixture", timeout: 30) {
+            fail("the parsed package never showed", file: #filePath, line: #line)
+        }
+        wait(for: "Installed", timeout: 30)
     }
 
     // MARK: F4 App manager and debloat
@@ -246,7 +250,7 @@ final class AirlockUITests: XCTestCase {
     func testVoiceOverNeverHearsRawSymbolNames() {
         // Regression: images exposed SF Symbol names such as "cable.connector" and "arrow.down.app".
         launch(queue: ["notes.apk"])
-        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "Installed", timeout: 30)
         if !appears(containing: "connected by USB", timeout: 5) { fail("the connection is not spoken", file: #filePath, line: #line) }
         for name in ["cable.connector", "arrow.down.app", "Arrow Down Circle", "checkmark.circle.fill"] {
             let match = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", name)).firstMatch

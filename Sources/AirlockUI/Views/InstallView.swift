@@ -6,6 +6,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 /// F2: drop files, watch the queue, review risky packages, fix failures.
+///
+/// The whole page takes drops. Empty, it is one invitation to drop; with files, it is the queue under a
+/// one-line summary.
 struct InstallView: View {
     let queue: InstallQueueModel
     let device: DeviceInfo?
@@ -14,49 +17,25 @@ struct InstallView: View {
     @State private var pendingFix: (id: UUID, package: String)?
 
     var body: some View {
-        VStack(spacing: 0) {
-            DropZone(isTargeted: isTargeted, deviceName: device?.displayName) { showImporter = true }
-                .padding()
-                .onDrop(of: [.fileURL], isTargeted: $isTargeted) { providers in
-                    load(providers)
-                    return true
-                }
-            if let notice = queue.notice {
-                Text(notice).font(.callout).foregroundStyle(Palette.warning).padding(.horizontal)
-            }
-            if let summary = queue.summary {
-                Text(summary)
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-                    .accessibilityIdentifier("queueSummary")
-            }
-            // A plain stack, not a List: List's reused table rows sometimes kept showing an old state when a
-            // row changed height (an install finishing), so a finished install still looked stuck.
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(queue.items) { item in
-                        QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
-                            .padding(.horizontal)
-                            .padding(.vertical, 6)
-                        Divider().padding(.leading)
-                    }
-                }
-            }
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("Install queue")
-            .accessibilityIdentifier("installQueue")
-            .overlay {
-                if queue.items.isEmpty {
-                    Text("Files you drop appear here.")
-                }
+        Group {
+            if queue.items.isEmpty {
+                EmptyDropState(deviceName: device?.displayName) { showImporter = true }
+            } else {
+                queueContent
             }
         }
-        .navigationTitle("Install")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .contentShape(Rectangle())
+        .onDrop(of: [.fileURL], isTargeted: $isTargeted) { providers in
+            load(providers)
+            return true
+        }
+        .overlay { if isTargeted { DropHighlight() } }
         .toolbar {
             ToolbarItem {
-                Button("Clear Finished", systemImage: "checkmark.circle") { queue.clearFinished() }
-                    .disabled(!queue.items.contains { $0.state.isFinished })
+                Button("Add Files…", systemImage: "plus") { showImporter = true }
+                    .labelStyle(.titleAndIcon)
+                    .accessibilityIdentifier("addFiles")
             }
         }
         .fileImporter(isPresented: $showImporter, allowedContentTypes: [.data, .folder], allowsMultipleSelection: true) { result in
@@ -78,6 +57,40 @@ struct InstallView: View {
         } message: { _ in
             Text("The app on your phone and its data are deleted. "
                 + "Airlock keeps a copy of the old app so you can reinstall it from History.")
+        }
+    }
+
+    private var queueContent: some View {
+        VStack(spacing: 0) {
+            QueueHeader(queue: queue, deviceName: device?.displayName)
+            Divider()
+            if let notice = queue.notice {
+                Label(notice, systemImage: "exclamationmark.triangle")
+                    .font(.callout)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, Spacing.xLarge)
+                    .padding(.vertical, Spacing.small)
+                    .background(Palette.warning.opacity(0.12))
+            }
+            // A plain stack, not a List: List's reused table rows sometimes kept showing an old state when a
+            // row changed height (an install finishing), so a finished install still looked stuck.
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(queue.items) { item in
+                        QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
+                            .padding(.horizontal, Spacing.xLarge)
+                            .padding(.vertical, Spacing.medium)
+                        Divider().padding(.leading, Spacing.xLarge + 40 + Spacing.medium)
+                    }
+                }
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Install queue")
+            .accessibilityIdentifier("installQueue")
+            Text("Drop more files anywhere on this page")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .padding(Spacing.medium)
         }
     }
 
@@ -108,31 +121,95 @@ struct InstallView: View {
     }
 }
 
-struct DropZone: View {
-    let isTargeted: Bool
+/// The page before anything is dropped: one clear invitation.
+struct EmptyDropState: View {
     let deviceName: String?
     let choose: () -> Void
 
     var body: some View {
-        VStack(spacing: 10) {
-            Image(systemName: "arrow.down.app").font(.system(size: 40)).foregroundStyle(Color.accentColor)
+        VStack(spacing: Spacing.large) {
+            Image(systemName: "arrow.down.app")
+                .font(.system(size: 56, weight: .light))
+                .foregroundStyle(Color.accentColor)
                 .accessibilityHidden(true)
-            Text("Drop APK, APKS, XAPK or APKM files or a folder of split APKs")
-                .font(.headline)
-            Text("Every file is checked before it is installed" + (deviceName.map { " on \($0)." } ?? "."))
-            Button("Choose Files…", action: choose).accessibilityIdentifier("chooseFiles")
+            VStack(spacing: Spacing.small) {
+                Text("Drop Android apps to check them")
+                    .font(.title2.weight(.semibold))
+                Text("Airlock checks every file before it goes on " + (deviceName ?? "your phone") + ".")
+                    .foregroundStyle(.secondary)
+            }
+            Button("Choose Files…", action: choose)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .accessibilityIdentifier("chooseFiles")
+            Text("APK, APKS, XAPK, APKM, or a folder of split APKs")
+                .font(.callout)
+                .foregroundStyle(.secondary)
         }
-        .frame(maxWidth: .infinity, minHeight: 170)
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [8]))
-                .foregroundStyle(isTargeted ? Color.accentColor : .secondary.opacity(0.5))
-        )
+        .multilineTextAlignment(.center)
+        .padding(Spacing.xxLarge)
         // `.contain` keeps the identifier on the container; without it SwiftUI copies it onto every child,
         // replacing the button's own identifier.
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Drop files to install")
         .accessibilityIdentifier("dropZone")
+    }
+}
+
+/// Drawn over the page while files are dragged over it.
+struct DropHighlight: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 14, style: .continuous)
+            .strokeBorder(Color.accentColor, lineWidth: 3)
+            .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(Color.accentColor.opacity(0.08)))
+            .overlay {
+                Label("Drop to check", systemImage: "arrow.down.app")
+                    .font(.title3.weight(.semibold))
+                    .padding(.horizontal, Spacing.large)
+                    .padding(.vertical, Spacing.small)
+                    .background(.regularMaterial, in: Capsule())
+            }
+            .padding(Spacing.small)
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+    }
+}
+
+/// What the queue is doing, in one line, with Clear Finished beside it.
+struct QueueHeader: View {
+    let queue: InstallQueueModel
+    let deviceName: String?
+
+    var body: some View {
+        HStack(spacing: Spacing.medium) {
+            symbol.font(.title2).frame(width: 28).accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(queue.summary ?? "")
+                    .font(.title3.weight(.semibold))
+                    .accessibilityIdentifier("queueSummary")
+                if let deviceName { Text("On \(deviceName)").font(.callout).foregroundStyle(.secondary) }
+            }
+            Spacer()
+            Button("Clear Finished") { queue.clearFinished() }
+                .disabled(!queue.items.contains { $0.state.isFinished })
+                .accessibilityIdentifier("clearFinished")
+        }
+        .padding(.horizontal, Spacing.xLarge)
+        .padding(.vertical, Spacing.large)
+    }
+
+    @ViewBuilder private var symbol: some View {
+        let finished = queue.items.allSatisfy(\.state.isFinished)
+        let allInstalled = queue.items.allSatisfy { if case .installed = $0.state { true } else { false } }
+        if queue.items.contains(where: { if case .needsReview = $0.state { true } else { false } }) {
+            Image(systemName: "exclamationmark.shield.fill").foregroundStyle(Palette.warning)
+        } else if !finished {
+            ProgressView().controlSize(.small)
+        } else if allInstalled {
+            Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.success)
+        } else {
+            Image(systemName: "exclamationmark.circle.fill").foregroundStyle(Palette.warning)
+        }
     }
 }
 
@@ -142,52 +219,93 @@ struct QueueRow: View {
     let requestUninstallFix: (UUID, String) -> Void
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            icon.font(.title2).frame(width: 28)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(item.package?.packageName ?? item.displayName).font(.headline)
-                detail
+        VStack(alignment: .leading, spacing: Spacing.small) {
+            HStack(spacing: Spacing.medium) {
+                AppTile(name: name, seed: item.package?.packageName ?? item.displayName, size: 40)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(name).font(.headline).lineLimit(1)
+                    Text(QueueRow.subtitle(of: item))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .textSelection(.enabled)
+                }
+                Spacer(minLength: Spacing.large)
+                if let level = item.riskLevel { CompactRiskBadge(level: level) }
+                status.frame(minWidth: 150, alignment: .trailing)
             }
-            Spacer()
-            if case .installing = item.state {
-                Button("Cancel") { queue.cancelCurrent() }.accessibilityIdentifier("cancelInstall")
+            if case .failed(let error) = item.state {
+                FailureView(error: error, item: item, queue: queue, requestUninstallFix: requestUninstallFix)
+                    .padding(.leading, 40 + Spacing.medium)
             }
         }
-        .padding(.vertical, 4)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel(item.package?.packageName ?? item.displayName)
+        .accessibilityLabel(name)
         .accessibilityIdentifier("queueItem")
     }
 
-    /// Hidden from VoiceOver: the text beside it already says the state.
-    private var icon: some View {
-        stateSymbol.accessibilityHidden(true)
+    private var name: String {
+        item.package.map { AppNaming.name(forPackage: $0.packageName) } ?? AppNaming.name(forFile: item.file)
     }
 
-    @ViewBuilder private var stateSymbol: some View {
-        switch item.state {
-        case .waiting: Image(systemName: "clock").foregroundStyle(.secondary)
-        case .inspecting: ProgressView().controlSize(.small)
-        case .needsReview: Image(systemName: "exclamationmark.shield").foregroundStyle(Palette.warning)
-        case .installing: Image(systemName: "arrow.down.circle").foregroundStyle(Color.accentColor)
-        case .installed: Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.success)
-        case .failed: Image(systemName: "xmark.octagon.fill").foregroundStyle(Palette.danger)
-        case .skipped, .cancelled: Image(systemName: "minus.circle").foregroundStyle(.secondary)
-        }
+    /// "com.demo.notes · version 1.0 · 12 MB", or the file name before the file is read.
+    static func subtitle(of item: InstallQueueModel.Item) -> String {
+        guard let package = item.package else { return item.displayName }
+        let bytes = package.base.sizeBytes + package.splits.reduce(0) { $0 + $1.sizeBytes }
+        let size = ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
+        return [package.packageName, "version \(package.base.manifest.versionName ?? String(package.base.manifest.versionCode))", size]
+            .joined(separator: " · ")
     }
 
-    @ViewBuilder private var detail: some View {
+    @ViewBuilder private var status: some View {
         switch item.state {
-        case .waiting: Text("Waiting")
-        case .inspecting: Text("Checking the file…")
-        case .needsReview(let plan): Text("\(plan.report.level.title): review before installing").foregroundStyle(Palette.warning)
+        case .waiting: statusText("Waiting", color: .secondary)
+        case .inspecting:
+            HStack(spacing: Spacing.small) { ProgressView().controlSize(.small); statusText("Checking…", color: .secondary) }
+        case .needsReview: statusText("Waiting for your review", color: .primary)
         case .installing(let progress):
-            ProgressView(value: progress.totalFraction) { Text(progress.message).font(.caption) }
-        case .installed(let outcome): Text("Installed version \(outcome.versionCode)")
-        case .skipped: Text("Not installed")
-        case .cancelled: Text("Cancelled. Nothing was changed on the phone.")
-        case .failed(let error): FailureView(error: error, item: item, queue: queue, requestUninstallFix: requestUninstallFix)
+            HStack(spacing: Spacing.small) {
+                ProgressView(value: progress.totalFraction)
+                    .frame(width: 90)
+                    .accessibilityLabel(progress.message)
+                Button("Stop") { queue.cancelCurrent() }.accessibilityIdentifier("cancelInstall")
+            }
+        case .installed:
+            HStack(spacing: Spacing.xSmall) {
+                Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.success).accessibilityHidden(true)
+                statusText("Installed", color: .primary)
+            }
+        case .skipped: statusText("Not installed", color: .secondary)
+        case .cancelled: statusText("Cancelled", color: .secondary)
+        case .failed:
+            HStack(spacing: Spacing.xSmall) {
+                Image(systemName: "xmark.octagon.fill").foregroundStyle(Palette.danger).accessibilityHidden(true)
+                statusText("Failed", color: .primary)
+            }
         }
+    }
+
+    private func statusText(_ text: String, color: Color) -> some View {
+        Text(text).foregroundStyle(color).accessibilityIdentifier("itemStatus")
+    }
+}
+
+/// The verdict at row size: a coloured symbol and the level in primary text.
+struct CompactRiskBadge: View {
+    let level: RiskLevel
+
+    var body: some View {
+        HStack(spacing: Spacing.xSmall) {
+            Image(systemName: Palette.verdictSymbol(level)).foregroundStyle(Palette.verdict(level)).accessibilityHidden(true)
+            Text(level.title)
+        }
+        .font(.callout)
+        .padding(.horizontal, Spacing.small)
+        .padding(.vertical, 3)
+        .background(Capsule().fill(Palette.verdict(level).opacity(0.14)))
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("rowRisk")
     }
 }
 
