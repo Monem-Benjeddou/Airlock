@@ -88,6 +88,15 @@ public struct SafeExtractor: Sendable {
         return ExtractionResult(job: job, files: files)
     }
 
+    /// Extracts a detected package's base, splits and OBBs into a new job folder.
+    ///
+    /// A single APK or a folder of splits needs no extraction: the job is created empty and the files are
+    /// used where they are.
+    public func extract(_ package: DetectedPackage) throws(ArchiveError) -> ExtractionResult {
+        guard let archive = package.archive else { return ExtractionResult(job: try makeJob(), files: []) }
+        return try extract(package.layout.entriesToExtract, from: archive)
+    }
+
     /// Extracts `entries` into an existing job folder. On failure the job folder is removed.
     public func extract(_ entries: [ZipEntry], from archive: ZipArchive, into job: ExtractionJob) throws(ArchiveError) -> [ExtractedFile] {
         do {

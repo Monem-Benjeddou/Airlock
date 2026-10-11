@@ -56,6 +56,8 @@ public enum ArchiveError: Error, Hashable, Sendable, CustomStringConvertible {
     case entryTooLarge(String, bytes: UInt64, limit: UInt64)
     case nestingTooDeep(limit: Int)
     case noAPKs
+    /// A file named like an APK that is not one (no root `AndroidManifest.xml`).
+    case invalidAPK(String)
     case noBaseAPK
     case ambiguousBaseAPK([String])
     case invalidMetadata(String, reason: String)
@@ -97,6 +99,8 @@ public enum ArchiveError: Error, Hashable, Sendable, CustomStringConvertible {
             "This archive contains archives inside archives, deeper than any real app bundle."
         case .noAPKs:
             "This file doesn't contain any Android apps."
+        case .invalidAPK:
+            "This bundle contains a file named like an Android app that isn't one."
         case .noBaseAPK:
             "This bundle contains only add-on parts (splits) and no main app."
         case .ambiguousBaseAPK:
@@ -136,6 +140,7 @@ public enum ArchiveError: Error, Hashable, Sendable, CustomStringConvertible {
         case let .entryTooLarge(name, bytes, limit): "\(name) is \(bytes) bytes, limit \(limit)"
         case .nestingTooDeep(let limit): "nesting deeper than \(limit)"
         case .noAPKs: "no APK entries"
+        case .invalidAPK(let name): "not an APK: \(name)"
         case .noBaseAPK: "no base APK candidate"
         case .ambiguousBaseAPK(let names): "base APK candidates: \(names.joined(separator: ", "))"
         case let .invalidMetadata(file, reason): "\(file): \(reason)"
