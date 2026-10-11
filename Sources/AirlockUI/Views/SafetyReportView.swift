@@ -92,7 +92,6 @@ struct ReviewSheet: View {
 /// F3: the report itself. Verdicts are Low, Medium or High risk, never "safe".
 struct SafetyReportView: View {
     let report: SafetyReport
-    @State private var showsTechnicalDetails = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -142,28 +141,7 @@ struct SafetyReportView: View {
             }
             GroupBox("VirusTotal") { ReputationSummary(result: report.reputation) }
             // Verdict first, details on request: hashes matter to experts, not to the install decision.
-            DisclosureGroup(isExpanded: $showsTechnicalDetails) {
-                VStack(alignment: .leading, spacing: 4) {
-                    // Callout size: long hex strings are hard to read at caption size.
-                    LabeledContent("File SHA-256") {
-                        Text(report.sha256).font(.callout.monospaced()).textSelection(.enabled)
-                    }
-                    if let certificate = report.signer.certificates.first {
-                        LabeledContent("Certificate SHA-256") {
-                            Text(certificate.sha256).font(.callout.monospaced()).textSelection(.enabled)
-                        }
-                    }
-                    LabeledContent("Rules version", value: report.rulesVersion)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 4)
-            } label: {
-                // macOS only toggles a DisclosureGroup from its triangle; people click the words too.
-                Button("Technical details") { showsTechnicalDetails.toggle() }
-                    .buttonStyle(.plain)
-            }
-            .accessibilityLabel("Technical details")
-            .accessibilityIdentifier("technicalDetails")
+            TechnicalDetails(report: report)
         }
     }
 }
@@ -240,6 +218,42 @@ struct ReputationSummary: View {
             case .unknown: Text("VirusTotal has never seen this file. New or rare files are often unknown.")
             case .notConfigured: Text("Add your VirusTotal API key in Settings to check the file's hash. Only the hash is sent.")
             case .unavailable(let message): Text(message)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// File and certificate hashes, collapsed by default. A plain button rather than a DisclosureGroup: on macOS the
+/// group only toggles from its triangle, and a custom label either lost its name or leaked it onto the rows.
+struct TechnicalDetails: View {
+    let report: SafetyReport
+    @State private var isExpanded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Button {
+                isExpanded.toggle()
+            } label: {
+                Label("Technical details", systemImage: isExpanded ? "chevron.down" : "chevron.right")
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+            .accessibilityIdentifier("technicalDetails")
+            if isExpanded {
+                VStack(alignment: .leading, spacing: 4) {
+                    // Callout size: long hex strings are hard to read at caption size.
+                    LabeledContent("File SHA-256") {
+                        Text(report.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                    }
+                    if let certificate = report.signer.certificates.first {
+                        LabeledContent("Certificate SHA-256") {
+                            Text(certificate.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                        }
+                    }
+                    LabeledContent("Rules version", value: report.rulesVersion)
+                }
+                .padding(.leading, 22)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
