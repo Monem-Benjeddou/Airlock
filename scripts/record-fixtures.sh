@@ -11,10 +11,13 @@
 # third-party package names, battery serials) before anything is written to the repo.
 set -euo pipefail
 SERIAL="$1"; NAME="$2"
+SCRIPTS="$(cd "$(dirname "$0")" && pwd)"
+REPO="$(dirname "$SCRIPTS")"
 RAW="$(mktemp -d)"
 cd "$RAW"
 a() { adb -s "$SERIAL" "$@"; }
-adb devices -l                                                          > devices-l.txt
+# Only the target device's line: other attached devices (a personal phone) must never be recorded.
+{ echo "List of devices attached"; adb devices -l | awk -v s="$SERIAL" '$1 == s'; echo; } > devices-l.txt
 a shell getprop                                                         > getprop.txt
 a shell dumpsys battery                                                 > dumpsys-battery.txt
 a shell wm density                                                      > wm-density.txt
@@ -29,6 +32,5 @@ a shell dumpsys package com.android.settings                            > dumpsy
 a shell cmd package query-activities --brief -a android.intent.action.MAIN -c android.intent.category.HOME > home-activities.txt
 a shell ime list -s                                                     > ime-list.txt
 a shell pm list users                                                   > pm-list-users.txt
-python3 -I "$(dirname "$0")/sanitize_fixtures.py" "$RAW" \
-  "$(cd "$(dirname "$0")/.." && pwd)/Tests/AirlockTestSupport/Fixtures/adb/$NAME" "$SERIAL"
+python3 -I "$SCRIPTS/sanitize_fixtures.py" "$RAW" "$REPO/Tests/AirlockTestSupport/Fixtures/adb/$NAME" "$SERIAL"
 rm -rf "$RAW"

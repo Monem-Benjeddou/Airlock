@@ -8,7 +8,7 @@ import Foundation
 /// Locates recorded fixtures copied into the test-support bundle.
 public enum Fixture {
     /// Devices with recorded adb output under `Fixtures/adb/<name>/`.
-    public static let recordedDevices = ["samsung-s24ultra-android16"]
+    public static let recordedDevices = ["samsung-s24ultra-android16", "google-emulator-android15"]
 
     public static func url(_ relativePath: String) -> URL {
         guard let root = Bundle.module.url(forResource: "Fixtures", withExtension: nil) else {
