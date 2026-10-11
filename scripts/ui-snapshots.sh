@@ -27,22 +27,28 @@ let sized = windows.map { window -> (Int, Double) in
     let bounds = window[kCGWindowBounds as String] as? [String: Double] ?? [:]
     return (window[kCGWindowNumber as String] as? Int ?? 0, (bounds["Width"] ?? 0) * (bounds["Height"] ?? 0))
 }
-if let main = sized.max(by: { $0.1 < $1.1 }) { print(main.0) }
+// The main window first, then any sheet, so a sheet is also captured on its own.
+for window in sized.sorted(by: { $0.1 > $1.1 }) { print(window.0) }
 SWIFT
 
 capture() {
     local name="$1" section="$2" queue="$3" mode="$4" wifi="${5:-0}"
     AIRLOCK_SECTION="$section" AIRLOCK_DEMO_QUEUE="$queue" AIRLOCK_SHOW_WIFI="$wifi" "$APP" "$mode" >/dev/null 2>&1 &
     local pid=$!
-    local id=""
+    local ids=""
     for _ in $(seq 1 40); do
-        id="$(swift "$WINDOW_ID" "$pid" 2>/dev/null || true)"
-        [ -n "$id" ] && break
+        ids="$(swift "$WINDOW_ID" "$pid" 2>/dev/null || true)"
+        [ -n "$ids" ] && break
         sleep 0.5
     done
     sleep 3  # let the demo device connect and the queue settle
-    if [ -n "$id" ]; then
-        screencapture -o -x -l "$id" "$OUT/$name.png"
+    ids="$(swift "$WINDOW_ID" "$pid" 2>/dev/null || true)"
+    if [ -n "$ids" ]; then
+        local suffix=""
+        for id in $ids; do
+            screencapture -o -x -l "$id" "$OUT/$name$suffix.png"
+            suffix="-sheet"
+        done
         echo "captured $name"
     else
         echo "no window for $name" >&2

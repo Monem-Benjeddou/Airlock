@@ -44,3 +44,33 @@ struct AppTileTests {
         #expect(AppTile.monogram(for: "…") == "?")
     }
 }
+
+@MainActor
+@Suite("Safety report text")
+struct ReportTextTests {
+    private func signature(_ subject: String?) -> SignatureCheck {
+        SignatureCheck(status: .verified, schemes: [2], certificates: subject.map {
+            [SignerCertificate(subject: $0, issuer: $0, sha256: "00")]
+        } ?? [])
+    }
+
+    @Test func theSignerIsItsCommonName() {
+        #expect(ReportSections.signerName(signature("CN=Demo Studio, O=Demo, C=GB")) == "Demo Studio")
+        #expect(ReportSections.signerName(signature("O=No Common Name")) == "O=No Common Name")
+        #expect(ReportSections.signerName(signature(nil)) == "Unknown")
+    }
+
+    @Test func sensitivePermissionsComeFirst() {
+        let permissions = [
+            PermissionFinding(permission: "a", plainLanguage: "Use the internet", isDangerous: false),
+            PermissionFinding(permission: "b", plainLanguage: "Read your text messages", isDangerous: true),
+            PermissionFinding(permission: "c", plainLanguage: "Access your location", isDangerous: true),
+        ]
+        #expect(ReportSections.sorted(permissions).map(\.permission) == ["c", "b", "a"])
+    }
+
+    @Test func aVerifiedSignatureSaysSoWithoutJargon() {
+        #expect(SignerText.status(signature("CN=x")) == "Verified")
+        #expect(SignerText.match(.notInstalled) == "Not installed yet")
+    }
+}
