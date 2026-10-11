@@ -112,6 +112,9 @@ final class AirlockUITests: XCTestCase {
         launch(queue: ["risky.apk"])
         XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
         XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
+        XCTAssertFalse(appears(containing: "cdcdcdcd", timeout: 0), "hashes stay out of the way until asked for")
+        wait(for: "Technical details").click()
+        XCTAssertTrue(appears(containing: "cdcdcdcd", timeout: 3))
         wait(for: "skipInstall").click()
         wait(for: "Not installed")
     }

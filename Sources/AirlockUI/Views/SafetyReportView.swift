@@ -97,10 +97,7 @@ struct SafetyReportView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 RiskBadge(level: report.level)
-                VStack(alignment: .leading) {
-                    Text(report.packageName).font(.title2.bold())
-                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).textSelection(.enabled)
-                }
+                Text(report.packageName).font(.title2.bold())
             }
             if report.reasons.isEmpty {
                 Text("Airlock found nothing worrying. That is not a guarantee: only install apps from sources you trust.")
@@ -121,7 +118,7 @@ struct SafetyReportView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach(report.permissions) { permission in
                             Label(permission.plainLanguage, systemImage: permission.isDangerous ? "exclamationmark.triangle" : "checkmark")
-                                .foregroundStyle(permission.isDangerous ? .primary : .secondary)
+                                .foregroundStyle(permission.isDangerous ? Color.primary : Palette.subdued)
                                 .help(permission.permission)
                         }
                     }
@@ -139,6 +136,18 @@ struct SafetyReportView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             GroupBox("VirusTotal") { ReputationSummary(result: report.reputation) }
+            // Verdict first, details on request: hashes matter to experts, not to the install decision.
+            DisclosureGroup("Technical details") {
+                VStack(alignment: .leading, spacing: 4) {
+                    LabeledContent("File SHA-256") {
+                        Text(report.sha256).font(.caption.monospaced()).textSelection(.enabled)
+                    }
+                    LabeledContent("Rules version", value: report.rulesVersion)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 4)
+            }
+            .accessibilityIdentifier("technicalDetails")
         }
     }
 }
