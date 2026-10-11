@@ -68,7 +68,7 @@ public enum FixtureAPKs {
 
     /// Zip entry names of a v1-signed fixture (`app-v1-rsa` or `app-v1-ec`).
     public static func entryNames(_ stem: String) throws -> [String] {
-        let text = String(decoding: try raw("\(stem).entries.txt"), as: UTF8.self)
+        let text = String(decoding: try raw("\(stem).entries.txt"), as: Unicode.UTF8.self)
         return text.split(separator: "\n").map(String.init)
     }
 
