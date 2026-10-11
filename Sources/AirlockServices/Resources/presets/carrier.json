@@ -1,0 +1,1213 @@
+{
+ "id": "carrier",
+ "name": "Carrier apps",
+ "brand": "other",
+ "source": "UAD-ng uad_lists.json (GPL-3.0), commit f02581f7f09f2e93d6f69cbc6c0602d03c89688f",
+ "entries": [
+  {
+   "packageName": "ca.bell.selfserve.mybellmobile",
+   "risk": "safe",
+   "description": "Bell's 'award winning' (no source) app for managing your Bell account and services. Useless, especially if you don't use Bell. (https://play.google.com/store/apps/details?id=ca.bell.selfserve.mybellmobile). Note that Bell violates section F.1 of the Canadian Wireless Code by s..."
+  },
+  {
+   "packageName": "ca.bell.wt.android.tunesappswidget",
+   "risk": "safe",
+   "description": "App Widget Developped by Bell Canada, it is a home screen widget which shows advertisements, promotions, news, sports & entertainment. https://play.google.com/store/apps/details?id=ca.bell.wt.android.tunesappswidget"
+  },
+  {
+   "packageName": "com.LogiaGroup.LogiaDeck",
+   "risk": "safe",
+   "description": "Mobile Services Manager Seems to be a spyware. Good explanation from someone who worked for carrier : https://www.reddit.com/r/lgv20/comments/6u0wnf/what_is_mobile_services_manager_did_i_catch_a/"
+  },
+  {
+   "packageName": "com.Rogers.MyRogersTab",
+   "risk": "safe",
+   "description": "Appears to be the tablet version of MyRogers (https://play.google.com/store/apps/details?id=com.fivemobile.myaccount), an app to manage your account with Canadian carrier Rogers."
+  },
+  {
+   "packageName": "com.aetherpal.attdh.se",
+   "risk": "safe",
+   "description": "Device Help for AT&T Samsung device Developed by Aetherpal, a company which sells smart remote controls tools (https://en.wikipedia.org/wiki/AetherPal) I guess this app is used for tech support."
+  },
+  {
+   "packageName": "com.aetherpal.attdh.zte",
+   "risk": "safe",
+   "description": "Device Help for AT&T ZTE devices. Developed by Aetherpal, a company which sells smart remote controls tools (https://en.wikipedia.org/wiki/AetherPal) I guess this app is used for tech support."
+  },
+  {
+   "packageName": "com.altice.android.myapps",
+   "risk": "safe",
+   "description": "MyApps it's probably for install apps but it's useless."
+  },
+  {
+   "packageName": "com.americanexpress.plenti",
+   "risk": "safe",
+   "description": "Plenti Get points and promos with your American Express card"
+  },
+  {
+   "packageName": "com.android.partnerbrowsercustomizations.tmobile",
+   "risk": "safe",
+   "description": "The proprietary application of the mobile operator T-Mobile, presumably displays ads, is responsible for the operation of some of the operator's settings"
+  },
+  {
+   "packageName": "com.android.provision.carrieroverlay.kddi",
+   "risk": "caution",
+   "description": "Useless Japanese overlay app."
+  },
+  {
+   "packageName": "com.android.sprint.hiddenmenuapp",
+   "risk": "safe",
+   "description": "Lets you access hidden features tests/settings (you need to type a special code in the dialer) https://bestcellular.com/dial-codes/"
+  },
+  {
+   "packageName": "com.asurion.android.mobilerecovery.att",
+   "risk": "safe",
+   "description": "AT&T Protect Plus (discontinued. Replaced by AT&T ProTech : com.asurion.android.protech.att) Help and support app. Lets you call or chat with a live U.S.-based AT&T ProTech support expert Note : This app is developed by Asurion, a US company whose business is to sell insurance..."
+  },
+  {
+   "packageName": "com.asurion.android.mobilerecovery.sprint",
+   "risk": "safe",
+   "description": "Sprint Protect Support app (see com.asurion.android.protech.att)"
+  },
+  {
+   "packageName": "com.asurion.android.mobilerecovery.sprint.vpl",
+   "risk": "safe",
+   "description": "Sprint Protect Support app (see com.asurion.android.protech.att)"
+  },
+  {
+   "packageName": "com.asurion.android.protech.att",
+   "risk": "safe",
+   "description": "AT&T ProTech (https://play.google.com/store/apps/details?id=com.asurion.android.protech.att) Help and support app. Lets you call or chat with a live U.S.-based AT&T ProTech support\"expert\". Note : This app is developed by Asurion, a US company whose business is to sell insuran..."
+  },
+  {
+   "packageName": "com.asurion.android.verizon.vms",
+   "risk": "safe",
+   "description": "Verizon Digital Secure (https://play.google.com/store/apps/details?id=com.asurion.android.verizon.vms) Note : This app is developed by Asurion, a US company whose business is to sell insurances. All US carriers use Asurion for the phone insurances."
+  },
+  {
+   "packageName": "com.asurion.home.sprint",
+   "risk": "safe",
+   "description": "Sprint Protect Support app (see com.asurion.android.protech.att) Sprint Complete (https://play.google.com/store/apps/details?id=com.asurion.home.sprint) Lets you call or chat with live tech experts ! Maybe you will find the love of your life ! Note : See note above."
+  },
+  {
+   "packageName": "com.asurion.home.sprint.vpl",
+   "risk": "safe",
+   "description": "Tech Expert (for VPL devices/employees) ? Now\"Sprint Complete\" (see below). Note : This app is developed by Asurion, a US company whose business is to sell insurances. All US carriers use Asurion for the phone insurances."
+  },
+  {
+   "packageName": "com.att.android.attsmartwifi",
+   "risk": "safe",
+   "description": "AT&T Smart Wi-Fi (https://play.google.com/store/apps/details?id=com.att.android.attsmartwifi) Finds and auto-connects to available hotspots to minimize cellular data consumption. Auto-connects is not a good idea. Worth reading : https://www.europol.europa.eu/activities-service..."
+  },
+  {
+   "packageName": "com.att.callprotect",
+   "risk": "safe",
+   "description": "AT&T Call Protect (https://play.google.com/store/apps/details?id=com.att.callprotect) Spam call blocking app provided by Hiya NOTE : You should never trust spam blocking apps (https://itmunch.com/robocall-caught-sending-customers-confidential-data-without-consent/)"
+  },
+  {
+   "packageName": "com.att.csoiam.mobilekey",
+   "risk": "safe",
+   "description": "AT&T Sign in Helper (https://play.google.com/store/apps/details?id=com.att.csoiam.mobilekey) Allows AT&T applications to securely authenticate on Android devices"
+  },
+  {
+   "packageName": "com.att.deviceunlock",
+   "risk": "safe",
+   "description": "Device Unlock Useless app from AT&T. it's only for unlock device."
+  },
+  {
+   "packageName": "com.att.dh",
+   "risk": "safe",
+   "description": "Device Help (https://play.google.com/store/apps/details?id=com.att.dh) Troubleshooting app."
+  },
+  {
+   "packageName": "com.att.dtv.shaderemote",
+   "risk": "safe",
+   "description": "DIRECTV Remote App (https://play.google.com/store/apps/details?id=com.att.dtv.shaderemote) Lets you control DIRECTV HD receivers in your home that are connected to Internet, from your phone. FYI : DIRECTV is a subsidiary of AT&T Worth reading : https://en.wikipedia.org/wiki/Di..."
+  },
+  {
+   "packageName": "com.att.iqi",
+   "risk": "safe",
+   "description": "Carrier IQ / Device Health Gathers, stores and forwards diagnostic measurements on its behalf (see https://en.wikipedia.org/wiki/Carrier_IQ) Great ! A rootkit : https://en.wikipedia.org/wiki/Carrier_IQ#Rootkit_discovery_and_media_attention"
+  },
+  {
+   "packageName": "com.att.mobile.android.vvm",
+   "risk": "safe",
+   "description": "AT&T Visual Voicemail (https://play.google.com/store/apps/details?id=com.att.mobile.android.vvm) Lets you manage your voicemail directly from the app without the need to dial into your mailbox."
+  },
+  {
+   "packageName": "com.att.mobilesecurity",
+   "risk": "safe",
+   "description": "AT&T Mobile Security (https://play.google.com/store/apps/details?id=com.att.mobilesecurity) AT&T android antivirus."
+  },
+  {
+   "packageName": "com.att.mobiletransfer",
+   "risk": "safe",
+   "description": "AT&T Mobile Transfer Lets you transfert user data from an older AT&T phone to a new one."
+  },
+  {
+   "packageName": "com.att.myWireless",
+   "risk": "safe",
+   "description": "My AT&T (https://play.google.com/store/apps/details?id=com.att.myWireless) Lets you manage your AT&T account."
+  },
+  {
+   "packageName": "com.att.personalcloud",
+   "risk": "safe",
+   "description": "AT&T Personal Cloud (https://play.google.com/store/apps/details?id=com.att.personalcloud) Note: it's a paid extra feature and data are obviously not E2EE (i.e AT&T can access them) Don't keep this app. It's a privacy nightmare and was poorly coded: https://beta.pithus.org/repo..."
+  },
+  {
+   "packageName": "com.att.tv",
+   "risk": "safe",
+   "description": "AT&T TV (https://play.google.com/store/apps/details?id=com.att.tv) Lets you Stream TV live and on demand from your phone."
+  },
+  {
+   "packageName": "com.att.tv.watchtv",
+   "risk": "safe",
+   "description": "AT&T WatchTV (https://play.google.com/store/apps/details?id=com.att.tv.watchtv) Lets you stream TV live and VOD form your phone. No it's not the same thing than AT&T TV. Yes it's a mess. Differences with AT&T TV : https://www.cordcuttersnews.com/att-tv-vs-att-tv-now-whats-the-..."
+  },
+  {
+   "packageName": "com.aura.jet.att",
+   "risk": "safe",
+   "description": "AT&T Hub App from AT&T. Installs apps on oobe and its maded by advertising company 'ironSource'."
+  },
+  {
+   "packageName": "com.aura.oobe.att",
+   "risk": "safe",
+   "description": "AppCloud App from AT&T. Installs apps on oobe and its maded by advertising company 'ironSource'."
+  },
+  {
+   "packageName": "com.aura.oobe.deutsche",
+   "risk": "safe",
+   "description": "Provides an Out Of The Box experience. You can disable it via Settings > Apps > Three dots > Show system > App selector. It has a T-Mobile icon"
+  },
+  {
+   "packageName": "com.aura.oobe.kddi",
+   "risk": "safe",
+   "description": "AppCloud Seems to exist to try to get you to download games and another testimonial."
+  },
+  {
+   "packageName": "com.aura.oobe.motorola",
+   "risk": "safe",
+   "description": "MotoApps It's something to install apps, but it's an advertising company."
+  },
+  {
+   "packageName": "com.aura.oobe.ntt",
+   "risk": "safe",
+   "description": "Aura from Unity Persistent notification until you click on it and agree to install games. Sort of game cloud pre-installed in some docomo carrier phones Safe to remove."
+  },
+  {
+   "packageName": "com.aura.oobe.rakuten",
+   "risk": "safe",
+   "description": "Aura from Unity Persistent notification until you click on it and agree to install games. Sort of game cloud pre-installed in some Rakuten Mobile carrier phones Safe to remove."
+  },
+  {
+   "packageName": "com.aura.oobe.samsung",
+   "risk": "safe",
+   "description": "AppCloud It offers the\"Aura Out-Of-the-Box Experience\" (OOBE) It is some kind of post-install recommended apps setup from the carrier. Asks for your age and gender and then recommends you to install popular apps. Developed by IronSource, an Israeli advertising company (now own..."
+  },
+  {
+   "packageName": "com.aura.oobe.samsung.gl",
+   "risk": "safe",
+   "description": "AppCloud It offers the\"Aura Out-Of-the-Box Experience\" (OOBE) It is some kind of post-install recommended apps setup from the carrier. Asks for your age and gender and then recommends you to install popular apps. Developed by IronSource, an Israeli advertising company (now own..."
+  },
+  {
+   "packageName": "com.aura.oobe.softbank",
+   "risk": "safe",
+   "description": "Aura from Unity Persistent notification until you click on it and agree to install games. Sort of game cloud pre-installed in some SoftBank carrier phones Safe to remove."
+  },
+  {
+   "packageName": "com.aura.oobe.vodafone",
+   "risk": "safe",
+   "description": "Vodafone AppBox It is some kind of post-install recommended apps setup from the carrier. Asks for your age and gender and then recommends you to install popular apps. Developped by IronSource, an Israeli advertising company."
+  },
+  {
+   "packageName": "com.bc360.android.service",
+   "risk": "safe",
+   "description": "Verizon Adaptive Sound Provides Voice Enhance, but according to the carrier. Does the same thing as the 'com.bc360.control' app."
+  },
+  {
+   "packageName": "com.bc360.control",
+   "risk": "safe",
+   "description": "Verizon Adaptive Sound Provides Voice Enhance, but according to the carrier."
+  },
+  {
+   "packageName": "com.bell.ptt",
+   "risk": "safe",
+   "description": "Bell Push to Talk app. Apparently the 'most advanced carrier-grade Push-to-talk coomunicates technology available today.' (doubt). Realistically, no one is using this, safe to remove. https://play.google.com/store/apps/details?id=com.bell.ptt"
+  },
+  {
+   "packageName": "com.claroColombia.contenedor",
+   "risk": "safe",
+   "description": "Claro It's something to install apps, but it's an advertising company."
+  },
+  {
+   "packageName": "com.communitake.remotecontrolservice",
+   "risk": "safe",
+   "description": "Remote management app installed by Bell on some devices. Has access to almost every permission so probably best to remove this."
+  },
+  {
+   "packageName": "com.cricketwireless.minus",
+   "risk": "safe",
+   "description": "Cricket partner tab? better remove it. It probably have news or partner customization to chrome."
+  },
+  {
+   "packageName": "com.customermobile.preload.vzw",
+   "risk": "safe",
+   "description": "Verizon Store/Retail Demo Mode This application requires a lot of permissions and downloads a remote configuration file from an AWS-hosted domain over plain-text HTTP. This leaves the overall device and configuration vulnerable. https://thehackernews.com/2024/08/google-pixel-d..."
+  },
+  {
+   "packageName": "com.digitalturbine.android.apps.news.att",
+   "risk": "safe",
+   "description": "Essentials This application results in fullscreen advertisements upon unlocking the device. https://play.google.com/store/apps/details?id=com.digitalturbine.android.apps.news.att&hl=en_US https://www.virustotal.com/gui/file/a7625586ea2d21efcb76b528c5ad66c9cf77e74a52029cabcd415..."
+  },
+  {
+   "packageName": "com.directv.promo.shade",
+   "risk": "safe",
+   "description": "DIRECTV Remote Official app from DIRECTV (subsidiary of AT&T). With the DIRECTV Remote for AT&T Samsung devices, control of your favorite DIRECTV shows is just a swipe away. Swipe down from the status bar at the top of your screen to automatically connect and control your DIRE..."
+  },
+  {
+   "packageName": "com.dot.app.sancharsaathi",
+   "risk": "safe",
+   "description": "Spyware billed as citizen-centric safety tool that is required by Goverment of India be pre-installed. https://www.reuters.com/sustainability/boards-policy-regulation/what-is-indias-politically-contentious-sanchar-saathi-cyber-safety-app-2025-12-02"
+  },
+  {
+   "packageName": "com.dti.amx",
+   "risk": "safe",
+   "description": "it's used to choose app install? A lot trackers, permissions. Useless."
+  },
+  {
+   "packageName": "com.dti.att",
+   "risk": "safe",
+   "description": "AT&T App Select I guess it lets you choose AT&T apps to install. It has a LOT of permissions : https://knowledge.protektoid.com/apps/com.dti.att/7a36d4f5f00bae044566221400719c75ea2f4f33bc2578a7f8210f36d718a8d6 Someone knows what\"dti\" is/means ?"
+  },
+  {
+   "packageName": "com.dti.bouyguestelecom",
+   "risk": "safe",
+   "description": "Bouygues AppCloud it's probably for install apps but it's useless and have ads and a lot permissions."
+  },
+  {
+   "packageName": "com.dti.cricket",
+   "risk": "safe",
+   "description": "it's app for installing recommended apps? it's only used on first-boot setup and it's useless."
+  },
+  {
+   "packageName": "com.dti.motorola",
+   "risk": "safe",
+   "description": "Mobile Services Manager it's something for install apps but it's useless and a lot permissions."
+  },
+  {
+   "packageName": "com.dti.samsung",
+   "risk": "safe",
+   "description": "Mobile Services Manager Digital Turbine app, pre-install some apps/games to your phone and its made by advertising company."
+  },
+  {
+   "packageName": "com.dti.telefonica",
+   "risk": "safe",
+   "description": "O2 & Telefonica carrier bloat. Runs in background, updates, maintains and installs Telefonica carrier apps and services, and is totally useless if you don't use this carrier. O2 and Telefonica are only available in Latin America, Brazil, Spain, Germany and UK, but it's often p..."
+  },
+  {
+   "packageName": "com.dti.tim",
+   "risk": "safe",
+   "description": "Mobile Service Manager It's a system app that can't be opened but keeps running in the background. It can install/uninstall apps without notifying you, access internet, run at the boot of the system, kill background processes, ads and other permissions. it's only bloatware, OT..."
+  },
+  {
+   "packageName": "com.dti.tracfone",
+   "risk": "safe",
+   "description": "Installs sponsored apps automatically on Tracfone and affiliated carriers (Straight Talk, Total Wireless, etc)"
+  },
+  {
+   "packageName": "com.fivemobile.myaccount",
+   "risk": "safe",
+   "description": "App for managing your Rogers account. Rogers violates section F.1 of Canada's Wireless Code, they refuse to unlock devices sold before December 1, 2017, even if it doesn't affect you, don't support practices like this! Switch to another carrier (such as Telus) if possible."
+  },
+  {
+   "packageName": "com.google.omadm.trigger",
+   "risk": "safe",
+   "description": "OemDmTrigger OMA Device Managment Verizon."
+  },
+  {
+   "packageName": "com.gsma.rcs",
+   "risk": "caution",
+   "description": "RCS Hidden RCS Messaging? or only Frameworks? Feature code:184501 Carrier name: GSM Association."
+  },
+  {
+   "packageName": "com.hyperlync.Sprint.Backup",
+   "risk": "safe",
+   "description": "Sprint Backup\" (https://play.google.com/store/apps/details?id=com.hyperlync.Sprint.Backup) Lets you backup your phone’s content to your Sprint Backup account. FYI : This app is developped by Hyperlync Technologies an Israel-based company which provide cyber-security solutions...."
+  },
+  {
+   "packageName": "com.hyperlync.Sprint.CloudBinder",
+   "risk": "safe",
+   "description": "Sprint Cloud Binder (https://play.google.com/store/apps/details?id=com.hyperlync.Sprint.CloudBinder) Hub for all you cloud accounts. See package above."
+  },
+  {
+   "packageName": "com.inmobi.installer",
+   "risk": "safe",
+   "description": "it's installer advertising company app."
+  },
+  {
+   "packageName": "com.ironsource.appcloud.oobe.hutchison",
+   "risk": "safe",
+   "description": "AppCloud (discontinued) from ironSource, an advertising company. Worth reading: https://en.wikipedia.org/wiki/IronSource"
+  },
+  {
+   "packageName": "com.jrd.verizonuriintentservice",
+   "risk": "expert",
+   "description": ""
+  },
+  {
+   "packageName": "com.kddi.android.cmail",
+   "risk": "safe",
+   "description": "+Message A Japanese messaging and e-mail app. https://play.google.com/store/apps/details?id=com.kddi.android.cmail"
+  },
+  {
+   "packageName": "com.kmsjp",
+   "risk": "safe",
+   "description": "Kaspersky Anti-virus pre-installed on some Huawei phone's in Japanese."
+  },
+  {
+   "packageName": "com.kuackmedia.orange",
+   "risk": "safe",
+   "description": "Altice Music It's a music application that allows you to stream music, but it comes pre-installed. https://play.google.com/store/apps/details?id=com.kuackmedia.orange"
+  },
+  {
+   "packageName": "com.lge.SprintHiddenMenu",
+   "risk": "safe",
+   "description": "Hidden diagnostic menu for Sprint LG devices."
+  },
+  {
+   "packageName": "com.locationlabs.cni.att",
+   "risk": "safe",
+   "description": "AT&T Smart Limits Parental Control tool. https://m.att.com/shopmobile/wireless/features/smart-limits.html"
+  },
+  {
+   "packageName": "com.locationlabs.finder.sprint",
+   "risk": "safe",
+   "description": "Sprint Family Locator (https://play.google.com/store/apps/details?id=com.locationlabs.finder.sprint) Lets you locate any phone registered under the Sprint family plan Location labs is owned by AGV which is owned by Avast. You shouldn't trust Avast. FYI : https://www.google.com..."
+  },
+  {
+   "packageName": "com.locationlabs.finder.sprint.vpl",
+   "risk": "safe",
+   "description": "Sprint Family Locator (https://play.google.com/store/apps/details?id=com.locationlabs.finder.sprint) Lets you locate any phone registered under the Sprint family plan Location labs is owned by AGV which is owned by Avast. You shouldn't trust Avast. FYI : https://www.google.com..."
+  },
+  {
+   "packageName": "com.matchboxmobile.wisp",
+   "risk": "safe",
+   "description": "AT&T Hot Spots Run in background. Automatically connects you to a free AT&T wifi hotspot at one of their participating partner locations such as Starbucks."
+  },
+  {
+   "packageName": "com.miui.carrierinstructions",
+   "risk": "safe",
+   "description": "Manual Shortcut to the carrier's online manual."
+  },
+  {
+   "packageName": "com.mobitv.client.sprinttvng",
+   "risk": "safe",
+   "description": "Sprint TV & Movies provided by mobitv (https://en.wikipedia.org/wiki/MobiTV) Lets you watch live TV and VOD."
+  },
+  {
+   "packageName": "com.mobitv.client.tmobiletvhd",
+   "risk": "safe",
+   "description": "T-Mobile TV (discontinued, replaced by nl.tmobiletv.vinson) provided by mobitv (https://en.wikipedia.org/wiki/MobiTV) https://play.google.com/store/apps/details?id=nl.tmobiletv.vinson&hl=en"
+  },
+  {
+   "packageName": "com.mobolize.sprint.securewifi",
+   "risk": "safe",
+   "description": "Secure Wifi (https://play.google.com/store/apps/details?id=com.mobolize.sprint.securewifi) Sprint VPN app provided by Mobolize. You need to pay for using it. You'd better use a reliable third-party VPN if you really need to use one. This one runs in background all time and eve..."
+  },
+  {
+   "packageName": "com.motorola.att.phone.extensions",
+   "risk": "safe",
+   "description": "AT&T Phone Extension Provides access to AT&T extensions in your dialer. https://asecare.att.com/tutorials/adding-and-deleting-an-extension-on-your-officehand-mobile-app-2990/?product=AT&T%20Office@Hand"
+  },
+  {
+   "packageName": "com.motorola.attvowifi",
+   "risk": "safe",
+   "description": "AT&T Wifi-calling https://www.att.com/shop/wireless/features/wifi-calling.html"
+  },
+  {
+   "packageName": "com.motorola.ltebroadcastservices_vzw",
+   "risk": "safe",
+   "description": "LTE Broadcast services from Verizon. Allows your phone to receive broadcast message from Verizon?"
+  },
+  {
+   "packageName": "com.motorola.mot5gmod",
+   "risk": "safe",
+   "description": "5G Moto Mod (https://play.google.com/store/apps/details?id=com.motorola.mot5gmod)"
+  },
+  {
+   "packageName": "com.motorola.omadm.sprint",
+   "risk": "safe",
+   "description": "Configuration of the device (including first time use), enabling and disabling features provided by carriers. I believe it's only useful if you want to use a Sprint service with a non branded phone (not sure at all) https://www.androidpolice.com/2015/03/10/android-5-1-includes..."
+  },
+  {
+   "packageName": "com.motorola.omadm.usc",
+   "risk": "safe",
+   "description": "OMA Device Management for Verizon Handles configuration of the device (including first time use), enabling and disabling features provided by carriers. https://en.wikipedia.org/wiki/OMA_Device_Management I believe it's only useful if you want to use a Verizon service with a no..."
+  },
+  {
+   "packageName": "com.motorola.omadm.vzw",
+   "risk": "safe",
+   "description": "OMA Device Management for Verizon Handles configuration of the device (including first time use), enabling and disabling features provided by carriers. https://en.wikipedia.org/wiki/OMA_Device_Management I believe it's only useful if you want to use a Verizon service with a no..."
+  },
+  {
+   "packageName": "com.motorola.service.vzw.entitlement",
+   "risk": "caution",
+   "description": "Deleting this package whill disable Hotspot functionality if you're a Verizon client. What you can do is preventing the phone from notifying the carrier about when you use hotspot : https://android.stackexchange.com/questions/226580/how-is-verizon-suddenly-tracking-my-hot-spot..."
+  },
+  {
+   "packageName": "com.motorola.sprintwfc",
+   "risk": "safe",
+   "description": "Sprint Wifi Calling Provides wifi calling to Sprint customers."
+  },
+  {
+   "packageName": "com.motorola.visualvoicemail",
+   "risk": "caution",
+   "description": "Verizon Visual Voicemail (https://play.google.com/store/apps/details?id=com.motorola.visualvoicemail) On non-Verizon phones it has a generic\"Voicemail\" name and icon, and doesn't seem to active."
+  },
+  {
+   "packageName": "com.motorola.vzw.cloudsetup",
+   "risk": "safe",
+   "description": "Cloud setup"
+  },
+  {
+   "packageName": "com.motorola.vzw.loader",
+   "risk": "safe",
+   "description": "???? Doesn't seem to break anything once removed."
+  },
+  {
+   "packageName": "com.motorola.vzw.mot5gmod",
+   "risk": "safe",
+   "description": "5G Moto Mod (https://play.google.com/store/apps/details?id=com.motorola.mot5gmod)"
+  },
+  {
+   "packageName": "com.motorola.vzw.phone.extensions",
+   "risk": "safe",
+   "description": "Free HD wallpaper from verizon"
+  },
+  {
+   "packageName": "com.motorola.vzw.provider",
+   "risk": "safe",
+   "description": "???? Doesn't seem to break anything once removed."
+  },
+  {
+   "packageName": "com.motricity.verizon.ssodownloadable",
+   "risk": "safe",
+   "description": "Verizon Login by Motricity (now Voltari) Voltari provides relevance-driven mobile advertising, mobile marketing, mobile merchandising, and predictive analytics solutions. Needed for My Verizon. https://en.wikipedia.org/wiki/Voltari https://www.lightreading.com/motricity-holds-..."
+  },
+  {
+   "packageName": "com.naviexpert.NaviExpert",
+   "risk": "safe",
+   "description": "Navigation T-Mobile https://play.google.com/store/apps/details?id=com.naviexpert.NaviExpert"
+  },
+  {
+   "packageName": "com.nextbit.app",
+   "risk": "safe",
+   "description": "docomo LIVE UX backup it's on some japanese phones"
+  },
+  {
+   "packageName": "com.nhl.gcl.canada",
+   "risk": "safe",
+   "description": "Rogers NHL app. Just opens a 404 page in the web browser. Useless."
+  },
+  {
+   "packageName": "com.nim.rogers",
+   "risk": "safe",
+   "description": "Texture, a digital magazine service created by Rogers Media. Discontinued in 2019."
+  },
+  {
+   "packageName": "com.nttdocomo.android.anmane2",
+   "risk": "safe",
+   "description": "Likely a placeholder for docomo's corporate MDM service. Empty package and disabled by default on consumer devices."
+  },
+  {
+   "packageName": "com.nttdocomo.android.anshinsecurity",
+   "risk": "safe",
+   "description": "Anshin-security (https://www.docomo.ne.jp/service/anshin_security/) docomo's security suite providing virus scanning, spam call/email prevention and so on. Safe to remove, but you may want to check https://mydocomo.docomo.ne.jp for subscriptions. Frequently bundled with device..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.apnsw",
+   "risk": "safe",
+   "description": "APN switching control Resource-only stub. Safe to remove. May potentially cause tethering issues on legacy (pre-2016) models due to docomo's APN-switching requirements?"
+  },
+  {
+   "packageName": "com.nttdocomo.android.applicationmanager",
+   "risk": "caution",
+   "description": "docomo Application Manager Manages installation and updates of docomo-specific app. Safe to remove if you don't use any docomo service. NOTE: After reinstall, reboot needed to launch in some cases."
+  },
+  {
+   "packageName": "com.nttdocomo.android.databackup",
+   "risk": "safe",
+   "description": "Backup feature for application of docomo's service, mainly provides schedule/memo's cloud sync function."
+  },
+  {
+   "packageName": "com.nttdocomo.android.devicehelp",
+   "risk": "safe",
+   "description": "Recommended usage tips Intrusive. Provide \"helpful hints\" based on user activity, but behaving like adware by showing frequent pop-ups. Requires high-level permissions such as Accessibility and \"Draw over other apps\" (overlay) to monitor user actions. It's not enabled by defau..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.dhome",
+   "risk": "caution",
+   "description": "Legacy docomo LIVE UX docomo's default home screen (launcher). Safe to remove ONLY IF another launcher is installed. Certain devices such as dtab may not have any other home screen apps preinstalled. docomo application manager (com.nttdocomo.android.applicationmanager) must be..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.dmenu2",
+   "risk": "safe",
+   "description": "d-menu Web page shortcut and notification receiver."
+  },
+  {
+   "packageName": "com.nttdocomo.android.docomoset",
+   "risk": "caution",
+   "description": "docomo service/cloud Settings Adds a \"docomo service/cloud\" entry to the system Settings app. Simple navigation screen providing entry points to docomo-specific app settings, such as d-account and docomo application manager. Essential for launching d-account settings. Safe to..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.homezozo",
+   "risk": "caution",
+   "description": "docomo LIVE UX docomo's default home screen (launcher). Safe to remove ONLY IF another launcher is installed. Certain devices such as dtab may not have any other home screen apps preinstalled. docomo application manager (com.nttdocomo.android.applicationmanager) must be instal..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.iconcier_contents",
+   "risk": "safe",
+   "description": "Diagnostics things only in this japanese app"
+  },
+  {
+   "packageName": "com.nttdocomo.android.idmanager",
+   "risk": "caution",
+   "description": "d ACCOUNT Settings Account Settings for d-account, includes an authentication component for other docomo apps. Safe to remove if you don't use any docomo services, but ensure you check your login method as you may need this app for two-step authentication when logging in from..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.initialization",
+   "risk": "safe",
+   "description": "DOCOMO initialization OOBE (Initial setup) component for docomo devices. Safe to remove. Tips: Apps deleted here will be restored when you factory reset the device!"
+  },
+  {
+   "packageName": "com.nttdocomo.android.mascot",
+   "risk": "safe",
+   "description": "my daiz (https://www.docomo.ne.jp/service/mydaiz/) docomo's information (e.g. weather, news) app. Also displays a mascot (looks like tofu) on docomo LIVE UX. Requires lots of permissions."
+  },
+  {
+   "packageName": "com.nttdocomo.android.msg",
+   "risk": "safe",
+   "description": "+Message A messaging app using a carrier-customized RCS implementation by Softbank, au, and docomo. It adds LINE-like features to the standard SMS/RCS. Safe to remove, but recommended to have an alternative SMS app for OTPs. Google Messages is a simpler and more standard alter..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.mymagazine",
+   "risk": "safe",
+   "description": "SmartNews for docomo News app. Special version of SmartNews for docomo user."
+  },
+  {
+   "packageName": "com.nttdocomo.android.networkservice",
+   "risk": "safe",
+   "description": "Office Link Settings Provides \"Office Link\" service (docomo's enterprise internal line service). Typically accessed through the settings menu of the OEM Phone app. Safe to remove."
+  },
+  {
+   "packageName": "com.nttdocomo.android.pf.dcmippushaggregator",
+   "risk": "safe",
+   "description": "A background platform service that manages docomo's proprietary IP push notification system. Safe to remove if you don't need to receive docomo's service notifications."
+  },
+  {
+   "packageName": "com.nttdocomo.android.remotelock",
+   "risk": "safe",
+   "description": "Omakase-lock (https://www.docomo.ne.jp/service/lock/) Remote device lock service. Allows docomo customer support to lock your device upon request. Safe to remove. Google's \"Find Hub\" are better-integrated alternatives including NFC (=FeliCa) remote lock. NOTE: To uninstall thi..."
+  },
+  {
+   "packageName": "com.nttdocomo.android.rwpushcontroller",
+   "risk": "safe",
+   "description": "rwpushcontroller Another FeliCa Networks app, with japanese language Useless frameworks"
+  },
+  {
+   "packageName": "com.nttdocomo.android.schedulememo",
+   "risk": "safe",
+   "description": "Schedule & Memo 2 different apps in one package; docomo's schedule and memo apps."
+  },
+  {
+   "packageName": "com.nttdocomo.android.store",
+   "risk": "safe",
+   "description": "d-Point Market Web page shortcut and notification receiver."
+  },
+  {
+   "packageName": "com.nttdocomo.android.wipe",
+   "risk": "safe",
+   "description": "Remote Wipe (https://www.docomo.ne.jp/service/initialization/) Allows docomo customer support to wipe your device upon request. This does NOT clear data inside the FeliCa chip. Safe to remove. Google's \"Find Hub\" or oem provided services are better-integrated alternatives. NOT..."
+  },
+  {
+   "packageName": "com.oem.euiccpartnerapp",
+   "risk": "safe",
+   "description": "EuiccPartnerApp Needed for eSIM (eUICC)? I think it's useless."
+  },
+  {
+   "packageName": "com.orange.aura.oobe",
+   "risk": "safe",
+   "description": "Orange Manual Selector Makes unnecessary notifications"
+  },
+  {
+   "packageName": "com.orange.mail.fr",
+   "risk": "safe",
+   "description": "Mail Orange (https://play.google.com/store/apps/details?id=com.orange.mail.fr)"
+  },
+  {
+   "packageName": "com.orange.miorange",
+   "risk": "safe",
+   "description": "Lets you access to your Orange account"
+  },
+  {
+   "packageName": "com.orange.mylivebox.fr",
+   "risk": "safe",
+   "description": "Ma Livebox (https://play.google.com/store/apps/details?id=com.orange.mylivebox.fr) Lets you manage your livebox from your phone."
+  },
+  {
+   "packageName": "com.orange.mysosh",
+   "risk": "safe",
+   "description": "My Sosh (https://play.google.com/store/apps/details?id=com.orange.mysosh) Lets you access to your Sosh account"
+  },
+  {
+   "packageName": "com.orange.orangeetmoi",
+   "risk": "safe",
+   "description": "Orange Et Moi (https://play.google.com/store/apps/details?id=com.orange.orangeetmoi) Orange customer space"
+  },
+  {
+   "packageName": "com.orange.owtv",
+   "risk": "safe",
+   "description": "TV d'Orange (https://play.google.com/store/apps/details?id=com.orange.owtv) Lets you watch TV/VOD on your phone."
+  },
+  {
+   "packageName": "com.orange.tdd",
+   "risk": "safe",
+   "description": "Transfert de données (https://play.google.com/store/apps/details?id=com.orange.tdd) Lets you transfer wirelessly: contacts, SMS, call log, calendar, photos, videos, audio files, etc., all from your old Android"
+  },
+  {
+   "packageName": "com.orange.update",
+   "risk": "safe",
+   "description": "Handles Orange apps updates."
+  },
+  {
+   "packageName": "com.orange.update.OrangeUpdateApplication",
+   "risk": "safe",
+   "description": "Obviously related to update..."
+  },
+  {
+   "packageName": "com.orange.vvm",
+   "risk": "safe",
+   "description": "Messagerie vocale visuelle (https://play.google.com/store/apps/details?id=com.orange.vvm) Lets you manage your voicemail with an app."
+  },
+  {
+   "packageName": "com.orange.wifiorange",
+   "risk": "safe",
+   "description": "Mon Réseau (https://play.google.com/store/apps/details?id=com.orange.wifiorange) Lets you measure your speed connection and find better Orange wifi hotspots. Informs you also about near network incidents."
+  },
+  {
+   "packageName": "com.ptc.osp.gnc",
+   "risk": "safe",
+   "description": "Playing the Waiting Game by T-Mobile. This app is maded for listening to music."
+  },
+  {
+   "packageName": "com.quickplay.android.bellmediaplayer",
+   "risk": "safe",
+   "description": "App for watching your Bell Fibe TV on the go. Useless, especially if you don't use Bell. (https://play.google.com/store/apps/details?id=com.quickplay.android.bellmediaplayer). Note that Bell violates section F.1 of the Canadian Wireless Code by selling locked devices. If you u..."
+  },
+  {
+   "packageName": "com.rogers.npd.appzone",
+   "risk": "safe",
+   "description": "An app store just for Rogers bloat. Why the hell would you want this?"
+  },
+  {
+   "packageName": "com.samsung.attvvm",
+   "risk": "safe",
+   "description": "Visual Voicemail Simple GUI for voicemail"
+  },
+  {
+   "packageName": "com.samsung.huxextension",
+   "risk": "safe",
+   "description": "Hux Extension Verizon activation, registration"
+  },
+  {
+   "packageName": "com.samsung.slsi.telephony.oem.oemrilhookservice",
+   "risk": "expert",
+   "description": "Part of the Samsung cellular modem infrastructure used by the OS to provide cellular support."
+  },
+  {
+   "packageName": "com.samsung.slsi.telephony.oemril",
+   "risk": "expert",
+   "description": "Part of the Samsung cellular modem infrastructure used by the OS to provide cellular support."
+  },
+  {
+   "packageName": "com.samsung.sprint.chameleon",
+   "risk": "safe",
+   "description": "Chameleon service which is a service designed to store sprint-specific properties (customizes some apps)."
+  },
+  {
+   "packageName": "com.sec.android.app.ewidgetatt",
+   "risk": "safe",
+   "description": "Entertainment Widget AT&T Widget for OneUI"
+  },
+  {
+   "packageName": "com.sec.android.app.tfstatus",
+   "risk": "expert",
+   "description": "Tracfone app, function unknown"
+  },
+  {
+   "packageName": "com.sec.android.app.tfunlock",
+   "risk": "expert",
+   "description": "The unlocking interface and process when unlocking a Tracfone-based phone. Probably needed for unlocking your carrier status. probably needed if you want to unlock your phone from a Tracfone service."
+  },
+  {
+   "packageName": "com.sec.omadm",
+   "risk": "expert",
+   "description": "OMADM Open Mobile Alliance Device Management. A protocol for management of mobile devices. https://en.wikipedia.org/wiki/OMA_Device_Management"
+  },
+  {
+   "packageName": "com.sec.omadmspr.syncmlphoneif",
+   "risk": "expert",
+   "description": "OMADM Phone Interface? OMADM = Open Mobile Alliance Device Management. A protocol for management of mobile devices. https://en.wikipedia.org/wiki/OMA_Device_Management"
+  },
+  {
+   "packageName": "com.sec.sprint.wfcstub",
+   "risk": "safe",
+   "description": "Seems to be related to Wifi-Calling on Samsung phone."
+  },
+  {
+   "packageName": "com.securityandprivacy.android.verizon.vms",
+   "risk": "safe",
+   "description": "Digital Secure (https://play.google.com/store/apps/details?id=com.securityandprivacy.android.verizon.vms&hl=en) I don't know why this apps is released twice on the Play store under 2 different package name."
+  },
+  {
+   "packageName": "com.sfr.android.moncompte",
+   "risk": "safe",
+   "description": "SFR & Moi (https://play.google.com/store/apps/details?id=com.sfr.android.moncompte) Lets you manage your SFR account"
+  },
+  {
+   "packageName": "com.sfr.android.sfrcloud",
+   "risk": "safe",
+   "description": "SFR Cloud (https://play.google.com/store/apps/details?id=com.sfr.android.sfrcloud) Cloud provided by SFR"
+  },
+  {
+   "packageName": "com.sfr.android.sfrjeux",
+   "risk": "safe",
+   "description": "My Games it's not useful app for games and better uninstall it"
+  },
+  {
+   "packageName": "com.sfr.android.sfrmail",
+   "risk": "safe",
+   "description": "SFR Mail (https://play.google.com/store/apps/details?id=com.sfr.android.sfrmail)"
+  },
+  {
+   "packageName": "com.sfr.android.sfrplay",
+   "risk": "safe",
+   "description": "SFR Play (https://play.google.com/store/apps/details?id=com.sfr.android.sfrplay) VOD streaming from SFR."
+  },
+  {
+   "packageName": "com.sfr.android.vvm",
+   "risk": "safe",
+   "description": "SFR Répondeur + (https://play.google.com/store/apps/details?id=com.sfr.android.vvm) Lets you use your voice mail and manage your inbox without dialing into your voicemail."
+  },
+  {
+   "packageName": "com.shannon.imsservice",
+   "risk": "caution",
+   "description": "Verizon IMS service."
+  },
+  {
+   "packageName": "com.shannon.rcsservice",
+   "risk": "caution",
+   "description": "Verizon RCS service."
+  },
+  {
+   "packageName": "com.sprint.android.musicplus2033",
+   "risk": "safe",
+   "description": "Sprint Music Plus (https://play.google.com/store/apps/details?id=com.sprint.android.musicplus2033) Sprint’s official Music Store and player."
+  },
+  {
+   "packageName": "com.sprint.android.musicplus2033.vpl",
+   "risk": "safe",
+   "description": "Sprint Music Plus (https://play.google.com/store/apps/details?id=com.sprint.android.musicplus2033) Sprint’s official Music Store and player"
+  },
+  {
+   "packageName": "com.sprint.care",
+   "risk": "safe",
+   "description": "My Sprint (https://play.google.com/store/apps/details?id=com.sprint.care) Lets you manage your Sprint Account and pay your bill."
+  },
+  {
+   "packageName": "com.sprint.ce.updater",
+   "risk": "safe",
+   "description": "Mobile Installer Used by Sprint to (force) install/update Sprint apps. https://community.sprint.com/t5/Samsung/How-to-stop-quot-Mobile-Installer-quot-from-pushing-apps-to/td-p/1036387"
+  },
+  {
+   "packageName": "com.sprint.ecid",
+   "risk": "safe",
+   "description": "Enhanced Caller ID Enable you to hide name and phone number when you make phone calls https://www.sprint.com/en/support/solutions/services/restrict-your-caller-id-information.html"
+  },
+  {
+   "packageName": "com.sprint.fng",
+   "risk": "safe",
+   "description": "Sprint Spot (https://play.google.com/store/apps/details?id=com.sprint.fng) Provides Sprint customers a way to discover and access apps, services, games, TV & video, music, and more."
+  },
+  {
+   "packageName": "com.sprint.international.message",
+   "risk": "safe",
+   "description": "Sprint Worldwide Just an help page for international travelers."
+  },
+  {
+   "packageName": "com.sprint.ms.cdm",
+   "risk": "safe",
+   "description": "Sprint Device Manager Mobile Device Management (MDM) allows company’s IT department to reach inside your phone in the background, allowing them to ensure your device is secure, know where it is, and remotely erase your data if the phone is stolen. You should NEVER install a MD..."
+  },
+  {
+   "packageName": "com.sprint.ms.cnap",
+   "risk": "safe",
+   "description": "Caller ID cnap = Caller Name Presentation (https://en.wikipedia.org/wiki/Calling_Name_Presentation) Lets you change the name that is displayed on caller ID when making a call. Strange is it the same thing than\"com.sprint.ecid\" ?"
+  },
+  {
+   "packageName": "com.sprint.ms.smf.services",
+   "risk": "safe",
+   "description": "Sprint Hub (https://play.google.com/store/apps/details?id=com.sprint.ms.smf.services) Enables Sprint features (including Wifi calling) and products for devices operating on the Sprint network."
+  },
+  {
+   "packageName": "com.sprint.psdg.sw",
+   "risk": "safe",
+   "description": "Carrier Setup Wizard The first time you turn your device on, a Welcome screen is displayed. It guides you through the basics of setting up your device. Here it handles the setup of Sprint features/services."
+  },
+  {
+   "packageName": "com.sprint.safefound",
+   "risk": "safe",
+   "description": "Safe & Found (https://play.google.com/store/apps/details?id=com.sprint.safefound) Mobile safety and security application that helps protect and locate your\"loved ones\". You have the ability to track and manage smartphones, tablets and Tracker all in one app. https://www.sprint..."
+  },
+  {
+   "packageName": "com.sprint.safefound.vpl",
+   "risk": "safe",
+   "description": "Safe & Found (https://play.google.com/store/apps/details?id=com.sprint.safefound) Mobile safety and security application that helps protect and locate your\"loved ones\". You have the ability to track and manage smartphones, tablets and Tracker all in one app. https://www.sprint..."
+  },
+  {
+   "packageName": "com.sprint.topup",
+   "risk": "safe",
+   "description": "Doesn't exist anymore? Now Sprint Pay (https://play.google.com/store/apps/details?id=com.sprintpay)"
+  },
+  {
+   "packageName": "com.sprint.w.installer",
+   "risk": "safe",
+   "description": "Sprint ID Provides mobile ID Packs featuring apps, ringers, wallpapers, widgets and more. Can (and do) force install apps you disabled."
+  },
+  {
+   "packageName": "com.sprint.w.v8",
+   "risk": "safe",
+   "description": "Old app Discover App (discontinued / new package name) Lets you discover Sprint apps?"
+  },
+  {
+   "packageName": "com.sprint.zone",
+   "risk": "safe",
+   "description": "My Sprint Launcher? Apparently helps the user find new apps, in addition to some carrier-specific functionality."
+  },
+  {
+   "packageName": "com.synchronoss.dcs.att.r2g",
+   "risk": "safe",
+   "description": "AT&T Ready2Go (discontinued) Its purpose was to help you migrating your data to your new Android device."
+  },
+  {
+   "packageName": "com.tcl.vzwintents",
+   "risk": "expert",
+   "description": ""
+  },
+  {
+   "packageName": "com.tct.vzwwifioffload",
+   "risk": "expert",
+   "description": ""
+  },
+  {
+   "packageName": "com.telcel.contenedor",
+   "risk": "safe",
+   "description": "Telcel app, Advertising company to get promotions. https://play.google.com/store/apps/details?id=com.telcel.contenedor"
+  },
+  {
+   "packageName": "com.telecomsys.directedsms.android.SCG",
+   "risk": "safe",
+   "description": "Verizon Location Agent Location tracking (does not impact GPS function if deleted, don't worry)"
+  },
+  {
+   "packageName": "com.telenav.app.android.bell",
+   "risk": "safe",
+   "description": "Bell Navigator app. It works, but there are much better Maps apps available. https://play.google.com/store/apps/details?id=com.telenav.app.android.bell"
+  },
+  {
+   "packageName": "com.telus.checkup",
+   "risk": "safe",
+   "description": "Checkup app (from Mobile Klinik; a Canadian store for buying, selling, and repairing smartphones) Mainly used to run device-health diagnostics, estimate device value post-diagnostics (for re-selling at a Mobile Klinik location), and finding nearby Mobile Klinik locations to bo..."
+  },
+  {
+   "packageName": "com.telus.featuredapps",
+   "risk": "safe",
+   "description": "Recommended apps from Telus. Now discontinued and doesn't show any apps."
+  },
+  {
+   "packageName": "com.telus.myaccount",
+   "risk": "safe",
+   "description": "My TELUS app It's used for managing your telus account Safe to remove if you don't use it"
+  },
+  {
+   "packageName": "com.tmobile.pr.adapt",
+   "risk": "safe",
+   "description": "Diagnostic tool. This app can see all your installed apps, that you have allowed unknown sources on, that your rooted, and will deny your warranty saying your rooted. It constantly runs in the background."
+  },
+  {
+   "packageName": "com.tmobile.pr.mytmobile",
+   "risk": "safe",
+   "description": "T-mobile app (https://play.google.com/store/apps/details?id=com.tmobile.pr.mytmobile)"
+  },
+  {
+   "packageName": "com.tmobile.services.nameid",
+   "risk": "safe",
+   "description": "Name ID T-Mobile (powered by Hiya or cequint if on Samsung devices) NOTE : Never trust a company which promotes call ID/spam blocking features. https://techcrunch.com/2019/08/09/many-robocall-blocking-apps-send-your-private-data-without-permission/"
+  },
+  {
+   "packageName": "com.tmobile.simlock",
+   "risk": "safe",
+   "description": "Device Unlock. Allows you to request and apply a mobile device unlock directly from the device. https://support.t-mobile.com/docs/DOC-14011"
+  },
+  {
+   "packageName": "com.tmobile.vvm.application",
+   "risk": "safe",
+   "description": "T-Mobile Visual VoiceMail (https://play.google.com/store/apps/details?id=com.tmobile.vvm.application) Lets you use your voice mail and manage your inbox without dialing into your voicemail."
+  },
+  {
+   "packageName": "com.tracfone.preload.accountservices",
+   "risk": "safe",
+   "description": "TracPhone / StraightTalk application. It just shows IMEI, SIM, and phone number, as well as a way to see device properties. Comes preinstalled with any TracPhone or StraightTalk device. It can be downloaded from the playstore if needed for whatever reason. Has Approximate and..."
+  },
+  {
+   "packageName": "com.vcast.mediamanager",
+   "risk": "safe",
+   "description": "Verizon Cloud (https://play.google.com/store/apps/details?id=com.vcast.mediamanager)"
+  },
+  {
+   "packageName": "com.verizon.cloudsetupwizard",
+   "risk": "safe",
+   "description": ""
+  },
+  {
+   "packageName": "com.verizon.llkagent",
+   "risk": "safe",
+   "description": "Used for Verizon store demo mode."
+  },
+  {
+   "packageName": "com.verizon.loginengine.unbranded",
+   "risk": "safe",
+   "description": "Carrier Login Engine Needed for wifi-calling. (To be confirmed)"
+  },
+  {
+   "packageName": "com.verizon.messaging.vzmsgs",
+   "risk": "safe",
+   "description": "Verizon Messages (https://play.google.com/store/apps/details?id=com.verizon.messaging.vzmsgs)"
+  },
+  {
+   "packageName": "com.verizon.mips.services",
+   "risk": "caution",
+   "description": "My Verizon Services Related to My Verizon app. Required for hotspot"
+  },
+  {
+   "packageName": "com.verizon.obdm",
+   "risk": "safe",
+   "description": "It's a set of metrics-related modules. Google Play uses the version of the Telemetry module to determine if updates are available for metrics-related modules and which security patch version to display to the end user. This module doesn’t contain active code and has no functio..."
+  },
+  {
+   "packageName": "com.verizon.obdm_permissions",
+   "risk": "safe",
+   "description": "D-MAT. Has a LOT of permissions! (https://knowledge.protektoid.com/apps/com.verizon.obdm/d48680955d8d58bade2e6620ccb1e30b9bf23cb8e50055e10de3466da558c0ee) DMAT Account ? It is used to hold shares and securities in dematerialised/electronic format. Seems weird that Verizon prov..."
+  },
+  {
+   "packageName": "com.verizon.permissions.appdirectedsms",
+   "risk": "safe",
+   "description": "Custom permissions for some verizon stuff?"
+  },
+  {
+   "packageName": "com.verizon.permissions.vzwappapn",
+   "risk": "safe",
+   "description": "Custom permissions used to set Verizon APN?"
+  },
+  {
+   "packageName": "com.verizon.remoteSimlock",
+   "risk": "safe",
+   "description": "VZWRemoteSimlockService Remote SimLock lock, unlock, looks more danger than useful app."
+  },
+  {
+   "packageName": "com.verizon.services",
+   "risk": "caution",
+   "description": "AppDirectedSMS OMA Device Management for Verizon. it's for wifi calling, sms"
+  },
+  {
+   "packageName": "com.verizon.vzwavs",
+   "risk": "safe",
+   "description": "Has a scary list of permissions. Does seems to break anything if removed"
+  },
+  {
+   "packageName": "com.verizontelematics.verizonhum",
+   "risk": "safe",
+   "description": "Hum Family Locator (https://play.google.com/store/apps/details?id=com.verizontelematics.verizonhum)"
+  },
+  {
+   "packageName": "com.vznavigator.Generic",
+   "risk": "safe",
+   "description": "VZ Navigator (GPS app) (https://play.google.com/store/apps/details?id=com.vznavigator.Generic)"
+  },
+  {
+   "packageName": "com.vzw.apnlib",
+   "risk": "expert",
+   "description": "Kind of library for Verizon APN ? REMINDER : https://developer.android.com/reference/android/telephony/data/ApnSetting After uninstall phone won't allow to call or text(breaks WiFi calling), On Auto Optimization it cause auto reboots."
+  },
+  {
+   "packageName": "com.vzw.apnservice",
+   "risk": "caution",
+   "description": "APN Services. REMINDER : https://developer.android.com/reference/android/telephony/data/ApnSetting"
+  },
+  {
+   "packageName": "com.vzw.easvalidation",
+   "risk": "expert",
+   "description": ""
+  },
+  {
+   "packageName": "com.vzw.ecid",
+   "risk": "safe",
+   "description": "Verizon Call Filter (https://play.google.com/store/apps/details?id=com.vzw.ecid) NOTE : Never trust a company which promotes call ID/spam blocking features."
+  },
+  {
+   "packageName": "com.vzw.hss.myverizon",
+   "risk": "safe",
+   "description": "MyVerizon app"
+  },
+  {
+   "packageName": "com.vzw.hss.widgets.infozone.large",
+   "risk": "safe",
+   "description": "My InfoZone Widget Gives weekly tips, access to device info and account information. https://www.droid-life.com/2013/02/12/verizon-introduces-my-infozone-widget-allows-easy-access-to-tips-device-info-and-account-information/"
+  },
+  {
+   "packageName": "com.vzw.qualitydatalog",
+   "risk": "safe",
+   "description": "Logging stuff"
+  },
+  {
+   "packageName": "com.wavemarket.waplauncher",
+   "risk": "safe",
+   "description": "AT&T Secure Family (https://play.google.com/store/apps/details?id=com.wavemarket.waplauncher) Parental control app. 7 trackers + 16 permissions (https://reports.exodus-privacy.eu.org/en/reports/com.wavemarket.waplauncher/latest/)"
+  },
+  {
+   "packageName": "com.whitepages.nameid.tmobile",
+   "risk": "safe",
+   "description": "T-mobile NAME ID by WhitePages (https://www.whitepages.com/) Discontinued. Replaced by com.tmobile.services.nameid https://www.fiercewireless.com/wireless/t-mobile-to-offer-name-id-service-from-whitepages https://www.geekwire.com/2016/whitepages-spins-caller-id-spam-blocking-a..."
+  },
+  {
+   "packageName": "de.telekom.tsc",
+   "risk": "safe",
+   "description": "AppEnabler tsc = Telecom Service Center Used to display ads in notifications panel. )"
+  },
+  {
+   "packageName": "fr.bouyguestelecom.ecm.android",
+   "risk": "safe",
+   "description": "Espace Client (https://play.google.com/store/apps/details?id=fr.bouyguestelecom.ecm.android) Lets you manage your Bouygues account."
+  },
+  {
+   "packageName": "fr.bouyguestelecom.tv.android",
+   "risk": "safe",
+   "description": "B.tv (https://play.google.com/store/apps/details?id=fr.bouyguestelecom.tv.android) Lets you watch TV from your phone."
+  },
+  {
+   "packageName": "fr.bouyguestelecom.vvmandroid",
+   "risk": "safe",
+   "description": "This app wants to inject ads into your gallery. Found only ads and crashlytics components."
+  },
+  {
+   "packageName": "fr.orange.cineday",
+   "risk": "safe",
+   "description": "Orange cineday (https://play.google.com/store/apps/details?id=fr.orange.cineday) Useless app but cineday is pretty nice. Every tuesday you can invite the person of your choice in movies (within the limit of available seats). You can just use https://cineday.orange.fr/cineday/"
+  },
+  {
+   "packageName": "hdopen.vivicitta",
+   "risk": "safe",
+   "description": "Companion App for training, so bloated and from T-Mobile"
+  },
+  {
+   "packageName": "hu.telekom.telekomapp",
+   "risk": "safe",
+   "description": "Telekom App for subscriptions, so bloated (a lot spying) and from T-Mobile"
+  },
+  {
+   "packageName": "hu.telekom.telekomtv",
+   "risk": "safe",
+   "description": "Mobile shopping App for watch tv on phone, so bloated (a lot spying) and from T-Mobile"
+  },
+  {
+   "packageName": "jp.co.daj.consumer.ifilter.aflauncher",
+   "risk": "safe",
+   "description": "Something Japanese with useless code."
+  },
+  {
+   "packageName": "jp.co.nttdocomo.anshinmode",
+   "risk": "safe",
+   "description": "Anshin-Filter for docomo (https://www.docomo.ne.jp/service/anshin_filter/0) Carrier-provided parental controls. Terrible. Causes excessive battery drain on both parent and child devices due to heavy background polling, and a ton of other issues. If you care about your child's..."
+  },
+  {
+   "packageName": "jp.co.nttdocomo.carriermail",
+   "risk": "safe",
+   "description": "docomo mail Carrier mail app. Safe to remove."
+  },
+  {
+   "packageName": "jp.co.nttdocomo.lcsapp",
+   "risk": "safe",
+   "description": "docomo location information Provides \"Keitai-Osagashi Service\" (Mobile Phone Finder Service) and \"imadoco search\" (parental tracking) by docomo. com.nttdocomo.android.docomoset is needed to launch settings screen. Safe to remove, but you may want to check https://mydocomo.doco..."
+  },
+  {
+   "packageName": "jp.co.nttdocomo.saigaiban",
+   "risk": "safe",
+   "description": "Disaster kit (https://www.docomo.ne.jp/info/disaster/disaster_kit/) A dedicated app for docomo's safety registration service used during major emergencies. It allows users to post and search for safety status. NOTE: This is not related to the core functionality of Area Mail (e..."
+  },
+  {
+   "packageName": "jp.co.omronsoft.wnnext.skin.std_dark_type2_HW",
+   "risk": "safe",
+   "description": "Skin Dark mode to Japanese Keyboard."
+  },
+  {
+   "packageName": "jp.co.omronsoft.wnnext.skin.std_light_type2_HW",
+   "risk": "safe",
+   "description": "Skin Light mode to Japanese Keyboard."
+  },
+  {
+   "packageName": "jp.co.yahoo.android.ebookjapan.preinstall",
+   "risk": "safe",
+   "description": "eBookJapan Not needed japanese."
+  },
+  {
+   "packageName": "net.aetherpal.device",
+   "risk": "safe",
+   "description": "AT&T Remote Support provided by aetherpal (was acquired by VMware) Allows an AT&T Advanced Support representative to assist you by accessing your device remotely."
+  },
+  {
+   "packageName": "pl.tmobile.miboa",
+   "risk": "safe",
+   "description": "My T-Mobile Has login activity and MailBox. A lot metrics, analytics."
+  },
+  {
+   "packageName": "pl.tmobile.panel",
+   "risk": "safe",
+   "description": "MyBox Require sim card to run app it's app store(discontinued?)"
+  },
+  {
+   "packageName": "ro.cosmote.aps.wnwlite",
+   "risk": "safe",
+   "description": "TopApps(discontinued) it's non english app. Installs recommended apps? I can't launch the app because it displays an error that it can't connect to the Internet, even when Wi-Fi is on."
+  },
+  {
+   "packageName": "telekom.hu.android.mobilvasarlas",
+   "risk": "safe",
+   "description": "Mobile shopping App for shopping or paying, so bloated and from T-Mobile"
+  },
+  {
+   "packageName": "tmobile.hu.android.epgmiab",
+   "risk": "safe",
+   "description": "Newsreel Another app to tv things, so bloated and from T-Mobile, not needed"
+  },
+  {
+   "packageName": "uk.co.ee.myee",
+   "risk": "safe",
+   "description": "Myee app (https://play.google.com/store/apps/details?id=uk.co.ee.myee) Lets you control your EE pay monthly, pay as you go and WiFi devices. Check your data, bills, packs and more, and keep an eye on your spending. Contains unnecessary analytics and most of the things the app..."
+  },
+  {
+   "packageName": "us.com.dt.iq.appsource.tmobile",
+   "risk": "safe",
+   "description": "App Source (discontinued) This app aimed at organizing all of your existing apps on the phone by category and helping you discover new apps through search and recommendations."
+  }
+ ]
+}

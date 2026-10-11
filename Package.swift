@@ -63,7 +63,7 @@ let package = Package(
                 "AirlockCore", "AirlockADB", "AirlockArchive", "AirlockSafety",
                 "AirlockJournal", "AirlockReputation", "AirlockPairing",
             ],
-            resources: [.process("Resources")],
+            resources: [.copy("Resources/presets")],
             swiftSettings: strict
         ),
         .target(name: "AirlockUI", dependencies: ["AirlockCore", "AirlockServices"], swiftSettings: strict),

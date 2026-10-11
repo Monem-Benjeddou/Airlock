@@ -1,0 +1,913 @@
+{
+ "id": "google",
+ "name": "Google apps",
+ "brand": "other",
+ "source": "UAD-ng uad_lists.json (GPL-3.0), commit f02581f7f09f2e93d6f69cbc6c0602d03c89688f",
+ "entries": [
+  {
+   "packageName": "com.android.chrome",
+   "risk": "caution",
+   "description": "Google Chrome (https://play.google.com/store/apps/details?id=com.android.chrome) Occasionally runs in the background. NOTE: Disabling or uninstalling Chrome may break functionality for creating and storing passkeys (https://fidoalliance.org/passkeys/) on your phone, so keep th..."
+  },
+  {
+   "packageName": "com.android.partnerbrowsercustomizations.chromeHomepage",
+   "risk": "safe",
+   "description": "Horrible stuff for Google Chrome. This package bypass your DNS settings (for letting pass Google ads)"
+  },
+  {
+   "packageName": "com.android.soundpicker",
+   "risk": "expert",
+   "description": "Google Sounds. Needed to pick up a phone ringtone. No weird permissions. Pithus analysis: https://beta.pithus.org/report/f5f7c265c6d98666c78267b91643bbfb635021d5d4f85c93407079ba4aad88ee"
+  },
+  {
+   "packageName": "com.android.systemui.plugin.globalactions.wallet",
+   "risk": "caution",
+   "description": "Apk file name: QuickAccessWallet This is the Google Pay widget in the power menu(hold power button for 1sec to show this menu), below the Emergency, Power off and Reboot buttons."
+  },
+  {
+   "packageName": "com.android.vending",
+   "risk": "expert",
+   "description": "Google Play Store"
+  },
+  {
+   "packageName": "com.chrome.beta",
+   "risk": "safe",
+   "description": "Google Chrome Beta (https://play.google.com/store/apps/details?id=com.chrome.beta)"
+  },
+  {
+   "packageName": "com.chrome.canary",
+   "risk": "safe",
+   "description": "Google Chrome Canary (Nightly build) (https://play.google.com/store/apps/details?id=com.chrome.canary)"
+  },
+  {
+   "packageName": "com.chrome.dev",
+   "risk": "safe",
+   "description": "Google Chrome (developer) (https://play.google.com/store/apps/details?id=com.chrome.dev)"
+  },
+  {
+   "packageName": "com.google.android.GoogleCamera",
+   "risk": "caution",
+   "description": "Google Camera (https://play.google.com/store/apps/details?id=com.google.android.GoogleCamera)"
+  },
+  {
+   "packageName": "com.google.android.accessibility.soundamplifier",
+   "risk": "safe",
+   "description": "Accessibility sound amplifier (https://play.google.com/store/apps/details?id=com.google.android.accessibility.soundamplifier)"
+  },
+  {
+   "packageName": "com.google.android.apps.access.wifi.consumer",
+   "risk": "safe",
+   "description": "Google Wifi app (https://play.google.com/store/apps/details?id=com.google.android.apps.access.wifi.consumer)"
+  },
+  {
+   "packageName": "com.google.android.apps.adm",
+   "risk": "safe",
+   "description": "Google Find my device app (https://play.google.com/store/apps/details?id=com.google.android.apps.adm)"
+  },
+  {
+   "packageName": "com.google.android.apps.ads.publisher",
+   "risk": "safe",
+   "description": "Google Adsense app (https://play.google.com/store/apps/details?id=com.google.android.apps.ads.publisher)"
+  },
+  {
+   "packageName": "com.google.android.apps.adwords",
+   "risk": "safe",
+   "description": "Google Ads app (https://play.google.com/store/apps/details?id=com.google.android.apps.adwords)"
+  },
+  {
+   "packageName": "com.google.android.apps.aiwallpapers",
+   "risk": "safe",
+   "description": "Provides the ability to create wallpapers by using AI and several presets. Not sure how this can be useful to the average user + collects device info."
+  },
+  {
+   "packageName": "com.google.android.apps.assistant",
+   "risk": "safe",
+   "description": "Google Assistant Go (https://play.google.com/store/apps/details?id=com.google.android.apps.assistant) Go apps are lite-versions of their normal counterparts, made for low-RAM devices."
+  },
+  {
+   "packageName": "com.google.android.apps.authenticator2",
+   "risk": "safe",
+   "description": "Google Authenticator app (https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)"
+  },
+  {
+   "packageName": "com.google.android.apps.bard",
+   "risk": "safe",
+   "description": "Google Gemini, safe to remove"
+  },
+  {
+   "packageName": "com.google.android.apps.blogger",
+   "risk": "safe",
+   "description": "Google blogger app (https://play.google.com/store/apps/details?id=com.google.android.apps.blogger)"
+  },
+  {
+   "packageName": "com.google.android.apps.books",
+   "risk": "safe",
+   "description": "Google Play Books (https://play.google.com/store/apps/details?id=com.google.android.apps.books)"
+  },
+  {
+   "packageName": "com.google.android.apps.chromecast.app",
+   "risk": "safe",
+   "description": "Google Home (https://play.google.com/store/apps/details?id=com.google.android.apps.chromecast.app)"
+  },
+  {
+   "packageName": "com.google.android.apps.cloudprint",
+   "risk": "safe",
+   "description": "Cloud print (https://play.google.com/store/apps/details?id=com.google.android.apps.cloudprint)"
+  },
+  {
+   "packageName": "com.google.android.apps.cultural",
+   "risk": "safe",
+   "description": "Google Arts & Culture (https://play.google.com/store/apps/details?id=com.google.android.apps.cultural)"
+  },
+  {
+   "packageName": "com.google.android.apps.currents",
+   "risk": "safe",
+   "description": "Google Currents (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.docs",
+   "risk": "safe",
+   "description": "Google Drive (https://play.google.com/store/apps/details?id=com.google.android.apps.docs)"
+  },
+  {
+   "packageName": "com.google.android.apps.docs.editors.docs",
+   "risk": "safe",
+   "description": "Google Docs (https://play.google.com/store/apps/details?id=com.google.android.apps.docs.editors.docs)"
+  },
+  {
+   "packageName": "com.google.android.apps.docs.editors.sheets",
+   "risk": "safe",
+   "description": "Google Sheets (https://play.google.com/store/apps/details?id=com.google.android.apps.docs.editors.sheets)"
+  },
+  {
+   "packageName": "com.google.android.apps.docs.editors.slides",
+   "risk": "safe",
+   "description": "Google Slides (https://play.google.com/store/apps/details?id=com.google.android.apps.docs.editors.slides)"
+  },
+  {
+   "packageName": "com.google.android.apps.dynamite",
+   "risk": "safe",
+   "description": "Hangout chat (discontinued) (https://play.google.com/store/apps/details?id=com.google.android.apps.dynamite)"
+  },
+  {
+   "packageName": "com.google.android.apps.enterprise.cpanel",
+   "risk": "safe",
+   "description": "Google Admin (https://play.google.com/store/apps/details?id=com.google.android.apps.enterprise.cpanel)"
+  },
+  {
+   "packageName": "com.google.android.apps.enterprise.dmagent",
+   "risk": "safe",
+   "description": "Google apps device policy (https://play.google.com/store/apps/details?id=com.google.android.apps.enterprise.dmagent)"
+  },
+  {
+   "packageName": "com.google.android.apps.fireball",
+   "risk": "safe",
+   "description": "Google Allo (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.fitness",
+   "risk": "safe",
+   "description": "Google Fit (https://play.google.com/store/apps/details?id=com.google.android.apps.fitness)"
+  },
+  {
+   "packageName": "com.google.android.apps.freighter",
+   "risk": "safe",
+   "description": "Google Datally (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.gcs",
+   "risk": "caution",
+   "description": "Internet services for Pixel and Nexus devices, including Wi-Fi/Mobile data switching, enabling a Google VPN on public networks, and Call Casting for Chromebooks. https://play.google.com/store/apps/details?id=com.google.android.apps.gcs"
+  },
+  {
+   "packageName": "com.google.android.apps.genie.geniewidget",
+   "risk": "safe",
+   "description": "News and weather widget. App was discontinued in 2018 and no longer works, therefore there is no point to have it anymore."
+  },
+  {
+   "packageName": "com.google.android.apps.giant",
+   "risk": "safe",
+   "description": "Google Analytics (https://play.google.com/store/apps/details?id=com.google.android.apps.giant)"
+  },
+  {
+   "packageName": "com.google.android.apps.googleassistant",
+   "risk": "safe",
+   "description": "Google Assistant (https://play.google.com/store/apps/details?id=com.google.android.apps.googleassistant)"
+  },
+  {
+   "packageName": "com.google.android.apps.handwriting.ime",
+   "risk": "safe",
+   "description": "Google Handwriting Input (https://play.google.com/store/apps/details?id=com.google.android.apps.handwriting.ime)"
+  },
+  {
+   "packageName": "com.google.android.apps.hangoutsdialer",
+   "risk": "safe",
+   "description": "Google Hangout Dialer (https://play.google.com/store/apps/details?id=com.google.android.apps.hangoutsdialer)"
+  },
+  {
+   "packageName": "com.google.android.apps.inbox",
+   "risk": "safe",
+   "description": "Inbox by Gmail (Discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.inputmethod.hindi",
+   "risk": "caution",
+   "description": "Google Keyboard + Hinndi characters (https://play.google.com/store/apps/details?id=com.google.android.apps.inputmethod.hindi)"
+  },
+  {
+   "packageName": "com.google.android.apps.kids.familylink",
+   "risk": "safe",
+   "description": "Google Family Link (https://play.google.com/store/apps/details?id=com.google.android.apps.kids.familylink)"
+  },
+  {
+   "packageName": "com.google.android.apps.kids.familylinkhelper",
+   "risk": "safe",
+   "description": "Google Family Link for children & teens (https://play.google.com/store/apps/details?id=com.google.android.apps.kids.familylinkhelper)"
+  },
+  {
+   "packageName": "com.google.android.apps.m4b",
+   "risk": "safe",
+   "description": "Google My Maps (https://play.google.com/store/apps/details?id=com.google.android.apps.m4b) It is NOT Google Maps"
+  },
+  {
+   "packageName": "com.google.android.apps.magazines",
+   "risk": "safe",
+   "description": "Google News (https://play.google.com/store/apps/details?id=com.google.android.apps.magazines)"
+  },
+  {
+   "packageName": "com.google.android.apps.maps",
+   "risk": "safe",
+   "description": "Google Maps (https://play.google.com/store/apps/details?id=com.google.android.apps.maps)"
+  },
+  {
+   "packageName": "com.google.android.apps.mapslite",
+   "risk": "safe",
+   "description": "Google Maps Go (lite web app of Maps) (https://play.google.com/store/apps/details?id=com.google.android.apps.mapslite)"
+  },
+  {
+   "packageName": "com.google.android.apps.mediahome.launcher",
+   "risk": "safe",
+   "description": "Entertainment Space All-in-one application for entertainment purposes like movies, games, books etc."
+  },
+  {
+   "packageName": "com.google.android.apps.meetings",
+   "risk": "safe",
+   "description": "Hangout Meet (discontinued) (https://play.google.com/store/apps/details?id=com.google.android.apps.meetings)"
+  },
+  {
+   "packageName": "com.google.android.apps.messaging",
+   "risk": "caution",
+   "description": "Google Messages (https://play.google.com/store/apps/details?id=com.google.android.apps.messaging) SMS and RCS app. NOTE: possibly a global dependency for SMS, MMS, RCS, OTP, and other services/verifications. WARNING: once disabled/uninstalled, even if reinstalled, a factory re..."
+  },
+  {
+   "packageName": "com.google.android.apps.navlite",
+   "risk": "safe",
+   "description": "Google Maps GPS (https://play.google.com/store/apps/details?id=com.google.android.apps.navlite)"
+  },
+  {
+   "packageName": "com.google.android.apps.nbu.files",
+   "risk": "safe",
+   "description": "Files by Google (https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files) Runs in the background."
+  },
+  {
+   "packageName": "com.google.android.apps.nbu.paisa.user",
+   "risk": "safe",
+   "description": "Google Pay (https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user) Digital wallet and payment system List of all the information collected and associated to your Google account : https://support.google.com/googlepay/answer/10223752?hl=en&co=GENIE..."
+  },
+  {
+   "packageName": "com.google.android.apps.nexuslauncher",
+   "risk": "expert",
+   "description": "Pixel Launcher (https://play.google.com/store/apps/details?id=com.google.android.apps.nexuslauncher) Used to be called Nexus Launcher(back when Google's phones were called Nexus, not Pixel). A launcher is basically your homescreen. DON'T REMOVE IF YOU HAVEN'T INSTALLED ANOTHER..."
+  },
+  {
+   "packageName": "com.google.android.apps.paidtasks",
+   "risk": "safe",
+   "description": "Google Opinion Rewards (https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks)"
+  },
+  {
+   "packageName": "com.google.android.apps.pdfviewer",
+   "risk": "caution",
+   "description": "Google PDF Viewer Shouldn't run in the background, so no reason to disable. Discontinued, but still works perfectly on Android 11. In fact, this is the best standalone PDF-viewer I've found. The default PDF-viewer in recent Android releases is now integrated into Google Drive."
+  },
+  {
+   "packageName": "com.google.android.apps.photos",
+   "risk": "safe",
+   "description": "Google Photos (https://play.google.com/store/apps/details?id=com.google.android.apps.photos)"
+  },
+  {
+   "packageName": "com.google.android.apps.photos.scanner",
+   "risk": "safe",
+   "description": "Google PhotoScan (https://play.google.com/store/apps/details?id=com.google.android.apps.photos.scanner)"
+  },
+  {
+   "packageName": "com.google.android.apps.photosgo",
+   "risk": "safe",
+   "description": "Google Gallery (https://play.google.com/store/apps/details?id=com.google.android.apps.photosgo)"
+  },
+  {
+   "packageName": "com.google.android.apps.pixel.subzero",
+   "risk": "safe",
+   "description": "Daily Hub - useless a general-purpose news app"
+  },
+  {
+   "packageName": "com.google.android.apps.plus",
+   "risk": "safe",
+   "description": "Google+ (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.podcasts",
+   "risk": "safe",
+   "description": "Google Podcasts (https://play.google.com/store/apps/details?id=com.google.android.apps.podcasts)"
+  },
+  {
+   "packageName": "com.google.android.apps.privacy.wildlife",
+   "risk": "safe",
+   "description": "VPN by Google One. Discontinued. Succeeded by VPN by Google and Google Fi VPN."
+  },
+  {
+   "packageName": "com.google.android.apps.recorder",
+   "risk": "safe",
+   "description": "Google (audio)Recorder (https://play.google.com/store/apps/details?id=com.google.android.apps.recorder)"
+  },
+  {
+   "packageName": "com.google.android.apps.restore",
+   "risk": "safe",
+   "description": "The backup restore wizard used for pulling Android system backups from your Google account. Runs on boot. You only need this if you factory restore, in which case it’s automatically re-enabled for you."
+  },
+  {
+   "packageName": "com.google.android.apps.safetyhub",
+   "risk": "caution",
+   "description": "Personal Safety (https://play.google.com/store/apps/details?id=com.google.android.apps.safetyhub) Personal Safety is a Pixel app that helps you prepare and react in an emergency by quickly calling emergency services (e.g if your phone detects that you've been in a car crash, i..."
+  },
+  {
+   "packageName": "com.google.android.apps.santatracker",
+   "risk": "safe",
+   "description": "Google Santa Tracker (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.scone",
+   "risk": "safe",
+   "description": "Automatically switches basebands between LTE and 5G on demand"
+  },
+  {
+   "packageName": "com.google.android.apps.searchlite",
+   "risk": "safe",
+   "description": "Google Go (https://play.google.com/store/apps/details?id=com.google.android.apps.searchlite) Go apps are lite-versions of their normal counterparts, made for low-RAM devices."
+  },
+  {
+   "packageName": "com.google.android.apps.security.securityhub",
+   "risk": "safe",
+   "description": "Checks security your phone(you can find it in settings). Not very useful. https://play.google.com/store/apps/details?id=com.google.android.apps.security.securityhub"
+  },
+  {
+   "packageName": "com.google.android.apps.setupwizard.searchselector",
+   "risk": "safe",
+   "description": "Search engine selector The search selection screen in the setupwizard you see on new/factory reset phones. Runs on boot, but doesn't seem to run in the background beyond that."
+  },
+  {
+   "packageName": "com.google.android.apps.speechservices",
+   "risk": "safe",
+   "description": "Google Speech Services Absolute garbage. There is already another speech recognition app (Speech Recognition and Synthesis from Google), so this app is just spyware, judging by the URLs it connects to. https://www.virustotal.com/gui/file/9340b2aa1cb6f3fab3481a4bd5c0dacae2441bb..."
+  },
+  {
+   "packageName": "com.google.android.apps.subscriptions.red",
+   "risk": "safe",
+   "description": "Google One (https://play.google.com/store/apps/details?id=com.google.android.apps.subscriptions.red) Lets you manage your Google cloud storage. Occasionally runs in the background."
+  },
+  {
+   "packageName": "com.google.android.apps.tachyon",
+   "risk": "safe",
+   "description": "Google Duo (Video Calls) (https://play.google.com/store/apps/details?id=com.google.android.apps.tachyon)"
+  },
+  {
+   "packageName": "com.google.android.apps.tasks",
+   "risk": "safe",
+   "description": "Google Task (TODO list) (https://play.google.com/store/apps/details?id=com.google.android.apps.tasks)"
+  },
+  {
+   "packageName": "com.google.android.apps.translate",
+   "risk": "safe",
+   "description": "Google Translate (https://play.google.com/store/apps/details?id=com.google.android.apps.translate)"
+  },
+  {
+   "packageName": "com.google.android.apps.travel.onthego",
+   "risk": "safe",
+   "description": "Google Trip (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.turbo",
+   "risk": "expert",
+   "description": "Device Health Services. Breaks battery settings."
+  },
+  {
+   "packageName": "com.google.android.apps.tycho",
+   "risk": "safe",
+   "description": "Google Fi Wireless https://play.google.com/store/apps/details?id=com.google.android.apps.tycho"
+  },
+  {
+   "packageName": "com.google.android.apps.uploader",
+   "risk": "safe",
+   "description": "Picasa Uploader (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.apps.vega",
+   "risk": "safe",
+   "description": "Google My Business (https://play.google.com/store/apps/details?id=com.google.android.apps.vega)"
+  },
+  {
+   "packageName": "com.google.android.apps.walletnfcrel",
+   "risk": "safe",
+   "description": "Google Pay (https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel)"
+  },
+  {
+   "packageName": "com.google.android.apps.wallpaper",
+   "risk": "caution",
+   "description": "Google Wallpapers (https://play.google.com/store/apps/details?id=com.google.android.apps.wallpaper) Removes the wallpaper section in the settings app when removed, but keeps current wallpapers."
+  },
+  {
+   "packageName": "com.google.android.apps.weather",
+   "risk": "safe",
+   "description": "The new Weather app by Google. If removed,\"At a Glance\" and the lock screen will still redirect to the Google app (like before). https://play.google.com/store/apps/details?id=com.google.android.apps.weather"
+  },
+  {
+   "packageName": "com.google.android.apps.wellbeing",
+   "risk": "caution",
+   "description": "Digital Wellbeing (https://play.google.com/store/apps/details?id=com.google.android.apps.wellbeing) Lets you track device and app usage and set usage limits. WARNING: It is now a hard dependency for the Settings app on Android 12+ for Pixel phones. After uninstalling, there wi..."
+  },
+  {
+   "packageName": "com.google.android.apps.work.oobconfig",
+   "risk": "caution",
+   "description": "Device Setup Sets up device to be managed by EMM (Enterprise Mobility Management), which\"allows organizations to securely enable employee use of mobile devices\". Might also be what does the actual management on your device, if you set it up as a work device. Only seems to run..."
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.creator",
+   "risk": "safe",
+   "description": "YouTube Studio (https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.creator)"
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.gaming",
+   "risk": "safe",
+   "description": "YouTube Gaming -(discontinued in March 2019, features integrated in main youtube app)"
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.kids",
+   "risk": "safe",
+   "description": "YouTube Kids (https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.kids)"
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.mango",
+   "risk": "safe",
+   "description": "YouTube Go (https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.mango) Lite version of the YouTube app. Shutdown by Google in august 2022. https://support.google.com/youtube/thread/162222567/youtube-go-is-going-away-in-august-of-this-year"
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.music",
+   "risk": "safe",
+   "description": "YouTube Music (https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music)"
+  },
+  {
+   "packageName": "com.google.android.apps.youtube.vr",
+   "risk": "safe",
+   "description": "YouTube VR (https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.vr)"
+  },
+  {
+   "packageName": "com.google.android.as",
+   "risk": "safe",
+   "description": "Android System Intelligence (previously Device Personalization Services) (https://play.google.com/store/apps/details?id=com.google.android.as) Runs in the background. \"Enables intelligent features across Android\", like: Live Caption, Screen Attention, Improved Copy-Paste, App..."
+  },
+  {
+   "packageName": "com.google.android.as.oss",
+   "risk": "safe",
+   "description": "Private Compute Services. On-device behavior analysis Enables live caption, music recognition and smart replies. Seems to be a dependency of System Intelligence. https://play.google.com/store/apps/details?id=com.google.android.as.oss https://milaq.net/android-bloatware"
+  },
+  {
+   "packageName": "com.google.android.backup",
+   "risk": "safe",
+   "description": "Allows Android apps to back up their data on Google servers. (On Android 4.2)"
+  },
+  {
+   "packageName": "com.google.android.backuptransport",
+   "risk": "caution",
+   "description": "Allows Android apps to back up their data on Google servers."
+  },
+  {
+   "packageName": "com.google.android.calculator",
+   "risk": "safe",
+   "description": "Google Calculator (https://play.google.com/store/apps/details?id=com.google.android.calculator)"
+  },
+  {
+   "packageName": "com.google.android.calendar",
+   "risk": "safe",
+   "description": "Google Calendar (https://play.google.com/store/apps/details?id=com.google.android.calendar)"
+  },
+  {
+   "packageName": "com.google.android.configupdater",
+   "risk": "expert",
+   "description": "Config Update Intents used to provide unbundled updates of system data. All require the UPDATE_CONFIG permission. Updates: - system wide certificate pins for TLS connections. - System wide Intent firewall. - List of permium SMS short codes. - List of carrier provisioning URLs...."
+  },
+  {
+   "packageName": "com.google.android.contactkeys",
+   "risk": "expert",
+   "description": "Android System Key Verifier is a system service for verifying interlocutors using messengers with end-to-end encryption. Its job is to verify end-to-end encryption keys across chat apps. It has no internet permissions and performs local key comparisons only. It doesn’t access..."
+  },
+  {
+   "packageName": "com.google.android.contacts",
+   "risk": "caution",
+   "description": "Google Contacts (https://play.google.com/store/apps/details?id=com.google.android.contacts) Occasionally runs in the background."
+  },
+  {
+   "packageName": "com.google.android.deskclock",
+   "risk": "caution",
+   "description": "Google clock app (https://play.google.com/store/apps/details?id=com.google.android.deskclock) WARNING: on some phones, removing this makes it so alarms and notifications only vibrate and don't make any sound (via any installed app), and makes the 'Alarm' section unavailable in..."
+  },
+  {
+   "packageName": "com.google.android.dialer",
+   "risk": "caution",
+   "description": "Google Dialer (https://play.google.com/store/apps/details?id=com.google.android.dialer) Default dialer on some phones. Google Analytics are embedded in the app, assume everything is datamined. https://www.virustotal.com/gui/file/a978d90f27d5947dca33ed59b73bd8efbac67253f9ef7a34..."
+  },
+  {
+   "packageName": "com.google.android.email",
+   "risk": "safe",
+   "description": "AOSP Mail client Newer versions of AOSP Mail are renamed to com.android.email and Gmail was migrated to com.google.android.gm"
+  },
+  {
+   "packageName": "com.google.android.feedback",
+   "risk": "safe",
+   "description": "This is the package that sends crash-report feedback to the Play Store? The crash pop-up still happens with this disabled. Doesn't seem to run on its own. Has permission to access system logs and package usage stats. Only connects to 4 Google domains. App developers likely hav..."
+  },
+  {
+   "packageName": "com.google.android.gm",
+   "risk": "safe",
+   "description": "Gmail (https://play.google.com/store/apps/details?id=com.google.android.gm)"
+  },
+  {
+   "packageName": "com.google.android.gm.exchange",
+   "risk": "safe",
+   "description": "Microsoft Exchange ActiveSync support for Gmail. Now part of the Gmail (com.google.android.gm) app."
+  },
+  {
+   "packageName": "com.google.android.gm.lite",
+   "risk": "safe",
+   "description": "Gmail Go (https://play.google.com/store/apps/details?id=com.google.android.gm.lite) Lite version of the Gmail app (hah! Because the base one is too bloated?). Don't use this app"
+  },
+  {
+   "packageName": "com.google.android.gms",
+   "risk": "expert",
+   "description": "Google Play Services GMS = Google Mobile Services. It is a layer that sits on top of the OS and provides a lot of proprietary Google APIs, giving apps access to various Google Services, such as:\"fused\"-location (internet and GPS chip), QR Code scanner, 2FA, G-Drive storage, Fi..."
+  },
+  {
+   "packageName": "com.google.android.gms.location.history",
+   "risk": "safe",
+   "description": "Google Location History This app has nothing in the code. Only png logo google and name."
+  },
+  {
+   "packageName": "com.google.android.gms.policy_sidecar_aps",
+   "risk": "caution",
+   "description": "Not sure what purpose it has, but it gets some network and phone data and connects to some Google domains, but never on its own; it has no permissions and never runs on its own, it likely exists as a helper package for other Google services. Doesn't seem to exist in newer vers..."
+  },
+  {
+   "packageName": "com.google.android.gms.supervision",
+   "risk": "safe",
+   "description": "Family Link parental controls It has something to Family Link parental controls. Introduced in android 13. https://play.google.com/store/apps/details?id=com.google.android.gms.supervision"
+  },
+  {
+   "packageName": "com.google.android.googlequicksearchbox",
+   "risk": "caution",
+   "description": "Google Search box (https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox) Runs in the background. Pointless. If you need a shortcut to Google on your homescreen just use a web-browser shortcut. Does also remove the Google Sound Search widget, bu..."
+  },
+  {
+   "packageName": "com.google.android.gsf",
+   "risk": "expert",
+   "description": "Google Services Framework Supports the Play Services application in application updates, user authentication, location services, user searches & more. https://android.stackexchange.com/questions/216176/what-is-the-exact-functionality-of-google-play-services-google-services-fra..."
+  },
+  {
+   "packageName": "com.google.android.gsf.login",
+   "risk": "caution",
+   "description": "Support for managing Google accounts. Safe to remove if you don't use a Google account."
+  },
+  {
+   "packageName": "com.google.android.health.connect.backuprestore",
+   "risk": "caution",
+   "description": "Health Connect for Android backup/restore."
+  },
+  {
+   "packageName": "com.google.android.healthconnect.controller",
+   "risk": "caution",
+   "description": "Health Connect by Android gives you a simple way to share data between your health, fitness, and wellbeing apps without compromising on privacy. Once you've downloaded Health Connect, you can access it through your settings by going to Settings > Apps > Health Connect, or from..."
+  },
+  {
+   "packageName": "com.google.android.ims",
+   "risk": "caution",
+   "description": "Carrier Services (https://play.google.com/store/apps/details?id=com.google.android.ims) Runs in the background. Play store description claims power savings in addition to the features, but I don't see how that could be the case. IMS(Ip Multimedia Subsystem) is an open industry..."
+  },
+  {
+   "packageName": "com.google.android.inputmethod.japanese",
+   "risk": "caution",
+   "description": "Google Keyboard + Japanese characters (https://play.google.com/store/apps/details?id=com.google.android.inputmethod.japanese)"
+  },
+  {
+   "packageName": "com.google.android.inputmethod.korean",
+   "risk": "caution",
+   "description": "Google Keyboard + Korean characters (https://play.google.com/store/apps/details?id=com.google.android.inputmethod.korean)"
+  },
+  {
+   "packageName": "com.google.android.inputmethod.latin",
+   "risk": "caution",
+   "description": "Gboard – the Google Keyboard (https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin) Sometimes the only keyboard app on a phone; Make sure you have another installed before you disable. On some phones, disabling may lock you out after restart due t..."
+  },
+  {
+   "packageName": "com.google.android.inputmethod.pinyin",
+   "risk": "caution",
+   "description": "Google Keyboard + Pinyin (Chinese) characters (https://play.google.com/store/apps/details?id=com.google.android.inputmethod.pinyin)"
+  },
+  {
+   "packageName": "com.google.android.instantapps.supervisor",
+   "risk": "safe",
+   "description": "Lets you try new games directly on Google Play. https://www.zdnet.com/article/googles-instant-apps-goes-live-now-you-can-try-android-apps-before-installing-them/"
+  },
+  {
+   "packageName": "com.google.android.keep",
+   "risk": "safe",
+   "description": "Google Keep (https://play.google.com/store/apps/details?id=com.google.android.keep)"
+  },
+  {
+   "packageName": "com.google.android.launcher",
+   "risk": "caution",
+   "description": "Google Now Launcher (https://play.google.com/store/apps/details?id=com.google.android.launcher) DO NOT REMOVE THIS IF YOU DON'T HAVE ANOTHER LAUNCHER INSTALLED."
+  },
+  {
+   "packageName": "com.google.android.location",
+   "risk": "caution",
+   "description": "Handles location services on older devices. On newer ones Google location services is part of Google Play Services and Android location service is provided by com.android.location.fused or com.android.location."
+  },
+  {
+   "packageName": "com.google.android.markup",
+   "risk": "caution",
+   "description": "Google Markup app made for modifying pictures, shipped by default on every Pie+ device. Removes the button to quickly edit screenshots once taken."
+  },
+  {
+   "packageName": "com.google.android.marvin.talkback",
+   "risk": "caution",
+   "description": "Android Accessibility Suite (https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback) Helps blind and visually impaired users. WARNING: Causes com.motorola.dynamicvolume to not display individual apps and their respective volumes when volume button pre..."
+  },
+  {
+   "packageName": "com.google.android.music",
+   "risk": "safe",
+   "description": "Google Play Music (discontinued) (https://play.google.com/store/apps/details?id=com.google.android.music)"
+  },
+  {
+   "packageName": "com.google.android.onetimeinitializer",
+   "risk": "safe",
+   "description": "Provides first time setup, safe to remove."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig",
+   "risk": "caution",
+   "description": "Useless configurations about webview, wifi and bluetooth to scan for better location. Everything works without it. WARNING: causes the Galaxy App to force-close after a few seconds on a Samsung N960F running Android Q."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.asi",
+   "risk": "caution",
+   "description": "it's another component of Android System Intelligence (previously Device Personalization Services)"
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.common",
+   "risk": "expert",
+   "description": "If you delete this package, you won't be able to log in to your Google account on a Google app. But if you don't need to log in to a Google account, you can safely remove this."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.comms",
+   "risk": "expert",
+   "description": "Useless configurations dialer, sms, contacts Google(GApps) It may break PackageInstaller."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.geotz",
+   "risk": "expert",
+   "description": "Provides Geolocation Time Zone detection. and it's used by (com.google.android.overlay.gmsconfig.common)? No effects after remove."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.gsa",
+   "risk": "caution",
+   "description": "configures default assistant? And have config to allow disabling assist disclosure? I think it doesn't affect anything. Safe to remove if you removed (com.google.android.googlequicksearchbox)."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.personalsafety",
+   "risk": "expert",
+   "description": "Not needed for (com.google.android.apps.safetyhub)."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.searchlauncherqs",
+   "risk": "expert",
+   "description": "WARNING: Uninstalling it breaks the Settings app for Android 15, Blackview Tab 60 WiFi!"
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.searchselector",
+   "risk": "expert",
+   "description": "Removal will crash most apps like settings, clock, firefox, github, termux etc."
+  },
+  {
+   "packageName": "com.google.android.overlay.gmsconfig.ww",
+   "risk": "caution",
+   "description": "useless unused overlay gmsconfig to family link."
+  },
+  {
+   "packageName": "com.google.android.overlay.modules.cellbroadcastreceiver",
+   "risk": "expert",
+   "description": "Overlay (theme/notification) module for com.google.android.cellbroadcastreceiver"
+  },
+  {
+   "packageName": "com.google.android.partnersetup",
+   "risk": "caution",
+   "description": "Google Partner Setup Occasionally runs in the background. Based on an unclear explanation online:\"Enables applications to interact with your Google account/apps, for example: adding a Google Calendar event from a To-Do app.\" Probably safe to disable; haven't noticed any conseq..."
+  },
+  {
+   "packageName": "com.google.android.pixel.setupwizard",
+   "risk": "caution",
+   "description": "It's the basic configuration setup guides you through the basics of setting up Google features on your device. The second package is only present on Pixel phones. Breaks the Google Play System update page found on\"Security & privacy\", for whatever reason..."
+  },
+  {
+   "packageName": "com.google.android.play.games",
+   "risk": "safe",
+   "description": "Google Play Games (https://play.google.com/store/apps/details?id=com.google.android.play.games)"
+  },
+  {
+   "packageName": "com.google.android.projection.gearhead",
+   "risk": "caution",
+   "description": "Android Auto (https://play.google.com/store/apps/details?id=com.google.android.projection.gearhead) No direct replacement appears to exist."
+  },
+  {
+   "packageName": "com.google.android.setupwizard",
+   "risk": "caution",
+   "description": "Android Setup The factory reset device basic configuration setup guides you through the basics of setting up your device. WARNING: Oddly enough, disabling/uninstalling this package will break mobile identity management which could be used by apps (for example your bank) to aut..."
+  },
+  {
+   "packageName": "com.google.android.setupwizard.a_overlay",
+   "risk": "caution",
+   "description": "Overlay for setupwizard?"
+  },
+  {
+   "packageName": "com.google.android.soundpicker",
+   "risk": "caution",
+   "description": "Google Sounds. Provides notification, alarm, and ringtone sounds, will be set to default sounds (and cannot be changed) if removed, unless you already have another media select service."
+  },
+  {
+   "packageName": "com.google.android.street",
+   "risk": "safe",
+   "description": "Google Street View (https://play.google.com/store/apps/details?id=com.google.android.street)"
+  },
+  {
+   "packageName": "com.google.android.syncadapters.bookmarks",
+   "risk": "safe",
+   "description": "Synchronisation for Google Chrome bookmarks"
+  },
+  {
+   "packageName": "com.google.android.syncadapters.calendar",
+   "risk": "caution",
+   "description": "Synchronisation for Google Calendar."
+  },
+  {
+   "packageName": "com.google.android.syncadapters.contacts",
+   "risk": "caution",
+   "description": "Synchronisation for Google Contacts."
+  },
+  {
+   "packageName": "com.google.android.tag",
+   "risk": "safe",
+   "description": "Support for NFC tags interactions (5 permissions : Contacts/Phone On by default). NFC Tags are for instance used in bus to let you validate your transport card with your phone Other example: https://en.wikipedia.org/wiki/TecTile You will still be able to connect to an NFC devi..."
+  },
+  {
+   "packageName": "com.google.android.talk",
+   "risk": "safe",
+   "description": "Google Hangouts (https://play.google.com/store/apps/details?id=com.google.android.talk)"
+  },
+  {
+   "packageName": "com.google.android.tts",
+   "risk": "caution",
+   "description": "Speech Recognition and Synthesis from Google (https://play.google.com/store/apps/details?id=com.google.android.tts) Default Text To Speech (TTS) engine on most of Android devices. It enables apps to convert text into voice. Pithus analysis (2024-03-03): https://beta.pithus.org..."
+  },
+  {
+   "packageName": "com.google.android.turboadapter",
+   "risk": "safe",
+   "description": "Device Health Services Adapter Another app for Device Health Services(discontinued)"
+  },
+  {
+   "packageName": "com.google.android.tv.remote",
+   "risk": "safe",
+   "description": "Android TV remote control (https://play.google.com/store/apps/details?id=com.google.android.tv.remote)"
+  },
+  {
+   "packageName": "com.google.android.tvlauncher",
+   "risk": "expert",
+   "description": "Android TV Home, on some devices, removing this causes the device to restore default settings on the next power on. https://play.google.com/store/apps/details?id=com.google.android.tvlauncher&hl=en&gl=US https://www.clrn.org/how-to-disable-google-tv-on-android/"
+  },
+  {
+   "packageName": "com.google.android.videoeditor",
+   "risk": "safe",
+   "description": "Google Movie Studio (discontinued)"
+  },
+  {
+   "packageName": "com.google.android.videos",
+   "risk": "safe",
+   "description": "Google TV (previously Google Play Movies & TV) (https://play.google.com/store/apps/details?id=com.google.android.videos)"
+  },
+  {
+   "packageName": "com.google.android.voicesearch",
+   "risk": "safe",
+   "description": "Google Voice Search (Speech-To-Text)"
+  },
+  {
+   "packageName": "com.google.android.vr.home",
+   "risk": "safe",
+   "description": "Daydream (VR stuff) (https://play.google.com/store/apps/details?id=com.google.android.vr.home)"
+  },
+  {
+   "packageName": "com.google.android.vr.inputmethod",
+   "risk": "safe",
+   "description": "Daydream virtual keyboard (VR stuff) (https://play.google.com/store/apps/details?id=com.google.android.vr.inputmethod)"
+  },
+  {
+   "packageName": "com.google.android.wearable.app",
+   "risk": "safe",
+   "description": "Wear OS Smartwatch (https://play.google.com/store/apps/details?id=com.google.android.wearable.app)"
+  },
+  {
+   "packageName": "com.google.android.webview",
+   "risk": "expert",
+   "description": "Android System WebView (https://play.google.com/store/apps/details?id=com.google.android.webview) enables Android apps to display web content within the app itself, based on Chrome. If you delete WebView, make sure to install a replacement. Many third-party apps, such as banks..."
+  },
+  {
+   "packageName": "com.google.android.wifi.dialog",
+   "risk": "expert",
+   "description": "Wi-Fi dialog. App to launch user dialogs requested by the Wi-Fi service is stored here. Contains the Activity the dialogs are launched from. https://source.android.com/docs/core/ota/modular-system/wifi https://android.googlesource.com/platform/packages/apps/Settings/+/refs/hea..."
+  },
+  {
+   "packageName": "com.google.android.youtube",
+   "risk": "safe",
+   "description": "YouTube (https://play.google.com/store/apps/details?id=com.google.android.youtube)"
+  },
+  {
+   "packageName": "com.google.ar.core",
+   "risk": "safe",
+   "description": "Google Play Services for AR (Augmented Reality) (https://play.google.com/store/apps/details?id=com.google.ar.core) Note: Disabling it can mess with apps that use it, like Pokemon GO. https://beta.pithus.org/report/99ea324529f950fe351d22724f8b894cce19c16607fcc9c2855bc906b1f8e644"
+  },
+  {
+   "packageName": "com.google.ar.lens",
+   "risk": "safe",
+   "description": "Google Lens (for AR too) (https://play.google.com/store/apps/details?id=com.google.ar.lens)"
+  },
+  {
+   "packageName": "com.google.audio.hearing.visualization.accessibility.scribe",
+   "risk": "caution",
+   "description": "Live Transcribe & Sound Notifications (https://play.google.com/store/apps/details?id=com.google.audio.hearing.visualization.accessibility.scribe) Provides push notifications for critical sounds around you. This feature can be helpful for people with hearing loss. https://blog...."
+  },
+  {
+   "packageName": "com.google.chromeremotedesktop",
+   "risk": "safe",
+   "description": "Chrome Remote Desktop (https://play.google.com/store/apps/details?id=com.google.chromeremotedesktop)"
+  },
+  {
+   "packageName": "com.google.earth",
+   "risk": "safe",
+   "description": "Google Earth (https://play.google.com/store/apps/details?id=com.google.earth)"
+  },
+  {
+   "packageName": "com.google.mainline.telemetry",
+   "risk": "caution",
+   "description": "Contains data on which versions of modules are installed. Google Play uses this data to determine if updates are available for the modules, and to show which security patch is installed. This module doesn’t contain active code and has no functionality on its own. Anyway I wont..."
+  },
+  {
+   "packageName": "com.google.marvin.talkback",
+   "risk": "safe",
+   "description": "Android Accessibility Suite (https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback)"
+  },
+  {
+   "packageName": "com.google.samples.apps.cardboarddemo",
+   "risk": "safe",
+   "description": "Google Cardboard (VR stuff) (https://play.google.com/store/apps/details?id=com.google.samples.apps.cardboarddemo)"
+  },
+  {
+   "packageName": "com.google.tango.measure",
+   "risk": "safe",
+   "description": "Google Measure (https://play.google.com/store/apps/details?id=com.google.tango.measure)"
+  },
+  {
+   "packageName": "com.google.vr.cyclops",
+   "risk": "safe",
+   "description": "Google Cardboard Camera (VR stuff) (https://play.google.com/store/apps/details?id=com.google.vr.cyclops)"
+  },
+  {
+   "packageName": "com.google.vr.expeditions",
+   "risk": "safe",
+   "description": "Google Expedition (VR stuff) (https://play.google.com/store/apps/details?id=com.google.vr.expeditions)"
+  },
+  {
+   "packageName": "com.google.vr.vrcore",
+   "risk": "caution",
+   "description": "Google VR services (https://play.google.com/store/apps/details?id=com.google.vr.vrcore)"
+  },
+  {
+   "packageName": "com.google.zxing.client.android",
+   "risk": "safe",
+   "description": "Google Barcode Scanner (discontinued) (https://play.google.com/store/apps/details?id=com.google.zxing.client.android)"
+  }
+ ]
+}

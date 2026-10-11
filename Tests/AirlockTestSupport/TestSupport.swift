@@ -75,6 +75,11 @@ public final class FakeADB: ProcessRunning, @unchecked Sendable {
         lock.withLock { exact[arguments, default: []].append(response) }
     }
 
+    /// Replaces any earlier registrations for these arguments.
+    public func replace(_ arguments: [String], _ response: Response) {
+        lock.withLock { exact[arguments] = [response] }
+    }
+
     /// Responds to any command starting with these arguments (lower priority than exact matches).
     public func onPrefix(_ arguments: [String], _ response: Response) {
         lock.withLock { prefixes.append((arguments, response)) }

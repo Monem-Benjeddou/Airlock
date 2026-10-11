@@ -39,14 +39,26 @@ public struct DeviceChannel: Sendable {
         try await parsing { try DensityParser.parse(try await shell(["wm", "density"]).stdoutText) }
     }
 
-    public func packages() async throws(ADBError) -> [PackageListEntry] {
-        let output = try await shell(["pm", "list", "packages", "--user", "0", "-f", "-U", "--show-versioncode", "-i"]).stdoutText
-        return PackageListParser.parse(output)
+    public func packages(includingUninstalled: Bool = false) async throws(ADBError) -> [PackageListEntry] {
+        var arguments = ["pm", "list", "packages", "--user", "0", "-f", "-U", "--show-versioncode", "-i"]
+        if includingUninstalled { arguments.append("-u") }
+        return PackageListParser.parse(try await shell(arguments).stdoutText)
     }
 
-    public func packageNames(_ filter: PackageFilter) async throws(ADBError) -> Set<String> {
+    /// One system property, e.g. `ro.serialno`. Names are limited to `[a-z0-9._]`.
+    public func property(_ name: String) async throws(ADBError) -> String {
+        let valid = !name.isEmpty && name.utf8.allSatisfy {
+            (UInt8(ascii: "a")...UInt8(ascii: "z")).contains($0) || (UInt8(ascii: "0")...UInt8(ascii: "9")).contains($0)
+                || $0 == UInt8(ascii: ".") || $0 == UInt8(ascii: "_")
+        }
+        guard valid else { throw .invalidArgument("property \(name)") }
+        return try await shell(["getprop", name]).stdoutText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    public func packageNames(_ filter: PackageFilter, includingUninstalled: Bool = false) async throws(ADBError) -> Set<String> {
         var arguments = ["pm", "list", "packages", "--user", "0"]
         if filter != .all { arguments.append(filter.rawValue) }
+        if includingUninstalled, filter != .includingUninstalled { arguments.append("-u") }
         return PackageListParser.names(try await shell(arguments).stdoutText)
     }
 

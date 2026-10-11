@@ -135,6 +135,8 @@ public protocol SafetyEngine: Sendable {
 public enum AppManagerError: Error, Hashable, Sendable {
     case blockedByDenylist(PackageName, DenylistReason)
     case notRestorable(UUID)
+    /// Undoing this entry removes an app, so it needs the user's confirmation.
+    case confirmationRequired(PackageName)
     case commandFailed(String)
     case deviceNotReady
 }
@@ -143,11 +145,13 @@ public protocol AppManager: Sendable {
     func listApps(on serial: DeviceSerial) async throws -> [InstalledApp]
     /// Checks the denylist, journals, then runs the operation.
     func perform(_ operation: ConfirmedOperation, on serial: DeviceSerial) async throws -> JournalEntry
-    /// Undoes one journaled change.
-    func restore(_ entry: JournalEntry, on serial: DeviceSerial) async throws -> JournalEntry
+    /// Undoes one journaled change. Undoing an install uninstalls the app, which requires `confirmation`.
+    func restore(_ entry: JournalEntry, on serial: DeviceSerial, confirmation: ConfirmedOperation?) async throws -> JournalEntry
     func history(on serial: DeviceSerial) async throws -> [JournalEntry]
     /// Copies the base and split APKs of a package to a folder on the Mac.
     func exportAPKs(of package: PackageName, on serial: DeviceSerial, to folder: URL) async throws -> [URL]
+    /// Copies the app's shared-storage folders (`Android/data`, `Android/obb`) to the Mac, where Android allows it.
+    func backupAccessibleData(of package: PackageName, on serial: DeviceSerial, to folder: URL) async throws -> [URL]
     func presets(for brand: DeviceBrand) -> [DebloatPreset]
 }
 
