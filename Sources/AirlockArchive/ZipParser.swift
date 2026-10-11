@@ -211,9 +211,10 @@ struct ZipParser {
         guard let method = ZipEntry.Method(rawValue: methodID) else {
             throw .unsupportedCompression(name, method: methodID)
         }
-        let sizes = try Zip64Fields.resolve(
-            extra: extra, uncompressed: uncompressed32, compressed: compressed32, offset: offset32, disk: diskStart, name: name
+        let declared = Zip64Fields(
+            uncompressed: UInt64(uncompressed32), compressed: UInt64(compressed32), offset: UInt64(offset32), disk: UInt32(diskStart)
         )
+        let sizes = try declared.resolved(extra: extra, name: name)
         guard sizes.disk == 0 else { throw .malformed("entry on another disk: \(name)") }
         let isDirectory = try Self.checkType(
             name: name, nameBytes: nameBytes, versionMadeBy: versionMadeBy, externalAttributes: externalAttributes
@@ -338,19 +339,17 @@ private struct Zip64Fields {
     var offset: UInt64
     var disk: UInt32
 
-    static func resolve(
-        extra: [UInt8], uncompressed: UInt32, compressed: UInt32, offset: UInt32, disk: UInt16, name: String
-    ) throws(ArchiveError) -> Zip64Fields {
-        var fields = Zip64Fields(
-            uncompressed: UInt64(uncompressed), compressed: UInt64(compressed), offset: UInt64(offset), disk: UInt32(disk)
-        )
-        let needsZip64 = uncompressed == 0xFFFF_FFFF || compressed == 0xFFFF_FFFF || offset == 0xFFFF_FFFF || disk == 0xFFFF
-        guard needsZip64 else { return fields }
-        guard var data = try zip64Data(in: extra) else { throw .malformed("missing ZIP64 extra field: \(name)") }
+    /// Replaces each saturated 32-bit (16-bit for the disk) field with its value from the extra field.
+    func resolved(extra: [UInt8], name: String) throws(ArchiveError) -> Zip64Fields {
+        let wide: UInt64 = 0xFFFF_FFFF
+        let needsZip64 = uncompressed == wide || compressed == wide || offset == wide || disk == 0xFFFF
+        guard needsZip64 else { return self }
+        guard var data = try Self.zip64Data(in: extra) else { throw .malformed("missing ZIP64 extra field: \(name)") }
+        var fields = self
         do {
-            if uncompressed == 0xFFFF_FFFF { fields.uncompressed = try data.uint64() }
-            if compressed == 0xFFFF_FFFF { fields.compressed = try data.uint64() }
-            if offset == 0xFFFF_FFFF { fields.offset = try data.uint64() }
+            if uncompressed == wide { fields.uncompressed = try data.uint64() }
+            if compressed == wide { fields.compressed = try data.uint64() }
+            if offset == wide { fields.offset = try data.uint64() }
             if disk == 0xFFFF { fields.disk = try data.uint32() }
         } catch {
             throw .malformed("short ZIP64 extra field: \(name)")

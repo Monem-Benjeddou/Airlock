@@ -313,6 +313,10 @@ struct ZipArchiveNameTests {
         ("a//b", .redundantComponent),
         ("./a", .redundantComponent),
         ("a/./b", .redundantComponent),
+        // A combining mark after the slash must not hide the separator.
+        ("../\u{301}x", .parentTraversal),
+        ("/\u{301}etc", .absolutePath),
+        ("a\\\u{301}/../../x", .parentTraversal),
     ])
     func rejectsEscapingNames(_ name: String, _ reason: UnsafeNameReason) {
         let builder = ZipBuilder(files: [(name, [1])])

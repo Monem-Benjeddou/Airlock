@@ -98,7 +98,9 @@ public struct SafeExtractor: Sendable {
     }
 
     /// Extracts `entries` into an existing job folder. On failure the job folder is removed.
-    public func extract(_ entries: [ZipEntry], from archive: ZipArchive, into job: ExtractionJob) throws(ArchiveError) -> [ExtractedFile] {
+    public func extract(
+        _ entries: [ZipEntry], from archive: ZipArchive, into job: ExtractionJob
+    ) throws(ArchiveError) -> [ExtractedFile] {
         do {
             return try writeEntries(entries, from: archive, into: job)
         } catch {
@@ -116,7 +118,9 @@ public struct SafeExtractor: Sendable {
 
     // MARK: Writing
 
-    private func writeEntries(_ entries: [ZipEntry], from archive: ZipArchive, into job: ExtractionJob) throws(ArchiveError) -> [ExtractedFile] {
+    private func writeEntries(
+        _ entries: [ZipEntry], from archive: ZipArchive, into job: ExtractionJob
+    ) throws(ArchiveError) -> [ExtractedFile] {
         let budget = limits.uncompressedBudget(forArchiveBytes: archive.archiveSize)
         var written: UInt64 = 0
         var files: [ExtractedFile] = []

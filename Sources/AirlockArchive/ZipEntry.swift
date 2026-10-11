@@ -39,15 +39,16 @@ enum EntryName {
     /// Validates raw name bytes and returns the decoded name and its components.
     static func validate(_ bytes: [UInt8], limits: ExtractionLimits) throws(ArchiveError) -> (String, [String]) {
         guard let name = String(bytes: bytes, encoding: .utf8) else {
-            throw .unsafeEntryName(String(decoding: bytes, as: UTF8.self), .notUTF8)
+            throw .unsafeEntryName(escaped(bytes), .notUTF8)
         }
         guard !bytes.isEmpty else { throw .unsafeEntryName(name, .empty) }
         guard !bytes.contains(0) else { throw .unsafeEntryName(name, .containsNUL) }
         guard bytes.count <= limits.maxNameBytes else { throw .unsafeEntryName(name, .tooLong) }
 
-        // Backslashes count as separators for safety checks, as Windows tools treat them that way.
+        // Work on bytes, not Characters: a combining mark after `/` would otherwise merge into one grapheme
+        // and hide the separator. Backslashes count as separators, as Windows tools treat them that way.
         let unified = bytes.map { $0 == UInt8(ascii: "\\") ? UInt8(ascii: "/") : $0 }
-        if unified.first == UInt8(ascii: "/") { throw .unsafeEntryName(name, .absolutePath) }
+        if unified[0] == UInt8(ascii: "/") { throw .unsafeEntryName(name, .absolutePath) }
         if unified.count >= 2, unified[1] == UInt8(ascii: ":"), isASCIILetter(unified[0]) {
             throw .unsafeEntryName(name, .driveLetter)
         }
@@ -60,7 +61,9 @@ enum EntryName {
         for part in parts {
             if part.elementsEqual("..".utf8) { throw .unsafeEntryName(name, .parentTraversal) }
             if part.isEmpty || part.elementsEqual(".".utf8) { throw .unsafeEntryName(name, .redundantComponent) }
-            components.append(String(decoding: part, as: UTF8.self))
+            // Splitting valid UTF-8 at an ASCII byte always leaves valid UTF-8.
+            guard let component = String(bytes: part, encoding: .utf8) else { throw .unsafeEntryName(name, .notUTF8) }
+            components.append(component)
         }
         guard components.count <= limits.maxPathDepth else { throw .unsafeEntryName(name, .tooDeep) }
         return (name, components)
@@ -69,6 +72,13 @@ enum EntryName {
     /// The key two names collide on when written to a case- and normalization-insensitive disk (APFS, HFS+).
     static func collisionKey(_ components: some Sequence<String>) -> String {
         components.joined(separator: "/").decomposedStringWithCanonicalMapping.lowercased()
+    }
+
+    /// A printable form of a name that is not valid UTF-8, for errors and logs.
+    private static func escaped(_ bytes: [UInt8]) -> String {
+        bytes.map { byte in
+            (0x20..<0x7F).contains(byte) ? String(UnicodeScalar(byte)) : "\\x" + String(byte, radix: 16)
+        }.joined()
     }
 
     private static func isASCIILetter(_ byte: UInt8) -> Bool {

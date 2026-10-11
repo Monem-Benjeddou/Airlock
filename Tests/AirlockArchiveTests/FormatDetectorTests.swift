@@ -245,7 +245,9 @@ struct FormatDetectorTests {
         defer { temp.remove() }
         let missingSplit = gameManifest.replacingOccurrences(of: "config.arm64_v8a.apk", with: "config.x86.apk")
         #expect(detectionError(gameXAPK(manifest: missingSplit)) == .missingEntry("config.x86.apk"))
-        let missingOBB = ZipBuilder.container(apks: ["com.example.game.apk", "config.arm64_v8a.apk"], extraFiles: [xapkManifest(gameManifest)])
+        let missingOBB = ZipBuilder.container(
+            apks: ["com.example.game.apk", "config.arm64_v8a.apk"], extraFiles: [xapkManifest(gameManifest)]
+        )
         #expect(detectionError(missingOBB.build()) == .missingEntry("Android/obb/com.example.game/main.412.com.example.game.obb"))
     }
 
