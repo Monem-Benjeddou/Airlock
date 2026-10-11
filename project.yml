@@ -45,6 +45,9 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.utilities
         NSHumanReadableCopyright: "GPL-3.0-only, Airlock contributors"
+        # Wi-Fi pairing finds phones with Bonjour; macOS asks for local network access the first time.
+        NSLocalNetworkUsageDescription: "Airlock looks for your Android phone on your network to pair it over Wi-Fi."
+        NSBonjourServices: [_adb-tls-pairing._tcp, _adb-tls-connect._tcp]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock

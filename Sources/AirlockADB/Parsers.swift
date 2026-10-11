@@ -371,6 +371,13 @@ public struct MdnsService: Hashable, Sendable {
     public let type: Kind
     public let host: String
     public let port: Int
+
+    public init(instance: String, type: Kind, host: String, port: Int) {
+        self.instance = instance
+        self.type = type
+        self.host = host
+        self.port = port
+    }
 }
 
 public enum MdnsServicesParser {
