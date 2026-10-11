@@ -75,7 +75,7 @@ struct InstallQueueModelTests {
         model.add([url("com.a.one"), url("com.a.two"), url("com.a.three")])
         #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
         #expect(pipeline.installed.get() == ["com.a.one", "com.a.two", "com.a.three"])
-        #expect(pipeline.discarded.get().count == 3, "temp folders are cleaned after every outcome")
+        #expect(await eventually { pipeline.discarded.get().count == 3 }, "temp folders are cleaned after every outcome")
     }
 
     @Test func oneFailureDoesNotStopTheRest() async {
