@@ -5,6 +5,7 @@
 *.xcodeproj
 *.xcworkspace
 xcuserdata/
+temp_auto_push.bat
 DerivedData/
 /build
 /coverage
@@ -12,3 +13,6 @@ DerivedData/
 /Fuzz/corpus-*
 /Fuzz/crash-*
 /.claude
+__pycache__/
+.gitignore
+branch_structure.json
