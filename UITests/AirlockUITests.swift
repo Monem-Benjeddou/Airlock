@@ -281,26 +281,14 @@ final class AirlockUITests: XCTestCase {
 
     // TEMPORARY: narrows down the Wi-Fi sheet's parent/child audit failure. Remove once fixed.
     func testDiagnoseSheetAudits() throws {
-        continueAfterFailure = true
-        app.launchEnvironment["AIRLOCK_SHOW_WIFI"] = "1"
-        launch()
-        continueAfterFailure = true
-        wait(for: "pairingQR")
-        try audit("diag wifi at launch", within: app.sheets.firstMatch)
-
-        app.launchEnvironment["AIRLOCK_SHOW_WIFI"] = "0"
-        launch()
-        continueAfterFailure = true
-        wait(for: "devicePicker").click()
-        wait(for: "connectWiFiFromDevices").click()
-        wait(for: "pairingQR")
-        try audit("diag wifi from picker", within: app.sheets.firstMatch)
-        wait(for: "closeWiFi").click()
-
-        open("Apps")
-        wait(for: "presetsButton").click()
-        settleAnimations(expectingSheet: true)
-        try audit("diag presets sheet", within: app.sheets.firstMatch)
+        for probe in ["shell", "code", "stopped", "full"] {
+            app.launchEnvironment["AIRLOCK_SHOW_WIFI"] = "1"
+            app.launchEnvironment["AIRLOCK_WIFI_PROBE"] = probe
+            launch()
+            continueAfterFailure = true
+            wait(for: "closeWiFi")
+            try audit("probe \(probe)", within: app.sheets.firstMatch)
+        }
     }
 
     /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.

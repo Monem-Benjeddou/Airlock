@@ -19,7 +19,8 @@ enum PairingMethod: String, CaseIterable, Identifiable {
 struct PairingView: View {
     @Bindable var model: PairingModel
     let usbSerial: DeviceSerial?
-    @State private var method = PairingMethod.qr
+    @State var method = PairingMethod.qr
+    var autoStart = true
 
     var body: some View {
         Form {
@@ -40,7 +41,7 @@ struct PairingView: View {
         }
         .formStyle(.grouped)
         .onChange(of: method, initial: true) { _, method in
-            if method == .qr, model.state == .idle { model.startQRPairing() }
+            if autoStart, method == .qr, model.state == .idle { model.startQRPairing() }
             if method != .qr, model.state == .waitingForScan { model.stop() }
         }
         .onDisappear { model.stop() }
@@ -188,7 +189,13 @@ struct WiFiSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.horizontal, .top], Spacing.xLarge)
-            PairingView(model: model, usbSerial: usbSerial)
+            // TEMPORARY probe for the accessibility audit; remove once found.
+            switch ProcessInfo.processInfo.environment["AIRLOCK_WIFI_PROBE"] {
+            case "shell": Spacer()
+            case "code": PairingView(model: model, usbSerial: usbSerial, method: .code, autoStart: false)
+            case "stopped": PairingView(model: model, usbSerial: usbSerial, autoStart: false)
+            default: PairingView(model: model, usbSerial: usbSerial)
+            }
             Divider()
             HStack {
                 Spacer()
