@@ -3,6 +3,7 @@
 
 import AirlockADB
 import AirlockCore
+import AirlockInspection
 import AirlockJournal
 import AirlockSafety
 import AirlockServices

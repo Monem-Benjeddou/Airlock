@@ -14,7 +14,7 @@ EXACT = {
 CORE_MODULES = [
     "Sources/AirlockCore/", "Sources/AirlockADB/", "Sources/AirlockArchive/",
     "Sources/AirlockSafety/", "Sources/AirlockJournal/", "Sources/AirlockReputation/",
-    "Sources/AirlockPairing/", "Sources/AirlockServices/",
+    "Sources/AirlockPairing/", "Sources/AirlockServices/", "Sources/AirlockInspection/",
 ]
 CORE_MINIMUM = 90.0
 

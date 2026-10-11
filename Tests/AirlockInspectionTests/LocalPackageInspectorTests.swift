@@ -4,7 +4,7 @@
 import AirlockArchive
 import AirlockCore
 import AirlockSafety
-@testable import AirlockServices
+@testable import AirlockInspection
 import AirlockTestSupport
 import Foundation
 import Testing

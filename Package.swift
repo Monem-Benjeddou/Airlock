@@ -21,6 +21,7 @@ let package = Package(
         .library(name: "AirlockJournal", targets: ["AirlockJournal"]),
         .library(name: "AirlockReputation", targets: ["AirlockReputation"]),
         .library(name: "AirlockPairing", targets: ["AirlockPairing"]),
+        .library(name: "AirlockInspection", targets: ["AirlockInspection"]),
         .library(name: "AirlockServices", targets: ["AirlockServices"]),
         .library(name: "AirlockUI", targets: ["AirlockUI"]),
         .executable(name: "AirlockDev", targets: ["AirlockDev"]),
@@ -59,10 +60,17 @@ let package = Package(
         ),
         .target(name: "AirlockReputation", dependencies: ["AirlockCore"], swiftSettings: strict),
         .target(name: "AirlockPairing", dependencies: ["AirlockCore", "AirlockADB"], swiftSettings: strict),
+
+        // Everything the sandboxed parser helper runs: format detection, extraction, parsing, signatures.
+        .target(
+            name: "AirlockInspection",
+            dependencies: ["AirlockCore", "AirlockArchive", "AirlockSafety"],
+            swiftSettings: strict
+        ),
         .target(
             name: "AirlockServices",
             dependencies: [
-                "AirlockCore", "AirlockADB", "AirlockArchive", "AirlockSafety",
+                "AirlockCore", "AirlockADB", "AirlockInspection", "AirlockSafety",
                 "AirlockJournal", "AirlockReputation", "AirlockPairing",
             ],
             resources: [.copy("Resources/presets")],
@@ -71,7 +79,7 @@ let package = Package(
         .target(
             name: "AirlockUI",
             dependencies: [
-                "AirlockCore", "AirlockADB", "AirlockJournal", "AirlockSafety", "AirlockServices",
+                "AirlockCore", "AirlockADB", "AirlockInspection", "AirlockJournal", "AirlockSafety", "AirlockServices",
                 "AirlockPairing", "AirlockReputation",
             ],
             swiftSettings: strict
@@ -114,6 +122,11 @@ let package = Package(
             swiftSettings: strict
         ),
         .testTarget(
+            name: "AirlockInspectionTests",
+            dependencies: ["AirlockInspection", "AirlockTestSupport"],
+            swiftSettings: strict
+        ),
+        .testTarget(
             name: "AirlockServicesTests",
             dependencies: ["AirlockServices", "AirlockTestSupport"],
             swiftSettings: strict
@@ -126,7 +139,7 @@ let package = Package(
         // Talks to a real emulator; skipped unless AIRLOCK_INTEGRATION=1.
         .testTarget(
             name: "AirlockIntegrationTests",
-            dependencies: ["AirlockServices", "AirlockJournal", "AirlockSafety", "AirlockTestSupport"],
+            dependencies: ["AirlockServices", "AirlockInspection", "AirlockJournal", "AirlockSafety", "AirlockTestSupport"],
             swiftSettings: strict
         ),
     ]
