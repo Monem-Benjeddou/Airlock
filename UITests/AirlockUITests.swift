@@ -230,7 +230,7 @@ final class AirlockUITests: XCTestCase {
 
         launch(queue: ["risky.apk"])
         wait(for: "riskBadge")
-        try audit("review sheet")
+        try audit("review sheet", within: app.sheets.firstMatch)
         wait(for: "skipInstall").click()
         wait(for: "Not installed")
         try audit("install queue")
@@ -249,12 +249,14 @@ final class AirlockUITests: XCTestCase {
     /// Three kinds of finding are framework noise and are skipped: "no description" on layout containers
     /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), anything
     /// in the title bar, which AppKit draws, and contrast of system-coloured sidebar text.
-    private func audit(_ screen: String) throws {
+    /// With `region`, only findings inside it count: under a sheet, macOS dims the window on purpose.
+    private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
         app.activate()
         let window = app.windows.firstMatch.frame
         let sidebar = app.outlines["Sidebar"].firstMatch
         try app.performAccessibilityAudit { [self] issue in
             if let element = issue.element {
+                if let region, !region.frame.contains(element.frame) { return true }
                 // The sidebar's text uses the system's own colours on its translucent material, which the audit
                 // measures against a flattened backdrop; the app does not colour it.
                 if issue.auditType == .contrast, sidebar.exists, sidebar.frame.contains(element.frame) { return true }
