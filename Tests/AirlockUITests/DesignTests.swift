@@ -74,3 +74,38 @@ struct ReportTextTests {
         #expect(SignerText.match(.notInstalled) == "Not installed yet")
     }
 }
+
+@MainActor
+@Suite("Apps page")
+struct AppsPageTests {
+    private func package(_ raw: String) throws -> PackageName {
+        try #require(PackageName(rawValue: raw))
+    }
+
+    @Test func resultsReadAsPlainSentences() throws {
+        let ok = AppsModel.ChangeResult(package: try package("com.a.b"), error: nil)
+        let bad = AppsModel.ChangeResult(package: try package("com.a.c"), error: "no")
+        #expect(AppsModel.summary(of: [ok]) == "1 change applied")
+        #expect(AppsModel.summary(of: [ok, ok]) == "2 changes applied")
+        #expect(AppsModel.summary(of: [ok, bad]) == "1 of 2 changes failed")
+    }
+
+    @Test func coreAndroidPartsAreProtected() throws {
+        #expect(AppsModel.isProtected(try package("com.android.settings")))
+        #expect(!AppsModel.isProtected(try package("com.google.android.apps.tips")))
+    }
+
+    @Test func debloatAdviceTitlesSayWhatToDo() {
+        #expect(DebloatAdvice.title(.safe) == "Fine to turn off")
+        #expect(DebloatAdvice.title(.expert) == "Experts only")
+    }
+
+    @Test func filtersCountBeforeSearching() async {
+        let environment = AppEnvironment.demo()
+        environment.apps.device = DemoDeviceService.serial
+        await environment.apps.reload()
+        environment.apps.searchText = "zzz"
+        #expect(environment.apps.count(for: .all) == environment.apps.apps.count)
+        #expect(environment.apps.visibleApps.isEmpty)
+    }
+}

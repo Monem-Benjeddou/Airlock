@@ -261,7 +261,7 @@ struct AppsModelTests {
         let manager = FakeAppManager(apps: apps)
         let model = model(manager)
         model.request(.disableForUser, for: [pkg("com.samsung.bloat.safe")])
-        #expect(model.pendingChange?.title == "Disable com.samsung.bloat.safe?")
+        #expect(model.pendingChange?.title == "Turn off com.samsung.bloat.safe?")
         #expect(manager.performed.get().isEmpty)
         model.cancelPendingChange()
         #expect(model.pendingChange == nil)

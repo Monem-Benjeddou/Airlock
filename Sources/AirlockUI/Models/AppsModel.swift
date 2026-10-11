@@ -11,9 +11,9 @@ import Observation
 public final class AppsModel {
     public enum Filter: String, CaseIterable, Identifiable, Sendable {
         case all = "All"
-        case user = "Installed by you"
+        case user = "Yours"
         case system = "System"
-        case disabled = "Disabled or removed"
+        case disabled = "Turned Off"
         public var id: String { rawValue }
     }
 
@@ -28,8 +28,8 @@ public final class AppsModel {
             switch operation {
             case .uninstall: return "Uninstall \(target)?"
             case .uninstallForUser: return "Remove \(target) for this user?"
-            case .disableForUser: return "Disable \(target)?"
-            case .enable: return "Enable \(target)?"
+            case .disableForUser: return "Turn off \(target)?"
+            case .enable: return "Turn on \(target)?"
             case .installExisting: return "Restore \(target)?"
             }
         }
@@ -38,7 +38,7 @@ public final class AppsModel {
             switch operation {
             case .uninstall: "The app and its data are deleted. Airlock keeps a copy of the app (not its data) so you can reinstall it."
             case .uninstallForUser: "The app is hidden and stops running. You can restore it from History at any time."
-            case .disableForUser: "The app stops running until you enable it again from History."
+            case .disableForUser: "The app stops running until you turn it on again here or from History."
             case .enable, .installExisting: "The app becomes available again."
             }
         }
@@ -66,16 +66,50 @@ public final class AppsModel {
     }
 
     public var visibleApps: [InstalledApp] {
-        apps.filter { app in
-            switch filter {
-            case .all: true
-            case .user: !app.isSystem
-            case .system: app.isSystem
-            case .disabled: app.state != .enabled
-            }
+        apps.filter { Self.matches($0, filter) }
+            .filter { searchText.isEmpty || $0.packageName.rawValue.localizedCaseInsensitiveContains(searchText)
+                || ($0.label?.localizedCaseInsensitiveContains(searchText) ?? false) }
+    }
+
+    /// How many apps a filter shows, before searching.
+    public func count(for filter: Filter) -> Int {
+        apps.filter { Self.matches($0, filter) }.count
+    }
+
+    private static func matches(_ app: InstalledApp, _ filter: Filter) -> Bool {
+        switch filter {
+        case .all: true
+        case .user: !app.isSystem
+        case .system: app.isSystem
+        case .disabled: app.state != .enabled
         }
-        .filter { searchText.isEmpty || $0.packageName.rawValue.localizedCaseInsensitiveContains(searchText)
-            || ($0.label?.localizedCaseInsensitiveContains(searchText) ?? false) }
+    }
+
+    /// What the debloat lists say about a package, from the presets for this brand, if anything.
+    public func debloatAdvice(for package: PackageName, brand: DeviceBrand) -> DebloatEntry? {
+        for preset in presets(for: brand) {
+            if let entry = preset.entries.first(where: { $0.packageName == package }) { return entry }
+        }
+        return nil
+    }
+
+    /// Core parts of Android that Airlock never disables or removes.
+    public static func isProtected(_ package: PackageName) -> Bool {
+        if case .blocked = CriticalDenylist.standard.check(rawPackage: package.rawValue, operation: .disableForUser) {
+            return true
+        }
+        return false
+    }
+
+    /// "1 change applied", or "1 of 2 changes failed".
+    public static func summary(of results: [ChangeResult]) -> String {
+        let failures = results.filter { $0.error != nil }.count
+        let noun = results.count == 1 ? "change" : "changes"
+        return failures == 0 ? "\(results.count) \(noun) applied" : "\(failures) of \(results.count) \(noun) failed"
+    }
+
+    public func dismissResults() {
+        results = []
     }
 
     public func presets(for brand: DeviceBrand) -> [DebloatPreset] {

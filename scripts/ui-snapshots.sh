@@ -20,9 +20,14 @@ WINDOW_ID="$(mktemp -d)/window-id.swift"
 cat > "$WINDOW_ID" <<'SWIFT'
 import CoreGraphics
 let pid = Int(CommandLine.arguments[1]) ?? 0
-let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
+let list = CGWindowListCopyWindowInfo([.optionAll], kCGNullWindowID) as? [[String: Any]] ?? []
 // The largest normal window of the process: the main window, with any sheet drawn into it.
-let windows = list.filter { ($0[kCGWindowOwnerPID as String] as? Int) == pid && ($0[kCGWindowLayer as String] as? Int) == 0 }
+// All windows, not only on-screen ones: the window may open on another Space or display.
+let windows = list.filter {
+    ($0[kCGWindowOwnerPID as String] as? Int) == pid && ($0[kCGWindowLayer as String] as? Int) == 0
+        && ($0[kCGWindowAlpha as String] as? Double ?? 0) > 0
+        && (($0[kCGWindowBounds as String] as? [String: Double])?["Height"] ?? 0) > 100
+}
 let sized = windows.map { window -> (Int, Double) in
     let bounds = window[kCGWindowBounds as String] as? [String: Double] ?? [:]
     return (window[kCGWindowNumber as String] as? Int ?? 0, (bounds["Width"] ?? 0) * (bounds["Height"] ?? 0))
@@ -31,7 +36,15 @@ let sized = windows.map { window -> (Int, Double) in
 for window in sized.sorted(by: { $0.1 > $1.1 }) { print(window.0) }
 SWIFT
 
+# Forget window frames saved by earlier runs (only those keys), so every capture uses the default size.
+forget_frames() {
+    defaults read AirlockDev 2>/dev/null | grep -o '"NSWindow Frame [^"]*"' | tr -d '"' | while read -r key; do
+        defaults delete AirlockDev "$key" 2>/dev/null || true
+    done
+}
+
 capture() {
+    forget_frames
     local name="$1" section="$2" queue="$3" mode="$4" wifi="${5:-0}"
     AIRLOCK_SECTION="$section" AIRLOCK_DEMO_QUEUE="$queue" AIRLOCK_SHOW_WIFI="$wifi" "$APP" "$mode" >/dev/null 2>&1 &
     local pid=$!

@@ -204,9 +204,9 @@ final class AirlockUITests: XCTestCase {
         launch()
         open("Apps")
         wait(for: "com.example.bloat").click()
-        app.buttons.matching(NSPredicate(format: "label == 'Disable'")).firstMatch.click()
+        wait(for: "Turn Off").click()
         wait(for: "confirmChange", timeout: 3).click()
-        wait(for: "Done: 1 change(s) applied.")
+        wait(for: "1 change applied")
 
         open("History")
         wait(for: "restoreButton").click()
@@ -216,7 +216,7 @@ final class AirlockUITests: XCTestCase {
         launch()
         open("Apps")
         wait(for: "com.android.settings").click()
-        app.buttons.matching(NSPredicate(format: "label == 'Disable'")).firstMatch.click()
+        wait(for: "Turn Off").click()
         wait(for: "confirmChange", timeout: 3).click()
         if !appears(containing: "core part of Android", timeout: 5) {
             fail("the denylist reason was not shown", file: #filePath, line: #line)
