@@ -41,17 +41,6 @@ struct BoundedReader<Failure: Error> {
         return UInt32(littleEndian: bytes.loadUnaligned(fromByteOffset: offset, as: UInt32.self))
     }
 
-    func u64(at offset: Int) throws(Failure) -> UInt64 {
-        try check(offset, 8)
-        return UInt64(littleEndian: bytes.loadUnaligned(fromByteOffset: offset, as: UInt64.self))
-    }
-
-    /// A copy of `size` bytes at `offset`.
-    func data(at offset: Int, count size: Int) throws(Failure) -> Data {
-        try check(offset, size)
-        return Data(UnsafeRawBufferPointer(rebasing: bytes[offset..<(offset + size)]))
-    }
-
     /// A borrowed view of `size` bytes at `offset`, valid as long as the underlying buffer.
     func slice(at offset: Int, count size: Int) throws(Failure) -> UnsafeRawBufferPointer {
         try check(offset, size)
