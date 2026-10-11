@@ -135,12 +135,19 @@ struct WiFiSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        PairingView(model: model, usbSerial: usbSerial)
-            .frame(minWidth: 560, idealWidth: 600, minHeight: 440, idealHeight: 520)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }.accessibilityIdentifier("closeWiFi")
-                }
+        // A plain footer rather than `.toolbar`: toolbar items in a sheet fail the accessibility audit's
+        // parent/child check.
+        VStack(spacing: 0) {
+            PairingView(model: model, usbSerial: usbSerial)
+            Divider()
+            HStack {
+                Spacer()
+                Button("Done") { dismiss() }
+                    .keyboardShortcut(.defaultAction)
+                    .accessibilityIdentifier("closeWiFi")
             }
+            .padding(Spacing.large)
+        }
+        .frame(minWidth: 560, idealWidth: 600, minHeight: 440, idealHeight: 520)
     }
 }
