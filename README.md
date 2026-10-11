@@ -56,7 +56,7 @@ xcodebuild -scheme Airlock -destination 'platform=macOS' build
 xcodebuild -scheme Airlock -destination 'platform=macOS' test   # XCUITests, one per user story, in demo mode
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the architecture, test layers and how to add device presets.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the architecture, test layers and how to add device presets. To report a security problem privately, see [SECURITY.md](SECURITY.md).
 
 ## Architecture in one paragraph
 
