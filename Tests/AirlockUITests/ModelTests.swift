@@ -69,6 +69,21 @@ struct InstallQueueModelTests {
         return model
     }
 
+    @Test func keepsTheMacAwakeOnlyWhileTheQueueRuns() async {
+        // App Nap or idle sleep mid-install stalls adb transfers and trips their timeouts.
+        var log: [String] = []
+        let model = InstallQueueModel(pipeline: FakePipeline(), appManager: FakeAppManager()) { reason in
+            log.append("begin: \(reason)")
+            return { log.append("end") }
+        }
+        model.targetDevice = serial("R58")
+        #expect(log.isEmpty)
+        model.add([url("com.a.one"), url("com.a.two")])
+        #expect(log == ["begin: Installing apps on a phone"])
+        #expect(await eventually { !model.isBusy })
+        #expect(log == ["begin: Installing apps on a phone", "end"], "one hold for the whole batch, released at the end")
+    }
+
     @Test func lowRiskFilesInstallInOrderWithoutQuestions() async {
         let pipeline = FakePipeline()
         let model = queue(pipeline)

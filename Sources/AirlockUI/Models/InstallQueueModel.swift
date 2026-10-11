@@ -51,10 +51,23 @@ public final class InstallQueueModel {
     private var currentInstall: Task<InstallOutcome, any Error>?
     private var reviewContinuation: CheckedContinuation<InstallPlan?, Never>?
     public var targetDevice: DeviceSerial?
+    private let keepAwake: @MainActor (String) -> @MainActor () -> Void
 
-    public init(pipeline: any InstallPipeline, appManager: any AppManager) {
+    /// - Parameter keepAwake: starts a hold against App Nap and idle sleep and returns its release; App Nap
+    ///   throttles timers and I/O in the background, which stalls adb transfers and trips their timeouts.
+    public init(
+        pipeline: any InstallPipeline,
+        appManager: any AppManager,
+        keepAwake: @escaping @MainActor (String) -> @MainActor () -> Void = InstallQueueModel.systemKeepAwake
+    ) {
         self.pipeline = pipeline
         self.appManager = appManager
+        self.keepAwake = keepAwake
+    }
+
+    public static func systemKeepAwake(_ reason: String) -> @MainActor () -> Void {
+        let activity = ProcessInfo.processInfo.beginActivity(options: .userInitiated, reason: reason)
+        return { ProcessInfo.processInfo.endActivity(activity) }
     }
 
     public var isBusy: Bool { worker != nil }
@@ -113,9 +126,11 @@ public final class InstallQueueModel {
 
     private func startIfNeeded() {
         guard worker == nil else { return }
+        let release = keepAwake("Installing apps on a phone")
         worker = Task { [weak self] in
             await self?.processQueue()
             self?.worker = nil
+            release()
         }
     }
 

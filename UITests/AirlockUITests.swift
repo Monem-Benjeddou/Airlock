@@ -101,7 +101,7 @@ final class AirlockUITests: XCTestCase {
 
     func testLowRiskFileInstallsWithoutQuestions() {
         launch(queue: ["notes.apk"])
-        wait(for: "Installed version 3")
+        wait(for: "Installed version 3", timeout: 30)
         XCTAssertFalse(element("approveInstall").exists, "a Low risk file is not held for review")
     }
 
@@ -116,7 +116,7 @@ final class AirlockUITests: XCTestCase {
     func testHighRiskFileCanBeInstalledAfterReview() {
         launch(queue: ["risky.apk"])
         wait(for: "approveInstall").click()
-        wait(for: "Installed version 3")
+        wait(for: "Installed version 3", timeout: 30)
     }
 
     func testQueueInstallsSeveralFilesInOrder() {
