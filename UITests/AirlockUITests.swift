@@ -258,8 +258,8 @@ final class AirlockUITests: XCTestCase {
     /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
     ///
     /// Two kinds of finding are framework noise and are skipped: "no description" on layout containers
-    /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), and anything
-    /// in the title bar, which AppKit draws.
+    /// (SwiftUI's invisible groups, split views, the Touch Bar, and wrappers around a single named element, which
+    /// VoiceOver does not stop on), and anything in the title bar, which AppKit draws.
     /// With `region`, only findings on its own elements count: under a sheet, macOS dims the window on purpose.
     private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
         settleAnimations(expectingSheet: region != nil)
@@ -275,6 +275,7 @@ final class AirlockUITests: XCTestCase {
                 if let regionFrames, !regionFrames.contains(NSStringFromRect(element.frame)) { return true }
                 let containers: [XCUIElement.ElementType] = [.group, .splitGroup, .touchBar]
                 if issue.auditType == .sufficientElementDescription, containers.contains(element.elementType) { return true }
+                if issue.auditType == .sufficientElementDescription, Self.isWrapperOfNamedElement(element) { return true }
                 if element.frame.maxY <= window.minY + 52 { return true }
             }
             let shot = XCTAttachment(screenshot: app.screenshot())
@@ -297,6 +298,15 @@ final class AirlockUITests: XCTestCase {
             RunLoop.current.run(until: Date().addingTimeInterval(0.1))
         }
         RunLoop.current.run(until: Date().addingTimeInterval(1))
+    }
+
+    /// A layout wrapper (such as a lazy stack's cell) that holds exactly one named element with the same frame;
+    /// VoiceOver passes straight through it to the named element.
+    private static func isWrapperOfNamedElement(_ element: XCUIElement) -> Bool {
+        let children = element.children(matching: .any)
+        guard children.count == 1 else { return false }
+        let child = children.element(boundBy: 0)
+        return child.frame == element.frame && !child.label.isEmpty
     }
 
     /// The frames of every element in a snapshot, as strings so they can go in a set.
