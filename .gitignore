@@ -12,3 +12,4 @@ DerivedData/
 /Fuzz/corpus-*
 /Fuzz/crash-*
 /.claude
+__pycache__/
