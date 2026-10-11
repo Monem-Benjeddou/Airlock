@@ -50,6 +50,16 @@ struct DevicesModelTests {
         #expect(model.selectedInfo == nil)
     }
 
+    @Test func aRetryAfterAFailureLoadsTheDetails() async {
+        let service = FakeDeviceService(snapshots: [], failing: ["R58"])
+        let model = DevicesModel(service: service)
+        await model.apply([device("R58", .ready)])
+        service.failingSerials = []
+        await model.loadDetails(serial("R58"))
+        #expect(model.detailErrors[serial("R58")] == nil)
+        #expect(model.selectedInfo != nil)
+    }
+
     @Test func runConsumesTheServiceStream() async {
         let snapshots = [[device("A", .ready)], [device("A", .ready), device("B", .offline)]]
         let model = DevicesModel(service: FakeDeviceService(snapshots: snapshots))

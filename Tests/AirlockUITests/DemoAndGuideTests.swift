@@ -271,6 +271,14 @@ struct DeviceRowTests {
         #expect(details == "SM-S928B · Android 16 · 87%")
     }
 
+    @Test func aReadyDeviceSaysWhetherItsDetailsAreLoadingOrFailed() throws {
+        #expect(DeviceRow.status(of: .ready, info: nil, failed: false) == "Reading details…")
+        #expect(DeviceRow.status(of: .ready, info: nil, failed: true) == "Couldn't read details. Click to retry.")
+        let loaded = try info(model: "SM-S928B", displayName: nil, battery: 50)
+        #expect(DeviceRow.status(of: .ready, info: loaded, failed: true) == "Android 16 · 50%")
+        #expect(DeviceRow.status(of: .unauthorized, info: nil, failed: false) == "Waiting for Allow")
+    }
+
     @Test func theModelCodeIsNotRepeatedWhenItIsTheName() throws {
         #expect(DeviceRow.details(of: try info(model: "CPH2581", displayName: nil, battery: nil)) == "Android 16")
     }
