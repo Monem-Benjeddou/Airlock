@@ -33,7 +33,11 @@ public actor VirusTotalClient {
     private let now: @Sendable () -> Date
     private var cache: [String: (result: ReputationResult, storedAt: Date)] = [:]
 
-    public init(http: any HTTPClient = URLSession(configuration: .ephemeral), keys: any APIKeyProvider, now: @escaping @Sendable () -> Date = Date.init) {
+    public init(
+        http: any HTTPClient = URLSession(configuration: .ephemeral),
+        keys: any APIKeyProvider,
+        now: @escaping @Sendable () -> Date = Date.init
+    ) {
         self.http = http
         self.keys = keys
         self.now = now
@@ -88,7 +92,9 @@ public actor VirusTotalClient {
     }
 
     static func isValidHash(_ value: String) -> Bool {
-        value.count == 64 && value.utf8.allSatisfy { (UInt8(ascii: "0")...UInt8(ascii: "9")).contains($0) || (UInt8(ascii: "a")...UInt8(ascii: "f")).contains($0) }
+        value.count == 64 && value.utf8.allSatisfy {
+            (UInt8(ascii: "0")...UInt8(ascii: "9")).contains($0) || (UInt8(ascii: "a")...UInt8(ascii: "f")).contains($0)
+        }
     }
 }
 
@@ -132,3 +138,5 @@ private struct FileReport: Decodable {
 
     let data: Payload
 }
+
+extension VirusTotalClient: ReputationLookup {}

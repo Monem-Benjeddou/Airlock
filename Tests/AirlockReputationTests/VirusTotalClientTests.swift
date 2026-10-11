@@ -27,7 +27,8 @@ final class FakeHTTP: HTTPClient, @unchecked Sendable {
             requests.append(request)
             if let error { throw error }
             let (status, body) = responses[0]
-            guard let url = request.url, let response = HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil) else {
+            guard let url = request.url,
+                  let response = HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil) else {
                 throw URLError(.badURL)
             }
             return (body, response)
@@ -100,7 +101,9 @@ struct VirusTotalClientTests {
         #expect(await client(http).lookup(sha256: hash) == .unavailable("VirusTotal sent a response Airlock could not read."))
     }
 
-    @Test(arguments: ["", "abc", String(repeating: "g", count: 64), String(repeating: "A", count: 64), "../" + String(repeating: "a", count: 61)])
+    @Test(arguments: [
+        "", "abc", String(repeating: "g", count: 64), String(repeating: "A", count: 64), "../" + String(repeating: "a", count: 61),
+    ])
     func rejectsInvalidHashesWithoutARequest(_ bad: String) async {
         let http = FakeHTTP(body: foundBody)
         #expect(await client(http).lookup(sha256: bad) == .unavailable("Invalid file hash."))

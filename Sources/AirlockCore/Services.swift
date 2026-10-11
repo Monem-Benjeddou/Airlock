@@ -150,3 +150,8 @@ public protocol AppManager: Sendable {
     func exportAPKs(of package: PackageName, on serial: DeviceSerial, to folder: URL) async throws -> [URL]
     func presets(for brand: DeviceBrand) -> [DebloatPreset]
 }
+
+/// A file-reputation service queried by hash only.
+public protocol ReputationLookup: Sendable {
+    func lookup(sha256: String) async -> ReputationResult
+}
