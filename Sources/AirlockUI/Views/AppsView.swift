@@ -31,7 +31,7 @@ struct AppsView: View {
     private var content: some View {
         VStack(spacing: 0) {
             if let error = model.lastError {
-                Text(error).foregroundStyle(.red).padding(8)
+                Text(error).foregroundStyle(Palette.danger).padding(8)
             }
             ResultsBanner(results: model.results)
             table
@@ -120,7 +120,7 @@ struct ResultsBanner: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(8)
-            .background(failures.isEmpty ? Color.green.opacity(0.12) : Color.orange.opacity(0.15))
+            .background(failures.isEmpty ? Palette.success.opacity(0.12) : Palette.warning.opacity(0.15))
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("resultsBanner")
         }
@@ -186,13 +186,7 @@ struct PresetSheet: View {
         .frame(minWidth: 640, minHeight: 520)
     }
 
-    private func riskColor(_ risk: DebloatRisk) -> Color {
-        switch risk {
-        case .safe: .green
-        case .caution: .orange
-        case .expert: .red
-        }
-    }
+    private func riskColor(_ risk: DebloatRisk) -> Color { Palette.debloat(risk) }
 }
 
 struct HistoryView: View {

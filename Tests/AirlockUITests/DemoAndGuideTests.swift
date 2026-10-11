@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Airlock contributors
 
 import AirlockCore
+import AppKit
 import AirlockReputation
 @testable import AirlockUI
 import Foundation
@@ -189,5 +190,32 @@ struct DemoEnvironmentTests {
         #expect(keys.apiKey() == "abc")
         try keys.delete()
         #expect(keys.apiKey() == nil)
+    }
+}
+
+@Suite("Palette and About")
+struct PaletteAndAboutTests {
+    @Test func riskScalesShareOneSetOfColours() {
+        #expect(Palette.verdict(.low) == Palette.success)
+        #expect(Palette.verdict(.medium) == Palette.warning)
+        #expect(Palette.verdict(.high) == Palette.danger)
+        #expect(Palette.debloat(.safe) == Palette.verdict(.low))
+        #expect(Palette.debloat(.caution) == Palette.verdict(.medium))
+        #expect(Palette.debloat(.expert) == Palette.verdict(.high))
+    }
+
+    @Test func aLowRiskReasonIsNeutralNotGreen() {
+        #expect(Palette.reason(.low) == .secondary)
+        #expect(Palette.reason(.high) == Palette.danger)
+        #expect(Set(RiskLevel.allCases.map(Palette.reasonSymbol)).count == RiskLevel.allCases.count)
+    }
+
+    @Test func aboutCreditsNameTheLicenceAndLinkTheSource() throws {
+        let credits = AboutPanel.credits()
+        #expect(credits.string.contains("GNU GPL 3.0"))
+        #expect(credits.string.contains("UAD-ng"))
+        let range = (credits.string as NSString).range(of: "Source code")
+        let link = credits.attribute(.link, at: range.location, effectiveRange: nil) as? URL
+        #expect(link?.absoluteString == AboutPanel.sourceURL)
     }
 }

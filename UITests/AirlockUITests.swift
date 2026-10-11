@@ -170,6 +170,57 @@ final class AirlockUITests: XCTestCase {
         wait(for: "com.example.bloat")
     }
 
+    // MARK: Identity and accessibility
+
+    func testAboutPanelShowsTheVersionAndLicence() {
+        launch()
+        app.menuBars.menuBarItems["Airlock"].click()
+        app.menuBars.menuItems["About Airlock"].click()
+        XCTAssertTrue(appears(containing: "Version 0.1.0", timeout: 5))
+        XCTAssertTrue(appears(containing: "GNU GPL 3.0", timeout: 2))
+    }
+
+    func testVoiceOverNeverHearsRawSymbolNames() {
+        // Regression: images exposed SF Symbol names such as "cable.connector" and "arrow.down.app".
+        launch(queue: ["notes.apk"])
+        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "USB")
+        for name in ["cable.connector", "arrow.down.app", "Arrow Down Circle", "checkmark.circle.fill"] {
+            let match = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", name)).firstMatch
+            XCTAssertFalse(match.exists, "VoiceOver would read \(name)")
+        }
+    }
+
+    func testMainScreensPassTheAccessibilityAudit() throws {
+        launch(["--demo-no-device"])
+        wait(for: "onboardingTitle")
+        try audit("onboarding")
+
+        launch(queue: ["risky.apk"])
+        wait(for: "riskBadge")
+        try audit("review sheet")
+        wait(for: "skipInstall").click()
+        wait(for: "Not installed")
+        try audit("install queue")
+
+        open("Apps")
+        wait(for: "com.example.bloat")
+        try audit("apps")
+
+        open("Wireless")
+        wait(for: "showQR")
+        try audit("wireless")
+    }
+
+    /// Runs Apple's audit and fails with the screen name, printing the tree once for CI logs.
+    private func audit(_ screen: String) throws {
+        try app.performAccessibilityAudit { [self] issue in
+            fail("\(screen): \(issue.auditType) \(issue.compactDescription) on \(issue.element?.debugDescription ?? "the window")",
+                 file: #filePath, line: #line)
+            return true
+        }
+    }
+
     // MARK: F5 Wireless pairing
 
     func testQRPairingShowsACode() {

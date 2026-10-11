@@ -22,7 +22,7 @@ struct InstallView: View {
                     return true
                 }
             if let notice = queue.notice {
-                Text(notice).font(.callout).foregroundStyle(.orange).padding(.horizontal)
+                Text(notice).font(.callout).foregroundStyle(Palette.warning).padding(.horizontal)
             }
             List {
                 ForEach(queue.items) { item in
@@ -100,6 +100,7 @@ struct DropZone: View {
     var body: some View {
         VStack(spacing: 10) {
             Image(systemName: "arrow.down.app").font(.system(size: 40)).foregroundStyle(Color.accentColor)
+                .accessibilityHidden(true)
             Text("Drop APK, APKS, XAPK or APKM files or a folder of split APKs")
                 .font(.headline)
             Text("Every file is checked before it is installed" + (deviceName.map { " on \($0)." } ?? "."))
@@ -141,14 +142,19 @@ struct QueueRow: View {
         .accessibilityIdentifier("queueItem")
     }
 
-    @ViewBuilder private var icon: some View {
+    /// Hidden from VoiceOver: the text beside it already says the state.
+    private var icon: some View {
+        stateSymbol.accessibilityHidden(true)
+    }
+
+    @ViewBuilder private var stateSymbol: some View {
         switch item.state {
         case .waiting: Image(systemName: "clock").foregroundStyle(.secondary)
         case .inspecting: ProgressView().controlSize(.small)
-        case .needsReview: Image(systemName: "exclamationmark.shield").foregroundStyle(.orange)
+        case .needsReview: Image(systemName: "exclamationmark.shield").foregroundStyle(Palette.warning)
         case .installing: Image(systemName: "arrow.down.circle").foregroundStyle(Color.accentColor)
-        case .installed: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-        case .failed: Image(systemName: "xmark.octagon.fill").foregroundStyle(.red)
+        case .installed: Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.success)
+        case .failed: Image(systemName: "xmark.octagon.fill").foregroundStyle(Palette.danger)
         case .skipped, .cancelled: Image(systemName: "minus.circle").foregroundStyle(.secondary)
         }
     }
@@ -157,7 +163,7 @@ struct QueueRow: View {
         switch item.state {
         case .waiting: Text("Waiting").foregroundStyle(.secondary)
         case .inspecting: Text("Checking the file…").foregroundStyle(.secondary)
-        case .needsReview(let plan): Text("\(plan.report.level.title): review before installing").foregroundStyle(.orange)
+        case .needsReview(let plan): Text("\(plan.report.level.title): review before installing").foregroundStyle(Palette.warning)
         case .installing(let progress):
             ProgressView(value: progress.totalFraction) { Text(progress.message).font(.caption) }
         case .installed(let outcome): Text("Installed version \(outcome.versionCode)").foregroundStyle(.secondary)

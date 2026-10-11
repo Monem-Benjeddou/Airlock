@@ -44,10 +44,11 @@ struct PairingView: View {
                     Button("Stop") { model.stop() }
                 }
             case .paired(let device):
-                Label("Connected to \(device.name) at \(device.host)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
+                Label("Connected to \(device.name) at \(device.host)", systemImage: "checkmark.circle.fill")
+                    .foregroundStyle(Palette.success)
                 Button("Pair Another Phone") { model.startQRPairing() }
             case .failed(let error):
-                Label(error.explanation, systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
+                Label(error.explanation, systemImage: "exclamationmark.triangle").foregroundStyle(Palette.warning)
                     .accessibilityIdentifier("pairingError")
                 Button("Try Again") { model.startQRPairing() }
             case .idle:

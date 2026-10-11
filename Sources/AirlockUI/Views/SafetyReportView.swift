@@ -108,8 +108,8 @@ struct SafetyReportView: View {
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(report.reasons) { reason in
-                        Label(reason.message, systemImage: symbol(for: reason.level))
-                            .foregroundStyle(color(for: reason.level))
+                        Label(reason.message, systemImage: Palette.reasonSymbol(reason.level))
+                            .foregroundStyle(Palette.reason(reason.level))
                     }
                 }
                 .accessibilityElement(children: .contain)
@@ -141,22 +141,6 @@ struct SafetyReportView: View {
             GroupBox("VirusTotal") { ReputationSummary(result: report.reputation) }
         }
     }
-
-    private func symbol(for level: RiskLevel) -> String {
-        switch level {
-        case .low: "info.circle"
-        case .medium: "exclamationmark.triangle"
-        case .high: "exclamationmark.octagon"
-        }
-    }
-
-    private func color(for level: RiskLevel) -> Color {
-        switch level {
-        case .low: .secondary
-        case .medium: .orange
-        case .high: .red
-        }
-    }
 }
 
 struct RiskBadge: View {
@@ -172,13 +156,7 @@ struct RiskBadge: View {
             .accessibilityIdentifier("riskBadge")
     }
 
-    private var color: Color {
-        switch level {
-        case .low: .green
-        case .medium: .orange
-        case .high: .red
-        }
-    }
+    private var color: Color { Palette.verdict(level) }
 }
 
 struct SignerSummary: View {

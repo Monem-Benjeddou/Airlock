@@ -111,6 +111,7 @@ struct DeviceRow: View {
         HStack(spacing: 10) {
             Image(systemName: device.serial.isWireless ? "wifi" : "cable.connector")
                 .foregroundStyle(isSelected ? Color.accentColor : .secondary)
+                .accessibilityLabel(device.serial.isWireless ? "Wi-Fi" : "USB")
             VStack(alignment: .leading, spacing: 2) {
                 Text(info?.model ?? device.model?.replacingOccurrences(of: "_", with: " ") ?? device.serial.rawValue)
                     .fontWeight(isSelected ? .semibold : .regular)
@@ -156,6 +157,7 @@ struct OnboardingView: View {
                             .font(.title2)
                             .frame(width: 36)
                             .foregroundStyle(Color.accentColor)
+                            .accessibilityHidden(true)
                         VStack(alignment: .leading, spacing: 4) {
                             Text("\(index + 1). \(step.title)").font(.headline)
                             Text(step.detail).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
