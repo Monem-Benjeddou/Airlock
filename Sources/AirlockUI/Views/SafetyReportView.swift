@@ -99,7 +99,7 @@ struct SafetyReportView: View {
                 RiskBadge(level: report.level)
                 VStack(alignment: .leading) {
                     Text(report.packageName).font(.title2.bold())
-                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).foregroundStyle(Palette.subdued).textSelection(.enabled)
+                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).textSelection(.enabled)
                 }
             }
             if report.reasons.isEmpty {
@@ -175,7 +175,7 @@ struct SignerSummary: View {
             Text(statusText).fontWeight(.semibold)
             if let certificate = check.certificates.first {
                 Text(certificate.subject)
-                Text(certificate.sha256).font(.caption.monospaced()).foregroundStyle(Palette.subdued).textSelection(.enabled)
+                Text(certificate.sha256).font(.caption.monospaced()).textSelection(.enabled)
             }
             Text(matchText).foregroundStyle(Palette.subdued)
         }
