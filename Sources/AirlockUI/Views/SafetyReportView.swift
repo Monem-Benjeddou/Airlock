@@ -97,22 +97,24 @@ struct SafetyReportView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 RiskBadge(level: report.level)
-                VStack(alignment: .leading) {
-                    Text(report.packageName).font(.title2.bold())
-                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).foregroundStyle(.secondary).textSelection(.enabled)
-                }
+                Text(report.packageName).font(.title2.bold())
             }
             if report.reasons.isEmpty {
                 Text("Airlock found nothing worrying. That is not a guarantee: only install apps from sources you trust.")
-                    .foregroundStyle(.secondary)
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(report.reasons) { reason in
-                        Label(reason.message, systemImage: symbol(for: reason.level))
-                            .foregroundStyle(color(for: reason.level))
+                        // Readable text, with the colour on the symbol: red text fails contrast at body size.
+                        Label {
+                            Text(reason.message)
+                        } icon: {
+                            Image(systemName: Palette.reasonSymbol(reason.level))
+                                .foregroundStyle(Palette.reason(reason.level))
+                        }
                     }
                 }
                 .accessibilityElement(children: .contain)
+                .accessibilityLabel("Reasons")
                 .accessibilityIdentifier("riskReasons")
             }
             GroupBox("Developer") { SignerSummary(check: report.signer, match: report.signerMatch) }
@@ -121,7 +123,7 @@ struct SafetyReportView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach(report.permissions) { permission in
                             Label(permission.plainLanguage, systemImage: permission.isDangerous ? "exclamationmark.triangle" : "checkmark")
-                                .foregroundStyle(permission.isDangerous ? .primary : .secondary)
+                                .fontWeight(permission.isDangerous ? .semibold : .regular)
                                 .help(permission.permission)
                         }
                     }
@@ -131,7 +133,7 @@ struct SafetyReportView: View {
             GroupBox("Tracking and advertising") {
                 Group {
                     if report.trackers.isEmpty {
-                        Text("No known tracker libraries found.").foregroundStyle(.secondary)
+                        Text("No known tracker libraries found.")
                     } else {
                         ForEach(report.trackers) { Text("\($0.name) (\($0.category))") }
                     }
@@ -139,22 +141,8 @@ struct SafetyReportView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             GroupBox("VirusTotal") { ReputationSummary(result: report.reputation) }
-        }
-    }
-
-    private func symbol(for level: RiskLevel) -> String {
-        switch level {
-        case .low: "info.circle"
-        case .medium: "exclamationmark.triangle"
-        case .high: "exclamationmark.octagon"
-        }
-    }
-
-    private func color(for level: RiskLevel) -> Color {
-        switch level {
-        case .low: .secondary
-        case .medium: .orange
-        case .high: .red
+            // Verdict first, details on request: hashes matter to experts, not to the install decision.
+            TechnicalDetails(report: report)
         }
     }
 }
@@ -163,22 +151,23 @@ struct RiskBadge: View {
     let level: RiskLevel
 
     var body: some View {
-        Text(level.title)
-            .font(.headline)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(Capsule().fill(color.opacity(0.18)))
-            .foregroundStyle(color)
-            .accessibilityIdentifier("riskBadge")
+        // Primary text on a tinted capsule, with the colour carried by the symbol: coloured text on its own
+        // tint failed the contrast audit.
+        HStack(spacing: 6) {
+            Image(systemName: Palette.reasonSymbol(level))
+                .foregroundStyle(color)
+                .accessibilityHidden(true)
+            Text(level.title)
+                .foregroundStyle(.primary)
+                .accessibilityIdentifier("riskBadge")
+        }
+        .font(.headline)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Capsule().fill(color.opacity(0.18)))
     }
 
-    private var color: Color {
-        switch level {
-        case .low: .green
-        case .medium: .orange
-        case .high: .red
-        }
-    }
+    private var color: Color { Palette.verdict(level) }
 }
 
 struct SignerSummary: View {
@@ -190,9 +179,8 @@ struct SignerSummary: View {
             Text(statusText).fontWeight(.semibold)
             if let certificate = check.certificates.first {
                 Text(certificate.subject)
-                Text(certificate.sha256).font(.caption.monospaced()).foregroundStyle(.secondary).textSelection(.enabled)
             }
-            Text(matchText).foregroundStyle(.secondary)
+            Text(matchText)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -234,6 +222,41 @@ struct ReputationSummary: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundStyle(.secondary)
+    }
+}
+
+/// File and certificate hashes, collapsed by default. A plain button rather than a DisclosureGroup: on macOS the
+/// group only toggles from its triangle, and a custom label either lost its name or leaked it onto the rows.
+struct TechnicalDetails: View {
+    let report: SafetyReport
+    @State private var isExpanded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Button {
+                isExpanded.toggle()
+            } label: {
+                Label("Technical details", systemImage: isExpanded ? "chevron.down" : "chevron.right")
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+            .accessibilityIdentifier("technicalDetails")
+            if isExpanded {
+                VStack(alignment: .leading, spacing: 4) {
+                    // Callout size: long hex strings are hard to read at caption size.
+                    LabeledContent("File SHA-256") {
+                        Text(report.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                    }
+                    if let certificate = report.signer.certificates.first {
+                        LabeledContent("Certificate SHA-256") {
+                            Text(certificate.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                        }
+                    }
+                    LabeledContent("Rules version", value: report.rulesVersion)
+                }
+                .padding(.leading, 22)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

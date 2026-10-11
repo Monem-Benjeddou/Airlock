@@ -2,8 +2,11 @@
 // SPDX-FileCopyrightText: 2026 Airlock contributors
 
 import AirlockCore
+import AirlockInspection
 import AirlockReputation
+import AirlockTestSupport
 @testable import AirlockUI
+import AppKit
 import Foundation
 import Testing
 
@@ -189,5 +192,66 @@ struct DemoEnvironmentTests {
         #expect(keys.apiKey() == "abc")
         try keys.delete()
         #expect(keys.apiKey() == nil)
+    }
+}
+
+@Suite("Palette and About")
+struct PaletteAndAboutTests {
+    @Test func riskScalesShareOneSetOfColours() {
+        #expect(Palette.verdict(.low) == Palette.success)
+        #expect(Palette.verdict(.medium) == Palette.warning)
+        #expect(Palette.verdict(.high) == Palette.danger)
+        #expect(Palette.debloat(.safe) == Palette.verdict(.low))
+        #expect(Palette.debloat(.caution) == Palette.verdict(.medium))
+        #expect(Palette.debloat(.expert) == Palette.verdict(.high))
+    }
+
+    @Test func aLowRiskReasonIsNeutralNotGreen() {
+        #expect(Palette.reason(.low) == .secondary)
+        #expect(Palette.reason(.high) == Palette.danger)
+        #expect(Set(RiskLevel.allCases.map(Palette.reasonSymbol)).count == RiskLevel.allCases.count)
+    }
+
+    @Test func aboutCreditsNameTheLicenceAndLinkTheSource() throws {
+        let credits = AboutPanel.credits()
+        #expect(credits.string.contains("GNU GPL 3.0"))
+        #expect(credits.string.contains("UAD-ng"))
+        let range = (credits.string as NSString).range(of: "Source code")
+        let link = credits.attribute(.link, at: range.location, effectiveRange: nil) as? URL
+        #expect(link?.absoluteString == AboutPanel.sourceURL)
+    }
+}
+
+@MainActor
+@Suite("Demo with a real inspector")
+struct DemoRealInspectorTests {
+    @Test func realFilesAreInspectedAndTheirJobFolderIsRemoved() async throws {
+        let scratch = FileManager.default.temporaryDirectory.appendingPathComponent("airlock-demo-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: scratch) }
+        let jobs = scratch.appendingPathComponent("Airlock/jobs")
+        let apk = scratch.appendingPathComponent("game.apk")
+        try FileManager.default.createDirectory(at: scratch, withIntermediateDirectories: true)
+        try FixtureAPKs.data(.v2RSA).write(to: apk)
+
+        let pipeline = DemoPipeline(inspector: LocalPackageInspector(jobsRoot: jobs))
+        let package = try await pipeline.inspect(apk)
+        #expect(package.packageName == "org.airlock.fixture")
+        #expect(FileManager.default.fileExists(atPath: package.workDirectory.path))
+        await pipeline.discard(package)
+        #expect(!FileManager.default.fileExists(atPath: package.workDirectory.path))
+
+        let demo = try await pipeline.inspect(URL(fileURLWithPath: "/demo/notes.apk"))
+        #expect(demo.packageName == "com.demo.notes", "made-up names never reach the inspector")
+    }
+
+    @Test func discardNeverTouchesFoldersOutsideAJobsFolder() async throws {
+        let keep = FileManager.default.temporaryDirectory.appendingPathComponent("airlock-keep-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: keep, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: keep) }
+        let real = try await DemoPipeline().inspect(URL(fileURLWithPath: "/demo/x.apk"))
+        let package = InspectedPackage(sourceFile: keep.appendingPathComponent("x.apk"), format: .apk, sourceSHA256: "00",
+                                       base: real.base, splits: [], obbFiles: [], workDirectory: keep)
+        await DemoPipeline().discard(package)
+        #expect(FileManager.default.fileExists(atPath: keep.path))
     }
 }

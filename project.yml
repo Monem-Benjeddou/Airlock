@@ -41,11 +41,15 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Airlock
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.utilities
         NSHumanReadableCopyright: "GPL-3.0-only, Airlock contributors"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock
+        # Drawn by scripts/make-icon.swift; regenerate rather than editing the PNGs.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
   AirlockParser:
     type: xpc-service
     platform: macOS
@@ -63,6 +67,8 @@ targets:
       path: ParserXPC/Info.plist
       properties:
         CFBundleDisplayName: AirlockParser
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         XPCService:
           ServiceType: Application
     settings:

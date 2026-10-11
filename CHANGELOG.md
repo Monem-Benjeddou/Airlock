@@ -5,7 +5,7 @@
 
 ## 0.1.0
 
-The first preview. Airlock is not notarized yet, so macOS asks you to confirm the first time you open it (see Installing in the README).
+The first preview. Airlock is not notarized yet, so macOS blocks the first launch until you allow it in System Settings › Privacy & Security (see Installing in the README).
 
 ### What you can do
 
@@ -15,10 +15,18 @@ The first preview. Airlock is not notarized yet, so macOS asks you to confirm th
 - **Manage installed apps.** Browse, disable, remove for the current user, export APKs, and apply debloat presets based on UAD-ng. Every change asks first, is journaled, and can be undone from History. Core system apps are protected.
 - **Pair over Wi-Fi.** Android 11 and later can pair with a QR code or pairing code; older phones use the USB-to-Wi-Fi switch. Airlock reconnects remembered phones.
 
+### Accessibility
+
+- Every control and status has a name VoiceOver reads; decorative symbols are hidden from it.
+- Risk is shown by text and a symbol, never by colour alone, and all text uses full-strength colours.
+- Apple's accessibility audit runs on the main screens in every CI build.
+
 ### Safety
 
 - Untrusted archives are parsed in a sandboxed helper with no network access. Path traversal, zip bombs and symlinks are rejected.
 - Airlock never runs anything from an APK, and only ever calls `adb` with argument arrays, never through a shell.
+- Pressing Return on a High risk report never installs it: the safe choice is the default, and Install Anyway needs a tick first.
+- Your Mac stays awake and out of App Nap while installs run, so transfers are not cut short.
 
 ### Known limitations
 

@@ -15,7 +15,9 @@ final class AirlockUITests: XCTestCase {
 
     private func launch(_ arguments: [String] = ["--demo"], queue: [String] = []) {
         continueAfterFailure = false
-        app.launchArguments = arguments
+        // App Nap can freeze a background app's timers on CI runners; keep it out of the picture. The defaults
+        // pair goes first: after "--demo", AppKit would read it as that flag's value and treat "YES" as a file.
+        app.launchArguments = ["-NSAppSleepDisabled", "YES"] + arguments
         if !queue.isEmpty { app.launchEnvironment["AIRLOCK_DEMO_QUEUE"] = queue.joined(separator: ",") }
         app.launch()
         app.activate()
@@ -31,13 +33,16 @@ final class AirlockUITests: XCTestCase {
         return app.staticTexts.matching(NSPredicate(format: "value == %@", text)).firstMatch
     }
 
-    /// Whether some element's label, or some static text's value, contains `text`, within `timeout`.
+    /// Whether some element's label, or the value of a static text, text view or text field (selectable text),
+    /// contains `text`, within `timeout`.
     private func appears(containing text: String, timeout: TimeInterval) -> Bool {
         let labels = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", text)).firstMatch
         let values = app.staticTexts.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
+        let textViews = app.textViews.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
+        let textFields = app.textFields.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
         let deadline = Date().addingTimeInterval(timeout)
         repeat {
-            if labels.exists || values.exists { return true }
+            if labels.exists || values.exists || textViews.exists || textFields.exists { return true }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         } while Date() < deadline
         return false
@@ -109,6 +114,15 @@ final class AirlockUITests: XCTestCase {
         launch(queue: ["risky.apk"])
         XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
         XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
+        XCTAssertFalse(appears(containing: "cdcdcdcd", timeout: 0), "hashes stay out of the way until asked for")
+        let details = wait(for: "technicalDetails")
+        XCTAssertEqual(details.label, "Technical details", "VoiceOver names the section")
+        XCTAssertEqual(details.value as? String, "Collapsed")
+        details.click()
+        if !appears(containing: "cdcdcdcd", timeout: 3) {
+            fail("Technical details did not show the hash", file: #filePath, line: #line)
+        }
+        XCTAssertEqual(details.value as? String, "Expanded")
         wait(for: "skipInstall").click()
         wait(for: "Not installed")
     }
@@ -131,10 +145,37 @@ final class AirlockUITests: XCTestCase {
 
     func testQueueInstallsSeveralFilesInOrder() {
         launch(queue: ["one.apk", "two.apk", "three.apk"])
+        wait(for: "3 of 3 installed", timeout: 30)
         let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed version 3' OR label == 'Installed version 3'"))
         let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
         if installed.count != 3 { fail("expected 3 installed rows, saw \(installed.count)", file: #filePath, line: #line) }
+    }
+
+    // MARK: Real files through the sandboxed parser
+
+    private func fixture(_ name: String) throws -> URL {
+        try XCTUnwrap(Bundle(for: Self.self).url(forResource: name, withExtension: "apk"), "missing UI test fixture \(name)")
+    }
+
+    func testARealAPKIsParsedByTheSandboxedHelper() throws {
+        // The shipped path: the app hands the file to AirlockParser.xpc, which parses it inside its sandbox and
+        // hands the extracted files back. Only the phone is simulated.
+        launch(queue: [try fixture("app-v2-rsa").path])
+        wait(for: "org.airlock.fixture", timeout: 30)
+        wait(for: "Installed version 3", timeout: 30)
+    }
+
+    func testAFolderOfSplitAPKsIsParsedByTheSandboxedHelper() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("airlock-ui-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        try FileManager.default.copyItem(at: try fixture("app-v2-rsa"), to: folder.appendingPathComponent("base.apk"))
+        try FileManager.default.copyItem(at: try fixture("split-arm64-v2-rsa"),
+                                         to: folder.appendingPathComponent("split_config.arm64_v8a.apk"))
+        launch(queue: [folder.path])
+        wait(for: "org.airlock.fixture", timeout: 30)
+        wait(for: "Installed version 3", timeout: 30)
     }
 
     // MARK: F4 App manager and debloat
@@ -168,6 +209,109 @@ final class AirlockUITests: XCTestCase {
         wait(for: "presetsButton").click()
         wait(for: "Debloat presets")
         wait(for: "com.example.bloat")
+    }
+
+    // MARK: Identity and accessibility
+
+    func testAboutPanelShowsTheVersionAndLicence() {
+        // Regression: Info.plist hard-coded version 1.0, so About and Finder showed the wrong version.
+        launch()
+        app.menuBars.menuBarItems["Airlock"].click()
+        app.menuBars.menuItems["About Airlock"].click()
+        if !appears(containing: "Version 0.1.0", timeout: 5) { fail("About shows the wrong version", file: #filePath, line: #line) }
+        if !appears(containing: "GNU GPL 3.0", timeout: 2) { fail("About has no licence", file: #filePath, line: #line) }
+    }
+
+    func testVoiceOverNeverHearsRawSymbolNames() {
+        // Regression: images exposed SF Symbol names such as "cable.connector" and "arrow.down.app".
+        launch(queue: ["notes.apk"])
+        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "USB")
+        for name in ["cable.connector", "arrow.down.app", "Arrow Down Circle", "checkmark.circle.fill"] {
+            let match = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", name)).firstMatch
+            XCTAssertFalse(match.exists, "VoiceOver would read \(name)")
+        }
+    }
+
+    func testMainScreensPassTheAccessibilityAudit() throws {
+        launch(["--demo-no-device"])
+        continueAfterFailure = true  // report every issue on every screen in one run
+        wait(for: "onboardingTitle")
+        try audit("onboarding")
+
+        launch(queue: ["risky.apk"])
+        wait(for: "riskBadge")
+        try audit("review sheet", within: app.sheets.firstMatch)
+        wait(for: "skipInstall").click()
+        wait(for: "Not installed")
+        try audit("install queue")
+
+        open("Apps")
+        wait(for: "com.example.bloat")
+        try audit("apps")
+
+        open("Wireless")
+        wait(for: "showQR")
+        try audit("wireless")
+    }
+
+    /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
+    ///
+    /// Two kinds of finding are framework noise and are skipped: "no description" on layout containers
+    /// (SwiftUI's invisible groups, split views, the Touch Bar, and wrappers around a single named element, which
+    /// VoiceOver does not stop on), and anything in the title bar, which AppKit draws.
+    /// With `region`, only findings on its own elements count: under a sheet, macOS dims the window on purpose.
+    private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
+        settleAnimations(expectingSheet: region != nil)
+        let regionFrames = try region.map { try Self.frames(in: $0.snapshot()) }
+        app.activate()
+        let window = app.windows.firstMatch.frame
+        // Every audit type except contrast. On the CI runners the contrast check flagged plain black text on a
+        // near-white window (screenshot of run 38139707491, "Every file is checked…"), so it measures the
+        // software-rendered VM, not the app. Contrast is handled by design instead: Palette colours, solid text,
+        // and colour never carrying meaning alone.
+        try app.performAccessibilityAudit(for: .all.subtracting(.contrast)) { [self] issue in
+            if let element = issue.element {
+                if let regionFrames, !regionFrames.contains(NSStringFromRect(element.frame)) { return true }
+                let containers: [XCUIElement.ElementType] = [.group, .splitGroup, .touchBar]
+                if issue.auditType == .sufficientElementDescription, containers.contains(element.elementType) { return true }
+                if issue.auditType == .sufficientElementDescription, Self.isWrapperOfNamedElement(element) { return true }
+                if element.frame.maxY <= window.minY + 52 { return true }
+            }
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = "audit-\(screen)"
+            shot.lifetime = .keepAlways
+            add(shot)
+            print("AUDIT DETAIL \(screen): \(issue.detailedDescription)")
+            fail("\(screen): \(issue.auditType) \(issue.compactDescription) on \(issue.element?.debugDescription ?? "the window")",
+                 file: #filePath, line: #line)
+            return true
+        }
+    }
+
+    /// Waits for sheet animations to finish. A sheet fades in and out over the window and dims it meanwhile, so
+    /// an audit taken mid-fade measures regular-weight text against a dimmed window. A sheet's frame does not
+    /// change while it fades, so this waits on the sheet's presence and then a fixed settling time.
+    private func settleAnimations(expectingSheet: Bool) {
+        let deadline = Date().addingTimeInterval(5)
+        while app.sheets.firstMatch.exists != expectingSheet, Date() < deadline {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+        }
+        RunLoop.current.run(until: Date().addingTimeInterval(1))
+    }
+
+    /// A layout wrapper (such as a lazy stack's cell) that holds exactly one named element with the same frame;
+    /// VoiceOver passes straight through it to the named element.
+    private static func isWrapperOfNamedElement(_ element: XCUIElement) -> Bool {
+        let children = element.children(matching: .any)
+        guard children.count == 1 else { return false }
+        let child = children.element(boundBy: 0)
+        return child.frame == element.frame && !child.label.isEmpty
+    }
+
+    /// The frames of every element in a snapshot, as strings so they can go in a set.
+    private static func frames(in snapshot: any XCUIElementSnapshot) -> Set<String> {
+        snapshot.children.reduce(into: [NSStringFromRect(snapshot.frame)]) { $0.formUnion(frames(in: $1)) }
     }
 
     // MARK: F5 Wireless pairing

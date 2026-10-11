@@ -72,6 +72,19 @@ public final class InstallQueueModel {
 
     public var isBusy: Bool { worker != nil }
 
+    /// One line over the queue, computed from the items so it is right even when a row is slow to redraw.
+    public var summary: String? {
+        guard !items.isEmpty else { return nil }
+        if items.contains(where: { if case .needsReview = $0.state { true } else { false } }) {
+            return "Waiting for your review"
+        }
+        let finished = items.filter(\.state.isFinished)
+        guard finished.count == items.count else { return "Installing \(finished.count + 1) of \(items.count)" }
+        let installed = items.filter { if case .installed = $0.state { true } else { false } }.count
+        let missed = items.count - installed
+        return "\(installed) of \(items.count) installed" + (missed > 0 ? ", \(missed) not installed" : "")
+    }
+
     // MARK: Adding
 
     public func add(_ files: [URL]) {

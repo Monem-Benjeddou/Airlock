@@ -5,9 +5,10 @@
 #   90% line coverage on core services, 100% on error mapping and the critical denylist.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-# No --parallel: worker processes write coverage counters concurrently and can lose counts, which made
-# the 100% gates fail at random. Swift Testing already runs tests in parallel within one process.
-swift test --enable-code-coverage "$@"
+# Serial on purpose. Coverage counters are not atomic, and llvm-cov derives some regions by subtraction
+# (an else branch is "calls minus calls that took the if"). Tests calling the same function concurrently
+# lose increments, so a branch that ran can show zero hits and the 100% gates failed at random.
+swift test --enable-code-coverage --no-parallel "$@"
 BIN_DIR="$(swift build --show-bin-path)"
 PROFDATA="$BIN_DIR/codecov/default.profdata"
 XCTEST="$(find "$BIN_DIR" -maxdepth 1 -name '*.xctest' | head -1)"

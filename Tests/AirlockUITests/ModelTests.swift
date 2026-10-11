@@ -84,6 +84,31 @@ struct InstallQueueModelTests {
         #expect(log == ["begin: Installing apps on a phone", "end"], "one hold for the whole batch, released at the end")
     }
 
+    @Test func summaryAsksForAReviewWhenOneIsWaiting() async {
+        let model = queue(FakePipeline(levels: ["com.a.risky": .high]))
+        model.add([url("com.a.risky")])
+        #expect(await eventually { model.summary == "Waiting for your review" })
+        model.skipReview()
+        #expect(await eventually { model.summary == "0 of 1 installed, 1 not installed" })
+    }
+
+    @Test func summaryCountsWhatHappened() async {
+        let pipeline = FakePipeline()
+        let model = queue(pipeline)
+        #expect(model.summary == nil, "nothing to summarise before files are added")
+        model.add([url("com.a.one"), url("com.a.two")])
+        #expect(model.summary == "Installing 1 of 2")
+        #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
+        #expect(model.summary == "2 of 2 installed")
+    }
+
+    @Test func summaryNamesFilesThatDidNotInstall() async {
+        let model = queue(FakePipeline(failures: ["com.a.bad": .deviceDisconnected]))
+        model.add([url("com.a.good"), url("com.a.bad")])
+        #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
+        #expect(model.summary == "1 of 2 installed, 1 not installed")
+    }
+
     @Test func lowRiskFilesInstallInOrderWithoutQuestions() async {
         let pipeline = FakePipeline()
         let model = queue(pipeline)

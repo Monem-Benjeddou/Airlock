@@ -81,7 +81,6 @@ struct Sidebar: View {
             SwiftUI.Section("Devices") {
                 if devices.devices.isEmpty {
                     Label("No phone connected", systemImage: "iphone.slash")
-                        .foregroundStyle(.secondary)
                 }
                 ForEach(devices.devices) { device in
                     DeviceRow(device: device, info: devices.details[device.serial], isSelected: device.serial == devices.selectedSerial)
@@ -111,6 +110,7 @@ struct DeviceRow: View {
         HStack(spacing: 10) {
             Image(systemName: device.serial.isWireless ? "wifi" : "cable.connector")
                 .foregroundStyle(isSelected ? Color.accentColor : .secondary)
+                .accessibilityLabel(device.serial.isWireless ? "Wi-Fi" : "USB")
             VStack(alignment: .leading, spacing: 2) {
                 Text(info?.model ?? device.model?.replacingOccurrences(of: "_", with: " ") ?? device.serial.rawValue)
                     .fontWeight(isSelected ? .semibold : .regular)
@@ -143,7 +143,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(explanation.title).font(.largeTitle.bold()).accessibilityIdentifier("onboardingTitle")
-                    Text(explanation.detail).font(.title3).foregroundStyle(.secondary)
+                    Text(explanation.detail).font(.title3)
                 }
                 Picker("Phone brand", selection: Binding(get: { shownBrand }, set: { chosenBrand = $0 })) {
                     ForEach(DeviceBrand.allCases, id: \.self) { Text(OnboardingGuide.title(for: $0)).tag($0) }
@@ -156,9 +156,10 @@ struct OnboardingView: View {
                             .font(.title2)
                             .frame(width: 36)
                             .foregroundStyle(Color.accentColor)
+                            .accessibilityHidden(true)
                         VStack(alignment: .leading, spacing: 4) {
                             Text("\(index + 1). \(step.title)").font(.headline)
-                            Text(step.detail).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                            Text(step.detail).fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .accessibilityElement(children: .combine)

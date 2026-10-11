@@ -22,17 +22,33 @@ struct InstallView: View {
                     return true
                 }
             if let notice = queue.notice {
-                Text(notice).font(.callout).foregroundStyle(.orange).padding(.horizontal)
+                Text(notice).font(.callout).foregroundStyle(Palette.warning).padding(.horizontal)
             }
-            List {
-                ForEach(queue.items) { item in
-                    QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
+            if let summary = queue.summary {
+                Text(summary)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .accessibilityIdentifier("queueSummary")
+            }
+            // A plain stack, not a List: List's reused table rows sometimes kept showing an old state when a
+            // row changed height (an install finishing), so a finished install still looked stuck.
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(queue.items) { item in
+                        QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
+                            .padding(.horizontal)
+                            .padding(.vertical, 6)
+                        Divider().padding(.leading)
+                    }
                 }
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Install queue")
             .accessibilityIdentifier("installQueue")
             .overlay {
                 if queue.items.isEmpty {
-                    Text("Files you drop appear here.").foregroundStyle(.secondary)
+                    Text("Files you drop appear here.")
                 }
             }
         }
@@ -100,10 +116,10 @@ struct DropZone: View {
     var body: some View {
         VStack(spacing: 10) {
             Image(systemName: "arrow.down.app").font(.system(size: 40)).foregroundStyle(Color.accentColor)
+                .accessibilityHidden(true)
             Text("Drop APK, APKS, XAPK or APKM files or a folder of split APKs")
                 .font(.headline)
             Text("Every file is checked before it is installed" + (deviceName.map { " on \($0)." } ?? "."))
-                .foregroundStyle(.secondary)
             Button("Choose Files…", action: choose).accessibilityIdentifier("chooseFiles")
         }
         .frame(maxWidth: .infinity, minHeight: 170)
@@ -115,6 +131,7 @@ struct DropZone: View {
         // `.contain` keeps the identifier on the container; without it SwiftUI copies it onto every child,
         // replacing the button's own identifier.
         .accessibilityElement(children: .contain)
+        .accessibilityLabel("Drop files to install")
         .accessibilityIdentifier("dropZone")
     }
 }
@@ -138,31 +155,37 @@ struct QueueRow: View {
         }
         .padding(.vertical, 4)
         .accessibilityElement(children: .contain)
+        .accessibilityLabel(item.package?.packageName ?? item.displayName)
         .accessibilityIdentifier("queueItem")
     }
 
-    @ViewBuilder private var icon: some View {
+    /// Hidden from VoiceOver: the text beside it already says the state.
+    private var icon: some View {
+        stateSymbol.accessibilityHidden(true)
+    }
+
+    @ViewBuilder private var stateSymbol: some View {
         switch item.state {
         case .waiting: Image(systemName: "clock").foregroundStyle(.secondary)
         case .inspecting: ProgressView().controlSize(.small)
-        case .needsReview: Image(systemName: "exclamationmark.shield").foregroundStyle(.orange)
+        case .needsReview: Image(systemName: "exclamationmark.shield").foregroundStyle(Palette.warning)
         case .installing: Image(systemName: "arrow.down.circle").foregroundStyle(Color.accentColor)
-        case .installed: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-        case .failed: Image(systemName: "xmark.octagon.fill").foregroundStyle(.red)
+        case .installed: Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.success)
+        case .failed: Image(systemName: "xmark.octagon.fill").foregroundStyle(Palette.danger)
         case .skipped, .cancelled: Image(systemName: "minus.circle").foregroundStyle(.secondary)
         }
     }
 
     @ViewBuilder private var detail: some View {
         switch item.state {
-        case .waiting: Text("Waiting").foregroundStyle(.secondary)
-        case .inspecting: Text("Checking the file…").foregroundStyle(.secondary)
-        case .needsReview(let plan): Text("\(plan.report.level.title): review before installing").foregroundStyle(.orange)
+        case .waiting: Text("Waiting")
+        case .inspecting: Text("Checking the file…")
+        case .needsReview(let plan): Text("\(plan.report.level.title): review before installing").foregroundStyle(Palette.warning)
         case .installing(let progress):
             ProgressView(value: progress.totalFraction) { Text(progress.message).font(.caption) }
-        case .installed(let outcome): Text("Installed version \(outcome.versionCode)").foregroundStyle(.secondary)
-        case .skipped: Text("Not installed").foregroundStyle(.secondary)
-        case .cancelled: Text("Cancelled. Nothing was changed on the phone.").foregroundStyle(.secondary)
+        case .installed(let outcome): Text("Installed version \(outcome.versionCode)")
+        case .skipped: Text("Not installed")
+        case .cancelled: Text("Cancelled. Nothing was changed on the phone.")
         case .failed(let error): FailureView(error: error, item: item, queue: queue, requestUninstallFix: requestUninstallFix)
         }
     }
@@ -177,7 +200,7 @@ struct FailureView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(InstallErrorText.title(error)).fontWeight(.semibold)
-            Text(InstallErrorText.explanation(error)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            Text(InstallErrorText.explanation(error)).fixedSize(horizontal: false, vertical: true)
             if case .packageManager(let explained) = error, let fix = explained.fix {
                 Button(fix.buttonTitle) {
                     if fix == .uninstallExistingThenInstall {

@@ -31,7 +31,7 @@ struct AppsView: View {
     private var content: some View {
         VStack(spacing: 0) {
             if let error = model.lastError {
-                Text(error).foregroundStyle(.red).padding(8)
+                Text(error).foregroundStyle(Palette.danger).padding(8)
             }
             ResultsBanner(results: model.results)
             table
@@ -43,13 +43,14 @@ struct AppsView: View {
             TableColumn("App") { (app: InstalledApp) in
                 VStack(alignment: .leading) {
                     Text(app.label ?? app.packageName.rawValue)
-                    if app.label != nil { Text(app.packageName.rawValue).font(.caption).foregroundStyle(.secondary) }
+                    if app.label != nil { Text(app.packageName.rawValue).font(.caption) }
                 }
             }
             TableColumn("Version") { (app: InstalledApp) in Text(app.versionName ?? String(app.versionCode)) }.width(90)
             TableColumn("Source") { (app: InstalledApp) in Text(app.installSource) }.width(150)
             TableColumn("State") { (app: InstalledApp) in Text(stateText(app)) }.width(110)
         }
+        .accessibilityLabel("Installed apps")
         .accessibilityIdentifier("appsTable")
     }
 
@@ -120,8 +121,9 @@ struct ResultsBanner: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(8)
-            .background(failures.isEmpty ? Color.green.opacity(0.12) : Color.orange.opacity(0.15))
+            .background(failures.isEmpty ? Palette.success.opacity(0.12) : Palette.warning.opacity(0.15))
             .accessibilityElement(children: .contain)
+            .accessibilityLabel("Results")
             .accessibilityIdentifier("resultsBanner")
         }
     }
@@ -143,7 +145,6 @@ struct PresetSheet: View {
             Text("Debloat presets").font(.title2.bold())
             Text("Lists come from the Universal Android Debloater (UAD-ng) project. Every change can be undone from History, "
                 + "and core system apps can never be removed.")
-                .foregroundStyle(.secondary)
             HStack {
                 Picker("Preset", selection: Binding(get: { preset?.id }, set: { presetID = $0; chosen = [] })) {
                     ForEach(presets) { Text("\($0.name) (\($0.entries.count))").tag(Optional($0.id)) }
@@ -165,11 +166,11 @@ struct PresetSheet: View {
                             Text(entry.risk.rawValue.capitalized).font(.caption)
                                 .padding(.horizontal, 6).background(Capsule().fill(riskColor(entry.risk).opacity(0.2)))
                         }
-                        Text(entry.description).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                        Text(entry.description).font(.caption).lineLimit(2)
                     }
                 }
             }
-            .overlay { if entries.isEmpty { Text("Nothing from this preset is active on this phone.").foregroundStyle(.secondary) } }
+            .overlay { if entries.isEmpty { Text("Nothing from this preset is active on this phone.") } }
             HStack {
                 Button("Select All") { chosen = Set(entries.map(\.packageName)) }
                 Spacer()
@@ -186,13 +187,7 @@ struct PresetSheet: View {
         .frame(minWidth: 640, minHeight: 520)
     }
 
-    private func riskColor(_ risk: DebloatRisk) -> Color {
-        switch risk {
-        case .safe: .green
-        case .caution: .orange
-        case .expert: .red
-        }
-    }
+    private func riskColor(_ risk: DebloatRisk) -> Color { Palette.debloat(risk) }
 }
 
 struct HistoryView: View {
@@ -206,7 +201,7 @@ struct HistoryView: View {
                     Text(entry.packageName.rawValue).font(.headline)
                     let date = entry.createdAt.formatted(date: .abbreviated, time: .shortened)
                     Text("\(describe(entry.kind)) · \(date) · \(entry.status.rawValue)")
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption)
                 }
                 Spacer()
                 if entry.isRestorable {
@@ -221,7 +216,7 @@ struct HistoryView: View {
                 }
             }
         }
-        .overlay { if model.history.isEmpty { Text("Changes you make appear here and can be undone.").foregroundStyle(.secondary) } }
+        .overlay { if model.history.isEmpty { Text("Changes you make appear here and can be undone.") } }
         .navigationTitle("History")
         .task(id: model.device) { await model.reload() }
         .confirmationDialog(
