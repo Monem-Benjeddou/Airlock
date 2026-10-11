@@ -37,8 +37,6 @@ targets:
       - target: AirlockParser
         embed: true
         codeSign: true
-    entitlements:
-      path: App/Airlock.entitlements
     info:
       path: App/Info.plist
       properties:
@@ -55,8 +53,12 @@ targets:
     dependencies:
       - package: Airlock
         product: AirlockInspection
+    # Written by XcodeGen from these properties; a path without properties makes it write an empty file,
+    # which is how an unsandboxed helper once slipped through. CI checks the signed result.
     entitlements:
       path: ParserXPC/AirlockParser.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
     info:
       path: ParserXPC/Info.plist
       properties:
