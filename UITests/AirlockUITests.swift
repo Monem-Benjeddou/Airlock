@@ -75,6 +75,11 @@ final class AirlockUITests: XCTestCase {
         wait(for: "section-\(section)").click()
     }
 
+    private func openWiFi() {
+        wait(for: "connectWiFi").click()
+        wait(for: "showQR")
+    }
+
     private func text(of element: XCUIElement) -> String {
         (element.value as? String).flatMap { $0.isEmpty ? nil : $0 } ?? element.label
     }
@@ -97,16 +102,27 @@ final class AirlockUITests: XCTestCase {
 
     func testReadyPhoneShowsModelAndBattery() {
         launch()
-        wait(for: "Pixel 9 (demo)")
-        wait(for: "Android 16 · 82%")
+        let picker = wait(for: "devicePicker")
+        for part in ["Pixel 9 (demo)", "Android 16 · 82%", "connected by USB"] where !appears(containing: part, timeout: 5) {
+            fail("the device picker does not say \(part): \(picker.label)", file: #filePath, line: #line)
+        }
         wait(for: "chooseFiles")
+    }
+
+    func testTheDevicePickerListsPhonesAndOffersWiFi() {
+        launch()
+        wait(for: "devicePicker").click()
+        wait(for: "device-DEMO0001")
+        wait(for: "connectWiFiFromDevices").click()
+        wait(for: "showQR")
+        wait(for: "closeWiFi").click()
     }
 
     // MARK: F2 Installer and F3 safety report
 
     func testLowRiskFileInstallsWithoutQuestions() {
         launch(queue: ["notes.apk"])
-        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "Installed", timeout: 30)
         XCTAssertFalse(element("approveInstall").exists, "a Low risk file is not held for review")
     }
 
@@ -140,13 +156,13 @@ final class AirlockUITests: XCTestCase {
         launch(queue: ["risky.apk"])
         wait(for: "acknowledgeRisk").click()
         wait(for: "approveInstall").click()
-        wait(for: "Installed version 3", timeout: 30)
+        wait(for: "Installed", timeout: 30)
     }
 
     func testQueueInstallsSeveralFilesInOrder() {
         launch(queue: ["one.apk", "two.apk", "three.apk"])
-        wait(for: "3 of 3 installed", timeout: 30)
-        let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed version 3' OR label == 'Installed version 3'"))
+        wait(for: "All 3 installed", timeout: 30)
+        let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed' OR label == 'Installed'"))
         let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
         if installed.count != 3 { fail("expected 3 installed rows, saw \(installed.count)", file: #filePath, line: #line) }
@@ -162,8 +178,10 @@ final class AirlockUITests: XCTestCase {
         // The shipped path: the app hands the file to AirlockParser.xpc, which parses it inside its sandbox and
         // hands the extracted files back. Only the phone is simulated.
         launch(queue: [try fixture("app-v2-rsa").path])
-        wait(for: "org.airlock.fixture", timeout: 30)
-        wait(for: "Installed version 3", timeout: 30)
+        if !appears(containing: "org.airlock.fixture", timeout: 30) {
+            fail("the parsed package never showed", file: #filePath, line: #line)
+        }
+        wait(for: "Installed", timeout: 30)
     }
 
     func testAFolderOfSplitAPKsIsParsedByTheSandboxedHelper() throws {
@@ -174,8 +192,10 @@ final class AirlockUITests: XCTestCase {
         try FileManager.default.copyItem(at: try fixture("split-arm64-v2-rsa"),
                                          to: folder.appendingPathComponent("split_config.arm64_v8a.apk"))
         launch(queue: [folder.path])
-        wait(for: "org.airlock.fixture", timeout: 30)
-        wait(for: "Installed version 3", timeout: 30)
+        if !appears(containing: "org.airlock.fixture", timeout: 30) {
+            fail("the parsed package never showed", file: #filePath, line: #line)
+        }
+        wait(for: "Installed", timeout: 30)
     }
 
     // MARK: F4 App manager and debloat
@@ -230,8 +250,8 @@ final class AirlockUITests: XCTestCase {
     func testVoiceOverNeverHearsRawSymbolNames() {
         // Regression: images exposed SF Symbol names such as "cable.connector" and "arrow.down.app".
         launch(queue: ["notes.apk"])
-        wait(for: "Installed version 3", timeout: 30)
-        wait(for: "USB")
+        wait(for: "Installed", timeout: 30)
+        if !appears(containing: "connected by USB", timeout: 5) { fail("the connection is not spoken", file: #filePath, line: #line) }
         for name in ["cable.connector", "arrow.down.app", "Arrow Down Circle", "checkmark.circle.fill"] {
             let match = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", name)).firstMatch
             XCTAssertFalse(match.exists, "VoiceOver would read \(name)")
@@ -255,9 +275,8 @@ final class AirlockUITests: XCTestCase {
         wait(for: "com.example.bloat")
         try audit("apps")
 
-        open("Wireless")
-        wait(for: "showQR")
-        try audit("wireless")
+        openWiFi()
+        try audit("wireless", within: app.sheets.firstMatch)
     }
 
     /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
@@ -323,7 +342,7 @@ final class AirlockUITests: XCTestCase {
 
     func testQRPairingShowsACode() {
         launch()
-        open("Wireless")
+        openWiFi()
         wait(for: "showQR").click()
         wait(for: "pairingQR")
         wait(for: "Waiting for your phone…")

@@ -99,7 +99,15 @@ struct InstallQueueModelTests {
         model.add([url("com.a.risky")])
         #expect(await eventually { model.summary == "Waiting for your review" })
         model.skipReview()
-        #expect(await eventually { model.summary == "0 of 1 installed, 1 not installed" })
+        #expect(await eventually { model.summary == "Not installed" })
+    }
+
+    @Test func theVerdictStaysOnTheRowAfterInstalling() async {
+        let model = queue(FakePipeline())
+        model.add([url("com.a.one")])
+        #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
+        #expect(model.items.first?.riskLevel == .low)
+        #expect(model.summary == "Installed")
     }
 
     @Test func summaryCountsWhatHappened() async {
@@ -109,7 +117,7 @@ struct InstallQueueModelTests {
         model.add([url("com.a.one"), url("com.a.two")])
         #expect(model.summary == "Installing 1 of 2")
         #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
-        #expect(model.summary == "2 of 2 installed")
+        #expect(model.summary == "All 2 installed")
     }
 
     @Test func summaryNamesFilesThatDidNotInstall() async {

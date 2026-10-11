@@ -25,7 +25,6 @@ struct PairingView: View {
             .frame(maxWidth: 720, alignment: .leading)
         }
         .accessibilityLabel("Wireless pairing")
-        .task { await model.reconnectRemembered() }
         .onDisappear { model.stop() }
     }
 
@@ -126,5 +125,22 @@ public struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: 480)
         .padding()
+    }
+}
+
+/// Wi-Fi pairing as a sheet: a one-time setup task, not a page.
+struct WiFiSheet: View {
+    let model: PairingModel
+    let usbSerial: DeviceSerial?
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        PairingView(model: model, usbSerial: usbSerial)
+            .frame(minWidth: 560, idealWidth: 600, minHeight: 440, idealHeight: 520)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }.accessibilityIdentifier("closeWiFi")
+                }
+            }
     }
 }

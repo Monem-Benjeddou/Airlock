@@ -283,3 +283,37 @@ struct DeviceRowTests {
         #expect(DeviceRow.details(of: try info(model: "CPH2581", displayName: nil, battery: nil)) == "Android 16")
     }
 }
+
+@Suite("Starting section")
+struct StartingSectionTests {
+    @Test func theEnvironmentPicksTheStartingPage() {
+        #expect(Section.initial(["AIRLOCK_SECTION": "apps"]) == .apps)
+        #expect(Section.initial(["AIRLOCK_SECTION": "History"]) == .history)
+    }
+
+    @Test func anythingElseStartsOnInstall() {
+        #expect(Section.initial([:]) == .install)
+        #expect(Section.initial(["AIRLOCK_SECTION": "settings"]) == .install)
+    }
+}
+
+@MainActor
+@Suite("Sidebar")
+struct SidebarTests {
+    @Test func badgesCountQueuedFilesAppsAndChanges() async {
+        let environment = AppEnvironment.demo()
+        #expect(Sidebar.badge(for: .install, environment: environment) == 0)
+        environment.installQueue.add([URL(fileURLWithPath: "/demo/notes.apk")])
+        #expect(Sidebar.badge(for: .install, environment: environment) == 1)
+        environment.apps.device = DemoDeviceService.serial
+        await environment.apps.reload()
+        #expect(Sidebar.badge(for: .apps, environment: environment) == environment.apps.apps.count)
+        #expect(Sidebar.badge(for: .history, environment: environment) == environment.apps.history.count)
+    }
+
+    @Test func aDeviceIsNamedByItsDetailsThenAdbsModelThenItsSerial() throws {
+        let serial = try DeviceSerial("R58")
+        #expect(DeviceRow.name(of: ConnectedDevice(serial: serial, state: .ready, model: "Pixel_9"), info: nil) == "Pixel 9")
+        #expect(DeviceRow.name(of: ConnectedDevice(serial: serial, state: .ready), info: nil) == "R58")
+    }
+}
