@@ -79,7 +79,8 @@ struct InstallQueueModelTests {
     }
 
     @Test func oneFailureDoesNotStopTheRest() async {
-        let pipeline = FakePipeline(failures: ["com.a.two": .packageManager(InstallErrorMapper.explain(InstallFailure(code: "INSTALL_FAILED_OLDER_SDK")))])
+        let olderSDK = InstallErrorMapper.explain(InstallFailure(code: "INSTALL_FAILED_OLDER_SDK"))
+        let pipeline = FakePipeline(failures: ["com.a.two": .packageManager(olderSDK)])
         let model = queue(pipeline)
         model.add([url("com.a.one"), url("com.a.two"), url("notanapp"), url("com.a.four")])
         #expect(await eventually { model.items.allSatisfy { $0.state.isFinished } })
@@ -151,7 +152,8 @@ struct InstallQueueModelTests {
         await model.applyFix(.uninstallExistingThenInstall, to: id, confirmation: nil)
         #expect(manager.performed.get().isEmpty, "no uninstall without confirmation")
 
-        await model.applyFix(.uninstallExistingThenInstall, to: id, confirmation: ConfirmedOperation(userConfirmed: .uninstall, on: pkg("com.a.game")))
+        let confirmation = ConfirmedOperation(userConfirmed: .uninstall, on: pkg("com.a.game"))
+        await model.applyFix(.uninstallExistingThenInstall, to: id, confirmation: confirmation)
         #expect(manager.performed.get().map(\.operation) == [.uninstall])
         #expect(await eventually { model.items[0].state.isFinished })
     }
