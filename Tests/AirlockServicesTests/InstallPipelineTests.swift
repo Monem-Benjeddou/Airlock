@@ -88,7 +88,7 @@ struct PipelineHarness {
     static let obbDir = "/sdcard/Android/obb/com.studio.game"
     static let obbFile = obbDir + "/main.70.com.studio.game.obb"
 
-    init(job: GameJob? = nil, inspector: StubInspector? = nil, installed: String? = nil, freeKilobytes: Int = 75_619_616) throws {
+    init(job: GameJob? = nil, inspector: StubInspector? = nil, installed: String? = nil, freeKilobytes: Int = 75_032_496) throws {
         let job = try job ?? GameJob()
         self.job = job
         journal = try SQLiteJournalStore.inMemory()

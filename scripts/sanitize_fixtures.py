@@ -8,8 +8,9 @@
 - getprop is reduced to an allowlist of non-identifying properties
 - dumpsys battery keeps only the first block (later blocks hold battery serials)
 - dumpsys package keeps only the "Packages:" block (other blocks list installed apps)
+- profile names in pm list users become Owner and "User <id>"
 - the name the owner gave the phone (it can contain their own name) becomes "Fixture Phone",
-  in its own file and anywhere else it appears
+  in its own file and anywhere else it appears; a name that only repeats the model code is kept
 """
 import hashlib
 import os
@@ -42,10 +43,19 @@ def third_party(raw):
     return {name: f"com.example.userapp{i + 1}" for i, name in enumerate(sorted(names))}
 
 
+PUBLIC_NAME_PROPS = ("ro.product.model", "ro.product.name", "ro.product.device", "ro.product.marketname",
+                     "ro.product.vendor.marketname")
+
+
 def device_name(raw):
-    """The owner's name for the phone, or None when `settings get` printed nothing or `null`."""
+    """The owner's name for the phone, or None when `settings get` printed nothing or `null`, or when the
+    name only repeats a public product property (the emulator reports its model code)."""
     name = (read(raw, "settings-device-name.txt") or "").strip()
-    return None if name in ("", "null") else name
+    if name in ("", "null"):
+        return None
+    props = dict(re.findall(r"^\[([^\]]+)\]: \[(.*)\]$", read(raw, "getprop.txt") or "", re.MULTILINE))
+    public = {props[key].lower() for key in PUBLIC_NAME_PROPS if props.get(key)}
+    return None if name.lower() in public else name
 
 
 def scrub(text, mapping, serial, owner_name=None):
@@ -73,6 +83,15 @@ def getprop(text, serial):
     return "\n".join(keep) + "\n"
 
 
+def users(text):
+    """Profile names can be a person's name: user 0 becomes Owner, every other profile "User <id>"."""
+    def name(match):
+        user, flags = match.group(1), match.group(2)
+        return f"UserInfo{{{user}:{'Owner' if user == '0' else 'User ' + user}:{flags}}}"
+    # The name sits between the id and the hex flags and may itself contain ':' or '}'.
+    return re.sub(r"UserInfo\{(\d+):.*:([0-9a-fA-F]+)\}", name, text)
+
+
 def first_block(text):
     return text.split("\n\n", 1)[0].rstrip("\n") + "\n"
 
@@ -96,8 +115,10 @@ def main(raw, out, serial):
             text = first_block(text)
         elif name.startswith("dumpsys-package"):
             text = packages_block(text)
-        elif name == "settings-device-name.txt":
-            text = (FAKE_DEVICE_NAME if owner_name else "null") + "\n"
+        elif name == "pm-list-users.txt":
+            text = users(text)
+        elif name == "settings-device-name.txt" and owner_name:
+            text = FAKE_DEVICE_NAME + "\n"
         text = scrub(text, mapping, serial, owner_name)
         with open(os.path.join(out, name), "w", encoding="utf-8") as handle:
             handle.write(text)

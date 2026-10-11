@@ -10,10 +10,10 @@ package:/apex/com.android.cellbroadcast/priv-app/GoogleCellBroadcastApp@37203842
 package:/system/app/SamsungWeather/SamsungWeather.apk=com.sec.android.daemonapp versionCode:172564100  installer=null uid:10237
 package:/system/app/P2pAwareOverlay/P2pAwareOverlay.apk=com.samsung.android.wifi.p2paware.resources versionCode:1  installer=null uid:10201
 package:/data/app/~~1054a8767aa66f27559477==/com.samsung.android.inputshare-b99fffd13826355730d35a==/base.apk=com.samsung.android.inputshare versionCode:270104000  installer=com.sec.android.app.samsungapps uid:10102
-package:/data/app/~~72adedd11918d4dd719102==/com.example.userapp90-7b7362d2e23b4bd68e6340==/base.apk=com.example.userapp90 versionCode:263907400  installer=com.android.vending uid:10335
 package:/data/app/~~f1ea49944f79520f633985==/com.example.userapp55-a2ac76755cdf2dcc8a1e64==/base.apk=com.example.userapp55 versionCode:850201000  installer=com.sec.android.app.samsungapps uid:10330
 package:/system/app/ImsSettings/ImsSettings.apk=com.samsung.advp.imssettings versionCode:1  installer=null uid:10192
 package:/apex/com.android.adservices/app/SdkSandboxGoogle@372038020/SdkSandboxGoogle.apk=com.google.android.sdksandbox versionCode:1  installer=null uid:10324
+package:/data/app/~~3c98d076f1ef93e35d20bb==/com.example.userapp97-6acde7a5159a8bf4a123c9==/base.apk=com.example.userapp97 versionCode:71671  installer=com.android.vending uid:10487
 package:/data/app/~~80d0d90ed6bf991ad033f0==/com.example.userapp99-a294d608c7750d8d9f1f60==/base.apk=com.example.userapp99 versionCode:4  installer=com.android.vending uid:10509
 package:/data/app/~~a441413babc2b26719369f==/com.samsung.android.ipsgeofence-8394378a37a81bb7047edd==/base.apk=com.samsung.android.ipsgeofence versionCode:411902100  installer=com.sec.android.app.samsungapps uid:5022
 package:/product/overlay/GmsConfigOverlayADVerifier.apk=com.google.android.verifier.overlay versionCode:36  installer=null uid:10343
@@ -58,7 +58,6 @@ package:/system/priv-app/KnoxMposAgent/KnoxMposAgent.apk=com.samsung.android.kno
 package:/system/priv-app/GlobalPostProcMgr/GlobalPostProcMgr.apk=com.samsung.android.globalpostprocmgr versionCode:310100000  installer=null uid:1000
 package:/system/priv-app/BuiltInPrintService/BuiltInPrintService.apk=com.android.bips versionCode:36  installer=null uid:10060
 package:/system/priv-app/SecSettingsIntelligence/SecSettingsIntelligence.apk=com.android.settings.intelligence versionCode:36  installer=null uid:10132
-package:/data/app/~~8ab29405bb8cc4d03e5616==/com.example.userapp98-397b8e30cace9e3a19712a==/base.apk=com.example.userapp98 versionCode:2038  installer=com.android.vending uid:10458
 package:/product/overlay/GooglePermissionControllerOverlay.apk=com.google.android.overlay.modules.permissioncontroller versionCode:1  installer=null uid:10020
 package:/system/priv-app/SDMConfig/SDMConfig.apk=com.samsung.android.sdm.config versionCode:490900000  installer=null uid:10111
 package:/data/app/~~2515673b8831959802d153==/com.samsung.android.mydevice-2062c6993decd9914079f4==/base.apk=com.samsung.android.mydevice versionCode:130703844  installer=com.sec.android.app.samsungapps uid:10399
@@ -137,6 +136,7 @@ package:/system/priv-app/DressRoom/DressRoom.apk=com.samsung.android.app.dressro
 package:/system/priv-app/KnoxCore/KnoxCore.apk=com.samsung.android.knox.containercore versionCode:1  installer=null uid:5250
 package:/system/priv-app/GalleryWidget/GalleryWidget.apk=com.samsung.android.widget.pictureframe versionCode:810000035  installer=null uid:10080
 package:/data/app/~~1cb81fff06618f17656d7e==/com.google.android.apps.maps-0b942f54a835eafc943e35==/base.apk=com.google.android.apps.maps versionCode:1068820686  installer=com.android.vending uid:10293
+package:/data/app/~~2263f282c7bbd8b86504f6==/com.example.userapp90-a550d328244e1fb9e1216d==/base.apk=com.example.userapp90 versionCode:263907900  installer=com.android.vending uid:10335
 package:/data/app/~~6b69799a79f6b3a94c43da==/com.samsung.android.scs-5c8a30f5e0026359e8fc9c==/SamsungCoreServices.apk=com.samsung.android.scs versionCode:550106200  installer=null uid:10119
 package:/system/app/DAAgent/DAAgent.apk=com.samsung.android.da.daagent versionCode:360000000  installer=null uid:1000
 package:/system_ext/overlay/smartfaceservice_overlay.apk=com.samsung.android.smartface.overlay versionCode:1  installer=null uid:10000
@@ -151,7 +151,6 @@ package:/data/app/~~3029c6f48de76a367cd156==/com.samsung.android.bixby.agent-782
 package:/system/priv-app/SamsungCalendarProvider/SamsungCalendarProvider.apk=com.android.providers.calendar versionCode:1270100005  installer=null uid:10114
 package:/apex/com.android.wifi/app/OsuLogin@BP4A.251205.006/OsuLogin.apk=com.android.hotspot2.osulogin versionCode:36  installer=null uid:10312
 package:/system/priv-app/MmsService/MmsService.apk=com.android.mms.service versionCode:36  installer=null uid:1001
-package:/data/app/~~7344c114b8316482ae9c7c==/com.example.userapp97-65aedc0ee45d8c866522f3==/base.apk=com.example.userapp97 versionCode:71122  installer=com.android.vending uid:10487
 package:/system/priv-app/PeopleStripe/PeopleStripe.apk=com.samsung.android.service.peoplestripe versionCode:1530001005  installer=null uid:10105
 package:/data/app/~~5d3d448dfa221a28772e5f==/com.example.userapp63-1ee8ff6d6f4856ac48031a==/base.apk=com.example.userapp63 versionCode:900100000  installer=com.sec.android.app.samsungapps uid:10432
 package:/data/app/~~2edc9525de2b57c1294254==/com.samsung.android.authfw-bba589fadd2d6581466027==/base.apk=com.samsung.android.authfw versionCode:521003000  installer=com.sec.android.app.samsungapps uid:5278
@@ -309,6 +308,7 @@ package:/system/priv-app/SHClient/SHClient.apk=com.samsung.android.settingshelpe
 package:/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk=com.google.android.syncadapters.calendar versionCode:2017706991  installer=null uid:10280
 package:/data/app/~~16160c2e916cbae4e79ef9==/com.google.android.mosey-1301ed08af22b2ed6ea67c==/base.apk=com.google.android.mosey versionCode:60715  installer=com.android.vending uid:10375
 package:/system/priv-app/BCService/BCService.apk=com.sec.bcservice versionCode:2  installer=null uid:1000
+package:/data/app/~~068832f6d7bbf24f26ee26==/com.google.android.projection.gearhead-4e64d4131a8a12e9056e5a==/base.apk=com.google.android.projection.gearhead versionCode:177666914  installer=com.android.vending uid:10259
 package:/data/app/~~85509f2bfa26d8be652ed7==/com.example.userapp69-040ebfd7a3e85924d1d3e1==/base.apk=com.example.userapp69 versionCode:1032900000  installer=null uid:10478
 package:/system/priv-app/NSDSWebApp/NSDSWebApp.apk=com.sec.vsim.ericssonnsds.webapp versionCode:310200000  installer=null uid:10101
 package:/system/priv-app/SmartEye/SmartEye.apk=com.samsung.android.service.airviewdictionary versionCode:512001000  installer=null uid:10141
@@ -332,6 +332,7 @@ package:/system/priv-app/EmergencySOS/EmergencySOS.apk=com.samsung.android.emerg
 package:/system/app/SetupWizardLegalProvider/SetupWizardLegalProvider.apk=com.sec.android.app.setupwizardlegalprovider versionCode:300300000  installer=null uid:10231
 package:/system/priv-app/MtpService/MtpService.apk=com.android.mtp versionCode:36  installer=null uid:10069
 package:/data/app/~~c247288b4d1b319248c5c0==/com.example.userapp10-676c9b9fb792ee0688d2ee==/base.apk=com.example.userapp10 versionCode:4110  installer=com.android.vending uid:10528
+package:/data/app/~~8873760b99eafa23378847==/com.example.userapp98-29a34ab4aa79154ed0d091==/base.apk=com.example.userapp98 versionCode:2040  installer=com.android.vending uid:10458
 package:/system/app/MotionPhoto/MotionPhoto.apk=com.samsung.android.motionphoto.app versionCode:509300000  installer=null uid:1000
 package:/data/app/~~9aaf80fe1d82e8b9b5c40a==/com.example.userapp50-0b0568a703266972c3d00c==/base.apk=com.example.userapp50 versionCode:106700000  installer=null uid:10467
 package:/data/app/~~6af1ec79ff1d541dc4fa59==/com.example.userapp86-d6307f0c3ce4c497464b24==/base.apk=com.example.userapp86 versionCode:1  installer=com.sec.android.easyMover uid:10386
@@ -358,7 +359,6 @@ package:/product/overlay/NavigationBarModeSamsungGestural/NavigationBarModeSamsu
 package:/system/app/AASAservice/AASAservice.apk=com.samsung.aasaservice versionCode:222000000  installer=null uid:1000
 package:/product/app/NetworkStackOverlay/NetworkStackOverlay.apk=com.samsung.android.networkstack versionCode:36  installer=null uid:10281
 package:/product/app/GoogleLocationHistory/GoogleLocationHistory.apk=com.google.android.gms.location.history versionCode:3  installer=null uid:10279
-package:/data/app/~~6bed7561fd3596d94723a8==/com.google.android.projection.gearhead-7881f7543d165678ad563c==/base.apk=com.google.android.projection.gearhead versionCode:177663674  installer=com.android.vending uid:10259
 package:/system_ext/priv-app/SystemUI/SystemUI.apk=com.android.systemui versionCode:36  installer=null uid:10056
 package:/system/priv-app/SoundAlive_B2/SoundAlive_B2.apk=com.sec.android.app.soundalive versionCode:1613200000  installer=null uid:10145
 package:/system/app/WifiRROverlayAppWifiLock/WifiRROverlayAppWifiLock.apk=com.samsung.android.wifi.resources.wifilock versionCode:1  installer=null uid:10252
@@ -403,8 +403,8 @@ package:/data/app/~~676b9679005f70acb238ca==/com.example.userapp4-70149c90cf7db4
 package:/data/app/~~50fbaef44f2e7a697e020d==/com.example.userapp32-5758c9dcd846f44b8e8888==/base.apk=com.example.userapp32 versionCode:116  installer=com.android.vending uid:10436
 package:/product/overlay/GmsConfigOverlayASI.apk=com.google.android.overlay.gmsconfig.asi versionCode:1  installer=null uid:10010
 package:/system/priv-app/PhotoEditor_AIFull/PhotoEditor_AIFull.apk=com.sec.android.mimage.photoretouching versionCode:382416100  installer=null uid:10110
-package:/data/app/~~f3cad6b99f374a36660f28==/com.example.userapp21-abfe1061ac9e4d3c399ad6==/base.apk=com.example.userapp21 versionCode:950  installer=com.android.vending uid:10505
 package:/system/priv-app/GameDriver-SM8650/GameDriver-SM8650.apk=com.samsung.gamedriver.sm8650 versionCode:1600000000  installer=null uid:10081
+package:/data/app/~~0a2f2bcf37969078abf161==/com.example.userapp21-f84f144a37da4d8fb921a5==/base.apk=com.example.userapp21 versionCode:951  installer=com.android.vending uid:10505
 package:/system/app/UnifiedWFC/UnifiedWFC.apk=com.sec.unifiedwfc versionCode:840021100  installer=null uid:10242
 package:/product/priv-app/AndroidGlassesCore/AndroidGlassesCore.apk=com.google.android.glasses.core versionCode:251110010  installer=null uid:10370
 package:/system/priv-app/InputDevices/InputDevices.apk=com.android.inputdevices versionCode:36  installer=null uid:1000
