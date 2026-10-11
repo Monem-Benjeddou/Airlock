@@ -28,8 +28,8 @@ func registerS24(_ fake: FakeADB) {
     fake.on(shell("dumpsys", "battery"), .ok(Fixture.adb(s24, "dumpsys-battery.txt")))
     fake.on(shell("wm", "density"), .ok(Fixture.adb(s24, "wm-density.txt")))
     fake.on(shell("df", "/data"), .ok(Fixture.adb(s24, "df-data.txt")))
-    // Not in the recording: the owner's name for the phone is personal, and a never-renamed S24 says this.
-    fake.on(shell("settings", "get", "global", "device_name"), .ok("Galaxy S24 Ultra\n"))
+    // The recorder replaces the name the owner gave the phone with "Fixture Phone".
+    fake.on(shell("settings", "get", "global", "device_name"), .ok(Fixture.adb(s24, "settings-device-name.txt")))
 }
 
 @Suite("DefaultDeviceService")
@@ -102,7 +102,7 @@ struct DeviceServiceTests {
         let service = DefaultDeviceService(adb: makeADB(fake))
         let info = try await service.info(for: try DeviceSerial(s24Serial))
         #expect(info.model == "SM-S928B")
-        #expect(info.displayName == "Galaxy S24 Ultra")
+        #expect(info.displayName == "Fixture Phone")
         #expect(info.manufacturer == "samsung")
         #expect(info.brand == .samsung)
         #expect(info.androidVersion == "16")
@@ -133,6 +133,18 @@ struct DeviceServiceTests {
         fake.on(shell("wm", "density"), .ok("Physical density: 420\n"))
         fake.on(shell("settings", "get", "global", "device_name"), deviceName)
         return try await DefaultDeviceService(adb: makeADB(fake)).info(for: try DeviceSerial(s24Serial)).displayName
+    }
+
+    @Test func theRecordedEmulatorIsCalledAndroidEmulator() async throws {
+        let emulator = "google-emulator-android15"
+        let fake = FakeADB()
+        fake.on(shell("getprop"), .ok(Fixture.adb(emulator, "getprop.txt")))
+        fake.on(shell("dumpsys", "battery"), .ok(Fixture.adb(emulator, "dumpsys-battery.txt")))
+        fake.on(shell("wm", "density"), .ok(Fixture.adb(emulator, "wm-density.txt")))
+        fake.on(shell("settings", "get", "global", "device_name"), .ok(Fixture.adb(emulator, "settings-device-name.txt")))
+        let info = try await DefaultDeviceService(adb: makeADB(fake)).info(for: try DeviceSerial(s24Serial))
+        #expect(info.model == "sdk_gphone64_arm64")
+        #expect(info.displayName == "Android Emulator")
     }
 
     @Test func theNameTheOwnerGaveThePhoneWins() async throws {

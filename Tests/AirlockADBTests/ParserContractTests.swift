@@ -50,7 +50,7 @@ struct GalaxyS24ContractTests {
         #expect(s24.model == "SM_S928B")
         #expect(s24.product == "e3qxxx")
         #expect(s24.deviceName == "e3q")
-        #expect(s24.transportID == "35")
+        #expect(s24.transportID == "43")
     }
 
     @Test func properties() throws {
@@ -96,7 +96,7 @@ struct GalaxyS24ContractTests {
 
     @Test func diskFree() throws {
         // 75619616 1K-blocks available.
-        #expect(try DiskFreeParser.availableBytes(Fixture.adb(device, "df-data.txt")) == 75_619_616 * 1024)
+        #expect(try DiskFreeParser.availableBytes(Fixture.adb(device, "df-data.txt")) == 75_032_496 * 1024)
     }
 
     @Test func dumpsysPackage() throws {

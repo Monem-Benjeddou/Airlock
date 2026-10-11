@@ -142,7 +142,7 @@ struct DeviceChannelTests {
         #expect(try await channel.properties()["ro.product.model"] == "SM-S928B")
         #expect(try await channel.batteryLevel() == 95)
         #expect(try await channel.density() == 560)
-        #expect(try await channel.freeBytes() == 75_619_616 * 1024)
+        #expect(try await channel.freeBytes() == 75_032_496 * 1024)
     }
 
     @Test func listsPackagesForUserZeroOnly() async throws {
