@@ -101,7 +101,6 @@ struct SafetyReportView: View {
             }
             if report.reasons.isEmpty {
                 Text("Airlock found nothing worrying. That is not a guarantee: only install apps from sources you trust.")
-                    .foregroundStyle(Palette.subdued)
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(report.reasons) { reason in
@@ -123,7 +122,7 @@ struct SafetyReportView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach(report.permissions) { permission in
                             Label(permission.plainLanguage, systemImage: permission.isDangerous ? "exclamationmark.triangle" : "checkmark")
-                                .foregroundStyle(permission.isDangerous ? Color.primary : Palette.subdued)
+                                .fontWeight(permission.isDangerous ? .semibold : .regular)
                                 .help(permission.permission)
                         }
                     }
@@ -133,7 +132,7 @@ struct SafetyReportView: View {
             GroupBox("Tracking and advertising") {
                 Group {
                     if report.trackers.isEmpty {
-                        Text("No known tracker libraries found.").foregroundStyle(Palette.subdued)
+                        Text("No known tracker libraries found.")
                     } else {
                         ForEach(report.trackers) { Text("\($0.name) (\($0.category))") }
                     }
@@ -196,7 +195,7 @@ struct SignerSummary: View {
             if let certificate = check.certificates.first {
                 Text(certificate.subject)
             }
-            Text(matchText).foregroundStyle(Palette.subdued)
+            Text(matchText)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -238,6 +237,5 @@ struct ReputationSummary: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundStyle(Palette.subdued)
     }
 }

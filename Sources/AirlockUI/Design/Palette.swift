@@ -11,9 +11,6 @@ enum Palette {
     static let success = Color.green
     static let warning = Color.orange
     static let danger = Color.red
-    /// Quieter than body text but still readable at caption sizes; the system's secondary grey fails the
-    /// contrast audit for small text.
-    static let subdued = Color.primary.opacity(0.75)
 
     /// The verdict badge: green, orange or red for Low, Medium or High.
     static func verdict(_ level: RiskLevel) -> Color {
