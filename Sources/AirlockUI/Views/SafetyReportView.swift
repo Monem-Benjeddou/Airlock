@@ -9,6 +9,8 @@ struct ReviewSheet: View {
     let plan: InstallPlan
     let queue: InstallQueueModel
     @State private var selected: Set<String>
+    /// High risk installs need this ticked, and Return never installs them.
+    @State private var acknowledged = false
 
     init(plan: InstallPlan, queue: InstallQueueModel) {
         self.plan = plan
@@ -46,20 +48,40 @@ struct ReviewSheet: View {
             }
             Divider()
             HStack {
-                Button("Don't Install", role: .cancel) { queue.skipReview() }
-                    .keyboardShortcut(.cancelAction)
-                    .accessibilityIdentifier("skipInstall")
-                Spacer()
-                Button(plan.report.level == .high ? "Install Anyway" : "Install") {
-                    queue.approve(plan.with(selectedSplits: plan.package.splits.filter { selected.contains($0.fileName) }))
+                if isHighRisk {
+                    // The safe choice is the default: Return and Escape both decline.
+                    Button("Don't Install") { queue.skipReview() }
+                        .keyboardShortcut(.defaultAction)
+                        .accessibilityIdentifier("skipInstall")
+                    Toggle("I understand the risks", isOn: $acknowledged)
+                        .accessibilityIdentifier("acknowledgeRisk")
+                } else {
+                    Button("Don't Install", role: .cancel) { queue.skipReview() }
+                        .keyboardShortcut(.cancelAction)
+                        .accessibilityIdentifier("skipInstall")
                 }
-                .disabled(!plan.problems.isEmpty)
-                .keyboardShortcut(.defaultAction)
-                .accessibilityIdentifier("approveInstall")
+                Spacer()
+                if isHighRisk {
+                    Button("Install Anyway", role: .destructive, action: approve)
+                        .disabled(!plan.problems.isEmpty || !acknowledged)
+                        .accessibilityIdentifier("approveInstall")
+                } else {
+                    Button("Install", action: approve)
+                        .disabled(!plan.problems.isEmpty)
+                        .keyboardShortcut(.defaultAction)
+                        .accessibilityIdentifier("approveInstall")
+                }
             }
             .padding()
+            .onExitCommand { queue.skipReview() }
         }
         .frame(minWidth: 560, minHeight: 520)
+    }
+
+    private var isHighRisk: Bool { plan.report.level == .high }
+
+    private func approve() {
+        queue.approve(plan.with(selectedSplits: plan.package.splits.filter { selected.contains($0.fileName) }))
     }
 
     private func binding(for file: String) -> Binding<Bool> {

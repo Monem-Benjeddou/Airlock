@@ -113,8 +113,18 @@ final class AirlockUITests: XCTestCase {
         wait(for: "Not installed")
     }
 
+    func testReturnNeverInstallsAHighRiskFile() {
+        // Regression: Install Anyway was the default button, so pressing Return installed a High risk app.
+        launch(queue: ["risky.apk"])
+        wait(for: "riskBadge")
+        XCTAssertFalse(element("approveInstall").isEnabled, "Install Anyway waits for the acknowledgement")
+        app.typeKey(.return, modifierFlags: [])
+        wait(for: "Not installed")
+    }
+
     func testHighRiskFileCanBeInstalledAfterReview() {
         launch(queue: ["risky.apk"])
+        wait(for: "acknowledgeRisk").click()
         wait(for: "approveInstall").click()
         wait(for: "Installed version 3", timeout: 30)
     }
