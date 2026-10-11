@@ -36,10 +36,12 @@ let package = Package(
         // so it also builds on Linux for libFuzzer. Runs inside the ParserXPC helper in the app.
         .target(
             name: "AirlockArchive",
-            dependencies: ["AirlockCore"],
+            dependencies: ["AirlockCore", .target(name: "CZlib", condition: .when(platforms: [.linux]))],
             swiftSettings: strict,
             linkerSettings: [.linkedLibrary("z")]
         ),
+        // Linux has no `zlib` Clang module (Apple SDKs do); this module map exposes the system zlib.h.
+        .systemLibrary(name: "CZlib", path: "Sources/CZlib"),
 
         // The only code that talks to adb.
         .target(name: "AirlockADB", dependencies: ["AirlockCore"], swiftSettings: strict),
