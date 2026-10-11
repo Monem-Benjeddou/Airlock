@@ -66,7 +66,7 @@ let package = Package(
             resources: [.copy("Resources/presets")],
             swiftSettings: strict
         ),
-        .target(name: "AirlockUI", dependencies: ["AirlockCore", "AirlockServices"], swiftSettings: strict),
+        .target(name: "AirlockUI", dependencies: ["AirlockCore", "AirlockServices", "AirlockPairing", "AirlockReputation"], swiftSettings: strict),
 
         // Runs the SwiftUI app straight from SwiftPM for development (`swift run AirlockDev`).
         // The shipping app is the Xcode target in App/, generated from project.yml.

@@ -216,3 +216,16 @@ public struct PairingService: Sendable {
         return .failed(String(describing: error))
     }
 }
+
+/// What the UI needs from pairing; ``PairingService`` is the real implementation.
+public protocol WirelessPairing: Sendable {
+    func pairWithQR(_ session: PairingSession) async throws(PairingError) -> PairedDevice
+    func pairWithCode(host: String, pairingPort: Int, code: String, connectPort: Int) async throws(PairingError) -> PairedDevice
+    func enableLegacyWireless(usb serial: DeviceSerial, port: Int) async throws(PairingError) -> PairedDevice
+    func reconnectRemembered() async -> [PairedDevice]
+    func rememberedDevices() -> [PairedDevice]
+    func forget(_ device: PairedDevice)
+    func diagnose(phoneAddress: String?) async -> NetworkDiagnosis
+}
+
+extension PairingService: WirelessPairing {}
