@@ -86,6 +86,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
+        # A version with a suffix (0.2.0-beta.1) is a pre-release; a plain version (0.1.1) is a full release.
         run: |
+          prerelease=false
+          if [[ "$VERSION" == *-* ]]; then prerelease=true; fi
           gh release create "$GITHUB_REF_NAME" "Airlock-$VERSION.zip" "Airlock-$VERSION.zip.sha256" \
-            --title "Airlock $VERSION" --notes-file notes.md --prerelease --verify-tag
+            --title "Airlock $VERSION" --notes-file notes.md --prerelease="$prerelease" --verify-tag
