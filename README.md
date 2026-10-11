@@ -28,7 +28,9 @@ Airlock never hosts or links to APKs and does not modify, repackage or crack app
 
 ## Installing
 
-Download `Airlock-<version>.zip` from [Releases](https://github.com/Monem-Benjeddou/Airlock/releases), unzip it and move Airlock to Applications. Preview builds are not notarized yet: the first time, right-click Airlock and choose Open, then Open again. If macOS still refuses, run `xattr -dr com.apple.quarantine /Applications/Airlock.app`.
+1. Download `Airlock-<version>.zip` from [Releases](https://github.com/Monem-Benjeddou/Airlock/releases), unzip it and move Airlock to Applications.
+2. Preview builds are not notarized yet, so macOS blocks the first launch. Open Airlock once and close the warning. Then open System Settings › Privacy & Security, scroll to Security, click **Open Anyway** next to Airlock, and confirm with your password. On macOS 14 you can instead Control-click Airlock, choose Open, then Open again.
+3. If you prefer the Terminal, `xattr -dr com.apple.quarantine /Applications/Airlock.app` does the same.
 
 ## Privacy
 

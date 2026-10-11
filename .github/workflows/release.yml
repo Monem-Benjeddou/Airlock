@@ -65,8 +65,10 @@ jobs:
           ### Installing
 
           1. Download `Airlock-*.zip`, unzip it, and move Airlock to Applications.
-          2. Airlock is not notarized yet. The first time, right-click Airlock and choose Open, then Open again.
-             If macOS still refuses, run `xattr -dr com.apple.quarantine /Applications/Airlock.app`.
+          2. Airlock is not notarized yet, so macOS blocks the first launch. Open it once and close the warning,
+             then go to System Settings › Privacy & Security, click Open Anyway next to Airlock, and confirm.
+             On macOS 14 you can Control-click Airlock and choose Open instead. In the Terminal,
+             `xattr -dr com.apple.quarantine /Applications/Airlock.app` does the same.
           3. Install adb if you don't have it: `brew install android-platform-tools`.
           NOTES
       - name: Keep the dry-run build

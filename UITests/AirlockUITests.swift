@@ -15,8 +15,9 @@ final class AirlockUITests: XCTestCase {
 
     private func launch(_ arguments: [String] = ["--demo"], queue: [String] = []) {
         continueAfterFailure = false
-        // App Nap can freeze a background app's timers on CI runners; keep it out of the picture.
-        app.launchArguments = arguments + ["-NSAppSleepDisabled", "YES"]
+        // App Nap can freeze a background app's timers on CI runners; keep it out of the picture. The defaults
+        // pair goes first: after "--demo", AppKit would read it as that flag's value and treat "YES" as a file.
+        app.launchArguments = ["-NSAppSleepDisabled", "YES"] + arguments
         if !queue.isEmpty { app.launchEnvironment["AIRLOCK_DEMO_QUEUE"] = queue.joined(separator: ",") }
         app.launch()
         app.activate()
@@ -137,6 +138,32 @@ final class AirlockUITests: XCTestCase {
         let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
         if installed.count != 3 { fail("expected 3 installed rows, saw \(installed.count)", file: #filePath, line: #line) }
+    }
+
+    // MARK: Real files through the sandboxed parser
+
+    private func fixture(_ name: String) throws -> URL {
+        try XCTUnwrap(Bundle(for: Self.self).url(forResource: name, withExtension: "apk"), "missing UI test fixture \(name)")
+    }
+
+    func testARealAPKIsParsedByTheSandboxedHelper() throws {
+        // The shipped path: the app hands the file to AirlockParser.xpc, which parses it inside its sandbox and
+        // hands the extracted files back. Only the phone is simulated.
+        launch(queue: [try fixture("app-v2-rsa").path])
+        wait(for: "org.airlock.fixture", timeout: 30)
+        wait(for: "Installed version 3", timeout: 30)
+    }
+
+    func testAFolderOfSplitAPKsIsParsedByTheSandboxedHelper() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("airlock-ui-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        try FileManager.default.copyItem(at: try fixture("app-v2-rsa"), to: folder.appendingPathComponent("base.apk"))
+        try FileManager.default.copyItem(at: try fixture("split-arm64-v2-rsa"),
+                                         to: folder.appendingPathComponent("split_config.arm64_v8a.apk"))
+        launch(queue: [folder.path])
+        wait(for: "org.airlock.fixture", timeout: 30)
+        wait(for: "Installed version 3", timeout: 30)
     }
 
     // MARK: F4 App manager and debloat

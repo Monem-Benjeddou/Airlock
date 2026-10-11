@@ -5,7 +5,7 @@
 
 ## 0.1.0
 
-The first preview. Airlock is not notarized yet, so macOS asks you to confirm the first time you open it (see Installing in the README).
+The first preview. Airlock is not notarized yet, so macOS blocks the first launch until you allow it in System Settings › Privacy & Security (see Installing in the README).
 
 ### What you can do
 

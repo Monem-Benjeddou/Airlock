@@ -9,11 +9,15 @@ import Foundation
 /// In-memory services for UI tests and screenshots. Never touches adb or the network.
 ///
 /// Launch the app with `--demo` (one ready phone) or `--demo-no-device`. `AIRLOCK_DEMO_QUEUE` lists file
-/// names to enqueue at launch; names containing "risky" get a High risk report.
+/// names to enqueue at launch; names containing "risky" get a High risk report. An absolute path is a real
+/// file: with an `inspector` it is opened and parsed for real (in the shipped app, by the sandboxed helper),
+/// and only the phone side stays simulated.
 extension AppEnvironment {
-    public static func demo(withDevice: Bool = true, queuedFiles: [String] = []) -> AppEnvironment {
+    public static func demo(
+        withDevice: Bool = true, queuedFiles: [String] = [], inspector: (any PackageInspector)? = nil
+    ) -> AppEnvironment {
         let manager = DemoAppManager()
-        let queue = InstallQueueModel(pipeline: DemoPipeline(), appManager: manager)
+        let queue = InstallQueueModel(pipeline: DemoPipeline(inspector: inspector), appManager: manager)
         let environment = AppEnvironment(
             devices: DevicesModel(service: DemoDeviceService(withDevice: withDevice)),
             installQueue: queue,
@@ -26,7 +30,7 @@ extension AppEnvironment {
         if !queuedFiles.isEmpty {
             // Enqueue once the window has seen the phone as ready, like a user dropping files would; adding
             // earlier races the window, which clears the install target until the phone is ready.
-            let files = queuedFiles.map { URL(fileURLWithPath: "/demo/\($0)") }
+            let files = queuedFiles.map { URL(fileURLWithPath: $0.hasPrefix("/") ? $0 : "/demo/\($0)") }
             Task { @MainActor in
                 while environment.devices.stage != .ready || queue.targetDevice == nil {
                     try? await Task.sleep(for: .milliseconds(50))
@@ -38,11 +42,13 @@ extension AppEnvironment {
     }
 
     /// Chooses live or demo services from the process arguments.
-    public static func fromLaunchArguments(_ arguments: [String] = ProcessInfo.processInfo.arguments) -> AppEnvironment {
+    public static func fromLaunchArguments(
+        _ arguments: [String] = ProcessInfo.processInfo.arguments, inspector: (any PackageInspector)? = nil
+    ) -> AppEnvironment {
         let queued = ProcessInfo.processInfo.environment["AIRLOCK_DEMO_QUEUE"]?.split(separator: ",").map(String.init) ?? []
-        if arguments.contains("--demo-no-device") { return .demo(withDevice: false) }
-        if arguments.contains("--demo") { return .demo(queuedFiles: queued) }
-        return .live()
+        if arguments.contains("--demo-no-device") { return .demo(withDevice: false, inspector: inspector) }
+        if arguments.contains("--demo") { return .demo(queuedFiles: queued, inspector: inspector) }
+        return .live(inspector: inspector)
     }
 }
 
@@ -67,7 +73,12 @@ struct DemoDeviceService: DeviceService {
 }
 
 struct DemoPipeline: InstallPipeline {
+    var inspector: (any PackageInspector)?
+
+    static func isDemoFile(_ file: URL) -> Bool { file.path.hasPrefix("/demo/") }
+
     func inspect(_ file: URL) async throws(InstallError) -> InspectedPackage {
+        if let inspector, !Self.isDemoFile(file) { return try await inspector.inspect(file) }
         let name = "com.demo." + file.deletingPathExtension().lastPathComponent.filter { $0.isLetter || $0.isNumber }.lowercased()
         let signature = SignatureCheck(
             status: .verified, schemes: [2, 3],
@@ -120,7 +131,13 @@ struct DemoPipeline: InstallPipeline {
         return InstallOutcome(packageName: name, versionCode: 3, journalEntryID: nil)
     }
 
-    func discard(_ package: InspectedPackage) async {}
+    /// Removes the job folder of a really inspected file, never anything outside a jobs folder.
+    func discard(_ package: InspectedPackage) async {
+        let folder = package.workDirectory
+        guard !Self.isDemoFile(package.sourceFile), folder.pathComponents.suffix(3).dropLast().elementsEqual(["Airlock", "jobs"])
+        else { return }
+        try? FileManager.default.removeItem(at: folder)
+    }
 
     private func info(_ serial: DeviceSerial) async throws(InstallError) -> DeviceInfo {
         do {

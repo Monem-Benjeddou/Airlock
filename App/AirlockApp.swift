@@ -12,10 +12,8 @@ struct AirlockApp: App {
 
     @MainActor
     init() {
-        let arguments = ProcessInfo.processInfo.arguments
-        environment = arguments.contains(where: { $0.hasPrefix("--demo") })
-            ? .fromLaunchArguments(arguments)
-            : .live(inspector: XPCPackageInspector())
+        // Demo mode simulates the phone but still parses real files in the helper, so UI tests cover it.
+        environment = .fromLaunchArguments(ProcessInfo.processInfo.arguments, inspector: XPCPackageInspector())
     }
 
     var body: some Scene {

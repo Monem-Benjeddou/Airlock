@@ -17,7 +17,7 @@ SPDX-FileCopyrightText = "2026 Airlock contributors"
 SPDX-License-Identifier = "GPL-3.0-only"
 
 [[annotations]]
-path = ["Tests/AirlockTestSupport/Fixtures/**"]
+path = ["Tests/AirlockTestSupport/Fixtures/**", "UITests/Fixtures/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Airlock contributors"
 SPDX-License-Identifier = "GPL-3.0-only"
