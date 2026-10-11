@@ -147,13 +147,20 @@ struct RiskBadge: View {
     let level: RiskLevel
 
     var body: some View {
-        Text(level.title)
-            .font(.headline)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(Capsule().fill(color.opacity(0.18)))
-            .foregroundStyle(color)
-            .accessibilityIdentifier("riskBadge")
+        // Primary text on a tinted capsule, with the colour carried by the symbol: coloured text on its own
+        // tint failed the contrast audit.
+        HStack(spacing: 6) {
+            Image(systemName: Palette.reasonSymbol(level))
+                .foregroundStyle(color)
+                .accessibilityHidden(true)
+            Text(level.title)
+                .foregroundStyle(.primary)
+                .accessibilityIdentifier("riskBadge")
+        }
+        .font(.headline)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Capsule().fill(color.opacity(0.18)))
     }
 
     private var color: Color { Palette.verdict(level) }
