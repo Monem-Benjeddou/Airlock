@@ -42,7 +42,7 @@ public final class AppEnvironment {
     }
 
     /// Wires the production services. Without an adb binary the app still opens and explains what to do.
-    public static func live() -> AppEnvironment {
+    public static func live(inspector: (any PackageInspector)? = nil) -> AppEnvironment {
         let location = ADBLocator().locate()
         let adb = ADBClient(configuration: ADBConfiguration(executable: location?.url ?? URL(fileURLWithPath: "/usr/bin/false")))
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -70,7 +70,7 @@ public final class AppEnvironment {
             adb: adb, journal: journal, presets: presets, backupRoot: support.appendingPathComponent("Backups", isDirectory: true)
         )
         let pipeline = DefaultInstallPipeline(
-            adb: adb, inspector: LocalPackageInspector(), safety: safety, devices: deviceService, journal: journal
+            adb: adb, inspector: inspector ?? LocalPackageInspector(), safety: safety, devices: deviceService, journal: journal
         )
 
         return AppEnvironment(

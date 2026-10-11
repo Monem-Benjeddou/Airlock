@@ -8,7 +8,7 @@ public struct AirlockScenes: Scene {
     private let environment: AppEnvironment
 
     @MainActor
-    public init(environment: AppEnvironment = .live()) {
+    public init(environment: AppEnvironment = .fromLaunchArguments()) {
         self.environment = environment
     }
 
