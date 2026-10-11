@@ -17,6 +17,7 @@ public struct AirlockScenes: Scene {
         WindowGroup("Airlock") {
             RootView(environment: environment)
         }
+        .defaultSize(width: 1040, height: 700)
         .windowToolbarStyle(.unified)
         .commands {
             CommandGroup(replacing: .appInfo) {
