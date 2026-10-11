@@ -162,6 +162,7 @@ struct SafetyReportView: View {
                 Button("Technical details") { showsTechnicalDetails.toggle() }
                     .buttonStyle(.plain)
             }
+            .accessibilityLabel("Technical details")
             .accessibilityIdentifier("technicalDetails")
         }
     }

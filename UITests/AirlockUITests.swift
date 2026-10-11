@@ -115,7 +115,9 @@ final class AirlockUITests: XCTestCase {
         XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
         XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
         XCTAssertFalse(appears(containing: "cdcdcdcd", timeout: 0), "hashes stay out of the way until asked for")
-        wait(for: "Technical details").click()
+        let details = wait(for: "technicalDetails")
+        XCTAssertEqual(details.label, "Technical details", "VoiceOver names the section")
+        details.click()
         if !appears(containing: "cdcdcdcd", timeout: 3) {
             fail("Technical details did not show the hash", file: #filePath, line: #line)
         }
@@ -273,6 +275,11 @@ final class AirlockUITests: XCTestCase {
                 if issue.auditType == .sufficientElementDescription, containers.contains(element.elementType) { return true }
                 if element.frame.maxY <= window.minY + 52 { return true }
             }
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = "audit-\(screen)"
+            shot.lifetime = .keepAlways
+            add(shot)
+            print("AUDIT DETAIL \(screen): \(issue.detailedDescription)")
             fail("\(screen): \(issue.auditType) \(issue.compactDescription) on \(issue.element?.debugDescription ?? "the window")",
                  file: #filePath, line: #line)
             return true
