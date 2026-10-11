@@ -115,7 +115,8 @@ final class AirlockUITests: XCTestCase {
         XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
         XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
         XCTAssertFalse(appears(containing: "cdcdcdcd", timeout: 0), "hashes stay out of the way until asked for")
-        wait(for: "Technical details").click()
+        // On macOS only the disclosure triangle expands a DisclosureGroup, not its label.
+        app.disclosureTriangles.firstMatch.click()
         XCTAssertTrue(appears(containing: "cdcdcdcd", timeout: 3))
         wait(for: "skipInstall").click()
         wait(for: "Not installed")

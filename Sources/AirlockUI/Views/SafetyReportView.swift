@@ -144,8 +144,14 @@ struct SafetyReportView: View {
             // Verdict first, details on request: hashes matter to experts, not to the install decision.
             DisclosureGroup("Technical details") {
                 VStack(alignment: .leading, spacing: 4) {
+                    // Callout size: caption-sized monospaced digits failed the contrast audit in any colour.
                     LabeledContent("File SHA-256") {
-                        Text(report.sha256).font(.caption.monospaced()).textSelection(.enabled)
+                        Text(report.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                    }
+                    if let certificate = report.signer.certificates.first {
+                        LabeledContent("Certificate SHA-256") {
+                            Text(certificate.sha256).font(.callout.monospaced()).textSelection(.enabled)
+                        }
                     }
                     LabeledContent("Rules version", value: report.rulesVersion)
                 }
@@ -189,7 +195,6 @@ struct SignerSummary: View {
             Text(statusText).fontWeight(.semibold)
             if let certificate = check.certificates.first {
                 Text(certificate.subject)
-                Text(certificate.sha256).font(.caption.monospaced()).textSelection(.enabled)
             }
             Text(matchText).foregroundStyle(Palette.subdued)
         }
