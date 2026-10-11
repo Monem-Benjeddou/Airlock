@@ -66,6 +66,8 @@ jobs:
         run: |
           APP="$(find "$PWD/build/Build/Products" -maxdepth 2 -name Airlock.app | head -1)"
           test -n "$APP"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$APP/Contents/Info.plist" | grep -qx AppIcon
+          test -s "$APP/Contents/Resources/AppIcon.icns"
           XPC="$APP/Contents/XPCServices/AirlockParser.xpc"
           test -d "$XPC"
           codesign -d --entitlements :- "$XPC" > xpc.plist
