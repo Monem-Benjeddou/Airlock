@@ -44,6 +44,7 @@ struct InstallView: View {
                 }
             }
             .accessibilityElement(children: .contain)
+            .accessibilityLabel("Install queue")
             .accessibilityIdentifier("installQueue")
             .overlay {
                 if queue.items.isEmpty {
@@ -130,6 +131,7 @@ struct DropZone: View {
         // `.contain` keeps the identifier on the container; without it SwiftUI copies it onto every child,
         // replacing the button's own identifier.
         .accessibilityElement(children: .contain)
+        .accessibilityLabel("Drop files to install")
         .accessibilityIdentifier("dropZone")
     }
 }
@@ -153,6 +155,7 @@ struct QueueRow: View {
         }
         .padding(.vertical, 4)
         .accessibilityElement(children: .contain)
+        .accessibilityLabel(item.package?.packageName ?? item.displayName)
         .accessibilityIdentifier("queueItem")
     }
 

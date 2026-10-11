@@ -122,6 +122,7 @@ struct ResultsBanner: View {
             .padding(8)
             .background(failures.isEmpty ? Palette.success.opacity(0.12) : Palette.warning.opacity(0.15))
             .accessibilityElement(children: .contain)
+            .accessibilityLabel("Results")
             .accessibilityIdentifier("resultsBanner")
         }
     }

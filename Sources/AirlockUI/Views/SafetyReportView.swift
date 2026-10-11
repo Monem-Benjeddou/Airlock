@@ -114,6 +114,7 @@ struct SafetyReportView: View {
                     }
                 }
                 .accessibilityElement(children: .contain)
+                .accessibilityLabel("Reasons")
                 .accessibilityIdentifier("riskReasons")
             }
             GroupBox("Developer") { SignerSummary(check: report.signer, match: report.signerMatch) }
