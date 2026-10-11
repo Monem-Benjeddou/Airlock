@@ -169,6 +169,7 @@ struct AppCell: View {
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier(app.packageName.rawValue)
     }
 
     static func name(of app: InstalledApp) -> String {
