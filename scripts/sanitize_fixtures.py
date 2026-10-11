@@ -8,6 +8,8 @@
 - getprop is reduced to an allowlist of non-identifying properties
 - dumpsys battery keeps only the first block (later blocks hold battery serials)
 - dumpsys package keeps only the "Packages:" block (other blocks list installed apps)
+- the name the owner gave the phone (it can contain their own name) becomes "Fixture Phone",
+  in its own file and anywhere else it appears
 """
 import hashlib
 import os
@@ -20,14 +22,18 @@ PROP_ALLOWLIST = {
     "ro.product.manufacturer", "ro.product.brand", "ro.product.locale", "persist.sys.locale",
     "ro.product.device", "ro.product.name", "ro.build.version.security_patch",
     "ro.sf.lcd_density", "ro.build.characteristics", "ro.miui.ui.version.name",
-    "ro.build.version.oneui", "ro.serialno",
+    "ro.build.version.oneui", "ro.serialno", "ro.product.marketname", "ro.product.vendor.marketname",
 }
 FAKE_SERIAL = "FIXTURESERIAL01"
+FAKE_DEVICE_NAME = "Fixture Phone"
 
 
 def read(raw, name):
     path = os.path.join(raw, name)
-    return open(path, encoding="utf-8", errors="replace").read() if os.path.exists(path) else None
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8", errors="replace") as handle:
+        return handle.read()
 
 
 def third_party(raw):
@@ -36,8 +42,16 @@ def third_party(raw):
     return {name: f"com.example.userapp{i + 1}" for i, name in enumerate(sorted(names))}
 
 
-def scrub(text, mapping, serial):
+def device_name(raw):
+    """The owner's name for the phone, or None when `settings get` printed nothing or `null`."""
+    name = (read(raw, "settings-device-name.txt") or "").strip()
+    return None if name in ("", "null") else name
+
+
+def scrub(text, mapping, serial, owner_name=None):
     text = text.replace(serial, FAKE_SERIAL)
+    if owner_name:
+        text = text.replace(owner_name, FAKE_DEVICE_NAME)
     # Longest names first so com.a.b.c is replaced before com.a.b.
     for real in sorted(mapping, key=len, reverse=True):
         text = re.sub(r"(?<![\w.])" + re.escape(real) + r"(?![\w])", mapping[real], text)
@@ -71,6 +85,7 @@ def packages_block(text):
 def main(raw, out, serial):
     os.makedirs(out, exist_ok=True)
     mapping = third_party(raw)
+    owner_name = device_name(raw)
     for name in sorted(os.listdir(raw)):
         if not name.endswith(".txt"):
             continue
@@ -81,8 +96,11 @@ def main(raw, out, serial):
             text = first_block(text)
         elif name.startswith("dumpsys-package"):
             text = packages_block(text)
-        text = scrub(text, mapping, serial)
-        open(os.path.join(out, name), "w", encoding="utf-8").write(text)
+        elif name == "settings-device-name.txt":
+            text = (FAKE_DEVICE_NAME if owner_name else "null") + "\n"
+        text = scrub(text, mapping, serial, owner_name)
+        with open(os.path.join(out, name), "w", encoding="utf-8") as handle:
+            handle.write(text)
         print(f"wrote {name}")
 
 

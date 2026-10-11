@@ -160,7 +160,11 @@ public struct DeviceInfo: Hashable, Sendable, Codable {
     public let serial: DeviceSerial
     /// Hardware serial (`ro.serialno`): stays the same over USB and Wi-Fi. Keys the action journal.
     public let stableID: String
+    /// The model code, e.g. `SM-S928B`.
     public let model: String
+    /// The name to show, e.g. "Galaxy S24 Ultra" or the name the owner gave the phone (see ``DeviceNames``).
+    /// On screen only: it can contain the owner's own name, so it is never logged or stored.
+    public let displayName: String
     public let manufacturer: String
     public let brand: DeviceBrand
     public let androidVersion: String
@@ -172,6 +176,7 @@ public struct DeviceInfo: Hashable, Sendable, Codable {
         serial: DeviceSerial,
         stableID: String,
         model: String,
+        displayName: String? = nil,
         manufacturer: String,
         brand: DeviceBrand,
         androidVersion: String,
@@ -181,6 +186,7 @@ public struct DeviceInfo: Hashable, Sendable, Codable {
         self.serial = serial
         self.stableID = stableID
         self.model = model
+        self.displayName = displayName ?? model
         self.manufacturer = manufacturer
         self.brand = brand
         self.androidVersion = androidVersion

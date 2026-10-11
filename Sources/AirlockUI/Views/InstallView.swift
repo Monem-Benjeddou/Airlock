@@ -15,7 +15,7 @@ struct InstallView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            DropZone(isTargeted: isTargeted, deviceName: device?.model) { showImporter = true }
+            DropZone(isTargeted: isTargeted, deviceName: device?.displayName) { showImporter = true }
                 .padding()
                 .onDrop(of: [.fileURL], isTargeted: $isTargeted) { providers in
                     load(providers)

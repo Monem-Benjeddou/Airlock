@@ -55,6 +55,16 @@ public struct DeviceChannel: Sendable {
         return try await shell(["getprop", name]).stdoutText.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    /// The name the owner gave the phone in Settings (`settings get global device_name`), or nil when none is
+    /// set or the device does not support the query. Read only. It can contain a person's name, so callers show
+    /// it on screen and nowhere else.
+    public func ownerDeviceName() async throws(ADBError) -> String? {
+        let result = try await shell(["settings", "get", "global", "device_name"], allowFailure: true)
+        guard result.exitCode == 0 else { return nil }
+        let name = result.stdoutText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return name.isEmpty || name == "null" ? nil : name
+    }
+
     public func packageNames(_ filter: PackageFilter, includingUninstalled: Bool = false) async throws(ADBError) -> Set<String> {
         var arguments = ["pm", "list", "packages", "--user", "0"]
         if filter != .all { arguments.append(filter.rawValue) }

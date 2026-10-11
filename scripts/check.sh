@@ -5,6 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 scripts/lint.sh
+python3 -I -W error scripts/test_sanitize_fixtures.py
 swift build --build-tests
 scripts/coverage.sh
 echo "All checks passed."
