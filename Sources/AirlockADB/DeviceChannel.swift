@@ -165,6 +165,15 @@ public struct DeviceChannel: Sendable {
         _ = try await shell(["rm", "-rf", path.rawValue], allowFailure: true)
     }
 
+    /// Deletes one file Airlock pushed under `/sdcard/Android/obb/`. Refuses any other location.
+    public func removeOBBFile(_ path: RemotePath) async throws(ADBError) {
+        let components = path.rawValue.split(separator: "/")
+        guard path.rawValue.hasPrefix("/sdcard/Android/obb/"), components.count == 5 else {
+            throw .invalidArgument("refusing to delete \(path)")
+        }
+        _ = try await shell(["rm", "-f", path.rawValue], allowFailure: true)
+    }
+
     public func push(_ local: URL, to remote: RemotePath) async throws(ADBError) {
         try await enqueued { () throws(ADBError) in
             _ = try await client.checked(

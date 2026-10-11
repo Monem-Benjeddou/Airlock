@@ -189,6 +189,18 @@ struct AppManagerChangeTests {
         #expect(history.first?.isRestorable == false)
     }
 
+    @Test func cancelledCommandIsStillJournaledAsFailed() async throws {
+        // Regression: a cancelled task also cancelled the journal update, leaving the entry "pending".
+        let harness = try AppManagerHarness()
+        let name = "com.example.slow"
+        harness.fake.on(shell("pm", "disable-user", "--user", "0", name), FakeADB.Response(delay: .seconds(30)))
+        let task = Task { try await harness.manager.perform(harness.confirm(.disableForUser, name), on: harness.serial) }
+        try await Task.sleep(for: .milliseconds(150))
+        task.cancel()
+        _ = await task.result
+        #expect(try await harness.journal.entries(deviceID: "FIXTURESERIAL01").first?.status == .failed)
+    }
+
     @Test func uninstallingAUserAppBacksUpItsAPKsFirst() async throws {
         let harness = try AppManagerHarness()
         let name = "com.example.userapp1"

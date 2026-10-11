@@ -89,10 +89,10 @@ public struct DefaultAppManager: AppManager {
         do {
             try await run(confirmed.operation, package, channel: channel)
         } catch {
-            try await journal.update(id: entry.id, status: .failed, note: Self.message(error))
+            try await record(entry.id, .failed, note: Self.message(error))
             throw AppManagerError.commandFailed(Self.message(error))
         }
-        try await journal.update(id: entry.id, status: .applied, note: nil)
+        try await record(entry.id, .applied, note: nil)
         var applied = entry
         applied.status = .applied
         return applied
@@ -227,6 +227,12 @@ public struct DefaultAppManager: AppManager {
         } catch {
             throw AppManagerError.commandFailed(String(describing: error))
         }
+    }
+
+    /// Journal updates after a device command must land even if the calling task was cancelled.
+    private func record(_ id: UUID, _ status: JournalEntry.Status, note: String?) async throws {
+        let journal = journal
+        try await Task.detached { try await journal.update(id: id, status: status, note: note) }.value
     }
 
     private func deviceID(_ serial: DeviceSerial) async throws -> String {

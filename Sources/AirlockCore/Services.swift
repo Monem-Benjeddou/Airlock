@@ -159,3 +159,11 @@ public protocol AppManager: Sendable {
 public protocol ReputationLookup: Sendable {
     func lookup(sha256: String) async -> ReputationResult
 }
+
+/// Turns a dropped file into an ``InspectedPackage``: detects the format, extracts it safely and
+/// parses every APK. In the app this runs in the sandboxed parser helper.
+public protocol PackageInspector: Sendable {
+    func inspect(_ file: URL) async throws(InstallError) -> InspectedPackage
+    /// SHA-256 digests of the signing certificates of an APK on disk (used for the installed copy).
+    func signerDigests(ofAPKAt url: URL) async throws(InstallError) -> [String]
+}
