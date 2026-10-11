@@ -59,6 +59,7 @@ public enum PairingError: Error, Hashable, Sendable {
 /// Discovery uses adb's own mDNS client (`adb mdns services`); Airlock never listens on a port.
 public struct PairingService: Sendable {
     private let adb: ADBClient
+    private let browser: (any ServiceBrowser)?
     private let network: any NetworkInspector
     private let store: any PairedDeviceStore
     private let scanTimeout: Duration
@@ -67,6 +68,7 @@ public struct PairingService: Sendable {
 
     public init(
         adb: ADBClient,
+        browser: (any ServiceBrowser)? = nil,
         network: any NetworkInspector = SystemNetworkInspector(),
         store: any PairedDeviceStore = UserDefaultsPairedDeviceStore(),
         scanTimeout: Duration = .seconds(180),
@@ -74,6 +76,7 @@ public struct PairingService: Sendable {
         pollInterval: Duration = .seconds(1)
     ) {
         self.adb = adb
+        self.browser = browser
         self.network = network
         self.store = store
         self.scanTimeout = scanTimeout
@@ -120,7 +123,7 @@ public struct PairingService: Sendable {
 
     /// Reconnects every remembered device that is reachable, preferring addresses currently advertised over mDNS.
     public func reconnectRemembered() async -> [PairedDevice] {
-        let advertised = (try? await adb.mdnsServices())?.filter { $0.type == .connect } ?? []
+        let advertised = (try? await services())?.filter { $0.type == .connect } ?? []
         var connected: [PairedDevice] = []
         for device in store.load() {
             let current = advertised.first { $0.instance == device.name }
@@ -158,8 +161,7 @@ public struct PairingService: Sendable {
         let deadline = ContinuousClock.now + timeout
         repeat {
             if Task.isCancelled { throw .cancelled }
-            let services = try await adbCall { try await adb.mdnsServices() }
-            if let found = services.first(where: matches) { return found }
+            if let found = try await services().first(where: matches) { return found }
             do {
                 try await Task.sleep(for: pollInterval)
             } catch {
@@ -167,6 +169,14 @@ public struct PairingService: Sendable {
             }
         } while ContinuousClock.now < deadline
         return nil
+    }
+
+    /// What adb sees, plus what `browser` sees that adb doesn't.
+    private func services() async throws(PairingError) -> [MdnsService] {
+        let fromADB = try await adbCall { try await adb.mdnsServices() }
+        guard let browser else { return fromADB }
+        let known = Set(fromADB.map { "\($0.type)/\($0.instance)" })
+        return fromADB + (await browser.services()).filter { !known.contains("\($0.type)/\($0.instance)") }
     }
 
     /// Returns the guid (mDNS instance name of the phone's connect service) when adb reports one.

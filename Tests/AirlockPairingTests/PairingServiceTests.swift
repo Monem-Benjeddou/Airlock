@@ -6,6 +6,7 @@ import AirlockCore
 @testable import AirlockPairing
 import AirlockTestSupport
 import Foundation
+import Network
 import Testing
 
 private func makeADB(_ fake: FakeADB) -> ADBClient {
@@ -280,5 +281,90 @@ struct NetworkDiagnosisTests {
         #expect(store.load() == [PairedDevice(name: "adb-A", host: "h", port: 1)])
         defaults.set(Data("garbage".utf8), forKey: "pairedDevices")
         #expect(store.load().isEmpty)
+    }
+}
+
+/// Services seen by macOS's Bonjour but not by adb.
+private struct FixedBrowser: ServiceBrowser {
+    let found: [MdnsService]
+    func services() async -> [MdnsService] { found }
+}
+
+@Suite("Discovery beyond adb")
+struct BonjourDiscoveryTests {
+    @Test func pairsWhenOnlyBonjourSeesThePhone() async throws {
+        // Regression: adb 37 on macOS listed no mDNS services, so the phone waited on "Pairing device" forever.
+        let fake = FakeADB()
+        fake.on(["mdns", "services"], .ok("List of discovered mdns services\n"))
+        fake.on(["pair", "192.168.1.20:37099", "Pw1234567890"], .ok("Successfully paired to 192.168.1.20:37099 [guid=adb-R58M-x]\n"))
+        fake.on(["connect", "192.168.1.20:41235"], .ok("connected to 192.168.1.20:41235\n"))
+        let browser = FixedBrowser(found: [
+            MdnsService(instance: "airlock-q", type: .pairing, host: "192.168.1.20", port: 37099),
+            MdnsService(instance: "adb-R58M-x", type: .connect, host: "192.168.1.20", port: 41235),
+        ])
+        let pairing = PairingService(adb: makeADB(fake), browser: browser, network: wifi, store: MemoryStore(),
+                                     pollInterval: .milliseconds(5))
+        let device = try await pairing.pairWithQR(PairingSession(serviceName: "airlock-q", password: "Pw1234567890"))
+        #expect(device == PairedDevice(name: "adb-R58M-x", host: "192.168.1.20", port: 41235))
+    }
+
+    @Test func adbsAddressWinsWhenBothSeeAService() async throws {
+        let fake = FakeADB()
+        fake.on(["mdns", "services"], .ok("airlock-q\t_adb-tls-pairing._tcp\t10.0.0.5:4000\n"))
+        fake.on(["pair", "10.0.0.5:4000", "Pw1234567890"], .ok("Failed: Wrong password or connection was dropped.\n"))
+        let browser = FixedBrowser(found: [MdnsService(instance: "airlock-q", type: .pairing, host: "10.0.0.9", port: 1)])
+        let pairing = PairingService(adb: makeADB(fake), browser: browser, network: wifi, store: MemoryStore(),
+                                     pollInterval: .milliseconds(5))
+        await #expect(throws: PairingError.wrongCode) {
+            try await pairing.pairWithQR(PairingSession(serviceName: "airlock-q", password: "Pw1234567890"))
+        }
+        #expect(!fake.calls.contains { $0.first == "pair" && $0[1] == "10.0.0.9:1" })
+    }
+
+    @Test func addressesDropTheInterfaceSuffix() throws {
+        let host = NWEndpoint.Host("192.168.1.135%en0")
+        #expect(BonjourBrowser.address(of: host) == "192.168.1.135")
+        #expect(BonjourBrowser.address(of: .name("phone.local", nil)) == nil)
+    }
+}
+
+@Suite("Bonjour browser", .serialized)
+struct BonjourBrowserTests {
+    /// Publishes a pairing service on this Mac, like a phone showing the QR screen, for as long as it lives.
+    private func advertise(_ name: String) throws -> NWListener {
+        let listener = try NWListener(using: .tcp)
+        listener.service = NWListener.Service(name: name, type: "_adb-tls-pairing._tcp")
+        listener.newConnectionHandler = { $0.cancel() }
+        listener.start(queue: .global())
+        return listener
+    }
+
+    private func wait(
+        for browser: BonjourBrowser, until done: ([MdnsService]) -> Bool
+    ) async throws -> [MdnsService] {
+        let deadline = ContinuousClock.now + .seconds(15)
+        var services = await browser.services()
+        while !done(services), ContinuousClock.now < deadline {
+            try await Task.sleep(for: .milliseconds(100))
+            services = await browser.services()
+        }
+        return services
+    }
+
+    @Test(.timeLimit(.minutes(1)))
+    func findsAndResolvesAnAdvertisedServiceThenForgetsIt() async throws {
+        let name = "airlock-test-\(UUID().uuidString.prefix(8))"
+        let listener = try advertise(name)
+        let browser = BonjourBrowser()
+
+        let found = try await wait(for: browser) { $0.contains { $0.instance == name } }
+        let service = try #require(found.first { $0.instance == name })
+        #expect(service.type == .pairing)
+        #expect(service.port == Int(listener.port?.rawValue ?? 0))
+        #expect(service.host.split(separator: ".").count == 4)
+
+        listener.cancel()
+        let after = try await wait(for: browser) { !$0.contains { $0.instance == name } }
+        #expect(!after.contains { $0.instance == name })
     }
 }

@@ -77,7 +77,7 @@ public final class AppEnvironment {
             devices: DevicesModel(service: deviceService),
             installQueue: InstallQueueModel(pipeline: pipeline, appManager: manager),
             apps: AppsModel(manager: manager),
-            pairing: PairingModel(pairing: PairingService(adb: adb)),
+            pairing: PairingModel(pairing: PairingService(adb: adb, browser: BonjourBrowser())),
             settings: SettingsModel(keys: keys),
             adbLocation: location,
             startupProblem: problem
