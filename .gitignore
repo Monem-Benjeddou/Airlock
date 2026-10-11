@@ -11,3 +11,4 @@ DerivedData/
 *.profraw
 /Fuzz/corpus-*
 /Fuzz/crash-*
+/.claude

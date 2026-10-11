@@ -63,9 +63,11 @@ custom_rules:
     regex: '("/(usr/)?bin/(ba|z|da|k)?sh"|"(ba|z|da|k)?sh"\s*,\s*"-c")'
     message: "Never run commands through a shell; pass argument arrays to ProcessRunner."
     severity: error
+  # REUSE-IgnoreStart
   spdx_header:
     name: "SPDX header"
     regex: '\A(?!// SPDX-License-Identifier: GPL-3\.0-only)'
     message: "Every Swift file starts with the SPDX licence header."
     severity: error
     match_kinds: []
+  # REUSE-IgnoreEnd

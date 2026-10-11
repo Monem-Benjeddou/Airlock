@@ -24,7 +24,7 @@ jobs:
       - name: SwiftLint (strict)
         run: scripts/lint.sh
       - name: REUSE licence check
-        run: pipx run reuse lint
+        run: pipx run --spec "reuse[charset-normalizer]" reuse lint
 
   test:
     runs-on: macos-15
