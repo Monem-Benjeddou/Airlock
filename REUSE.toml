@@ -1,0 +1,29 @@
+version = 1
+
+[[annotations]]
+path = [
+    ".gitignore",
+    "Package.resolved",
+    "**/*.json",
+    "**/*.txt",
+    "**/*.yml",
+    "**/*.plist",
+    "**/*.entitlements",
+    "**/*.xcassets/**",
+    "**/.gitkeep",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Airlock contributors"
+SPDX-License-Identifier = "GPL-3.0-only"
+
+[[annotations]]
+path = ["Tests/AirlockTestSupport/Fixtures/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Airlock contributors"
+SPDX-License-Identifier = "GPL-3.0-only"
+
+[[annotations]]
+path = ["LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "2007 Free Software Foundation, Inc."
+SPDX-License-Identifier = "GPL-3.0-only"
