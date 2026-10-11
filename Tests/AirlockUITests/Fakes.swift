@@ -49,7 +49,7 @@ enum Sample {
 
 final class FakeDeviceService: DeviceService, @unchecked Sendable {
     let snapshots: [[ConnectedDevice]]
-    let failingSerials: Set<String>
+    var failingSerials: Set<String>
     init(snapshots: [[ConnectedDevice]], failing: Set<String> = []) {
         self.snapshots = snapshots
         failingSerials = failing
