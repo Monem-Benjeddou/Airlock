@@ -24,6 +24,7 @@ struct PairingView: View {
             .padding(28)
             .frame(maxWidth: 720, alignment: .leading)
         }
+        .accessibilityLabel("Wireless pairing")
         .task { await model.reconnectRemembered() }
         .onDisappear { model.stop() }
     }

@@ -50,6 +50,7 @@ struct AppsView: View {
             TableColumn("Source") { (app: InstalledApp) in Text(app.installSource) }.width(150)
             TableColumn("State") { (app: InstalledApp) in Text(stateText(app)) }.width(110)
         }
+        .accessibilityLabel("Installed apps")
         .accessibilityIdentifier("appsTable")
     }
 
