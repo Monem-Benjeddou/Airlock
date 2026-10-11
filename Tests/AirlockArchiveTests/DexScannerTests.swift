@@ -26,7 +26,7 @@ enum DexBuilder {
         header += Data(count: 0x70 - header.count)
         var out = header
         for offset in offsets { out += AXMLBuilder.u32(offset) }
-        for index in typeOrder ?? (0..<UInt32(sorted.count)).map({ $0 }) { out += AXMLBuilder.u32(index) }
+        for index in typeOrder ?? Array(0..<UInt32(sorted.count)) { out += AXMLBuilder.u32(index) }
         out += stringData
         if out.count < size { out += Data(count: size - out.count) }
         out.replaceSubrange(32..<36, with: AXMLBuilder.u32(UInt32(out.count)))
