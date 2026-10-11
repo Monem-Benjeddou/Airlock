@@ -39,6 +39,8 @@ public struct RootView: View {
             detail
                 .frame(minWidth: 560, minHeight: 480)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Airlock")
         .task { await environment.devices.run() }
         .onChange(of: environment.devices.selectedSerial, initial: true) { _, serial in
             environment.installQueue.targetDevice = environment.devices.stage == .ready ? serial : nil

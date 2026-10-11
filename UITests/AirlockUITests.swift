@@ -173,11 +173,12 @@ final class AirlockUITests: XCTestCase {
     // MARK: Identity and accessibility
 
     func testAboutPanelShowsTheVersionAndLicence() {
+        // Regression: Info.plist hard-coded version 1.0, so About and Finder showed the wrong version.
         launch()
         app.menuBars.menuBarItems["Airlock"].click()
         app.menuBars.menuItems["About Airlock"].click()
-        XCTAssertTrue(appears(containing: "Version 0.1.0", timeout: 5))
-        XCTAssertTrue(appears(containing: "GNU GPL 3.0", timeout: 2))
+        if !appears(containing: "Version 0.1.0", timeout: 5) { fail("About shows the wrong version", file: #filePath, line: #line) }
+        if !appears(containing: "GNU GPL 3.0", timeout: 2) { fail("About has no licence", file: #filePath, line: #line) }
     }
 
     func testVoiceOverNeverHearsRawSymbolNames() {
@@ -193,6 +194,7 @@ final class AirlockUITests: XCTestCase {
 
     func testMainScreensPassTheAccessibilityAudit() throws {
         launch(["--demo-no-device"])
+        continueAfterFailure = true  // report every issue on every screen in one run
         wait(for: "onboardingTitle")
         try audit("onboarding")
 

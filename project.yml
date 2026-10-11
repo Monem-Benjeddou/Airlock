@@ -41,6 +41,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Airlock
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.utilities
         NSHumanReadableCopyright: "GPL-3.0-only, Airlock contributors"
     settings:
@@ -65,6 +67,8 @@ targets:
       path: ParserXPC/Info.plist
       properties:
         CFBundleDisplayName: AirlockParser
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         XPCService:
           ServiceType: Application
     settings:

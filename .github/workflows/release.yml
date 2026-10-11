@@ -47,6 +47,7 @@ jobs:
           test -d "$XPC"
           /usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$APP/Contents/Info.plist" | grep -qx AppIcon
           test -s "$APP/Contents/Resources/AppIcon.icns"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")" = "$VERSION"
           lipo -archs "$APP/Contents/MacOS/Airlock" | grep -q arm64
           lipo -archs "$APP/Contents/MacOS/Airlock" | grep -q x86_64
           codesign --verify --deep --strict "$APP"
