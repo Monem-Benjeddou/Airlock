@@ -76,6 +76,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock.UITests
         TEST_TARGET_NAME: Airlock
+        GENERATE_INFOPLIST_FILE: YES
 schemes:
   Airlock:
     build:
