@@ -35,7 +35,7 @@ struct PairingView: View {
             switch model.state {
             case .waitingForScan:
                 if let image = model.qrImage {
-                    Image(decorative: image, scale: 1).interpolation(.none).resizable().frame(width: 220, height: 220)
+                    Image(image, scale: 1, label: Text("Pairing QR code")).interpolation(.none).resizable().frame(width: 220, height: 220)
                         .accessibilityIdentifier("pairingQR")
                 }
                 HStack {

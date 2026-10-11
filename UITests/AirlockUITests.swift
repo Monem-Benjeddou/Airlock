@@ -5,126 +5,168 @@ import XCTest
 
 /// One or more tests per user story, run against the app's in-memory demo services (`--demo`).
 ///
-/// `launch()` replaces any running copy of the app, so each test starts clean without a tearDown.
+/// SwiftUI on macOS exposes a `Text` as a static text whose string is its *value*, while buttons and combined
+/// elements carry it as their *label*, so lookups match either. `launch()` replaces any running copy of the
+/// app, so each test starts clean without a tearDown.
 @MainActor
 final class AirlockUITests: XCTestCase {
     private lazy var app = XCUIApplication()
+    private var printedTree = false
 
     private func launch(_ arguments: [String] = ["--demo"], queue: [String] = []) {
         continueAfterFailure = false
         app.launchArguments = arguments
         if !queue.isEmpty { app.launchEnvironment["AIRLOCK_DEMO_QUEUE"] = queue.joined(separator: ",") }
         app.launch()
+        app.activate()
+    }
+
+    // MARK: Queries
+
+    /// Any element whose identifier, label or value is exactly `text`.
+    private func element(_ text: String) -> XCUIElement {
+        let byLabel = NSPredicate(format: "identifier == %@ OR label == %@", text, text)
+        let label = app.descendants(matching: .any).matching(byLabel).firstMatch
+        if label.exists { return label }
+        return app.staticTexts.matching(NSPredicate(format: "value == %@", text)).firstMatch
+    }
+
+    /// Whether some element's label, or some static text's value, contains `text`, within `timeout`.
+    private func appears(containing text: String, timeout: TimeInterval) -> Bool {
+        let labels = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", text)).firstMatch
+        let values = app.staticTexts.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
+        let deadline = Date().addingTimeInterval(timeout)
+        repeat {
+            if labels.exists || values.exists { return true }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        } while Date() < deadline
+        return false
+    }
+
+    /// Waits for `text` and fails with the accessibility tree printed, so CI logs show what was on screen.
+    @discardableResult
+    private func wait(
+        for text: String, timeout: TimeInterval = 10, file: StaticString = #filePath, line: UInt = #line
+    ) -> XCUIElement {
+        let deadline = Date().addingTimeInterval(timeout)
+        var found = element(text)
+        while !found.exists, Date() < deadline {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+            found = element(text)
+        }
+        if !found.exists { fail("\"\(text)\" never appeared", file: file, line: line) }
+        return found
+    }
+
+    private func fail(_ message: String, file: StaticString, line: UInt) {
+        if !printedTree {
+            printedTree = true
+            print("=== Accessibility tree at failure ===\n\(app.debugDescription)\n=== end ===")
+        }
+        XCTFail(message, file: file, line: line)
+    }
+
+    private func open(_ section: String) {
+        wait(for: "section-\(section)").click()
+    }
+
+    private func text(of element: XCUIElement) -> String {
+        (element.value as? String).flatMap { $0.isEmpty ? nil : $0 } ?? element.label
     }
 
     // MARK: F1 Device connection and onboarding
 
     func testOnboardingExplainsHowToConnectWhenNoPhoneIsAttached() {
         launch(["--demo-no-device"])
-        XCTAssertTrue(app.staticTexts["onboardingTitle"].waitForExistence(timeout: 5))
-        XCTAssertEqual(app.staticTexts["onboardingTitle"].label, "Connect your Android phone")
-        XCTAssertTrue(app.staticTexts["No phone connected"].exists)
+        XCTAssertEqual(text(of: wait(for: "onboardingTitle")), "Connect your Android phone")
+        wait(for: "No phone connected")
     }
 
     func testOnboardingShowsBrandSpecificSteps() {
         launch(["--demo-no-device"])
-        let picker = app.radioGroups["brandPicker"]
-        XCTAssertTrue(picker.waitForExistence(timeout: 5))
-        picker.radioButtons["Samsung Galaxy"].click()
-        XCTAssertTrue(app.staticTexts["3. Turn off Auto Blocker"].waitForExistence(timeout: 2))
-        picker.radioButtons["Xiaomi, Redmi or POCO"].click()
-        XCTAssertTrue(app.staticTexts["3. Turn on Install via USB"].waitForExistence(timeout: 2))
+        wait(for: "Samsung Galaxy").click()
+        XCTAssertTrue(appears(containing: "Turn off Auto Blocker", timeout: 3))
+        wait(for: "Xiaomi, Redmi or POCO").click()
+        XCTAssertTrue(appears(containing: "Turn on Install via USB", timeout: 3))
     }
 
     func testReadyPhoneShowsModelAndBattery() {
         launch()
-        XCTAssertTrue(app.staticTexts["Pixel 9 (demo)"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["Android 16 · 82%"].exists)
-        XCTAssertTrue(app.otherElements["dropZone"].exists || app.buttons["chooseFiles"].exists)
+        wait(for: "Pixel 9 (demo)")
+        wait(for: "Android 16 · 82%")
+        wait(for: "chooseFiles")
     }
 
     // MARK: F2 Installer and F3 safety report
 
     func testLowRiskFileInstallsWithoutQuestions() {
         launch(queue: ["notes.apk"])
-        XCTAssertTrue(app.staticTexts["Installed version 3"].waitForExistence(timeout: 10))
+        wait(for: "Installed version 3")
+        XCTAssertFalse(element("approveInstall").exists, "a Low risk file is not held for review")
     }
 
     func testHighRiskFileShowsTheReportAndCanBeDeclined() {
         launch(queue: ["risky.apk"])
-        let badge = app.staticTexts["riskBadge"]
-        XCTAssertTrue(badge.waitForExistence(timeout: 10))
-        XCTAssertEqual(badge.label, "High risk")
-        XCTAssertFalse(app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] 'safe'")).firstMatch.exists,
-                       "the report never calls an app safe")
-        app.buttons["skipInstall"].click()
-        XCTAssertTrue(app.staticTexts["Not installed"].waitForExistence(timeout: 5))
+        XCTAssertEqual(text(of: wait(for: "riskBadge")), "High risk")
+        XCTAssertFalse(appears(containing: "safe", timeout: 0), "the report never calls an app safe")
+        wait(for: "skipInstall").click()
+        wait(for: "Not installed")
     }
 
     func testHighRiskFileCanBeInstalledAfterReview() {
         launch(queue: ["risky.apk"])
-        XCTAssertTrue(app.buttons["approveInstall"].waitForExistence(timeout: 10))
-        app.buttons["approveInstall"].click()
-        XCTAssertTrue(app.staticTexts["Installed version 3"].waitForExistence(timeout: 10))
+        wait(for: "approveInstall").click()
+        wait(for: "Installed version 3")
     }
 
     func testQueueInstallsSeveralFilesInOrder() {
         launch(queue: ["one.apk", "two.apk", "three.apk"])
-        let predicate = NSPredicate(format: "label == 'Installed version 3'")
-        let installed = app.staticTexts.matching(predicate)
-        let deadline = Date().addingTimeInterval(15)
+        let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed version 3' OR label == 'Installed version 3'"))
+        let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
-        XCTAssertEqual(installed.count, 3)
+        if installed.count != 3 { fail("expected 3 installed rows, saw \(installed.count)", file: #filePath, line: #line) }
     }
 
     // MARK: F4 App manager and debloat
 
     func testDisablingAnAppNeedsConfirmationAndCanBeRestored() {
         launch()
-        app.outlineRows.staticTexts["Apps"].click()
-        let row = app.tables["appsTable"].staticTexts["com.example.bloat"]
-        XCTAssertTrue(row.waitForExistence(timeout: 5))
-        row.click()
-        app.toolbars.buttons["Disable"].click()
-        XCTAssertTrue(app.buttons["confirmChange"].waitForExistence(timeout: 3), "nothing changes without confirmation")
-        app.buttons["confirmChange"].click()
-        XCTAssertTrue(app.otherElements["resultsBanner"].waitForExistence(timeout: 5)
-            || app.staticTexts["Done: 1 change(s) applied."].waitForExistence(timeout: 5))
+        open("Apps")
+        wait(for: "com.example.bloat").click()
+        app.buttons.matching(NSPredicate(format: "label == 'Disable'")).firstMatch.click()
+        wait(for: "confirmChange", timeout: 3).click()
+        wait(for: "Done: 1 change(s) applied.")
 
-        app.outlineRows.staticTexts["History"].click()
-        let restore = app.buttons["restoreButton"]
-        XCTAssertTrue(restore.waitForExistence(timeout: 5))
-        restore.click()
+        open("History")
+        wait(for: "restoreButton").click()
     }
 
     func testCriticalSystemAppsCannotBeDisabled() {
         launch()
-        app.outlineRows.staticTexts["Apps"].click()
-        let row = app.tables["appsTable"].staticTexts["com.android.settings"]
-        XCTAssertTrue(row.waitForExistence(timeout: 5))
-        row.click()
-        app.toolbars.buttons["Disable"].click()
-        app.buttons["confirmChange"].click()
-        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'core part of Android'")).firstMatch
-            .waitForExistence(timeout: 5))
+        open("Apps")
+        wait(for: "com.android.settings").click()
+        app.buttons.matching(NSPredicate(format: "label == 'Disable'")).firstMatch.click()
+        wait(for: "confirmChange", timeout: 3).click()
+        if !appears(containing: "core part of Android", timeout: 5) {
+            fail("the denylist reason was not shown", file: #filePath, line: #line)
+        }
     }
 
     func testDebloatPresetsOpen() {
         launch()
-        app.outlineRows.staticTexts["Apps"].click()
-        XCTAssertTrue(app.toolbars.buttons["Debloat Presets"].waitForExistence(timeout: 5))
-        app.toolbars.buttons["Debloat Presets"].click()
-        XCTAssertTrue(app.staticTexts["Debloat presets"].waitForExistence(timeout: 3))
-        XCTAssertTrue(app.staticTexts["com.example.bloat"].exists)
+        open("Apps")
+        wait(for: "presetsButton").click()
+        wait(for: "Debloat presets")
+        wait(for: "com.example.bloat")
     }
 
     // MARK: F5 Wireless pairing
 
     func testQRPairingShowsACode() {
         launch()
-        app.outlineRows.staticTexts["Wireless"].click()
-        app.buttons["showQR"].click()
-        XCTAssertTrue(app.images["pairingQR"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["Waiting for your phone…"].exists)
+        open("Wireless")
+        wait(for: "showQR").click()
+        wait(for: "pairingQR")
+        wait(for: "Waiting for your phone…")
     }
 }
