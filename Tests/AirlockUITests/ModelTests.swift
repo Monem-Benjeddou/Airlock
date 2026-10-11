@@ -51,7 +51,8 @@ struct DevicesModelTests {
     }
 
     @Test func runConsumesTheServiceStream() async {
-        let model = DevicesModel(service: FakeDeviceService(snapshots: [[device("A", .ready)], [device("A", .ready), device("B", .offline)]]))
+        let snapshots = [[device("A", .ready)], [device("A", .ready), device("B", .offline)]]
+        let model = DevicesModel(service: FakeDeviceService(snapshots: snapshots))
         await model.run()
         #expect(model.devices.count == 2)
     }

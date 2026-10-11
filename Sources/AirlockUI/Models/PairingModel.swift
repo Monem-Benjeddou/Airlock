@@ -35,7 +35,7 @@ public final class PairingModel {
     }
 
     public var qrImage: CGImage? {
-        session.map { QRCodeRenderer.image(for: $0.qrPayload, scale: 8) } ?? nil
+        session.flatMap { QRCodeRenderer.image(for: $0.qrPayload, scale: 8) }
     }
 
     public func startQRPairing() {
@@ -110,7 +110,8 @@ extension PairingError {
         case .notFound(let diagnosis): diagnosis.title + ". " + diagnosis.suggestions.joined(separator: " ")
         case .wrongCode: "The pairing code was not accepted. Check the code on your phone and try again."
         case .unreachable: "Airlock could not reach your phone. Make sure it is on the same Wi-Fi network and the pairing screen is open."
-        case .pairedButNotConnected: "Your phone is paired but did not offer a connection. Toggle Wireless debugging off and on, then try again."
+        case .pairedButNotConnected:
+            "Your phone is paired but did not offer a connection. Toggle Wireless debugging off and on, then try again."
         case .phoneNotOnWiFi: "Your phone is not connected to Wi-Fi."
         case .invalidInput: "Check the address, ports and code."
         case .cancelled: "Pairing was cancelled."

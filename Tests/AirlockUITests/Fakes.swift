@@ -92,7 +92,10 @@ final class FakePipeline: InstallPipeline, @unchecked Sendable {
         Sample.plan(package, level: levels[package.packageName] ?? .low)
     }
 
-    func install(_ plan: InstallPlan, progress: @escaping @Sendable (InstallProgress) -> Void) async throws(InstallError) -> InstallOutcome {
+    func install(
+        _ plan: InstallPlan,
+        progress: @escaping @Sendable (InstallProgress) -> Void
+    ) async throws(InstallError) -> InstallOutcome {
         progress(InstallProgress(step: .installing, stepFraction: 0.5, totalFraction: 0.5, message: "Installing"))
         if installDelay > .zero {
             do {
@@ -132,7 +135,9 @@ final class FakeAppManager: AppManager, @unchecked Sendable {
         let entry = JournalEntry(deviceID: "R58", packageName: operation.package, kind: .operation(operation.operation),
                                  restore: .enable, status: .applied)
         journal.mutate { $0.insert(entry, at: 0) }
-        apps.mutate { list in list = list.map { $0.packageName == operation.package ? Sample.app($0.packageName.rawValue, state: .disabled) : $0 } }
+        apps.mutate { list in
+            list = list.map { $0.packageName == operation.package ? Sample.app($0.packageName.rawValue, state: .disabled) : $0 }
+        }
         return entry
     }
 
