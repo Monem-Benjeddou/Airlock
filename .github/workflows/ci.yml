@@ -59,7 +59,9 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild build-for-testing -project Airlock.xcodeproj -scheme Airlock \
-            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" CODE_SIGN_IDENTITY=- 2>&1 | tail -80
+            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" CODE_SIGN_IDENTITY=- > build.log 2>&1 \
+            || { grep -E 'error:' build.log | sort -u; tail -40 build.log; exit 1; }
+          tail -20 build.log
       - name: Check the parser helper is embedded, sandboxed and offline
         run: |
           APP="$(find "$PWD/build/Build/Products" -maxdepth 2 -name Airlock.app | head -1)"
@@ -75,7 +77,9 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building -project Airlock.xcodeproj -scheme Airlock \
             -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" \
-            -resultBundlePath "$PWD/ui-tests.xcresult" 2>&1 | tail -80
+            -resultBundlePath "$PWD/ui-tests.xcresult" > ui-tests.log 2>&1 \
+            || { grep -E 'error:|failed' ui-tests.log | sort -u; tail -60 ui-tests.log; exit 1; }
+          grep -E "Test Case|Executed" ui-tests.log | tail -40
       - name: Upload UI test results
         if: always()
         uses: actions/upload-artifact@v4

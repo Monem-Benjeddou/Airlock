@@ -4,18 +4,14 @@
 import XCTest
 
 /// One or more tests per user story, run against the app's in-memory demo services (`--demo`).
+///
+/// `launch()` replaces any running copy of the app, so each test starts clean without a tearDown.
+@MainActor
 final class AirlockUITests: XCTestCase {
-    private let app = XCUIApplication()
-
-    override func setUp() {
-        continueAfterFailure = false
-    }
-
-    override func tearDown() {
-        app.terminate()
-    }
+    private lazy var app = XCUIApplication()
 
     private func launch(_ arguments: [String] = ["--demo"], queue: [String] = []) {
+        continueAfterFailure = false
         app.launchArguments = arguments
         if !queue.isEmpty { app.launchEnvironment["AIRLOCK_DEMO_QUEUE"] = queue.joined(separator: ",") }
         app.launch()
