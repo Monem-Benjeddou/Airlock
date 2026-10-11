@@ -57,11 +57,13 @@ jobs:
         run: xcodegen generate
       - name: Build app and UI tests
         run: |
+          set -o pipefail
           xcodebuild build-for-testing -project Airlock.xcodeproj -scheme Airlock \
-            -destination 'platform=macOS' -derivedDataPath build CODE_SIGN_IDENTITY=- | tail -40
+            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" CODE_SIGN_IDENTITY=- 2>&1 | tail -80
       - name: Check the parser helper is embedded, sandboxed and offline
         run: |
-          APP="$(find build/Build/Products -maxdepth 2 -name Airlock.app | head -1)"
+          APP="$(find "$PWD/build/Build/Products" -maxdepth 2 -name Airlock.app | head -1)"
+          test -n "$APP"
           XPC="$APP/Contents/XPCServices/AirlockParser.xpc"
           test -d "$XPC"
           codesign -d --entitlements :- "$XPC" > xpc.plist
@@ -70,8 +72,10 @@ jobs:
           ! grep -q 'com.apple.security.network' xpc.plist
       - name: UI tests
         run: |
+          set -o pipefail
           xcodebuild test-without-building -project Airlock.xcodeproj -scheme Airlock \
-            -destination 'platform=macOS' -derivedDataPath build -resultBundlePath ui-tests.xcresult | tail -60
+            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" \
+            -resultBundlePath "$PWD/ui-tests.xcresult" 2>&1 | tail -80
       - name: Upload UI test results
         if: always()
         uses: actions/upload-artifact@v4

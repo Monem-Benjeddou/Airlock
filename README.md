@@ -27,7 +27,7 @@ Airlock never hosts or links to APKs and does not modify, repackage or crack app
 
 ## Privacy
 
-Airlock works offline. The only network request it can make is the optional VirusTotal lookup, which sends the file's SHA-256 hash, never the file, and only after you add your own API key. Analytics and crash reports are off unless you opt in, and never include file names, package names or device identifiers.
+Airlock works offline. The only network request it can make is the optional VirusTotal lookup, which sends the file's SHA-256 hash, never the file, and only after you add your own API key. Airlock has no analytics or crash reporting.
 
 ## Building from source
 
@@ -37,6 +37,7 @@ cd Airlock
 swift build            # core libraries
 swift test             # unit, contract and property tests
 swift run AirlockDev   # run the app straight from SwiftPM (development only)
+swift run AirlockDev --demo   # in-memory demo phone: no adb, no network, nothing changes
 ```
 
 The shipping app bundle, with its sandboxed parser helper, is built from `project.yml`:
@@ -45,6 +46,7 @@ The shipping app bundle, with its sandboxed parser helper, is built from `projec
 brew install xcodegen
 xcodegen generate
 xcodebuild -scheme Airlock -destination 'platform=macOS' build
+xcodebuild -scheme Airlock -destination 'platform=macOS' test   # XCUITests, one per user story, in demo mode
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the architecture, test layers and how to add device presets.
