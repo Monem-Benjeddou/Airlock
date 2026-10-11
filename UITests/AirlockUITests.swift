@@ -275,9 +275,6 @@ final class AirlockUITests: XCTestCase {
         wait(for: "com.example.bloat")
         try audit("apps")
 
-        // Over the Apps table the audit reports a parent/child mismatch on a dimmed table element it can't
-        // resolve, so `within:` can't exclude it. The sheet is the same over any page.
-        open("Install")
         openWiFi()
         try audit("wireless", within: app.sheets.firstMatch)
     }

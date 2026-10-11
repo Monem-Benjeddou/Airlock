@@ -52,10 +52,12 @@ public struct RootView: View {
                         DevicePicker(devices: environment.devices) { showWiFi = true }
                     }
                 }
-        }
-        .sheet(isPresented: $showWiFi) {
-            let usb = environment.devices.stage == .ready ? environment.devices.selectedSerial : nil
-            WiFiSheet(model: environment.pairing, usbSerial: usb)
+                // On the detail column, like the review sheet: attached to the split view, the sheet failed the
+                // accessibility audit's parent/child check.
+                .sheet(isPresented: $showWiFi) {
+                    let usb = environment.devices.stage == .ready ? environment.devices.selectedSerial : nil
+                    WiFiSheet(model: environment.pairing, usbSerial: usb)
+                }
         }
         .task { await environment.devices.run() }
         .task { await environment.pairing.reconnectRemembered() }
