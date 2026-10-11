@@ -105,8 +105,13 @@ struct SafetyReportView: View {
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(report.reasons) { reason in
-                        Label(reason.message, systemImage: Palette.reasonSymbol(reason.level))
-                            .foregroundStyle(Palette.reason(reason.level))
+                        // Readable text, with the colour on the symbol: red text fails contrast at body size.
+                        Label {
+                            Text(reason.message)
+                        } icon: {
+                            Image(systemName: Palette.reasonSymbol(reason.level))
+                                .foregroundStyle(Palette.reason(reason.level))
+                        }
                     }
                 }
                 .accessibilityElement(children: .contain)

@@ -33,14 +33,16 @@ final class AirlockUITests: XCTestCase {
         return app.staticTexts.matching(NSPredicate(format: "value == %@", text)).firstMatch
     }
 
-    /// Whether some element's label, or some static text's value, contains `text`, within `timeout`.
+    /// Whether some element's label, or the value of a static text, text view or text field (selectable text),
+    /// contains `text`, within `timeout`.
     private func appears(containing text: String, timeout: TimeInterval) -> Bool {
         let labels = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", text)).firstMatch
         let values = app.staticTexts.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
         let textViews = app.textViews.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
+        let textFields = app.textFields.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
         let deadline = Date().addingTimeInterval(timeout)
         repeat {
-            if labels.exists || values.exists || textViews.exists { return true }
+            if labels.exists || values.exists || textViews.exists || textFields.exists { return true }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         } while Date() < deadline
         return false
