@@ -1,0 +1,2088 @@
+{
+ "id": "misc",
+ "name": "Preinstalled third-party apps",
+ "brand": "other",
+ "source": "UAD-ng uad_lists.json (GPL-3.0), commit f02581f7f09f2e93d6f69cbc6c0602d03c89688f",
+ "entries": [
+  {
+   "packageName": "Info.Plateau.Einkbro",
+   "risk": "caution",
+   "description": "Open source web browser designed to fit E-ink devices, https://github.com/plateaukao/einkbro"
+  },
+  {
+   "packageName": "air.com.playtika.slotomania",
+   "risk": "safe",
+   "description": "Slotomania (https://play.google.com/store/apps/details?id=air.com.playtika.slotomania) Preinstalled game on some Samsung phones. 31 permissions, 13 trackers: https://reports.exodus-privacy.eu.org/reports/air.com.playtika.slotomania/latest/"
+  },
+  {
+   "packageName": "cci.usage",
+   "risk": "safe",
+   "description": "My Consumer Cellular (https://play.google.com/store/apps/details?id=cci.usage) Lets you manage your Consumer Cellular account, track your usage, pay your bill. Consumer Cellular is an American postpaid mobile virtual network operator https://en.wikipedia.org/wiki/Consumer_Cell..."
+  },
+  {
+   "packageName": "co.sitic.pp",
+   "risk": "safe",
+   "description": "Designed to remotely lock the phone (by sending a simple SMS) in case you don't pay your bill https://www.reddit.com/r/Android/comments/fde3l6/3rd_party_telemetry_found_in_nokia_smartphones/fjh4zbx/?context=3 This app was pre-installed on phone not served by that carrier (Amér..."
+  },
+  {
+   "packageName": "com.UCMobile.intl",
+   "risk": "safe",
+   "description": "UC Browser by Alibaba (https://play.google.com/store/apps/details?id=com.UCMobile.intl) !! Unsecure chinese web browser !! https://www.quora.com/Whats-wrong-with-UC-Browser https://www.digitalinformationworld.com/2019/05/url-spoofing-uc-browser-android.html"
+  },
+  {
+   "packageName": "com.aaa.android.discounts",
+   "risk": "safe",
+   "description": "AAA Mobile (https://play.google.com/store/apps/details?id=com.aaa.android.discounts) Kind of GPS that helps you find Point of interest (POI) like hotels, restaurants, and car repair facilities from the AAA databases. NOTE : You’ll have to sign up for an AAA membership to enjoy..."
+  },
+  {
+   "packageName": "com.aaa.android.discounts.vpl",
+   "risk": "safe",
+   "description": "AAA Mobile (https://play.google.com/store/apps/details?id=com.aaa.android.discounts) Kind of GPS that helps you find Point of interest (POI) like hotels, restaurants, and car repair facilities from the AAA databases. NOTE : You’ll have to sign up for an AAA membership to enjoy..."
+  },
+  {
+   "packageName": "com.adups.fota",
+   "risk": "expert",
+   "description": "Wireless Update (AKA System Update) FOTA = Firmware Over-the-air. Has a history of spying its users. If the installed version is below 5.4.x, it must be uninstalled. https://www.malwarebytes.com/blog/news/2017/12/mobile-menace-monday-upping-the-ante-on-adups-fwupgradeprovider..."
+  },
+  {
+   "packageName": "com.adups.fota.sysoper",
+   "risk": "safe",
+   "description": "UpgradeSys FOTA = Firmware Over-the-air. Has a history of spying its users. https://www.malwarebytes.com/blog/news/2017/12/mobile-menace-monday-upping-the-ante-on-adups-fwupgradeprovider https://www.cvedetails.com/vulnerability-list/vendor_id-16034/product_id-35606/year-2017/A..."
+  },
+  {
+   "packageName": "com.agui.toolbox",
+   "risk": "safe",
+   "description": "Toolbox contains a bunch of small utilites, most have there own APP but are only accessible from the Toolbox UI included; Noise test, Compass, Flashlight, Bubble Level, Picture Hanging, Heart rate, Measure height, Magnifier,Alarm, Plumb Bob, Protractor, Speedometer & a Pedometer."
+  },
+  {
+   "packageName": "com.alibaba.aliexpresshd",
+   "risk": "safe",
+   "description": "AliExpress shopping/marketplace. https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd"
+  },
+  {
+   "packageName": "com.amazon.aa",
+   "risk": "safe",
+   "description": "Amazon Assistant app. Nice spyware ! Shows you recommended products available on Amazon and price compare as you shop across the web. NOTE : https://www.gadgetguy.com.au/amazon-assistant-spies-on-you/"
+  },
+  {
+   "packageName": "com.amazon.aa.attribution",
+   "risk": "safe",
+   "description": "Amazon Assistant Attribution. A spyware again ! Tracking tool. Allows sellers to measure the impact of media channels **off Amazon** on sales. https://www.repricerexpress.com/amazon-attribution/"
+  },
+  {
+   "packageName": "com.amazon.appmanager",
+   "risk": "safe",
+   "description": "Mobile Device Information Provider Seems related to Kindle https://forum.xda-developers.com/t/are-these-phones-preloaded-with-amazon-spyware.4260299/ https://www.reddit.com/r/AndroidQuestions/comments/89qy76/what_is_mobile_device_information_provider_app/"
+  },
+  {
+   "packageName": "com.amazon.avod.thirdpartyclient",
+   "risk": "safe",
+   "description": "Amazon Prime Video (https://play.google.com/store/apps/details?id=com.amazon.avod.thirdpartyclient) VOD service from Amazon. https://en.wikipedia.org/wiki/Prime_Video"
+  },
+  {
+   "packageName": "com.amazon.clouddrive.photos",
+   "risk": "safe",
+   "description": "Amazon Photos (https://play.google.com/store/apps/details?id=com.amazon.clouddrive.photos)"
+  },
+  {
+   "packageName": "com.amazon.fv",
+   "risk": "safe",
+   "description": "Amazon App suite. Provides access to Amazon digital content"
+  },
+  {
+   "packageName": "com.amazon.kindle",
+   "risk": "safe",
+   "description": "Amazon Kindle (https://play.google.com/store/apps/details?id=com.amazon.kindle)"
+  },
+  {
+   "packageName": "com.amazon.mShop.android",
+   "risk": "safe",
+   "description": "Amazon Shopping (https://play.google.com/store/apps/details?id=com.amazon.mShop.android.shopping)"
+  },
+  {
+   "packageName": "com.amazon.mShop.android.shopping",
+   "risk": "safe",
+   "description": "Amazon Shopping (https://play.google.com/store/apps/details?id=com.amazon.mShop.android.shopping) Same package as com.amazon.mShop.android."
+  },
+  {
+   "packageName": "com.amazon.mShop.android.shopping.vpl",
+   "risk": "safe",
+   "description": "Amazon Shopping (https://play.google.com/store/apps/details?id=com.amazon.mShop.android.shopping) Same package as com.amazon.mShop.android."
+  },
+  {
+   "packageName": "com.amazon.mp3",
+   "risk": "safe",
+   "description": "Amazon Music (https://play.google.com/store/apps/details?id=com.amazon.mp3) Amazon streaming app"
+  },
+  {
+   "packageName": "com.amazon.venezia",
+   "risk": "caution",
+   "description": "Amazon AppStore Removal will result in breakage of app drawer on Amazon Fire TV devices."
+  },
+  {
+   "packageName": "com.android.frameworks.telresources",
+   "risk": "safe",
+   "description": "Completely empty package. Safe to remove."
+  },
+  {
+   "packageName": "com.android.ld.appstore",
+   "risk": "safe",
+   "description": "LD Gaming Appstore LDPlayer is an Android Gaming emulator for PC (https://ldplayer.net/)"
+  },
+  {
+   "packageName": "com.applovin.array.apphub.vincere",
+   "risk": "safe",
+   "description": "AppHub Is known as tracker company, potentially adware!"
+  },
+  {
+   "packageName": "com.aspiro.tidal",
+   "risk": "safe",
+   "description": "Tidal Music (https://play.google.com/store/apps/details?id=com.aspiro.tidal) Music streaming app"
+  },
+  {
+   "packageName": "com.aspiro.tidal.vpl",
+   "risk": "safe",
+   "description": "Tidal Music (https://play.google.com/store/apps/details?id=com.aspiro.tidal) Music streaming app"
+  },
+  {
+   "packageName": "com.audible.application",
+   "risk": "safe",
+   "description": "Cover Audible Audiobooks (https://play.google.com/store/apps/details?id=com.audible.application)"
+  },
+  {
+   "packageName": "com.bleacherreport.android.teamstream",
+   "risk": "safe",
+   "description": "Bleacher Report (https://play.google.com/store/apps/details?id=com.bleacherreport.android.teamstream) Sports news site"
+  },
+  {
+   "packageName": "com.block.juggle",
+   "risk": "safe",
+   "description": "Block Blast. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.block.puzzle.game.hippo.mi",
+   "risk": "safe",
+   "description": "Block Puzzle Guardian. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.blurb.checkout",
+   "risk": "safe",
+   "description": "Blurb Checkout Provides book purchase and checkout for Samsung’s Story Album app (discontinued)"
+  },
+  {
+   "packageName": "com.booking",
+   "risk": "safe",
+   "description": "Booking.com app (https://play.google.com/store/apps/details?id=com.booking) Seriously, you shouldn't use it ! https://en.wikipedia.org/wiki/Booking.com https://blog.usejournal.com/why-i-would-never-trust-booking-com-again-so-you-should-too-a2ab535ed915?gi=7ebe86eaa880 https://..."
+  },
+  {
+   "packageName": "com.caf.fmradio",
+   "risk": "safe",
+   "description": "https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/fm/tree/fmapp2/src/com/caf/fmradio"
+  },
+  {
+   "packageName": "com.cequint.ecid",
+   "risk": "safe",
+   "description": "Caller ID from Cequint (https://www.cequint.com/) https://www.fiercewireless.com/wireless/t-mobile-to-launch-caller-id-service-from-cequint NOTE : Never trust a company which promotes call ID/spam blocking features. https://itmunch.com/robocall-caught-sending-customers-confide..."
+  },
+  {
+   "packageName": "com.cnn.mobile.android.phone",
+   "risk": "safe",
+   "description": "CNN Breaking US & World News app (https://play.google.com/store/apps/details?id=com.cnn.mobile.android.phone)"
+  },
+  {
+   "packageName": "com.contextlogic.wish",
+   "risk": "safe",
+   "description": "Wish Shopping (https://play.google.com/store/apps/details?id=com.contextlogic.wish)"
+  },
+  {
+   "packageName": "com.cootek.smartinputv5.language.englishgb",
+   "risk": "safe",
+   "description": "TouchPal Keyboard by Cootek a chinese company. Adware (lots and lots of ads) Worth reading : https://www.buzzfeednews.com/article/craigsilverman/google-banned-cootek-adware"
+  },
+  {
+   "packageName": "com.cootek.smartinputv5.language.spanishus",
+   "risk": "safe",
+   "description": "TouchPal Keyboard by Cootek a chinese company. Adware (lots lots of ads) Worth reading : https://www.buzzfeednews.com/article/craigsilverman/google-banned-cootek-adware"
+  },
+  {
+   "packageName": "com.crowdcare.agent.k",
+   "risk": "safe",
+   "description": "Crowdcare is now Wysdom.AI From their Twitter description: the easiest way for businesses to improve customer satisfaction, contain costs, and generate revenue by using #AI to power customer experiences. Wysdom.AI has joined the Microsoft Partner Network in 2018 https://wysdom..."
+  },
+  {
+   "packageName": "com.davincikids.tv",
+   "risk": "safe",
+   "description": "Davinci Media A 2 star streaming service. https://play.google.com/store/apps/details?id=com.davincikids.tv"
+  },
+  {
+   "packageName": "com.debug.loggerui",
+   "risk": "safe",
+   "description": "DebugLoggerUI Similar to logcat, in some sense. Mostly focused on video graphics logging and network logging (includes Bluetooth). On some devices, it runs in the background (working non-cache RAM) even while not in use. https://peterelst.com/what-is-debug-logger-ui-android"
+  },
+  {
+   "packageName": "com.devhd.feedly",
+   "risk": "safe",
+   "description": "Feedly (https://play.google.com/store/apps/details?id=com.devhd.feedly) News aggregator application (RSS) RSS aggregator are great but Feedly is really bad, especially privacy-wise. https://feedly.com/i/legal/privacy Better Alternative : https://github.com/FreshRSS/FreshRSS"
+  },
+  {
+   "packageName": "com.digitalturbine.toolbar",
+   "risk": "safe",
+   "description": "Digital Turbine . Adware and used by carriers to showcase their apps FYI: Digital Turbine is an advertising company. [HELP: CAN SOMEONE UPLOAD THE APK?]"
+  },
+  {
+   "packageName": "com.diotek.sec.lookup.dictionary",
+   "risk": "safe",
+   "description": "Samsung dictionary from Diotek (Korean company) http://en.diotek.com/"
+  },
+  {
+   "packageName": "com.directv.dvrscheduler",
+   "risk": "safe",
+   "description": "DIRECTV (https://play.google.com/store/apps/details?id=com.directv.dvrscheduler) Offical app from DIRECTV (subsidiary of AT&T) Lets you watch Live TV, recorded shows, VODs and schedule recordings on your DVR Worth reading : https://en.wikipedia.org/wiki/DirecTV#Consumer_protec..."
+  },
+  {
+   "packageName": "com.discoveryscreen",
+   "risk": "safe",
+   "description": "Appflash (https://play.google.com/store/apps/details?id=com.discoveryscreen) Verizon Spyware. https://www.eff.org/deeplinks/2017/04/update-verizons-appflash-pre-installed-spyware-still-spyware"
+  },
+  {
+   "packageName": "com.dna.solitaireapp",
+   "risk": "safe",
+   "description": "Solitaire Game app from DNA company ?"
+  },
+  {
+   "packageName": "com.dolby.daxservice",
+   "risk": "expert",
+   "description": "Dolby Runs in the background as part of the system. Runs even if disabled. \"Optimizes system audio performance\" or something like that. This is likely the backend audio service, possibly applying settings from com.oneplus.sound.tuner (\"Dolby Atmos\") to the audio processing."
+  },
+  {
+   "packageName": "com.draftkings.dknativermgGP.vpl",
+   "risk": "safe",
+   "description": "DraftKings - Daily Fantasy Sports for Cash App has been removed from the Playstore. Worth reading : https://en.wikipedia.org/wiki/DraftKings"
+  },
+  {
+   "packageName": "com.drivemode",
+   "risk": "safe",
+   "description": "DraftKings - Daily Fantasy Sports for Cash App has been removed from the Playstore. Worth reading : https://en.wikipedia.org/wiki/DraftKings Drivemode (https://play.google.com/store/apps/details?id=com.drivemode.android) Simplifies how you manage calls and messages while drivi..."
+  },
+  {
+   "packageName": "com.dsi.ant.plugins.antplus",
+   "risk": "safe",
+   "description": "ANT+ plugin service (https://play.google.com/store/apps/details?id=com.dsi.ant.plugins.antplus)"
+  },
+  {
+   "packageName": "com.dsi.ant.sample.acquirechannels",
+   "risk": "safe",
+   "description": "I don't know why there is\"sample\" in the name. Is this package really useful to find ANT channels ?"
+  },
+  {
+   "packageName": "com.dsi.ant.server",
+   "risk": "safe",
+   "description": "ANT Radio Service Test. ANT HAL(Hardware Abstraction Layer) Server ANT is a wireless protocol, similar to Bluetooth, that is mainly used for sport and fitness trackers."
+  },
+  {
+   "packageName": "com.dsi.ant.service.socket",
+   "risk": "caution",
+   "description": "ANT Radio Service (https://play.google.com/store/apps/details?id=com.dsi.ant.service.socket) ANT is a wireless protocol, similar to Bluetooth, that is mainly used for sport and fitness trackers."
+  },
+  {
+   "packageName": "com.ebay.carrier",
+   "risk": "safe",
+   "description": "Kind of weird ebay apps pre-installed by carriers."
+  },
+  {
+   "packageName": "com.ebay.mobile",
+   "risk": "safe",
+   "description": "Ebay app (https://play.google.com/store/apps/details?id=com.ebay.mobile)"
+  },
+  {
+   "packageName": "com.ehernandez.radiolainolvidable",
+   "risk": "safe",
+   "description": "Radio La Inolvidable Peru (no longer exist) Spanish Radio app."
+  },
+  {
+   "packageName": "com.emoji.keyboard.touchpal",
+   "risk": "safe",
+   "description": "TouchPal Emoji Keyboard by Cootek a chinese company Adware (lots and lots of ads) Worth reading : https://www.buzzfeednews.com/article/craigsilverman/google-banned-cootek-adware"
+  },
+  {
+   "packageName": "com.eterno",
+   "risk": "safe",
+   "description": "Daily hunts News. (https://play.google.com/store/apps/details?id=com.eterno&hl=en)"
+  },
+  {
+   "packageName": "com.evernote",
+   "risk": "safe",
+   "description": "Evernote app (https://play.google.com/store/apps/details?id=com.evernote)"
+  },
+  {
+   "packageName": "com.evernote.promohelper",
+   "risk": "safe",
+   "description": "Companion for the Evernote app, seems to drain battery."
+  },
+  {
+   "packageName": "com.example",
+   "risk": "safe",
+   "description": "Auto Dialer test"
+  },
+  {
+   "packageName": "com.example.myapplication",
+   "risk": "safe",
+   "description": "Hidden app for testing: Battery, WiFi, Bluetooth"
+  },
+  {
+   "packageName": "com.facebook.appmanager",
+   "risk": "safe",
+   "description": "Facebook app manager handles Facebook apps updates."
+  },
+  {
+   "packageName": "com.facebook.katana",
+   "risk": "safe",
+   "description": "Facebook app (https://play.google.com/store/apps/details?id=com.facebook.katana)"
+  },
+  {
+   "packageName": "com.facebook.lite",
+   "risk": "safe",
+   "description": "Facebook Lite app (https://play.google.com/store/apps/details?id=com.facebook.lite)"
+  },
+  {
+   "packageName": "com.facebook.orca",
+   "risk": "safe",
+   "description": "Facebook Messenger (https://play.google.com/store/apps/details?id=com.facebook.orca)"
+  },
+  {
+   "packageName": "com.facebook.services",
+   "risk": "safe",
+   "description": "Facebook Services is a tool that lets you manage different Facebook services automatically using your Android device. In particular, the tool focuses on searching for nearby shops and establishments based on your interests. I don't know if this a dependency for com.facebook.ka..."
+  },
+  {
+   "packageName": "com.facebook.system",
+   "risk": "safe",
+   "description": "Facebook App Installer (empty shell app which incites you to install the Facebook app)"
+  },
+  {
+   "packageName": "com.fet.fridaywallet",
+   "risk": "safe",
+   "description": "friDay Wealth Management Provides customized deposit goal progress management services https://play.google.com/store/apps/details?id=com.fet.fridaywallet"
+  },
+  {
+   "packageName": "com.fido.asm",
+   "risk": "caution",
+   "description": "FIDO UAF1.0 ASM Related to app fingerprint unlocking and payments. Safe to remove if you don't use password-less authentication to access online services."
+  },
+  {
+   "packageName": "com.fido.uafclient",
+   "risk": "caution",
+   "description": "FIDO UAF1.0 Client Probably related to FIDO digital key gadget (Client), probably safe to remove if you don't have any."
+  },
+  {
+   "packageName": "com.finshell.fin",
+   "risk": "safe",
+   "description": "FinShell Pay (https://play.google.com/store/apps/details?id=com.finshell.fin) Provides various Payment and Financial Services. Pretty bad privacy policy: https://rwallet.finshell.co.in/html/user/privacy_policy.html"
+  },
+  {
+   "packageName": "com.fintech.life",
+   "risk": "safe",
+   "description": "Chinese app that spoofs as a Singapore financial and/or payment app to show advertisement notifications (mostly loans) It accesses locations, contacts, camera, mic by default, some people in Thailand also reported that they cannot use legitimate regional banking apps until thi..."
+  },
+  {
+   "packageName": "com.flipkart.android",
+   "risk": "safe",
+   "description": "Pre-installed Indian shopping bloatware with ads. (https://play.google.com/store/apps/details?id=com.flipkart.android)"
+  },
+  {
+   "packageName": "com.focaltech.fingerprint",
+   "risk": "safe",
+   "description": "Another fingerprint sensor test tool but Chinese."
+  },
+  {
+   "packageName": "com.focaltech.fpsensormmitest",
+   "risk": "safe",
+   "description": "Related to `com.focaltech.fingerprint`. Seems like a debugging activity triggered by dialing an MMI code"
+  },
+  {
+   "packageName": "com.fw.upgrade.sysoper",
+   "risk": "safe",
+   "description": "UpgradeSys FOTA = Firmware Over-the-air. Has a history of spying its users. https://www.malwarebytes.com/blog/news/2017/12/mobile-menace-monday-upping-the-ante-on-adups-fwupgradeprovider https://www.cvedetails.com/vulnerability-list/vendor_id-16034/product_id-35606/year-2017/A..."
+  },
+  {
+   "packageName": "com.galaxyfirsatlari",
+   "risk": "safe",
+   "description": "Galaxy Fırsatları (https://play.google.com/store/apps/details?id=com.galaxyfirsatlari) Samsung-only app for Turkish people Recommands you stuff to buy. You are supposed to save money but we all know this kind of apps encourages consumption. Exodus found 10 trackers and 17 perm..."
+  },
+  {
+   "packageName": "com.gd.mobicore.pa",
+   "risk": "caution",
+   "description": "Mobicore is now Trustonic Trustonic is a small OS running on the CPU providing a TEE, an isolated environment that runs in parallel with the operating system, guaranteeing code and data loaded inside to be protected. Sounds great, but it's closed source and\"normal\" devs can't..."
+  },
+  {
+   "packageName": "com.generalmobi.go2pay",
+   "risk": "safe",
+   "description": "Go2Pay (https://play.google.com/store/apps/details?id=com.generalmobi.go2pay) Payment app that offers mobile pre-paid recharges and post-paid bill payment, data card recharges and bill payment, DTH recharges through cashless transactions. DTH = Direct To Home Television"
+  },
+  {
+   "packageName": "com.glance.internet",
+   "risk": "safe",
+   "description": "Displays unsolicited\"trending\" stories on Lockscreen"
+  },
+  {
+   "packageName": "com.gohappy.mobileapp",
+   "risk": "safe",
+   "description": "Shopping app of friDay https://play.google.com/store/apps/details?id=com.gohappy.mobileacom.fetself"
+  },
+  {
+   "packageName": "com.gotv.nflgamecenter.us.lite",
+   "risk": "safe",
+   "description": "Football NFL (https://play.google.com/store/apps/details?id=com.gotv.nflgamecenter.us.lite)"
+  },
+  {
+   "packageName": "com.groupon",
+   "risk": "safe",
+   "description": "Groupon (https://play.google.com/store/apps/details?id=com.groupon) Online shopping deals and coupons. Worth reading : https://en.wikipedia.org/wiki/Groupon#Reception"
+  },
+  {
+   "packageName": "com.hancom.office.editor.hidden",
+   "risk": "safe",
+   "description": "Legacy Hancom Office Editor (Korean alternative to Microsoft Office). Featured in Samsung and LG phones"
+  },
+  {
+   "packageName": "com.handmark.expressweather",
+   "risk": "safe",
+   "description": "1Weather (https://play.google.com/store/apps/details?id=com.handmark.expressweather) Forecasts alerts app (contain ads)"
+  },
+  {
+   "packageName": "com.handmark.expressweather.vpl",
+   "risk": "safe",
+   "description": "1Weather (https://play.google.com/store/apps/details?id=com.handmark.expressweather) Forecasts alerts app (contain ads)"
+  },
+  {
+   "packageName": "com.haoba.btsmart",
+   "risk": "safe",
+   "description": "Agui Unibuds Iot stuff. May only be needed if you use Uniherts Ear Buds (Unibuds)."
+  },
+  {
+   "packageName": "com.haokan.pictorial",
+   "risk": "safe",
+   "description": "92 Lock Screen for RealMe 92 is pronounce in Chinese as 'Hao Kan' (it's the company name), so it's a Chinese app. This not related to 'Lock Screen Magazine' and potentially inject ads in lock screen."
+  },
+  {
+   "packageName": "com.heytap.accessory",
+   "risk": "caution",
+   "description": "Accessory Framework Quick device connect feature. Can be disabled via hidden setting (Settings -> Search 'App Enhancement Services' -> Quick device connect) if not wanted. Allows you to search for nearby devices and connect to them without having to go through the Bluetooth or..."
+  },
+  {
+   "packageName": "com.hp.android.printservice",
+   "risk": "safe",
+   "description": "Print to your HP printer using your Android phone. Most reviews on Google Play say it doesn't work very well. https://play.google.com/store/apps/details?id=com.hp.android.printservice"
+  },
+  {
+   "packageName": "com.huaqin.FM",
+   "risk": "safe",
+   "description": "Radio app from huaqin a chinese company NOTE : Transistor [https://f-droid.org/en/packages/org.y20k.transistor/] is much better"
+  },
+  {
+   "packageName": "com.huaqin.batteryinfo",
+   "risk": "safe",
+   "description": "Tests hardware things."
+  },
+  {
+   "packageName": "com.huaqin.clearefs",
+   "risk": "safe",
+   "description": "Debugging logs Wifi, Bluetooth"
+  },
+  {
+   "packageName": "com.huaqin.pocketbanreceiver",
+   "risk": "safe",
+   "description": "I found in code useless permissions BAN_BROADCAST and hello world! This app means nothing."
+  },
+  {
+   "packageName": "com.huaqin.sarcontroller",
+   "risk": "safe",
+   "description": "It have something like sar sensor, idk if it's for testing but mainactivity have chinese words and sar is for radio regulations?"
+  },
+  {
+   "packageName": "com.huaqin.shutdownservice",
+   "risk": "safe",
+   "description": "ShutdownAfterScreenOff10MinutesService. Not needed"
+  },
+  {
+   "packageName": "com.hulu.plus",
+   "risk": "safe",
+   "description": "Hulu (https://play.google.com/store/apps/details?id=com.hulu.plus&hl) Netflix competitor. FYI : Hulu is owned by Disney. https://en.wikipedia.org/wiki/Hulu https://www.digitaltrends.com/home-theater/hulu-vs-disney-plus/"
+  },
+  {
+   "packageName": "com.idea.questionnare",
+   "risk": "safe",
+   "description": "[NEED MORE INFO / NEED APK] Quizz app from MobileIdea company?"
+  },
+  {
+   "packageName": "com.ideashower.readitlater.pro",
+   "risk": "safe",
+   "description": "Pocket (https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro) Allows you to save an article or web page to remote servers for later reading Was purchased by Mozilla in 2017 but is still close source for now. https://getpocket.com/privacy Open-source alt..."
+  },
+  {
+   "packageName": "com.imdb.mobile",
+   "risk": "safe",
+   "description": "IMDb mobile app (https://play.google.com/store/apps/details?id=com.imdb.mobile)"
+  },
+  {
+   "packageName": "com.infraware.polarisoffice5",
+   "risk": "safe",
+   "description": "Polaris Office from US Infraware Inc company (Microsoft Office like) https://en.wikipedia.org/wiki/Polaris_Office https://play.google.com/store/apps/details?id=com.infraware.office.link"
+  },
+  {
+   "packageName": "com.instagram.android",
+   "risk": "safe",
+   "description": "Instagram (https://play.google.com/store/apps/details?id=com.instagram.android)"
+  },
+  {
+   "packageName": "com.ironsource.appcloud.oobe",
+   "risk": "safe",
+   "description": "AppCloud (discontinued) from ironSource, an advertising company. Worth reading : https://en.wikipedia.org/wiki/IronSource."
+  },
+  {
+   "packageName": "com.ironsource.appcloud.oobe.huawei",
+   "risk": "safe",
+   "description": "Essentials apps App which promotes some other apps (and encourages you to install them) Developed by IronSource, a\"next-generation advertising company\" https://aura.ironsrc.com/ (app) | https://company.ironsrc.com/ (company) When you try to read their privacy policy you arrive..."
+  },
+  {
+   "packageName": "com.ironsoure.appcloud.oobe.wiko",
+   "risk": "safe",
+   "description": "Provides first time setup for Wiko mobile"
+  },
+  {
+   "packageName": "com.jewelsblast.ivygames.Adventure.free",
+   "risk": "safe",
+   "description": "Jewels Blast. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.jiiov.fingerprint_factorytest",
+   "risk": "safe",
+   "description": "A factory test app for Jiiov fingerprint scanners (Jiiov fingerprint scanners are mostly used on devices such as Xiaomi, Redmi, POCO, etc..). Mostly not needed for daily phone use, might be needed in service centers during repair or when you'll want to test your fingerprint sc..."
+  },
+  {
+   "packageName": "com.king.candycrush4",
+   "risk": "safe",
+   "description": "Candy Crush Friends Saga (https://play.google.com/store/apps/details?id=com.king.candycrush4)"
+  },
+  {
+   "packageName": "com.king.candycrushsaga",
+   "risk": "safe",
+   "description": "Candy Crush Saga (https://play.google.com/store/apps/details?id=com.king.candycrushsaga) I don't understand why this game is so popular (I guess the fact it is pre-installed in a lot of phone helps)"
+  },
+  {
+   "packageName": "com.king.candycrushsodasaga",
+   "risk": "safe",
+   "description": "Candy Crush Soda Saga (https://play.google.com/store/apps/details?id=com.king.candycrushsodasaga)"
+  },
+  {
+   "packageName": "com.linkedin.android",
+   "risk": "safe",
+   "description": "Linkedin app (https://play.google.com/store/apps/details?id=com.linkedin.android)"
+  },
+  {
+   "packageName": "com.logame.eliminateintruder3d",
+   "risk": "safe",
+   "description": "Dust Settle. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.lookout",
+   "risk": "safe",
+   "description": "Lookout Security & Antivirus (https://play.google.com/store/apps/details?id=com.lookout)"
+  },
+  {
+   "packageName": "com.macropinch.swan",
+   "risk": "safe",
+   "description": "Weather https://play.google.com/store/apps/details?id=com.macropinch.swan"
+  },
+  {
+   "packageName": "com.magiear.handsfree.assistant",
+   "risk": "safe",
+   "description": "Hands-Free Assistant Only has permission activity voice from mediatek. https://play.google.com/store/apps/details?id=com.magiear.handsfree.assistant"
+  },
+  {
+   "packageName": "com.mediatek.MtkSettingsResOverlay",
+   "risk": "caution",
+   "description": "Nothing found in this app."
+  },
+  {
+   "packageName": "com.mediatek.SettingsProviderResOverlay",
+   "risk": "caution",
+   "description": "Nothing found in this app."
+  },
+  {
+   "packageName": "com.mediatek.aovtestapp",
+   "risk": "safe",
+   "description": "It tests in camera something."
+  },
+  {
+   "packageName": "com.mediatek.atci.service",
+   "risk": "caution",
+   "description": "Well this code is hard to understand, it have only notification stuff and needed for ims wifi calling."
+  },
+  {
+   "packageName": "com.mediatek.atmwifimeta",
+   "risk": "safe",
+   "description": "wifi data logger you don't want."
+  },
+  {
+   "packageName": "com.mediatek.autodialer",
+   "risk": "safe",
+   "description": "autodialer, have a lot useless code."
+  },
+  {
+   "packageName": "com.mediatek.batterywarning",
+   "risk": "expert",
+   "description": "Issues warning when the battery is low or when the battery temperature is high."
+  },
+  {
+   "packageName": "com.mediatek.bluetooth.dtt",
+   "risk": "safe",
+   "description": "Bluetooth logging."
+  },
+  {
+   "packageName": "com.mediatek.calendarimporter",
+   "risk": "safe",
+   "description": "Useful in China where Google isn’t available, but not needed for Google users."
+  },
+  {
+   "packageName": "com.mediatek.callrecorder",
+   "risk": "expert",
+   "description": "Call recording app for MediaTek devices. This is not the kind of feature expected from a Soc company. If you remove this I guess you will not be able to record your calls from the stock dialer If disabled, phone calls don't work. You can disable it, but then need to use the Go..."
+  },
+  {
+   "packageName": "com.mediatek.camera",
+   "risk": "caution",
+   "description": "Stock Camera app on some Mediatek phones."
+  },
+  {
+   "packageName": "com.mediatek.capctrl.service",
+   "risk": "expert",
+   "description": "It have mtkradioex components used for corporate device management and telephony control. Removing this will break key telephony functions such as SIM detection and carrier configuration, and cause com.android.phone to crash repeatedly."
+  },
+  {
+   "packageName": "com.mediatek.carrierexpress",
+   "risk": "safe",
+   "description": "Hidden operator configuration. it's Carrier Express app? also in code there a lot stuff about Custom Operator. I dont know why it should be useful when it only has notifications: SIM card detected or Switching the carrier etc. it's useless."
+  },
+  {
+   "packageName": "com.mediatek.cellbroadcastuiresoverlay",
+   "risk": "caution",
+   "description": "This app have something to emergency."
+  },
+  {
+   "packageName": "com.mediatek.datachannel.service",
+   "risk": "expert",
+   "description": "Mediatek's DataChannel Service, manages data channels used by IMS for VoLTE, VoWiFi and RCS. The communication bridge between modem and android telephony framework. Will most likely break RCS, VoLTE and VoWiFi. Not worth deleting."
+  },
+  {
+   "packageName": "com.mediatek.dataprotection",
+   "risk": "safe",
+   "description": "Possibly related to user partition encryption/decryption. A device should works flawlessly without it."
+  },
+  {
+   "packageName": "com.mediatek.datatransfer",
+   "risk": "expert",
+   "description": "The com.mediatek.datatransfer package is part of MediaTek's suite of utilities and is typically used for managing data transfer between devices or during device setup. This app often supports functions like transferring files, contacts, and other data from one device to anothe..."
+  },
+  {
+   "packageName": "com.mediatek.duraspeed",
+   "risk": "expert",
+   "description": "A frontend to a Mediatek service that fully takes over Android's own Adaptive Battery management. Uninstalling this app will only remove the UI component, but not the system service that it's controlling. To completely disable Duraspeed you need to have it enabled first, open..."
+  },
+  {
+   "packageName": "com.mediatek.emcamera",
+   "risk": "safe",
+   "description": "Useless camera calibration hidden app."
+  },
+  {
+   "packageName": "com.mediatek.engineermode",
+   "risk": "safe",
+   "description": "Engineer mode you can access by dialing a secret code (*#*#3646633#*#* on some Xiaomi phones for instance) It enables you to access the debug/logged data and some hidden firmware settings."
+  },
+  {
+   "packageName": "com.mediatek.entitlement.fcm",
+   "risk": "safe",
+   "description": "it's only FCM(Firebase Cloud Messaging). No activities, google firebase. Not needed."
+  },
+  {
+   "packageName": "com.mediatek.factorymode",
+   "risk": "safe",
+   "description": "Tests hardware things."
+  },
+  {
+   "packageName": "com.mediatek.filemanager",
+   "risk": "safe",
+   "description": "The com.mediatek.filemanager package is MediaTek’s proprietary file management app, designed to handle file browsing, organization, and management on devices with MediaTek chipsets. While it provides basic file management functions, there are many more advanced and feature-ric..."
+  },
+  {
+   "packageName": "com.mediatek.fwk.plugin",
+   "risk": "expert",
+   "description": "The com.mediatek.fwk.plugin package is part of MediaTek’s framework for managing plugins and extensions specific to MediaTek’s hardware and software ecosystem. This package may handle integration and support for various MediaTek-specific features and enhancements. Removing thi..."
+  },
+  {
+   "packageName": "com.mediatek.gba",
+   "risk": "caution",
+   "description": "Generic Bootstrapping Architecture. Has ims, X-TMUS-IMEI, bsf.msg.lab.t-mobile.com things to encrypted calls ims probably (thinking by looking at the classes.dex code). Connects to site bsf.ims.mncXXX.pub.3gppnetwork.org."
+  },
+  {
+   "packageName": "com.mediatek.gbaservice",
+   "risk": "safe",
+   "description": "Generic Bootstrapping Architecture. A ‘common ground’ of code used for many MediaTek apps. Can be removed if all other MediaTek apps are removed."
+  },
+  {
+   "packageName": "com.mediatek.gnss.nonframeworklbs",
+   "risk": "safe",
+   "description": "Have hidden activity and it's maybe for debug location requests, modem, VoWiFi and more. Not useful."
+  },
+  {
+   "packageName": "com.mediatek.gnssdebugreport",
+   "risk": "safe",
+   "description": "Hidden debug stuff."
+  },
+  {
+   "packageName": "com.mediatek.gpslocationupdate",
+   "risk": "safe",
+   "description": "Info about gps and notifications. Probably not needed for location."
+  },
+  {
+   "packageName": "com.mediatek.ims",
+   "risk": "expert",
+   "description": "Mediatek's implementation of IMS (low-level implementation?) https://www.programmersought.com/article/50164530665/ IMS(Ip Multimedia Subsystem) is an open industry standard for voice and multimedia communications over packet-based IP networks (VoLTE/VoIP/Wifi calling)."
+  },
+  {
+   "packageName": "com.mediatek.ims.pco",
+   "risk": "expert",
+   "description": "Protocol Configuration Options service for IMS IMS(Ip Multimedia Subsystem) is an open industry standard for voice and multimedia communications over packet-based IP networks (VoLTE/VoIP/Wifi calling). This package enable automatic configuration pushed by your carrier. You cou..."
+  },
+  {
+   "packageName": "com.mediatek.ims.rcsua.service",
+   "risk": "caution",
+   "description": "Needed to support IMS, RCS probably."
+  },
+  {
+   "packageName": "com.mediatek.lbs.em2.ui",
+   "risk": "safe",
+   "description": "LocationEM2 Another GPS status/testing app. Doesn’t stop GPS from working."
+  },
+  {
+   "packageName": "com.mediatek.location.lppe.main",
+   "risk": "expert",
+   "description": "LPPE = LTE Positioning Protocol enhancements/extensions (LTE =\"4G\") Positioning and assistance protocol between E-SMLC (mobile location center) and UE (User Equipement = phone) https://www.gpsworld.com/wirelessexpert-advice-positioning-protocol-next-gen-cell-phones-11125/ I do..."
+  },
+  {
+   "packageName": "com.mediatek.location.mtkgeofence",
+   "risk": "safe",
+   "description": "Mtk Geofence Only logs in code"
+  },
+  {
+   "packageName": "com.mediatek.location.mtknlp",
+   "risk": "expert",
+   "description": "Mtk Nlp Network Location Provider? This app has location permissions and no code."
+  },
+  {
+   "packageName": "com.mediatek.magtapp",
+   "risk": "safe",
+   "description": "MAGTApp Unknown, has GameEventService, MAGTEventAppReceiver, but code doesn't look very useful."
+  },
+  {
+   "packageName": "com.mediatek.mdmconfig",
+   "risk": "safe",
+   "description": "Mobile Device Management (MDM) allows company’s IT department to reach inside your phone in the background, allowing them to ensure your device is secure, know where it is, and remotely erase your data if the phone is stolen. It's a way to ensure employees stay productive and..."
+  },
+  {
+   "packageName": "com.mediatek.mdmlsample",
+   "risk": "safe",
+   "description": "It looks like debugging app. But I found some words SUBSCRIBE_TRAP, OTA, VoLTE Other data is a lot of debugging code so it's not needed."
+  },
+  {
+   "packageName": "com.mediatek.miravision.ui",
+   "risk": "caution",
+   "description": "Mediatek MiraVision Provides extensive hardware and software optimizations that improve the viewing quality. BUT I think it's not available and it's so bloated. https://www.mediatek.com/technology/miravision-for-smartphones"
+  },
+  {
+   "packageName": "com.mediatek.mms.appservice",
+   "risk": "caution",
+   "description": "Provides Voice message, Video message, Fax message, Text message in a messaging app?"
+  },
+  {
+   "packageName": "com.mediatek.mtklogger",
+   "risk": "safe",
+   "description": "Logs debug data. Has a lot of permissions and run in background all the time. Don't keep useless apps: reduce the attack surface Vulnerability found in this app in 2016: https://nvd.nist.gov/vuln/detail/CVE-2016-10135"
+  },
+  {
+   "packageName": "com.mediatek.mtklogger.proxy",
+   "risk": "safe",
+   "description": "Logs debug data."
+  },
+  {
+   "packageName": "com.mediatek.nlpservice",
+   "risk": "expert",
+   "description": "Mediatek Network Location Provider Provides periodic reports on the geographical location of the device. Each provider has a set of criteria under which it may be used. For example, some providers require GPS hardware and visibility to a number of satellites, while others requ..."
+  },
+  {
+   "packageName": "com.mediatek.omacp",
+   "risk": "expert",
+   "description": "omacp = OMA Client Provisioning. A protocol specified by the Open Mobile Alliance (OMA). Configuration messages parser. Used for provisioning APN settings to devices via SMS. In my case, it was automatic and I never needed configuration messages. Maybe it's useful if carriers..."
+  },
+  {
+   "packageName": "com.mediatek.presence",
+   "risk": "caution",
+   "description": "App used to IMS, RCS. IP Voice Call."
+  },
+  {
+   "packageName": "com.mediatek.providers.drm",
+   "risk": "caution",
+   "description": "DRM provider (actually Beep Science is MediaTek’s default DRM vendor) Probably required for some forms of DRM; disabling might break things like Netflix streaming, which relies on DRM to function. https://en.wikipedia.org/wiki/Digital_rights_management"
+  },
+  {
+   "packageName": "com.mediatek.schpwronoff",
+   "risk": "caution",
+   "description": "Set schedule power on & off."
+  },
+  {
+   "packageName": "com.mediatek.security",
+   "risk": "expert",
+   "description": "The com.mediatek.security package is part of MediaTek’s security suite, providing features such as malware protection, privacy settings, and secure browsing options. While the package may offer added security features specific to MediaTek devices, there are alternative securit..."
+  },
+  {
+   "packageName": "com.mediatek.sensorhub.ui",
+   "risk": "safe",
+   "description": "Testing sensors."
+  },
+  {
+   "packageName": "com.mediatek.simprocessor",
+   "risk": "caution",
+   "description": "This controls and imports contacts saved on a SIM card. Not needed if you don't store your contacts on the SIM card"
+  },
+  {
+   "packageName": "com.mediatek.smartratswitch.service",
+   "risk": "expert",
+   "description": "it handles switching connection between network types. (4G/5G)"
+  },
+  {
+   "packageName": "com.mediatek.systemuiresoverlay",
+   "risk": "caution",
+   "description": "It have nothing in code."
+  },
+  {
+   "packageName": "com.mediatek.telephony",
+   "risk": "caution",
+   "description": "allows you to get information about the available SIMs/subscriptions and listen for changes or activity on the SIM cards, such as call or data activity or connected cell details. In addition, the API enables apps to create SMS messages and send them using a specific SIM card...."
+  },
+  {
+   "packageName": "com.mediatek.thermalmanager",
+   "risk": "safe",
+   "description": "Hidden testing or logging app."
+  },
+  {
+   "packageName": "com.mediatek.videoplayer",
+   "risk": "safe",
+   "description": "The com.mediatek.videoplayer package is MediaTek’s default video player app, designed to handle video playback and provide basic media management features. Since there are numerous alternative video player apps available on Google Play that offer advanced features and better p..."
+  },
+  {
+   "packageName": "com.mediatek.voicecommand",
+   "risk": "safe",
+   "description": "It's for voice commands like control music playing or voice control for alarm, camera. But how to get access to it? Probably you need that for voice recognition but not sure. Maybe related to https://www.mediatek.com/products/smart-home/voice-assistant-devices"
+  },
+  {
+   "packageName": "com.mediatek.voiceunlock",
+   "risk": "safe",
+   "description": "It's for voice commands like control music playing or voice control for alarm, camera. But how to get access to it? Probably you need that for voice recognition but not sure. Maybe related to https://www.mediatek.com/products/smart-home/voice-assistant-devices"
+  },
+  {
+   "packageName": "com.mediatek.wfo.impl",
+   "risk": "safe",
+   "description": "According to olorin (https://www.olorin.me/2019/09/08/debloating-the-umidigi-f1-play/) it's a MediaTek’s default fingerprint app (and he removed it). Can someone confirm what this package does? Remember that any pre-installed apps you don't actually need just increase the surf..."
+  },
+  {
+   "packageName": "com.mediatek.ygps",
+   "risk": "safe",
+   "description": "YGPS GPS test and bug report utilities, accessed via Engineer Mode. Not needed."
+  },
+  {
+   "packageName": "com.mediatek.zramwritebackoverlay",
+   "risk": "expert",
+   "description": "config zramWriteback = true. What is this used for?"
+  },
+  {
+   "packageName": "com.micredit.in",
+   "risk": "safe",
+   "description": "Mi Credit (https://play.google.com/store/apps/details?id=com.micredit.in.gp) App providing loans to MIUI users from India and China Note: https://web.archive.org/web/20221207193942/https://onsitego.com/blog/xiaomi-quietly-discontinues-mi-credit-mi-pay-india/"
+  },
+  {
+   "packageName": "com.microsoft.appmanager",
+   "risk": "safe",
+   "description": "Link to Windows (https://play.google.com/store/apps/details?id=com.microsoft.appmanager) Microsoft app for synchronising your phone with a Windows PC."
+  },
+  {
+   "packageName": "com.microsoft.office.excel",
+   "risk": "safe",
+   "description": "Excel"
+  },
+  {
+   "packageName": "com.microsoft.office.officehub",
+   "risk": "safe",
+   "description": "Microsoft Office Mobile Includes the complete Word, PowerPoint, and Excel apps to offer a convenient office experience on the go."
+  },
+  {
+   "packageName": "com.microsoft.office.officehubhl",
+   "risk": "safe",
+   "description": "Office Mobile hub (on Samsung Phone) Includes the complete Word, PowerPoint, and Excel apps to offer a convenient office experience on the go."
+  },
+  {
+   "packageName": "com.microsoft.office.officehubrow",
+   "risk": "safe",
+   "description": "Microsoft Mobile Office Beta"
+  },
+  {
+   "packageName": "com.microsoft.office.onenote",
+   "risk": "safe",
+   "description": "OneNote (https://play.google.com/store/apps/details?id=com.microsoft.office.onenote) Microsoft and privacy you know... This app has a lot of permissions. For example it has access to phone state, including the phone number of the device, current cellular network information, t..."
+  },
+  {
+   "packageName": "com.microsoft.office.outlook",
+   "risk": "safe",
+   "description": "Outlook"
+  },
+  {
+   "packageName": "com.microsoft.office.powerpoint",
+   "risk": "safe",
+   "description": "PowerPoint"
+  },
+  {
+   "packageName": "com.microsoft.office.word",
+   "risk": "safe",
+   "description": "Word"
+  },
+  {
+   "packageName": "com.microsoft.skydrive",
+   "risk": "safe",
+   "description": "Microsoft OneDrive (Cloud) (https://play.google.com/store/apps/details?id=com.microsoft.skydrive)"
+  },
+  {
+   "packageName": "com.microsoft.translator",
+   "risk": "safe",
+   "description": "Microsoft Translator app (https://play.google.com/store/apps/details?id=com.microsoft.translator) )"
+  },
+  {
+   "packageName": "com.mintgames.triplecrush.tile.fun",
+   "risk": "safe",
+   "description": "Tile Fun. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.mintgames.wordtrip",
+   "risk": "safe",
+   "description": "Word Scenery Crossword. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.monotype.android.font.applemint",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.monotype.android.font.chococooky",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.monotype.android.font.cooljazz",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.monotype.android.font.foundation",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.monotype.android.font.rosemary",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.monotype.android.font.tinkerbell",
+   "risk": "safe",
+   "description": "Font"
+  },
+  {
+   "packageName": "com.mtk.telephony",
+   "risk": "safe",
+   "description": "SimRecoveryTestTool"
+  },
+  {
+   "packageName": "com.netflix.mediaclient",
+   "risk": "safe",
+   "description": "Netflix app (https://play.google.com/store/apps/details?id=com.netflix.mediaclient)"
+  },
+  {
+   "packageName": "com.netflix.partner.activation",
+   "risk": "safe",
+   "description": "Apk file name: By_3rd_NetflixActivationOverSeas Some form of activation of Netflix account, subscription or app? Might be what puts the Netflix app icon on the homescreen. Not sure. Netflix app works without this."
+  },
+  {
+   "packageName": "com.nextradioapp.nextradio",
+   "risk": "safe",
+   "description": "NextRadio (https://play.google.com/store/apps/details?id=com.nextradioapp.nextradio) 3-party app which lets you experience live and local FM radio on your smartphone. https://nextradioapp.com/"
+  },
+  {
+   "packageName": "com.nf.snake",
+   "risk": "safe",
+   "description": "Snake Zoneio. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.niksoftware.snapseed",
+   "risk": "safe",
+   "description": "Snapseed (https://play.google.com/store/apps/details?id=com.niksoftware.snapseed)"
+  },
+  {
+   "packageName": "com.nousguide.android.rbtv",
+   "risk": "safe",
+   "description": "Red Bull TV A 1 star streaming service owned by a company that sells electronic cigars and energy drinks to the youth. Can be uninstalled via Settings. https://play.google.com/store/apps/details?id=com.nousguide.android.rbtv"
+  },
+  {
+   "packageName": "com.nuance.swype.input",
+   "risk": "safe",
+   "description": "Swype keyboard by Nuance https://www.nuance.com/mobile/mobile-applications/swype/android.html https://en.wikipedia.org/wiki/Swype"
+  },
+  {
+   "packageName": "com.oem.rftoolkit",
+   "risk": "safe",
+   "description": "RfToolkit Testing things like Wi-Fi, lots of Chinese words"
+  },
+  {
+   "packageName": "com.omusic.gPhone",
+   "risk": "safe",
+   "description": "friDay music A treasure house of global music, thousands of situational playlists, complete classification of Chinese, Western, Japanese and Korean, classical, and original soundtracks, allowing you to easily travel the digital music world. https://play.google.com/store/apps/d..."
+  },
+  {
+   "packageName": "com.opera.branding",
+   "risk": "safe",
+   "description": "Opera Branding Provider Don't know what it really does."
+  },
+  {
+   "packageName": "com.opera.branding.news",
+   "risk": "safe",
+   "description": "Opera News Branding Provider Don't know what it really does."
+  },
+  {
+   "packageName": "com.opera.max.oem",
+   "risk": "safe",
+   "description": "Opera Max (discontinued) System-wide data-saving proxy that funnell all app data through Opera’s servers to compress images and videos"
+  },
+  {
+   "packageName": "com.opera.max.preinstall",
+   "risk": "safe",
+   "description": "Opera Max (discontinued) System-wide data-saving proxy that funnell all app data through Opera’s servers to compress images and videos"
+  },
+  {
+   "packageName": "com.opera.mini.native",
+   "risk": "safe",
+   "description": "Opera Mini web browser (https://play.google.com/store/apps/details?id=com.opera.mini.native)"
+  },
+  {
+   "packageName": "com.opera.preinstall",
+   "risk": "safe",
+   "description": "Opera Preinstall Data Generates utm tracking stuff"
+  },
+  {
+   "packageName": "com.opos.cs",
+   "risk": "safe",
+   "description": "Hot Apps Generate app folders on home screen that recommended sponsored apps and games."
+  },
+  {
+   "packageName": "com.ordinaryjoy.woodblast",
+   "risk": "safe",
+   "description": "Wood Blast. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.pandora.android",
+   "risk": "safe",
+   "description": "Pandora (https://play.google.com/store/apps/details?id=com.pandora.android) Very intrusive music and podcasts app. 17 permissions and 14 trackers: https://reports.exodus-privacy.eu.org/reports/com.pandora.android/latest/"
+  },
+  {
+   "packageName": "com.particlenews.newsbreak",
+   "risk": "safe",
+   "description": "News Break: Local & Breaking (https://play.google.com/store/apps/details?id=com.particlenews.newsbreak) News provided by NewsBreak (https://www.newsbreak.com/) # FYI : https://reports.exodus-privacy.eu.org/en/reports/com.particlenews.newsbreak/latest/"
+  },
+  {
+   "packageName": "com.phonepe.app",
+   "risk": "safe",
+   "description": "PhonePe (https://play.google.com/store/apps/details?id=com.phonepe.app) PhonePe is a payment app that allows indian users to use BHIM UPI, your credit card and debit card or wallet to recharge your mobile phone, pay your utility bills and also make instant payments at offline..."
+  },
+  {
+   "packageName": "com.pinsight.dw",
+   "risk": "safe",
+   "description": "App Stack Force-installed app by Sprint. Pinsight is an advertising company (https://pinsightmedia.com/) Note : Sprint sold Pinsight to InMobi in 2018. https://www.fiercewireless.com/wireless/sprint-sells-mobile-ad-biz-pinsight-media-to-inmobi"
+  },
+  {
+   "packageName": "com.pinsight.v1",
+   "risk": "safe",
+   "description": "App Spotlight Makes you discover new apps from the Google Play store. The selection criteria is unknown."
+  },
+  {
+   "packageName": "com.playphone.gamestore",
+   "risk": "safe",
+   "description": "Playphone Gamestore (https://www.playphone.com/) \"Helps\" you discover the\"best\" Android games and connects you to a global gaming community. Sounds Amazing !"
+  },
+  {
+   "packageName": "com.playphone.gamestore.loot",
+   "risk": "safe",
+   "description": "Loot Premium service from playphone ?"
+  },
+  {
+   "packageName": "com.pure.indosat.care",
+   "risk": "safe",
+   "description": "myIM3 (https://play.google.com/store/apps/details?id=com.pure.indosat.care) App provided by Indosat Ooredoo, an Internet provider from Indonesia. Enables Indosat users to manage prepaid and postpaid numbers and check their credit and payments, purchase data packs, calls, SMS..."
+  },
+  {
+   "packageName": "com.qti.confuridialer",
+   "risk": "safe",
+   "description": "Conference call service for digital signal (SIP/VoIP). it's hidden and no one uses it."
+  },
+  {
+   "packageName": "com.qti.dcf",
+   "risk": "safe",
+   "description": "I found only: DCF Allows an application to share content using Bluetooth. The application is only allowed to broadcast the content as it already has access to remote devices. These things are not available for users. Qualcomm only said these things, but where is the code? This..."
+  },
+  {
+   "packageName": "com.qti.diagservices",
+   "risk": "safe",
+   "description": "Starts process when plugged into a PC (with debugging on, haven't tried off) and then runs until stopped. Diagnostic services Presumably tests to collect hardware data. size of this package is 12 KB and have Diag_OnBoot, QTIDiagServices have permission: RECEIVE_BOOT_COMPLETED"
+  },
+  {
+   "packageName": "com.qti.dpmserviceapp",
+   "risk": "expert",
+   "description": "Data Power Manager for the radio? Used to improve energy efficiency? In code I found something like this: dpm hal server, read procid it's still unknown."
+  },
+  {
+   "packageName": "com.qti.ltebc",
+   "risk": "caution",
+   "description": "LTE Broadcast Manager Runs on boot, but not in the background beyond that."
+  },
+  {
+   "packageName": "com.qti.pasrservice",
+   "risk": "expert",
+   "description": "Has powersaving things, device idle mode changer to screen on/off."
+  },
+  {
+   "packageName": "com.qti.phone",
+   "risk": "expert",
+   "description": "dialer, dialing service, for phone calls. Has IMS things, optimizations?, its weird that calling works after remove, has code related to 'com.qualcomm.qcrilmsgtunnel', China Mobile Communications Corporation(China Mobile) SIM card things."
+  },
+  {
+   "packageName": "com.qti.powermodule",
+   "risk": "expert",
+   "description": "it's for powersaving? have more debugging stuff than powersaving."
+  },
+  {
+   "packageName": "com.qti.qcc",
+   "risk": "safe",
+   "description": "QCC Have a lot of stuff about logs, testing framework for Android with Robolectric, LTE Broadcast. Introduced in android 13. Have png file qdma = Qualcomm Device Management and Analytics. So it's only spyware."
+  },
+  {
+   "packageName": "com.qti.qualcomm.datastatusnotification",
+   "risk": "expert",
+   "description": "Sends you a message when you reach a specified data limit? Contains a service, but I've never it run. But I've also never run out of data or used the Android data warning system. WARNING: on HyperOS, disabling this package results in the mobile networks section to break as wel..."
+  },
+  {
+   "packageName": "com.qti.qualcomm.deviceinfo",
+   "risk": "safe",
+   "description": "Device Info Hidden device info activity not available for users. it's safe to remove and you will not lose device info in settings."
+  },
+  {
+   "packageName": "com.qti.qualcomm.mstatssystemservice",
+   "risk": "safe",
+   "description": "Useless network statistics, package usage."
+  },
+  {
+   "packageName": "com.qti.service.colorservice",
+   "risk": "safe",
+   "description": "Allows the application to directly affect the device's display paramter. Well I only know the no one app uses it."
+  },
+  {
+   "packageName": "com.qti.slaservice",
+   "risk": "safe",
+   "description": "Service Level Agreement (SLA) protocol that analyzes network performance, quality of service, and provides users with various parameters of network quality of service, such as: jitter delay, file transfer rate, TCP latency. BUT it's placebo. uses permission com.miui.analytics...."
+  },
+  {
+   "packageName": "com.qti.snapdragon.qdcm_ff",
+   "risk": "safe",
+   "description": "Qualcomm Display Color Management tool Attempts to\"make colors look vibrant and true to life\". No idea if it actually does something useful or if it's only some garbage dynamic color tuning (they tend to destroy colors). Contains a service, but I've never seen it run on my One..."
+  },
+  {
+   "packageName": "com.qti.xdivert",
+   "risk": "safe",
+   "description": "Smart-Divert If enabled, diverts your calls to another number. You can choose to divert all calls, divert on no reply or divert when the line is busy. Where can you enable/disable this feature?"
+  },
+  {
+   "packageName": "com.qualcomm.atfwd",
+   "risk": "safe",
+   "description": "Used to send AT command messages from/to the modem Attention commands commands are a collection of short-string commands developed in the early 1980s that were designed to be transmitted via phone lines and control modems. Different AT command strings can be merged together to..."
+  },
+  {
+   "packageName": "com.qualcomm.atfwd2",
+   "risk": "safe",
+   "description": "This is the same app as the 'com.qualcomm.atfwd'."
+  },
+  {
+   "packageName": "com.qualcomm.cabl",
+   "risk": "safe",
+   "description": "Content Adaptative Backlight Settings CABL will try to adjust the image being displaye by changing the contrast/quality/image backlight depending on the content on the screen. Downside to this is loss of dynamic range which results in some colors being washed out/clipped. CABL..."
+  },
+  {
+   "packageName": "com.qualcomm.embms",
+   "risk": "safe",
+   "description": "Runs on boot, but not in the background beyond that? Adds support for eMBMS(evolved Multimedia Broadcast Multicast Service), also known as: LTE Broadcast Enables carriers to send content using multicast/broadcast (same content to many users at the same time) instead of unicast..."
+  },
+  {
+   "packageName": "com.qualcomm.fastdormancy",
+   "risk": "caution",
+   "description": "Provide Fast Dormancy feature/setting in the dialer (reduce battery consumption and network utilization during periods of data inactivity) https://en.wikipedia.org/wiki/Fast_Dormancy"
+  },
+  {
+   "packageName": "com.qualcomm.interfacepermissions",
+   "risk": "safe",
+   "description": "Completely empty package. Useless."
+  },
+  {
+   "packageName": "com.qualcomm.location",
+   "risk": "safe",
+   "description": "LocationServices Runs in the background as part of the system. Runs even if disabled, so probably pointless to disable. Periodically sends a unique software ID, location (lat, long, alt, and their uncertainty), nearby cellular towers and Wi-Fi hotspots and their signal strengt..."
+  },
+  {
+   "packageName": "com.qualcomm.location.XT",
+   "risk": "safe",
+   "description": "Qualcomm IZat. it's hidden XT Activity. Location for Qualcomm. It's a bad idea to keep it. Periodically sends a unique software ID, location (lat, long, alt, and their uncertainty), nearby cellular towers and Wi-Fi hotspots and their signal strength to Qualcomm servers. https:..."
+  },
+  {
+   "packageName": "com.qualcomm.location.XT.setup",
+   "risk": "safe",
+   "description": "Qualcomm IZat Its hidden Setup XT location for Qualcomm. It's a bad idea to keep it. Periodically sends a unique software ID, location (lat, long, alt, and their uncertainty), nearby cellular towers and Wi-Fi hotspots and their signal strength to Qualcomm servers. https://www...."
+  },
+  {
+   "packageName": "com.qualcomm.qcom_qmi",
+   "risk": "safe",
+   "description": "qchat logo png founded also Hello World! and app_name Qchat_QMI this app has no code and no activities so safe to remove."
+  },
+  {
+   "packageName": "com.qualcomm.qcrilmsgtunnel",
+   "risk": "expert",
+   "description": "Message receiving channel (secondary card can't turn on 5g) So if you dont use dual-sim it's safe to remove. Breaks calls after a reboot on some phones."
+  },
+  {
+   "packageName": "com.qualcomm.qti.accesscache",
+   "risk": "safe",
+   "description": "CarrierAccessCacheService Well it's only name app and no code."
+  },
+  {
+   "packageName": "com.qualcomm.qti.auth.fidocryptoservice",
+   "risk": "safe",
+   "description": "Qualcomm FIDO implementation. FIDO : https://en.wikipedia.org/wiki/FIDO_Alliance Fido is a set of open technical specifications for mechanisms of authenticating users to online services that do not depend on passwords. https://fidoalliance.org/specs/u2f-specs-1.0-bt-nfc-id-ame..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.auth.sampleauthenticatorservice",
+   "risk": "safe",
+   "description": "it's only Sample, nothing important found in the code"
+  },
+  {
+   "packageName": "com.qualcomm.qti.auth.sampleextauthservice",
+   "risk": "safe",
+   "description": "it's only Sample, nothing important found in the code"
+  },
+  {
+   "packageName": "com.qualcomm.qti.auth.secureextauthservice",
+   "risk": "safe",
+   "description": "it's only Sample, nothing important found in the code"
+  },
+  {
+   "packageName": "com.qualcomm.qti.auth.securesampleauthservice",
+   "risk": "safe",
+   "description": "it's only Sample, nothing important found in the code"
+  },
+  {
+   "packageName": "com.qualcomm.qti.autoregistration",
+   "risk": "safe",
+   "description": "Collects device activation data to remotely activate phone warranty. In 2019 this package sent private data (IMEI, CELLID, CCID) in clear-text to zzhc.vnet.cn (chinese server). According to HMD (Nokia) it was a mistake: https://www.androidauthority.com/nokia-7-plus-user-info-9..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.biometrics.fingerprint.service",
+   "risk": "safe",
+   "description": "Fingerprint authentication not used by any app maybe only china, test temperature, debug, logs, fingerprint biometrics."
+  },
+  {
+   "packageName": "com.qualcomm.qti.callenhancement",
+   "risk": "safe",
+   "description": "Supposed to enhance call quality (I'll let you test if it really does) This can record your phone calls. A vulnerability was found in 2019, allowing unauthorized microphone audio recording by 3rd-party apps. https://nvd.nist.gov/vuln/detail/CVE-2019-15472"
+  },
+  {
+   "packageName": "com.qualcomm.qti.callfeaturessetting",
+   "risk": "safe",
+   "description": "CallFeatureSetting Hidden Call forwarding, Call waiting not available for users."
+  },
+  {
+   "packageName": "com.qualcomm.qti.cne",
+   "risk": "expert",
+   "description": "CneApp (Connectivity Engine) Runs in the background as part of the System. Enables seamless hand-off between mobile data and Wi-Fi networks. Can also dynamically measure network performance to prioritize using the best one (I think that's part of\"Intelligently select the best..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.confdialer",
+   "risk": "caution",
+   "description": "ConfDialer LTE Conferencing Service."
+  },
+  {
+   "packageName": "com.qualcomm.qti.devicestatisticsservice",
+   "risk": "safe",
+   "description": "Device statistics service Statistics of the phone's usage:data, Wifi, battery, the use of various software, number of SMS and emails sent, etc. is not very useful, can be removed."
+  },
+  {
+   "packageName": "com.qualcomm.qti.dynamicddsservice",
+   "risk": "caution",
+   "description": "Dynamic DDS Service DDS = Direct Digital Synthesizer. Supposedly useful for testing, communication and frequency sweep applications. Some apps may use this for local communication between devices? I'm guessing this is related to sending data through audio(a bunch of rapid beep..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.improvetouch.service",
+   "risk": "caution",
+   "description": "A improve touch things was found in the code, but it is not available to users, only to developers. The size of the app is 36.40 KB, so why would this improve touch? This app does not exist on some xiaomi phones, and the touch works the same."
+  },
+  {
+   "packageName": "com.qualcomm.qti.ims",
+   "risk": "safe",
+   "description": "Hidden IMS Settings activity not available for users. In this app you can only turn on option: Auto reject incoming calls."
+  },
+  {
+   "packageName": "com.qualcomm.qti.loadcarrier",
+   "risk": "safe",
+   "description": "CarrierLoadService Have only things like a: Find carrier, carrier switch. it's useless."
+  },
+  {
+   "packageName": "com.qualcomm.qti.lpa",
+   "risk": "caution",
+   "description": "lpa = Local Profile Assistants Runs on boot, but not in the background beyond that. Code has a lot of references to UIM(User Identity Module, which is SIM-related) Only useful if you use an eSIM? (electronic SIM) Allows users to choose and change their subscription data when s..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.modemtestmode",
+   "risk": "safe",
+   "description": "Modem test"
+  },
+  {
+   "packageName": "com.qualcomm.qti.networksetting",
+   "risk": "expert",
+   "description": "Network operators (hidden settings menu) Lets you select network modes like GSM only, WCDMA only, LTE only etc, toggle VoLTE On/Off..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.optinoverlay",
+   "risk": "caution",
+   "description": "Useless frameworks for com.qualcomm.location.XT it's probably dialogues. Anyway it's only legal notices."
+  },
+  {
+   "packageName": "com.qualcomm.qti.perfdump",
+   "risk": "safe",
+   "description": "Performance dump (logging) Enable a more accurate overview of the running services (and maybe how much power/RAM they take?)"
+  },
+  {
+   "packageName": "com.qualcomm.qti.performancemode",
+   "risk": "safe",
+   "description": "Performance Mode Hidden Performance Mode activity not available for users. it's on xiaomi, oneplus. Removal does not brick performance mode."
+  },
+  {
+   "packageName": "com.qualcomm.qti.poweroffalarm",
+   "risk": "expert",
+   "description": "Probably what enables alarms to start the device from an off state. Runs on boot and when you open a clock app."
+  },
+  {
+   "packageName": "com.qualcomm.qti.powersavemode",
+   "risk": "safe",
+   "description": "It have hidden power saving modes. Users cant use it."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qccauthmgr",
+   "risk": "safe",
+   "description": "QCC-AUTHMGR It have something to (com.qualcomm.qti.smq). Feedback stuff, something about key: blacklist, download or whatever. All looks like telemetry and it's all not available for users."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qccnetstat",
+   "risk": "safe",
+   "description": "useless network statistics also QCC in name qualcomm app is for analytics."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qcolor",
+   "risk": "safe",
+   "description": "QColor QTI enhanced color mode? I found 1 png file, color service, it's not needed for any app."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qcom_accesslogkit",
+   "risk": "safe",
+   "description": "Theres nothing about logs. I only found in receivers (c Broadcast Receiver) and some useless png, text files. Useless."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qdcmtpg",
+   "risk": "safe",
+   "description": "layout but not sure for what. a lot useless code, and internet permission"
+  },
+  {
+   "packageName": "com.qualcomm.qti.qdma",
+   "risk": "safe",
+   "description": "QDMA = Qualcomm Device Management and Analytics. thats what qdma means when I found it in .png a lot of data collections: logs, dropbox, network."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qmmi",
+   "risk": "safe",
+   "description": "QMMI is a test app made by Qualcomm. It is used by service center to test the working of the various device components. More info: https://community.phones.nokia.com/discussion/52566/android-10-on-nokia-8-1/p19 Useless for end-users."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qms.service.connectionsecurity",
+   "risk": "safe",
+   "description": "Telemetry service qms = quality management service Background-Connection to tls.telemetry.swe.quicinc.com (Host/Domain belongs to Qualcomm)"
+  },
+  {
+   "packageName": "com.qualcomm.qti.qms.service.credentials",
+   "risk": "safe",
+   "description": "QMS = Quality Management Service. In code I found logs and QMS spying things."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qms.service.telemetry",
+   "risk": "safe",
+   "description": "Qualcomm Mobile Security Telemetry service. Obviously phones to Qualcomm."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qms.service.trustzoneaccess",
+   "risk": "safe",
+   "description": "QMS always spying. Trust Zone in this app means nothing more than logs."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qtisettings",
+   "risk": "caution",
+   "description": "In code found getting info about device Ram Size, Rom Size, get Wifi Mac Address, is Settings Task Done. Also in app found qtisystemservice code. It looks like the app is for developers only, so it may be removed."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qtisystemservice",
+   "risk": "caution",
+   "description": "Seems to only log stuff related to telephony? A user removed this without noticing any issues."
+  },
+  {
+   "packageName": "com.qualcomm.qti.qwes.AndroidService",
+   "risk": "safe",
+   "description": "qms, qwes it's used for collecting user data."
+  },
+  {
+   "packageName": "com.qualcomm.qti.rcsimsbootstraputil",
+   "risk": "safe",
+   "description": "RCS Service RCS = Rich Communication Services. RCS is a communication protocol between mobile telephone carriers and between phone and carrier, aiming at replacing SMS. https://en.wikipedia.org/wiki/Rich_Communication_Services Uses IP protocol so it needs an internet connectio..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.remoteSimlockAuth",
+   "risk": "safe",
+   "description": "Enable you to lock/unlock your eSIM remotely. Seems more of a security risk to me than anything else. it's used to phishing."
+  },
+  {
+   "packageName": "com.qualcomm.qti.ridemodeaudio",
+   "risk": "safe",
+   "description": "Ridemode Recording list Hidden app, not available for users that should be the audio playback of the drive mode."
+  },
+  {
+   "packageName": "com.qualcomm.qti.roamingsettings",
+   "risk": "expert",
+   "description": "Hidden settings menu for tweaking roaming settings? How exactly do you access this menu?"
+  },
+  {
+   "packageName": "com.qualcomm.qti.seccamservice",
+   "risk": "safe",
+   "description": "SecCamService Only collects data about camera."
+  },
+  {
+   "packageName": "com.qualcomm.qti.seemp.service",
+   "risk": "safe",
+   "description": "Useless code and it's probably to verify packages."
+  },
+  {
+   "packageName": "com.qualcomm.qti.server.qtiwifi",
+   "risk": "safe",
+   "description": "it's made for analytics. This service can be used to have OEM specific feature development. Currently this service is being used to collect CSI data from cfrtool via hidl and then pass the data to application(user level)."
+  },
+  {
+   "packageName": "com.qualcomm.qti.server.wigig.tethering.rro",
+   "risk": "safe",
+   "description": "Only found dhcp range? Only the specified lists were found: 192.168. ... It have a lot random of this. Looks very unused."
+  },
+  {
+   "packageName": "com.qualcomm.qti.services.secureui",
+   "risk": "safe",
+   "description": "Qualcomm Secure UI Service It collects your data about screen:gravity, orientation, id, layout_width. It has a Wifi Display Service. QC_WFD Does not run in the background."
+  },
+  {
+   "packageName": "com.qualcomm.qti.services.systemhelper",
+   "risk": "expert",
+   "description": "System Helper Service Runs\"SysHelperService\" in the background as part of the system. Permissions: DEVICE_POWER, READ_PHONE_STATE, READ_PRIVILEGED_PHONE_STATE, RECEIVE_BOOT_COMPLETED, WRITE_SETTINGS, WAKE_LOCK and ACCESS_SURFACE_FLINGER. Android simple network firewall utility..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.simcontacts",
+   "risk": "safe",
+   "description": "SimContacts Hidden Qualcomm sim contacts editor app."
+  },
+  {
+   "packageName": "com.qualcomm.qti.simsettings",
+   "risk": "expert",
+   "description": "Related to SIM settings? Exact nature is unclear."
+  },
+  {
+   "packageName": "com.qualcomm.qti.smcinvokepkgmgr",
+   "risk": "safe",
+   "description": "This app have nothing."
+  },
+  {
+   "packageName": "com.qualcomm.qti.smq",
+   "risk": "safe",
+   "description": "QTR (Qualcomm Technology Reporting) Runs on boot. Seems like a telemetry package, supposedly sending hardware & software type, configuration and performance data. Contains a\"QtiFeedbackActivity\" called\"Hardware Feedback\". When that hidden activity is launched through Activity..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.telephony.vodafonepack",
+   "risk": "expert",
+   "description": "Related to Vodafone Prepaid Recharge Plan If you're not a Vodafone client but still has this package on your phone you can delete it. For Vodafone client, I don't know what this package does. https://en.wikipedia.org/wiki/Vodafone"
+  },
+  {
+   "packageName": "com.qualcomm.qti.uceShimService",
+   "risk": "expert",
+   "description": "The Qualcomm telephony support service that acts as a shim layer between IMS and qualcomm modem stack. Will likely break RCS, VoLTE, VoWiFi and some carrier preference customizations. Not worth deleting."
+  },
+  {
+   "packageName": "com.qualcomm.qti.uceshimservice",
+   "risk": "caution",
+   "description": "UCE shim service UCE = User Capability Exchange. A shim is basically a compatibility layer for an API, that makes sure anything that uses the API does so correctly. Used for RCS. Provides a discovery service for users to see the capabilities of other users. UCE is based on SIP..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.uim",
+   "risk": "safe",
+   "description": "Runs\"RemoteSimLockService\" in the background. This might be the only remote SIM lock service, just called UIM because R-UIM(Removeable-UserIdentityModule) is a variant of SIM commonly used in Asia."
+  },
+  {
+   "packageName": "com.qualcomm.qti.uimGbaApp",
+   "risk": "safe",
+   "description": "Contains a\"GbaService\", Related to uim card (R-UIM is a type of SIM card mainly used in Asia)"
+  },
+  {
+   "packageName": "com.qualcomm.qti.workloadclassifier",
+   "risk": "expert",
+   "description": "Runs\"WLCService\" in the background. I assume this has to do with CPU scheduling. Probably important for efficiency, if not basic operation. In code I found: it's for performance and security? it categorize apps maybe for optimization. it's named workloadclassifier so it should..."
+  },
+  {
+   "packageName": "com.qualcomm.qti.xrcb",
+   "risk": "safe",
+   "description": "Receive xrcb network signals for radio side. it's about emergency alerts, weather alerts, public announcements, and other information."
+  },
+  {
+   "packageName": "com.qualcomm.qti.xrvd.service",
+   "risk": "safe",
+   "description": "XRVD The real name of this app is XRVDTest. It has accessibility testing, collects some data? It's something for developers probably."
+  },
+  {
+   "packageName": "com.qualcomm.qtil.aptxacu",
+   "risk": "safe",
+   "description": "Hidden aptxals Audio Bluetooth sample improvement. Useless 96kHz sample."
+  },
+  {
+   "packageName": "com.qualcomm.qtil.aptxals",
+   "risk": "safe",
+   "description": "Hidden aptxals Audio Bluetooth sample improvement test"
+  },
+  {
+   "packageName": "com.qualcomm.qtil.aptxalsOverlay",
+   "risk": "caution",
+   "description": "Overlay hidden aptxals Audio Bluetooth sample improvement. Useless 96kHz sample."
+  },
+  {
+   "packageName": "com.qualcomm.qtil.aptxui",
+   "risk": "safe",
+   "description": "Hidden aptxals Audio Bluetooth sample improvement. Useless 96kHz sample."
+  },
+  {
+   "packageName": "com.qualcomm.qtil.btdsda",
+   "risk": "caution",
+   "description": "Hidden bluetooth: answering call, hanging up call, hanging up conference call. If you have dual-sim then you will lose these things? NOTE: disabling this causes audio to come from earpiece regardless of the option selected (Speaker, Earpiece, Bluetooth)"
+  },
+  {
+   "packageName": "com.qualcomm.shutdownlistner",
+   "risk": "safe",
+   "description": "uses library com.qualcomm.qcrilhook and logs shutdown phone but it's not needed."
+  },
+  {
+   "packageName": "com.qualcomm.simcontacts",
+   "risk": "safe",
+   "description": "Sim Contacts Probably handles syncing(exporting/importing) contacts to/from the SIM card. Usually not a feature anybody cares about."
+  },
+  {
+   "packageName": "com.qualcomm.svi",
+   "risk": "safe",
+   "description": "Sunlight Visibility Improvement SVI Settings. Hidden display enhancement colors not available to users."
+  },
+  {
+   "packageName": "com.qualcomm.timeservice",
+   "risk": "expert",
+   "description": "Qualcomm Time Service Updates time-services user time offset when user changes time of the day and Android sends a TIME_CHANGED or DATE_CHANGED intents. Time-services restores the time of the day after reboot using this offset: https://github.com/bcyj/android_tools_leeco_msm89..."
+  },
+  {
+   "packageName": "com.qualcomm.uimremoteclient",
+   "risk": "safe",
+   "description": "Related to uim card (R-UIM is a type of SIM card mainly used in Asia)"
+  },
+  {
+   "packageName": "com.qualcomm.uimremoteserver",
+   "risk": "safe",
+   "description": "Related to uim card (R-UIM is a type of SIM card mainly used in Asia)"
+  },
+  {
+   "packageName": "com.qualcomm.wfd.service",
+   "risk": "caution",
+   "description": "Wfd Service Provides a way to cast your screen to a TV (Miracast) https://en.wikipedia.org/wiki/Miracast Or it is WiFi Direct."
+  },
+  {
+   "packageName": "com.quicinc.cne.CNEService",
+   "risk": "expert",
+   "description": "Qualcomm Connectivity Engine Enables seamless hand-off between mobile data and Wi-Fi networks. Can also dynamically measure network performance to prioritize using the best one (I think that's part of\"Intelligently select the best Wi-Fi\" in settings). Probably worth keeping on..."
+  },
+  {
+   "packageName": "com.quicinc.fmradio",
+   "risk": "caution",
+   "description": "FM Radio app by Qualcomm quicinc = Qualcomm Innovation Center"
+  },
+  {
+   "packageName": "com.quicinc.voice.activation",
+   "risk": "safe",
+   "description": "Qualcomm Voice Assist (https://play.google.com/store/apps/details?id=com.quicinc.voice.activation) Always-on voice detection, so obviously always runs in the background. Probably worth keeping enabled for battery savings if you use Google Assistant regularly while your screen..."
+  },
+  {
+   "packageName": "com.realvnc.android.remote",
+   "risk": "safe",
+   "description": "Remote controle service by Realvnc (https://en.wikipedia.org/wiki/RealVNC) https://www.realvnc.com/en/legal/#privacy Not sure having a remote control app installed as a system app is a good idea This application is no longer maintained, besides."
+  },
+  {
+   "packageName": "com.redteamobile.roaming",
+   "risk": "safe",
+   "description": "ORoaming Lets you buy RedTeaMobile data plan to access Internet in foreign country with a virtual SIM card See https://support.oppo.com/uk/answer/?aid=neu9139 Pithus analysis: https://beta.pithus.org/report/d017d4f6623bf8e71456e6bffe551ef6f3ff3095c62cef3df6d968354898c097"
+  },
+  {
+   "packageName": "com.redteamobile.roaming.deamon",
+   "risk": "safe",
+   "description": "ORoaming Redtea Roaming service deamon for com.redteamobile.roaming"
+  },
+  {
+   "packageName": "com.remotefairy4",
+   "risk": "safe",
+   "description": "AnyMote Universal Remote + Wifi Smart Home Control (https://play.google.com/store/apps/details?id=com.remotefairy4) IR Remote control app Lots of trackers and permissions : https://reports.exodus-privacy.eu.org/en/reports/com.remotefairy4/latest/"
+  },
+  {
+   "packageName": "com.republicwireless.tel",
+   "risk": "safe",
+   "description": "Republic (https://play.google.com/store/apps/details?id=com.republicwireless.tel&hl) Lets you manage your Republic wireless account. Republic Wireless is an american mobile virtual network operator (https://en.wikipedia.org/wiki/Republic_Wireless)"
+  },
+  {
+   "packageName": "com.rhapsody",
+   "risk": "safe",
+   "description": "Napster Music (https://play.google.com/store/apps/details?id=com.rhapsody) Napster streaming app https://en.wikipedia.org/wiki/Napster"
+  },
+  {
+   "packageName": "com.rhapsody.vpl",
+   "risk": "safe",
+   "description": "Napster Music (https://play.google.com/store/apps/details?id=com.rhapsody) Napster streaming app https://en.wikipedia.org/wiki/Napster"
+  },
+  {
+   "packageName": "com.rlk.weathers",
+   "risk": "safe",
+   "description": "Daily Weather (https://play.google.com/store/apps/details?id=com.rlk.weathers) Weather app with ads and trackers. Can access phone calls and SMS. Pithus analysis: https://beta.pithus.org/report/c3fa30c66192c458f93456401421d3c74f9122191b561781af142c42c24fe603"
+  },
+  {
+   "packageName": "com.roaming.android.gsimbase",
+   "risk": "caution",
+   "description": "gsim = Global SIM? (SIM = Subscriber Identity Module, as in SIM-card) Considering the\"roaming\" context that's my best guess."
+  },
+  {
+   "packageName": "com.roaming.android.gsimcontentprovider",
+   "risk": "caution",
+   "description": "gsim = Global SIM? (SIM = Subscriber Identity Module, as in SIM-card) Considering the\"roaming\" context that's my best guess."
+  },
+  {
+   "packageName": "com.s.antivirus",
+   "risk": "safe",
+   "description": "AVG Antivirus (https://play.google.com/store/apps/details?id=com.s.antivirus) for Sony Xperia."
+  },
+  {
+   "packageName": "com.sec.app.samsungprintservice",
+   "risk": "safe",
+   "description": "Samsung Print Service Plugin. Published by HP, see: https://play.google.com/store/apps/details?id=com.sec.app.samsungprintservice"
+  },
+  {
+   "packageName": "com.sem.factoryapp",
+   "risk": "safe",
+   "description": "SEMFactoryApp Call home (172.217.168.14 --> Google IP). Needs NFC permission. This package is maybe used to test NFC."
+  },
+  {
+   "packageName": "com.sencatech.iwawa.iwawahome",
+   "risk": "safe",
+   "description": "Pre-installed parental control bloatware with ads. (https://play.google.com/store/apps/details?id=com.sencatech.iwawa.iwawahome)"
+  },
+  {
+   "packageName": "com.servicemagic.consumer",
+   "risk": "safe",
+   "description": "HomeAdvisor: Contractors for Home Improvement (https://play.google.com/store/apps/details?id=com.servicemagic.consumer) Helps you find local contractors from the service Home Advisor network HomeAdvisor collects users data when a request is made and then sells that data to loc..."
+  },
+  {
+   "packageName": "com.setk.widget",
+   "risk": "safe",
+   "description": "Galaxy Bizz (https://play.google.com/store/apps/details?id=com.setk.widget) Useless app that recommands you stuff to do/buy nearby your area"
+  },
+  {
+   "packageName": "com.sharecare.askmd",
+   "risk": "safe",
+   "description": "AskMD (discontinued) provided by Sharecare Symptom checker app. Lets you see what might be causing your symptoms and helps you find a nearby physician Worth Reading : https://en.wikipedia.org/wiki/Sharecare#Criticisms"
+  },
+  {
+   "packageName": "com.shopee.id",
+   "risk": "safe",
+   "description": "Shopee 2.2 (https://play.google.com/store/apps/details?id=com.shopee.id) official app from Shopee, an e-commerce online shopping platform in Southeast Asian."
+  },
+  {
+   "packageName": "com.skype.m2",
+   "risk": "safe",
+   "description": "Skype Lite (https://play.google.com/store/apps/details?id=com.skype.m2)"
+  },
+  {
+   "packageName": "com.skype.raider",
+   "risk": "safe",
+   "description": "Skype (https://play.google.com/store/apps/details?id=com.skype.raider)"
+  },
+  {
+   "packageName": "com.slacker.radio",
+   "risk": "safe",
+   "description": "LiveXLive - Streaming Music and Live Events (https://play.google.com/store/apps/details?id=com.slacker.radio)"
+  },
+  {
+   "packageName": "com.smithmicro.netwise.director.comcast.oem",
+   "risk": "safe",
+   "description": "XFINITY Wifi settings (https://play.google.com/store/apps/details?id=com.smithmicro.netwise.director.comcast.oem) Auto-connects you to XFINITY WiFi hotspot. XFINITY is a subsidiary of the Comcast Corporation (https://en.wikipedia.org/wiki/Xfinity)"
+  },
+  {
+   "packageName": "com.spotify.music",
+   "risk": "safe",
+   "description": "Spotify app (https://play.google.com/store/apps/details?id=com.spotify.music)"
+  },
+  {
+   "packageName": "com.staplegames.blocksClassicSGGP",
+   "risk": "safe",
+   "description": "Block (https://play.google.com/store/apps/details?id=com.staplegames.blocksClassicSGGP) Preinstalled game on some Samsung phones. 9 permissions, 26 trackers: https://reports.exodus-privacy.eu.org/reports/com.staplegames.blocksClassicSGGP/latest/"
+  },
+  {
+   "packageName": "com.sukhavati.gotoplaying.bubble.BubbleShooter.mint",
+   "risk": "safe",
+   "description": "Bubble Shooter And Friends. A causal game pre-installed on Xiaomi Poco devices."
+  },
+  {
+   "packageName": "com.swiftkey.swiftkeyconfigurator",
+   "risk": "safe",
+   "description": "SwiftKey factory settings Used by commercial swiftkey partners to configure the SwiftKey app. Swiftkey is a keyboard developed by TouchType, a Microsoft subsidiary (https://en.wikipedia.org/wiki/SwiftKey)"
+  },
+  {
+   "packageName": "com.taboola.mip",
+   "risk": "safe",
+   "description": "Intrusive background module (Taboola) that keeps pushing a lock-screen stories feed — spam-ads and irrelevant articles (often from foreign/hostile sources). Runs in background, uses data, nags user until it is enabled. No system function — safe to remove. https://techissuestod..."
+  },
+  {
+   "packageName": "com.talpa.hibrowser",
+   "risk": "safe",
+   "description": "Hi Browser (https://play.google.com/store/apps/details?id=com.talpa.hibrowser) Awful browser with embedded trackers and ads (https://reports.exodus-privacy.eu.org/fr/reports/com.talpa.hibrowser/latest/)"
+  },
+  {
+   "packageName": "com.talpa.share",
+   "risk": "safe",
+   "description": "XShare Mini File Sharing App (via Bluetooth) with Google and Facebook trackers. Asks for a lot of permissions including ACCESS_FINE_LOCATION, REQUEST_INSTALL_PACKAGES. Pithus analysis : https://beta.pithus.org/report/949bf802e335ad0db47b1551cde46af2b2ef13da4b38be969c60c9439b94..."
+  },
+  {
+   "packageName": "com.telenav.app.android.cingular",
+   "risk": "safe",
+   "description": "AT&T Navigator (https://play.google.com/store/apps/details?id=com.telenav.app.android.cingular) Crappy GPS app provided by Telenav and rebranded by AT&T. Worth reading : https://www.telenav.com/legal/policies-privacy-policy"
+  },
+  {
+   "packageName": "com.telenav.app.android.scout_us",
+   "risk": "safe",
+   "description": "Scout GPS Navigation & Meet Up (https://play.google.com/store/apps/details?id=com.telenav.app.android.scout_us) Bad GPS with bad chat features on top of that. https://www.scoutgps.com/"
+  },
+  {
+   "packageName": "com.til.timesnews",
+   "risk": "safe",
+   "description": "India News (https://play.google.com/store/apps/details?id=com.til.timesnews)"
+  },
+  {
+   "packageName": "com.tiqiaa.remote",
+   "risk": "safe",
+   "description": "ZazaRemote (https://play.google.com/store/apps/details?id=com.tiqiaa.remote) A Universal infrared control app full of trackers and with unecessary permissions. Pithus analysis: https://beta.pithus.org/report/93eed47a45c00998f2111907afc26b5697aaf7fb19c0efb6b42d46addf0e297c"
+  },
+  {
+   "packageName": "com.tmobile.echolocate",
+   "risk": "safe",
+   "description": "T-Mobile Diagnostics"
+  },
+  {
+   "packageName": "com.touchtype.swiftkey",
+   "risk": "caution",
+   "description": "Swiftkey Keyboard (https://play.google.com/store/apps/details?id=com.touchtype.swiftkey) Keyboard app by TouchType, a Microsoft subsidiary (https://en.wikipedia.org/wiki/SwiftKey) 4 Trackers + 11 Permissions: https://reports.exodus-privacy.eu.org/en/reports/com.touchtype.swift..."
+  },
+  {
+   "packageName": "com.touchtype.swiftkey.res.overlay",
+   "risk": "expert",
+   "description": "Some overlay for Swiftkey? Overlays are usually themes, but not sure about this one."
+  },
+  {
+   "packageName": "com.tracker.t",
+   "risk": "safe",
+   "description": "WTF is this ?? Given its name I think you can take the risk to delete it."
+  },
+  {
+   "packageName": "com.tripadvisor.tripadvisor",
+   "risk": "safe",
+   "description": "Trip advisor (https://play.google.com/store/apps/details?id=com.tripadvisor.tripadvisor) You should never trust and use trip advisor https://en.wikipedia.org/wiki/TripAdvisor (see 'Controversy and fraudulent reviews' section) https://nypost.com/2016/03/01/why-you-should-never-..."
+  },
+  {
+   "packageName": "com.tripledot.solitaire",
+   "risk": "safe",
+   "description": "Solitaire (https://play.google.com/store/apps/details?id=com.tripledot.solitaire) Preinstalled game on some Samsung phones. 30 permissions, 23 trackers: https://reports.exodus-privacy.eu.org/reports/com.tripledot.solitaire/latest/"
+  },
+  {
+   "packageName": "com.tripledot.triple.tile.match.pair.game.three.master.object",
+   "risk": "safe",
+   "description": "Triple Tile Pre-installed mobile game with ads and in-app purchases up to 129.99 USD. Can be disabled via Settings. https://play.google.com/store/apps/details?id=com.tripledot.triple.tile.match.pair.game.three.master.object"
+  },
+  {
+   "packageName": "com.tripledot.woodoku",
+   "risk": "safe",
+   "description": "Woodoku (https://play.google.com/store/apps/details?id=com.tripledot.woodoku) Preinstalled game on some Samsung phones.28 permissions, 24 trackers: https://reports.exodus-privacy.eu.org/reports/com.tripledot.woodoku/latest/"
+  },
+  {
+   "packageName": "com.trustonic.teeservice",
+   "risk": "expert",
+   "description": "TEE = Trusted Execution Environment See below"
+  },
+  {
+   "packageName": "com.trustonic.tuiservice",
+   "risk": "expert",
+   "description": "tuiService (Trusted User Interface) is a security layer by Trustonic. Allows a\"Trusted App\" to interact directly with the user, completely isolated from the device OS. It's closed source and normal devs can't use it for their apps. https://stackoverflow.com/questions/16909576/..."
+  },
+  {
+   "packageName": "com.turner.cnvideoapp",
+   "risk": "safe",
+   "description": "Cartoon network App (https://play.google.com/store/apps/details?id=com.turner.cnvideoapp)"
+  },
+  {
+   "packageName": "com.ubercab",
+   "risk": "safe",
+   "description": "Uber (https://play.google.com/store/apps/details?id=com.ubercab) Uber Driver (https://play.google.com/store/apps/details?id=com.ubercab.driver) Uber Eats (https://play.google.com/store/apps/details?id=com.ubercab.eats) Uber does not protect personal user data and has a questio..."
+  },
+  {
+   "packageName": "com.ubercab.driver",
+   "risk": "safe",
+   "description": "Uber (https://play.google.com/store/apps/details?id=com.ubercab) Uber Driver (https://play.google.com/store/apps/details?id=com.ubercab.driver) Uber Eats (https://play.google.com/store/apps/details?id=com.ubercab.eats) Uber does not protect personal user data and has a questio..."
+  },
+  {
+   "packageName": "com.ubercab.eats",
+   "risk": "safe",
+   "description": "Uber (https://play.google.com/store/apps/details?id=com.ubercab) Uber Driver (https://play.google.com/store/apps/details?id=com.ubercab.driver) Uber Eats (https://play.google.com/store/apps/details?id=com.ubercab.eats) Uber does not protect personal user data and has a questio..."
+  },
+  {
+   "packageName": "com.ume.browser.northamerica",
+   "risk": "safe",
+   "description": "UME Web Browser (https://play.google.com/store/apps/details?id=com.ume.browser.northamerica) Trackers and a LOT of permissions (https://reports.exodus-privacy.eu.org/en/reports/com.ume.browser.cust/latest/)"
+  },
+  {
+   "packageName": "com.wb.goog.got.conquest",
+   "risk": "safe",
+   "description": "Game of Thrones: Conquest (https://play.google.com/store/apps/details?id=com.wb.goog.got.conquest) Mobile game"
+  },
+  {
+   "packageName": "com.whatsapp",
+   "risk": "safe",
+   "description": "Whatsapp messenger. Requires Google Play Services to receive messages in the background. https://play.google.com/store/apps/details?id=com.whatsapp"
+  },
+  {
+   "packageName": "com.wing.wtsarcontrol",
+   "risk": "safe",
+   "description": "Sar control, Chinese App, not available for normal users."
+  },
+  {
+   "packageName": "com.wingtech.sartest",
+   "risk": "safe",
+   "description": "SarTest Secret code: 332."
+  },
+  {
+   "packageName": "com.yahoo.mobile.client.android.liveweather",
+   "risk": "safe",
+   "description": "Yahoo Weather (https://play.google.com/store/apps/details?id=com.yahoo.mobile.client.android.weather) Please boycott Yahoo ! (all of their services are crappy so it's not so difficult) If you're not aware : https://en.wikipedia.org/wiki/Criticism_of_Yahoo!"
+  },
+  {
+   "packageName": "com.yellowpages.android.ypmobile",
+   "risk": "safe",
+   "description": "Yellow Pages (https://play.google.com/store/apps/details?id=com.yellowpages.android.ypmobile)"
+  },
+  {
+   "packageName": "com.yelp.android",
+   "risk": "safe",
+   "description": "Yelp (https://play.google.com/store/apps/details?id=com.yelp.android) Yelp lets users post reviews and rate businesses. Worth reading : https://en.wikipedia.org/wiki/Yelp#Controversy_and_litigation"
+  },
+  {
+   "packageName": "com.zaz.translate",
+   "risk": "safe",
+   "description": "Hi Translate (https://play.google.com/store/apps/details?id=com.zaz.translate) Bloated translation app with a lot of trackers and permissions (https://reports.exodus-privacy.eu.org/fr/reports/com.zaz.translate/latest/) It has the Camera and microphone permissions and use the G..."
+  },
+  {
+   "packageName": "com.zhiliaoapp.musically",
+   "risk": "safe",
+   "description": "TikTok App Worth reading : https://en.wikipedia.org/wiki/TikTok#Privacy,_cyberbullying_and_addiction_concerns"
+  },
+  {
+   "packageName": "de.axelspringer.yana.zeropage",
+   "risk": "safe",
+   "description": "Upday news for Samsung (https://play.google.com/store/apps/details?id=de.axelspringer.yana) Eats your phone's resources and runs in the background. You can use other news providers that have more privacy than this, or your own browser with ad-blocking on."
+  },
+  {
+   "packageName": "flipboard.app",
+   "risk": "safe",
+   "description": "Flipboard News App (https://play.google.com/store/apps/details?id=flipboard.app)"
+  },
+  {
+   "packageName": "flipboard.boxer.app",
+   "risk": "safe",
+   "description": "Briefing app (https://play.google.com/store/apps/details?id=flipboard.boxer.app)"
+  },
+  {
+   "packageName": "id.co.babe",
+   "risk": "safe",
+   "description": "BaBe (https://play.google.com/store/apps/details?id=id.co.babe) Indonesian news app."
+  },
+  {
+   "packageName": "in.amazon.mShop.android.shopping",
+   "risk": "safe",
+   "description": "Amazon India (https://play.google.com/store/apps/details?id=in.amazon.mShop.android.shopping)"
+  },
+  {
+   "packageName": "in.mohalla.sharechat",
+   "risk": "safe",
+   "description": "ShareChat (https://play.google.com/store/apps/details?id=in.mohalla.sharechat)"
+  },
+  {
+   "packageName": "in.playsimple.tripcross",
+   "risk": "safe",
+   "description": "Crossword Jam (https://play.google.com/store/apps/details?id=in.playsimple.tripcross) Preinstalled game on some Samsung phones. 12 permissions, 25 trackers : https://reports.exodus-privacy.eu.org/reports/in.playsimple.tripcross/latest/"
+  },
+  {
+   "packageName": "in.playsimple.wordtrip",
+   "risk": "safe",
+   "description": "World Trip (https://play.google.com/store/apps/details?id=in.playsimple.wordtrip) Word Count & word streak puzzle game 19 trackers + 11 permissions (https://reports.exodus-privacy.eu.org/en/reports/in.playsimple.wordtrip/latest/)"
+  },
+  {
+   "packageName": "jp.co.omronsoft.openwnn",
+   "risk": "safe",
+   "description": "Japanese keyboard/IME (don't know why it's pre-installed on US/european devices) Note : IME = input method editor"
+  },
+  {
+   "packageName": "jp.gocro.smartnews.android",
+   "risk": "safe",
+   "description": "SmartNews: Local Breaking News (https://play.google.com/store/apps/details?id=jp.gocro.smartnews.android) Delivers the top trending news stories from others publishers (NBC News, The Verges etc...) 7 Trackers + 10 permissions (https://reports.exodus-privacy.eu.org/en/reports/j..."
+  },
+  {
+   "packageName": "msgplus.jibe.sca.vpl",
+   "risk": "safe",
+   "description": "Messaging Plus. Messings using the RCS protocol (https://en.wikipedia.org/wiki/Rich_Communication_Services) Related to Google Jibe (https://jibe.google.com/)"
+  },
+  {
+   "packageName": "net.bat.store",
+   "risk": "safe",
+   "description": "AHA Games Mobile game store. Full of trackers and has CAMERA and RECORD_AUDIO permissions. Displays intrusive game ads on HIOS launcher and random popups. Pithus Analysis: https://beta.pithus.org/report/f5346d1388aff293bc84b481c3a9823cc3bf76ffc241fcf455754b86028f22b9"
+  },
+  {
+   "packageName": "net.fetnet.fetvod",
+   "risk": "safe",
+   "description": "Streaming service Registered members can watch the movies, dramas, variety shows and animations https://play.google.com/store/apps/details?id=net.fetnet.fetvod"
+  },
+  {
+   "packageName": "net.sharewire.parkmobilev2",
+   "risk": "safe",
+   "description": "ParkMobile - Find Parking (https://play.google.com/store/apps/details?id=net.sharewire.parkmobilev2)"
+  },
+  {
+   "packageName": "net.supertreat.solitaire",
+   "risk": "safe",
+   "description": "Solitaire (https://play.google.com/store/apps/details?id=net.supertreat.solitaire) Preinstalled game on some Samsung phones. 8 permissions, 17 trackers: https://reports.exodus-privacy.eu.org/reports/net.supertreat.solitaire/latest/"
+  },
+  {
+   "packageName": "org.codeaurora.bluetooth",
+   "risk": "expert",
+   "description": "https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/bluetooth"
+  },
+  {
+   "packageName": "org.codeaurora.gps.gpslogsave",
+   "risk": "safe",
+   "description": "Saves GPS logs."
+  },
+  {
+   "packageName": "org.codeaurora.ims",
+   "risk": "caution",
+   "description": "IMS(Ip Multimedia Subsystem) is an open industry standard for voice and multimedia communications over packet-based IP networks (VoLTE/VoIP/Wifi calling). Runs in the background as part of the system, with Google's IMS(com.google.android.ims,\"Carrier Services\") disabled, I hav..."
+  },
+  {
+   "packageName": "org.simalliance.openmobileapi.service",
+   "risk": "caution",
+   "description": "The SmartCard API is a reference implementation of the SIMalliance Open Mobile API specification that enables Android applications to communicate with Secure Elements, (SIM card, embedded Secure Elements, Mobile Security Card or others) https://github.com/seek-for-android/pool..."
+  },
+  {
+   "packageName": "org.simalliance.openmobileapi.uicc1terminal",
+   "risk": "caution",
+   "description": "Open Mobile API (\"interface\") to access UICC secure elements UICC stands for Universal Integrated Circuit Card. It is a the physical and logical platform for the USIM and may contain additional USIMs and other applications. (U)SIM is an application on the UICC. https://bluesec..."
+  },
+  {
+   "packageName": "org.simalliance.openmobileapi.uicc2terminal",
+   "risk": "caution",
+   "description": "Open Mobile API (\"interface\") to access UICC secure elements UICC stands for Universal Integrated Circuit Card. It is a the physical and logical platform for the USIM and may contain additional USIMs and other applications. (U)SIM is an application on the UICC. https://bluesec..."
+  },
+  {
+   "packageName": "pl.zdunex25.updater",
+   "risk": "safe",
+   "description": "Updater for the zdnex25's theme https://www.deviantart.com/zdunex25/gallery/26889741/themes"
+  },
+  {
+   "packageName": "tv.fubo.mobile.vpl",
+   "risk": "safe",
+   "description": "fuboTV (https://play.google.com/store/apps/details?id=tv.fubo.mobile) Lets you Watch live Sports, TV Shows, Movies & News"
+  },
+  {
+   "packageName": "tv.peel.app",
+   "risk": "safe",
+   "description": "Peel Universal Smart TV Remote Control (discontinued) Lets you remotely control devices like your TV, DVD or Blu-ray player."
+  },
+  {
+   "packageName": "vendor.qti.data.txpwradmin",
+   "risk": "caution",
+   "description": "This app is from qualcomm, in androidmanifest.xml I found things like com.qualcomm.qti.qmsdataservices, qms is spyware, permissions uses: access wifi state, quary all packages, package usage stats. So hidden network stats, more about it is this code is just logs, takes apm, wi..."
+  },
+  {
+   "packageName": "vendor.qti.imsdatachannel",
+   "risk": "caution",
+   "description": "Needed for IMS."
+  },
+  {
+   "packageName": "vendor.qti.imsrcs",
+   "risk": "expert",
+   "description": "IMS(Ip Multimedia Subsystem) is an open industry standard for voice and multimedia communications over packet-based IP networks (VoLTE/VoIP/Wifi calling). Also have RCS."
+  },
+  {
+   "packageName": "vendor.qti.iwlan",
+   "risk": "caution",
+   "description": "Used for VoLTE/VoWifi (Wifi-calling) IwLAN = Interworking wLAN. Support for mobile data offloading (use of complementary network technologies for delivering data originally targeted for cellular networks) It means your phone will use the Wi-Fi connection instead of the cellula..."
+  },
+  {
+   "packageName": "vendor.qti.qesdk.sysservice",
+   "risk": "safe",
+   "description": "It's for debugging and logs. But in the code I see VDebug. Vivo probably uses Qualcomm for some features."
+  },
+  {
+   "packageName": "zpub.res",
+   "risk": "safe",
+   "description": "third-party app pre-installed on ZTE phones."
+  }
+ ]
+}

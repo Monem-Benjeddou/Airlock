@@ -27,3 +27,9 @@ path = ["LICENSE"]
 precedence = "override"
 SPDX-FileCopyrightText = "2007 Free Software Foundation, Inc."
 SPDX-License-Identifier = "GPL-3.0-only"
+
+[[annotations]]
+path = ["Sources/AirlockServices/Resources/presets/**"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Universal Debloater Alliance (UAD-ng) contributors", "2026 Airlock contributors"]
+SPDX-License-Identifier = "GPL-3.0-only"

@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-FileCopyrightText: 2026 Airlock contributors
+#
+# The app bundle around the Swift package. Generate with `xcodegen generate`; the .xcodeproj is not committed.
+name: Airlock
+options:
+  bundleIdPrefix: dev.airlock
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+    GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    ENABLE_HARDENED_RUNTIME: YES
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    DEVELOPMENT_TEAM: ""
+packages:
+  Airlock:
+    path: .
+targets:
+  Airlock:
+    type: application
+    platform: macOS
+    sources: [App]
+    dependencies:
+      - package: Airlock
+        product: AirlockUI
+      - package: Airlock
+        product: AirlockInspection
+      - target: AirlockParser
+        embed: true
+        codeSign: true
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Airlock
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHumanReadableCopyright: "GPL-3.0-only, Airlock contributors"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock
+  AirlockParser:
+    type: xpc-service
+    platform: macOS
+    sources: [ParserXPC]
+    dependencies:
+      - package: Airlock
+        product: AirlockInspection
+    # Written by XcodeGen from these properties; a path without properties makes it write an empty file,
+    # which is how an unsandboxed helper once slipped through. CI checks the signed result.
+    entitlements:
+      path: ParserXPC/AirlockParser.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    info:
+      path: ParserXPC/Info.plist
+      properties:
+        CFBundleDisplayName: AirlockParser
+        XPCService:
+          ServiceType: Application
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock.Parser
+  AirlockUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources: [UITests]
+    dependencies:
+      - target: Airlock
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.airlock.Airlock.UITests
+        TEST_TARGET_NAME: Airlock
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  Airlock:
+    build:
+      targets:
+        Airlock: all
+        AirlockUITests: [test]
+    test:
+      targets: [AirlockUITests]

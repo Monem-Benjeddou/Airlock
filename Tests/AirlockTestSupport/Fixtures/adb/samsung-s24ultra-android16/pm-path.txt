@@ -1,0 +1,1 @@
+package:/system/priv-app/SecSettings/SecSettings.apk

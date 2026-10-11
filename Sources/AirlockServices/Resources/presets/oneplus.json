@@ -1,0 +1,1893 @@
+{
+ "id": "oneplus",
+ "name": "OnePlus",
+ "brand": "oneplus",
+ "source": "UAD-ng uad_lists.json (GPL-3.0), commit f02581f7f09f2e93d6f69cbc6c0602d03c89688f",
+ "entries": [
+  {
+   "packageName": "com.coloros.accessibilityassistant",
+   "risk": "safe",
+   "description": "AI VoiceScribe. It's used to convert speech to text in real-time for accessibility purposes. Can be safely deleted if you don't use AI services."
+  },
+  {
+   "packageName": "com.coloros.activation",
+   "risk": "caution",
+   "description": "E-warranty card Lets you check if your registered phone is still under warranty (will send your IMEI to esa-reg-eup.myoppo.com. Has a lot of permissions and run at boot Pithus analysis: https://beta.pithus.org/report/2a1dc5caedd2347fa009563e9b4d1c11b1cb42726f9046151934c456fdd7..."
+  },
+  {
+   "packageName": "com.coloros.activation.overlay.common",
+   "risk": "caution",
+   "description": "E-warranty card Lets you check if your registered phone is still under warranty. Has a lot of permissions and runs at boot. Pithus analysis: https://beta.pithus.org/report/2a1dc5caedd2347fa009563e9b4d1c11b1cb42726f9046151934c456fdd77d88"
+  },
+  {
+   "packageName": "com.coloros.alarmclock",
+   "risk": "caution",
+   "description": "Stock Clock app."
+  },
+  {
+   "packageName": "com.coloros.appmanager",
+   "risk": "caution",
+   "description": "App Management Used to uninstall applications, but uninstalling apps works nonetheless, even after uninstalling this package. GameSpace's game assistant does not work anymore after uninstalling this package."
+  },
+  {
+   "packageName": "com.coloros.apprecover",
+   "risk": "safe",
+   "description": "Used for app recovery?"
+  },
+  {
+   "packageName": "com.coloros.assistantscreen",
+   "risk": "caution",
+   "description": "Shelf. ColorOS/OnePlus 'At a Glance'. Shelf provides a variety of widgets that let you access important information or services from apps with ease. Removing will also be unable to access third-party widgets (these are different from the 'normal' widgets in any launcher) in Co..."
+  },
+  {
+   "packageName": "com.coloros.athena",
+   "risk": "expert",
+   "description": "Memory management, maybe useful, maybe not"
+  },
+  {
+   "packageName": "com.coloros.athena.config_plugin",
+   "risk": "expert",
+   "description": "Needed to configure com.coloros.athena. Memory management, maybe useful, maybe not."
+  },
+  {
+   "packageName": "com.coloros.avastofferwall",
+   "risk": "safe",
+   "description": "Avast Offerwall Avast anti-virus things."
+  },
+  {
+   "packageName": "com.coloros.backuprestore",
+   "risk": "safe",
+   "description": "Most likely Oppo backup/restore feature"
+  },
+  {
+   "packageName": "com.coloros.backuprestore.remoteservice",
+   "risk": "safe",
+   "description": "It has something to scan always Wi-Fi but it's probably unused."
+  },
+  {
+   "packageName": "com.coloros.blacklistapp",
+   "risk": "expert",
+   "description": "Blacklist Contacts Black list contacts, blocking calling."
+  },
+  {
+   "packageName": "com.coloros.calculator",
+   "risk": "safe",
+   "description": "Calculator app Has internet access because it can convert exchange rate, but I don't know whether it's used for other things as well or not."
+  },
+  {
+   "packageName": "com.coloros.childrenspace",
+   "risk": "safe",
+   "description": "Limit time spending on apps for kids."
+  },
+  {
+   "packageName": "com.coloros.cloud",
+   "risk": "safe",
+   "description": "Oppo Cloud"
+  },
+  {
+   "packageName": "com.coloros.codebook",
+   "risk": "safe",
+   "description": "Password manager App where you can keep passwords."
+  },
+  {
+   "packageName": "com.coloros.colordirectservice",
+   "risk": "safe",
+   "description": "Screen Recognition (Breeno Touch). This app is used to recognize screen contents and provide quick access to relevant services (like Text Extraction, AI Summarizer). com.coloros.ocrscanner, com.coloros.ocrservice, com.oplus.ocs, com.oplus.aiunit, com.coloros.ocs.opencapability..."
+  },
+  {
+   "packageName": "com.coloros.colorfilestand",
+   "risk": "safe",
+   "description": "It has only Request permission activity. Probably useless framework also it has something to do with cloud."
+  },
+  {
+   "packageName": "com.coloros.compass2",
+   "risk": "caution",
+   "description": "ColorOS and OxygenOS 16's default compass app Keep in mind that by using this app you give your location to the weather Oppo/OnePlus servers. Pithus analysis: https://beta.pithus.org/report/9a965f5587fa6ee21c526612f3d72c50ef3cc53679b741260298387c44f5a3dc"
+  },
+  {
+   "packageName": "com.coloros.digitalwellbeing",
+   "risk": "caution",
+   "description": "App usage time that can be found in settings."
+  },
+  {
+   "packageName": "com.coloros.directui",
+   "risk": "safe",
+   "description": "Brenoo touch Smart things it can be found in settings."
+  },
+  {
+   "packageName": "com.coloros.dirrecord",
+   "risk": "safe",
+   "description": "Security features, anti-trojan?"
+  },
+  {
+   "packageName": "com.coloros.encryption",
+   "risk": "expert",
+   "description": "Private Safe Removing breaks the stock launcher? Private Safe (located in Privacy Settings)"
+  },
+  {
+   "packageName": "com.coloros.exserviceui",
+   "risk": "safe",
+   "description": "Edge touch Gesture-related things. Edge touch"
+  },
+  {
+   "packageName": "com.coloros.exsystemservice",
+   "risk": "expert",
+   "description": "Color settings, app manager things without activities. Someone can test if it's useless?"
+  },
+  {
+   "packageName": "com.coloros.eyeprotect",
+   "risk": "safe",
+   "description": "It's the only eye protection option"
+  },
+  {
+   "packageName": "com.coloros.feedback",
+   "risk": "safe",
+   "description": "Feedback service Feedback for OPPO"
+  },
+  {
+   "packageName": "com.coloros.filemanager",
+   "risk": "caution",
+   "description": "ColorOS File Manager"
+  },
+  {
+   "packageName": "com.coloros.findmyphone",
+   "risk": "safe",
+   "description": "Find phone Find phone, logout from oppo account before"
+  },
+  {
+   "packageName": "com.coloros.findphone.client2",
+   "risk": "expert",
+   "description": "Find phone Find phone, logout from oppo account before"
+  },
+  {
+   "packageName": "com.coloros.floatassistant",
+   "risk": "safe",
+   "description": "GA ball, Assistive ball feature."
+  },
+  {
+   "packageName": "com.coloros.focusmode",
+   "risk": "safe",
+   "description": "Focus mode it's option that can be found in settings."
+  },
+  {
+   "packageName": "com.coloros.gallery3d",
+   "risk": "caution",
+   "description": "Gallery Stock gallery app."
+  },
+  {
+   "packageName": "com.coloros.gamespace",
+   "risk": "safe",
+   "description": "Game Space Hub for your Games + some performance optimizations https://community.coloros.com/thread-9962-1-1.html"
+  },
+  {
+   "packageName": "com.coloros.gamespaceui",
+   "risk": "safe",
+   "description": "GameSpace Gaming utility aiming at 'optimizing your gaming experience'. Has a lot of permissions. For instance, it has internet access, will scans all the apps you have on your phones (to find games), can performs Bluetooth scan and has access to the metadata of your media fil..."
+  },
+  {
+   "packageName": "com.coloros.gesture",
+   "risk": "safe",
+   "description": "Gestures & Motions Somatic gestures (double tap to light up the screen)"
+  },
+  {
+   "packageName": "com.coloros.healthcheck",
+   "risk": "safe",
+   "description": "Health check Health check? Probably hidden."
+  },
+  {
+   "packageName": "com.coloros.healthservice",
+   "risk": "safe",
+   "description": "Health service Another thing related to health check"
+  },
+  {
+   "packageName": "com.coloros.karaoke",
+   "risk": "safe",
+   "description": "In-ear monitoring Basically ColorOS's high volume warning system. Can be removed fine if you don't want it."
+  },
+  {
+   "packageName": "com.coloros.launcher.layout",
+   "risk": "safe",
+   "description": "Useless code that means nothing for the launcher"
+  },
+  {
+   "packageName": "com.coloros.logkit",
+   "risk": "safe",
+   "description": "LogKit Logs, Dial *#800# for running it"
+  },
+  {
+   "packageName": "com.coloros.logkit.plugin.upload",
+   "risk": "safe",
+   "description": "Useless plugin for logs"
+  },
+  {
+   "packageName": "com.coloros.mapcom.frame",
+   "risk": "safe",
+   "description": "Useless frameworks"
+  },
+  {
+   "packageName": "com.coloros.mcs",
+   "risk": "safe",
+   "description": ""
+  },
+  {
+   "packageName": "com.coloros.musiclink",
+   "risk": "caution",
+   "description": "Music Party This app allows you to play music through different phones, synchronised. https://www.youtube.com/watch?v=3Ak222Z79RY"
+  },
+  {
+   "packageName": "com.coloros.notificationmanager",
+   "risk": "expert",
+   "description": "Needed for notification manager and scheduled do not disturb."
+  },
+  {
+   "packageName": "com.coloros.ocrscanner",
+   "risk": "safe",
+   "description": "ColorOS Optical character recognition scanner"
+  },
+  {
+   "packageName": "com.coloros.ocrservice",
+   "risk": "safe",
+   "description": "Extract text from images."
+  },
+  {
+   "packageName": "com.coloros.ocs.opencapabilityservice",
+   "risk": "safe",
+   "description": "Security things and something related to Chinese payment"
+  },
+  {
+   "packageName": "com.coloros.onekeylockscreen",
+   "risk": "safe",
+   "description": "Lock your phone if you click on the app icon. Completely useless unless your physical power button is damaged. This app still has the permission to list all the apps installed on the phone. Pithus analysis: https://beta.pithus.org/report/ece4088357c0a47dffd96bdc46a7b535d448c1a..."
+  },
+  {
+   "packageName": "com.coloros.operationManual",
+   "risk": "safe",
+   "description": "Help & feedback Help (in Settings - Other Settings)"
+  },
+  {
+   "packageName": "com.coloros.operationtips",
+   "risk": "safe",
+   "description": "Tips"
+  },
+  {
+   "packageName": "com.coloros.oppoguardelf",
+   "risk": "expert",
+   "description": "Needed for power-saving and security"
+  },
+  {
+   "packageName": "com.coloros.oppoguardelf.restrict_plugin",
+   "risk": "expert",
+   "description": "Needed components for com.coloros.oppoguardelf. Needed for power-saving and security. Also, the plugin is bloated with logs and statistics."
+  },
+  {
+   "packageName": "com.coloros.oppoguardelf.secretplugin",
+   "risk": "expert",
+   "description": "Needed components for com.coloros.oppoguardelf. Needed for power-saving and security. Also, the plugin is bloated with logs and statistics."
+  },
+  {
+   "packageName": "com.coloros.oppomultiapp",
+   "risk": "safe",
+   "description": "App cloner Needed for app clone feature."
+  },
+  {
+   "packageName": "com.coloros.oshare",
+   "risk": "caution",
+   "description": "Oppo Share File sharing app to transfer data from/to Oppo devices only. Seems to use weak crypto (AES ECB mode) and has weird permissions (such as `READ_CONTACTS`). WARNING: removing this app will break the functionality to share photos directly from ColorOS Photos app and bre..."
+  },
+  {
+   "packageName": "com.coloros.phonemanager",
+   "risk": "safe",
+   "description": "Phone Manager Provides so called 'optimization tools' and various security scanning services. These virus scanning services may have privacy implications. Pithus analysis: https://beta.pithus.org/report/6b7d9e117ffb600b852f3785ede4f3773385fc291376e94a061bf7ed787dec48"
+  },
+  {
+   "packageName": "com.coloros.phonenoareainquire",
+   "risk": "safe",
+   "description": "Number Origin"
+  },
+  {
+   "packageName": "com.coloros.prome.service",
+   "risk": "safe",
+   "description": "Useless frameworks. About feedback and smart touch."
+  },
+  {
+   "packageName": "com.coloros.prome.smsservice",
+   "risk": "safe",
+   "description": "Useless SMS frameworks."
+  },
+  {
+   "packageName": "com.coloros.recents",
+   "risk": "expert",
+   "description": "Recent apps. Provides navigation to alternate between multiple apps. Removal will result in no\"Recent App\" list and re-enablement will cause a soft reload."
+  },
+  {
+   "packageName": "com.coloros.regservice",
+   "risk": "safe",
+   "description": "Mobile DM authentication related (recommended to be uninstalled)"
+  },
+  {
+   "packageName": "com.coloros.remoteguardservice",
+   "risk": "safe",
+   "description": "Remote Guard Service Have only useless statistics and depends on: com.coloros.mcs, com.heytap.mcs ONLY FOR CHINA."
+  },
+  {
+   "packageName": "com.coloros.safecenter.config_plugin",
+   "risk": "safe",
+   "description": "This plugin doesn't have any important things. It's safe to remove, useless logs code."
+  },
+  {
+   "packageName": "com.coloros.safesdkproxy",
+   "risk": "safe",
+   "description": "It has cleaner and security things."
+  },
+  {
+   "packageName": "com.coloros.sau",
+   "risk": "expert",
+   "description": "System Upgrade Services Needed to update ColorOS."
+  },
+  {
+   "packageName": "com.coloros.sauhelper",
+   "risk": "safe",
+   "description": "SAUHelper It has only statistics and logs."
+  },
+  {
+   "packageName": "com.coloros.scenemode",
+   "risk": "safe",
+   "description": "Scene mode and simple mode"
+  },
+  {
+   "packageName": "com.coloros.sceneservice",
+   "risk": "safe",
+   "description": "Data Services Platform Data Services Platform (the entire Breeno option in the settings menu disappears after deletion)"
+  },
+  {
+   "packageName": "com.coloros.screenrecorder",
+   "risk": "caution",
+   "description": "Screen recorder Stock screen recording app."
+  },
+  {
+   "packageName": "com.coloros.screenshot",
+   "risk": "expert",
+   "description": "Screenshot Needed for screenshots. Very useful app."
+  },
+  {
+   "packageName": "com.coloros.securepay",
+   "risk": "safe",
+   "description": "Payment system from Oppo allowing you to pay with your phone Pithus analysis: https://beta.pithus.org/report/65246664d3795a5ac1b402d28456903e1b3bd76176de8298b3ea96c6c592ae9a"
+  },
+  {
+   "packageName": "com.coloros.securityguard",
+   "risk": "safe",
+   "description": "Security Events (located in Phone Manager - Security Tools, it is recommended to uninstall it)."
+  },
+  {
+   "packageName": "com.coloros.securitykeyboard",
+   "risk": "safe",
+   "description": "Secure keyboard Not needed if your keyboard is already good."
+  },
+  {
+   "packageName": "com.coloros.sharescreen",
+   "risk": "safe",
+   "description": "Shared screen assistance Shared screen assistance (nobody need it)"
+  },
+  {
+   "packageName": "com.coloros.simsettings",
+   "risk": "expert",
+   "description": "Data usage Data usage and OTA updates"
+  },
+  {
+   "packageName": "com.coloros.smartdrive",
+   "risk": "safe",
+   "description": "Breeno smart drive it's for smart things."
+  },
+  {
+   "packageName": "com.coloros.smartlock",
+   "risk": "safe",
+   "description": "\"Phone stays unlocked when using a wearable device\" feature support component."
+  },
+  {
+   "packageName": "com.coloros.smartsidebar",
+   "risk": "safe",
+   "description": "Smart Sidebar Edge panel settings"
+  },
+  {
+   "packageName": "com.coloros.soundrecorder",
+   "risk": "caution",
+   "description": "ColorOS Sound Recorder"
+  },
+  {
+   "packageName": "com.coloros.speechassist",
+   "risk": "safe",
+   "description": "ColorOS Speech Assistant"
+  },
+  {
+   "packageName": "com.coloros.systemclone",
+   "risk": "caution",
+   "description": "System Cloner Creates multiple users on device"
+  },
+  {
+   "packageName": "com.coloros.trafficlimit",
+   "risk": "safe",
+   "description": "Useless frameworks"
+  },
+  {
+   "packageName": "com.coloros.translate.engine",
+   "risk": "safe",
+   "description": "Used for translation?"
+  },
+  {
+   "packageName": "com.coloros.uxdesign",
+   "risk": "expert",
+   "description": "Needed for themes"
+  },
+  {
+   "packageName": "com.coloros.video",
+   "risk": "safe",
+   "description": "Video Player Default Oppo and OnePlus video player with too much permissions (21) for a video player! Note: using inbuilt screen recorder you won't be able to open the recorded video from the notification view. Pithus analysis: https://beta.pithus.org/report/4ceb96c23ad0e26ee8..."
+  },
+  {
+   "packageName": "com.coloros.wallet",
+   "risk": "safe",
+   "description": "Oppo Wallet"
+  },
+  {
+   "packageName": "com.coloros.wallpapers",
+   "risk": "expert",
+   "description": "Wallpapers Needed for wallpapers"
+  },
+  {
+   "packageName": "com.coloros.weather.service",
+   "risk": "expert",
+   "description": "Name indicates it's for the weather, but removing this causes the screen to flash and the phone will eventually become unresponsive. https://github.com/Universal-Debloater-Alliance/universal-android-debloater-next-generation/issues/585. Disabling instead does not seem to cause..."
+  },
+  {
+   "packageName": "com.coloros.weather2",
+   "risk": "expert",
+   "description": "ColorOS weather app. Removal seems to trigger a bootloop on some phones. You should try, several users removed this app without any trouble on Oppo/Realme device with Android 11+ See: https://github.com/0x192/universal-android-debloater/issues/211"
+  },
+  {
+   "packageName": "com.coloros.widget.smallweather",
+   "risk": "caution",
+   "description": "It is classified as a Safe app to remove. It is a widget that displays clock and weather, weather warnings, the clock, 15-day forecasts, etc. Does not work with the at a Glance Google widget"
+  },
+  {
+   "packageName": "com.coloros.wifibackuprestore",
+   "risk": "caution",
+   "description": "WifiBackupRestore Backup Wi-Fi to the cloud NOTE: Removing or disabling this app would lose the ability for Backup and Restore functionality to backup locally stored wifi access points or credentials locally on your device"
+  },
+  {
+   "packageName": "com.coloros.wifisecuredetect",
+   "risk": "safe",
+   "description": "Useless for Wi-Fi. Has captcha and mobile number verification."
+  },
+  {
+   "packageName": "com.coloros.wirelesssettings",
+   "risk": "expert",
+   "description": "Wireless settings Probably needed."
+  },
+  {
+   "packageName": "com.heytap.browser",
+   "risk": "safe",
+   "description": "Oppo Browser Rebranded HeyTap browser for Oppo and OnePlus devices. Full of ads and spams you in notifications. You should never use this browser HeyTap's terrible privacy policy: https://brand.heytap.com/eu/privacy.html"
+  },
+  {
+   "packageName": "com.heytap.cast",
+   "risk": "expert",
+   "description": "Screencast Phone casting (casting phone screen to other devices)."
+  },
+  {
+   "packageName": "com.heytap.cloud",
+   "risk": "safe",
+   "description": "HeyTap Cloud Bad privacy policy: https://muc.heytap.com/document/heytap/oversea/privacyPolicy/privacyPolicy_en-US.html Why does the app need `REQUEST_INSTALL_PACKAGES` (can install packages)? Pithus analysis: https://beta.pithus.org/report/dbf265db47f8632453bb83ef51ea1d921413c..."
+  },
+  {
+   "packageName": "com.heytap.colorfulengine",
+   "risk": "safe",
+   "description": "Useless frameworks for theming. Maybe needed for premium"
+  },
+  {
+   "packageName": "com.heytap.datamigration",
+   "risk": "safe",
+   "description": "Some tools for stock browser (not Chrome), but it's Chinese and probably unused"
+  },
+  {
+   "packageName": "com.heytap.habit.analysis",
+   "risk": "safe",
+   "description": "Most likely used to track your habits from IoT HeyTap devices [TO BE CONFIRMED]"
+  },
+  {
+   "packageName": "com.heytap.headset",
+   "risk": "caution",
+   "description": "HeyTap Melody App used to manage Oppo Bluetooth Earphones."
+  },
+  {
+   "packageName": "com.heytap.htms",
+   "risk": "expert",
+   "description": "Mobile Services Mobile services (removal may not be able to log in to OPPO account)."
+  },
+  {
+   "packageName": "com.heytap.linker",
+   "risk": "expert",
+   "description": "DistUI Needed for broadcast"
+  },
+  {
+   "packageName": "com.heytap.market",
+   "risk": "safe",
+   "description": "Heytap/Oppo app store.There is no benefit of using this app store and you should not keep a privileged app with as many permissions. https://developers.oppomobile.com/newservice/capability?pagename=app_store Pithus analysis: https://beta.pithus.org/report/3a2a10af9310411d814fd..."
+  },
+  {
+   "packageName": "com.heytap.mcs",
+   "risk": "safe",
+   "description": "System messages with trackers"
+  },
+  {
+   "packageName": "com.heytap.music",
+   "risk": "safe",
+   "description": "Default Oppo Music App with insecure WebView Implementation (execution of user controlled code in WebView is an important security hole. Has also weird permissions (QUERY_ALL_PACKAGES and BLUETOOTH?) https://beta.pithus.org/report/befa0ec0616c553632379f069453b0ca74ee29fd1428b9..."
+  },
+  {
+   "packageName": "com.heytap.mydevices",
+   "risk": "expert",
+   "description": "My devices My devices (showing headphones and such)"
+  },
+  {
+   "packageName": "com.heytap.openid",
+   "risk": "safe",
+   "description": "OpenID Device logos and advertisements; uninstallation causes anomalies in cloud drive functionality"
+  },
+  {
+   "packageName": "com.heytap.pictorial",
+   "risk": "safe",
+   "description": "Lock Screen Magazine Lock Screen Magazine provides high-quality wallpapers and allows users to customize their lock screens. Every time you wake your screen, the wallpaper automatically changes. https://play.google.com/store/apps/details?id=com.heytap.pictorial"
+  },
+  {
+   "packageName": "com.heytap.quicksearchbox",
+   "risk": "safe",
+   "description": "Global Search Realme. This will remove the single swipe from top to bottom search that has lots of Chinese in it."
+  },
+  {
+   "packageName": "com.heytap.speechassist",
+   "risk": "safe",
+   "description": "Breeno Voice Breeno assistant."
+  },
+  {
+   "packageName": "com.heytap.synergy",
+   "risk": "expert",
+   "description": "HeySynergy Another thing related to broadcast"
+  },
+  {
+   "packageName": "com.heytap.themestore",
+   "risk": "safe",
+   "description": "Theme Store with 73 permissions! (including CAMERA, CALL_PHONE, READ_CONTACTS, REQUEST_INSTALL_PACKAGES...) and 2 trackers. Pithus analysis: https://beta.pithus.org/report/e8c4fc2bae420cf5f094ce914f25accdede5152f9d801db6eb32a4020a7726b2"
+  },
+  {
+   "packageName": "com.heytap.usercenter",
+   "risk": "caution",
+   "description": "Login service for various HeyTap related services like HeyTap Cloud etc. Needed if you want to join Early Access Testing for new ColorOS/RealmeUI [APK NEEDED]"
+  },
+  {
+   "packageName": "com.heytap.usercenter.overlay",
+   "risk": "caution",
+   "description": "overlay needed to usercenter app has resources"
+  },
+  {
+   "packageName": "com.heytap.yoli",
+   "risk": "safe",
+   "description": "Video player with Chinese tracking."
+  },
+  {
+   "packageName": "com.oneplus.accessory",
+   "risk": "safe",
+   "description": "Oneplus Link I'm guessing this has to do with connecting to Oneplus accessories, like the Oneplus Buds (wireless earbuds). Might wanna keep it enabled if you use oneplus accessory devices. Noticed no negative effects from disable after weeks of use."
+  },
+  {
+   "packageName": "com.oneplus.account",
+   "risk": "caution",
+   "description": "OnePlus Account Enables Oneplus account login on device. Probably handles authentication for Oneplus apps. Safe to remove if you don't use them."
+  },
+  {
+   "packageName": "com.oneplus.account.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Dark theme for Oneplus Account?"
+  },
+  {
+   "packageName": "com.oneplus.account.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Light theme for Oneplus Account?"
+  },
+  {
+   "packageName": "com.oneplus.android.cellbroadcast.overlay",
+   "risk": "expert",
+   "description": "Wireless emergency alerts Theme pack Guessing it's a pack of themes for the emergency alert UI, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.aod",
+   "risk": "safe",
+   "description": "Always On Display / Ambient Display Runs in the background. When enabled in settings it shows clock and notifications when you raise the phone or touch the screen. This is basically a lower-power lock-screen. It could in theory reduce power draw if you check notifications/cloc..."
+  },
+  {
+   "packageName": "com.oneplus.aod.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for AOD? (Always On Display)"
+  },
+  {
+   "packageName": "com.oneplus.aod.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for AOD? (Always On Display)"
+  },
+  {
+   "packageName": "com.oneplus.aodnotification.overlay.gold",
+   "risk": "safe",
+   "description": "AOD notification gold"
+  },
+  {
+   "packageName": "com.oneplus.aodnotification.overlay.purple",
+   "risk": "safe",
+   "description": "AOD notification purple"
+  },
+  {
+   "packageName": "com.oneplus.aodnotification.overlay.red",
+   "risk": "safe",
+   "description": "AOD notification red"
+  },
+  {
+   "packageName": "com.oneplus.applocker",
+   "risk": "expert",
+   "description": "Encrypts and locks apps behind password access."
+  },
+  {
+   "packageName": "com.oneplus.appupgrader",
+   "risk": "caution",
+   "description": "Built-in App Updates Based on the name I'm guessing it's an upater for built-in Oneplus apps? Seems safe to disable, but only seems to run on boot, so there's little to be gained from disabling."
+  },
+  {
+   "packageName": "com.oneplus.asti",
+   "risk": "expert",
+   "description": "OPAI App Prediction Service, SarahService, bindsarah Its code is too difficult to understand, but it looks like AI training."
+  },
+  {
+   "packageName": "com.oneplus.backuprestore",
+   "risk": "safe",
+   "description": "OnePlus Switch (https://play.google.com/store/apps/details?id=com.oneplus.backuprestore) Lets you migrate contacts, text messages, photos, and other data from one device to another. Can also backup data as a compressed archive."
+  },
+  {
+   "packageName": "com.oneplus.backuprestore.remoteservice",
+   "risk": "caution",
+   "description": "Likely a backend service for OnePlus Switch(com.oneplus.backuprestore). I've never seen it run in the background. Probably safe to disable."
+  },
+  {
+   "packageName": "com.oneplus.brickmode",
+   "risk": "safe",
+   "description": "OnePlus Zen Mode (https://play.google.com/store/apps/details?id=com.oneplus.brickmode) Zen Mode helps you put down your phone and enjoy your life. In Zen Mode you will only be able to take photos and answer calls."
+  },
+  {
+   "packageName": "com.oneplus.bttestmode",
+   "risk": "safe",
+   "description": "OnePlus Bluetooth test mode Type *#*#232339#*#* in the OnePlus dialer to access this hidden test menu."
+  },
+  {
+   "packageName": "com.oneplus.calculator",
+   "risk": "caution",
+   "description": "Stock Oneplus Calculator app."
+  },
+  {
+   "packageName": "com.oneplus.calculator.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Calculator app?"
+  },
+  {
+   "packageName": "com.oneplus.calendar.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for stock Calendar app?"
+  },
+  {
+   "packageName": "com.oneplus.calendar.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for stock Calendar app?"
+  },
+  {
+   "packageName": "com.oneplus.camera",
+   "risk": "caution",
+   "description": "Camera The stock Oneplus camera app."
+  },
+  {
+   "packageName": "com.oneplus.camera.pictureprocessing",
+   "risk": "expert",
+   "description": "Is it for image processing?"
+  },
+  {
+   "packageName": "com.oneplus.camera.service",
+   "risk": "safe",
+   "description": "Runs in the background on some phones. Not sure what it does; camera functions fine without it. Could be related to photo backup? WARNING: may cause a bootloop when using a custom ROM on Android 14 (in this case, Nameless AOSP). Does not affect users running OxygenOS."
+  },
+  {
+   "packageName": "com.oneplus.card",
+   "risk": "safe",
+   "description": "Card Package Widget which lets you add membership card in Shelf. You enter numbers for a club card or something and it'll store it and generate a barcode for you. Shelf is a page on your home screen that allows you to take memos, add widgets, gain access to your most-used apps..."
+  },
+  {
+   "packageName": "com.oneplus.card.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Card package?"
+  },
+  {
+   "packageName": "com.oneplus.card.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Card package?"
+  },
+  {
+   "packageName": "com.oneplus.carrierlocation",
+   "risk": "caution",
+   "description": "Carrier Location Access Runs on boot, but not in the background beyond that. Not sure what this does. Could be related to detecting region to determine which radio frequencies to use? Noticed no ill effects from weeks of having it disabled."
+  },
+  {
+   "packageName": "com.oneplus.chargingpilar",
+   "risk": "safe",
+   "description": "Geolocates the phone to find OnePlus charging stations nearby. Connects to 'gateway.oneplus.net' Pithus analysis: https://beta.pithus.org/report/8c157eeec2931d3d1140aa8c452d7afa570e04c9d51e6cd5987dbb3ec43df4f9"
+  },
+  {
+   "packageName": "com.oneplus.cloud.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for some Oneplus Cloud thing?"
+  },
+  {
+   "packageName": "com.oneplus.cloud.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for some Oneplus Cloud thing?"
+  },
+  {
+   "packageName": "com.oneplus.collectiondata",
+   "risk": "expert",
+   "description": "Collection data to telephony?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.android",
+   "risk": "expert",
+   "description": "Needed for notifications? Status_bar?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.android.networkstack.inprocess",
+   "risk": "expert",
+   "description": "Needed for DHCP hostname?, captive portal HTTP URLs?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.android.networkstack.inprocess.cn",
+   "risk": "expert",
+   "description": "Needed for DHCP hostname?, captive portal HTTP URLs? Generate_204 Chinese Google?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.android.systemui",
+   "risk": "expert",
+   "description": "Needed for wellbeing or notifications?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.android.wifi.resources",
+   "risk": "expert",
+   "description": "Wi-Fi configs?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.google.android.networkstack",
+   "risk": "expert",
+   "description": "Needed for DHCP hostname?, captive portal HTTP URLs?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.google.android.networkstack.cn",
+   "risk": "expert",
+   "description": "Needed for DHCP hostname?, captive portal HTTP URLs? Generate_204 Chinese Google?"
+  },
+  {
+   "packageName": "com.oneplus.commonoverlay.com.oneplus",
+   "risk": "safe",
+   "description": "Testing things, debugging"
+  },
+  {
+   "packageName": "com.oneplus.communication.data",
+   "risk": "caution",
+   "description": "Oneplus call recorder service. Feature accessible from the stock dialer app"
+  },
+  {
+   "packageName": "com.oneplus.config",
+   "risk": "caution",
+   "description": "OPConfig Occasionally runs in the background. Package source is: OPOnlineConfig.apk Guessing it might handle communication certificates and general network config for Oneplus apps. Only has INTERNET and RECEIVE_BOOT_COMPLETED permissions. 'Tips & Support' will be removed from..."
+  },
+  {
+   "packageName": "com.oneplus.contacts",
+   "risk": "caution",
+   "description": "Oneplus Contacts"
+  },
+  {
+   "packageName": "com.oneplus.contacts.basiccolorblack.overlay",
+   "risk": "caution",
+   "description": "Theme overlay for Oneplus Contacts?"
+  },
+  {
+   "packageName": "com.oneplus.contacts.basiccolorwhite.overlay",
+   "risk": "caution",
+   "description": "Theme overlay for Oneplus Contacts?"
+  },
+  {
+   "packageName": "com.oneplus.coreservice",
+   "risk": "expert",
+   "description": "Android System Important system package for Oneplus phones? Runs in the background as part of the system. Contains broadcast dispatch and theme handler services. Probably unsafe to disable, but please contribute info about what happens if you do."
+  },
+  {
+   "packageName": "com.oneplus.cota",
+   "risk": "expert",
+   "description": "Carrier Update Runs in the background. cota = Carrier OTA. Handles carrier-specific OTA updates? Probably safe to disable if you didn't get your phone from a carrier; the normal System Update(com.oneplus.opbackup) should handle the OTA updates. I can confirm that I got an OTA..."
+  },
+  {
+   "packageName": "com.oneplus.dataoptimization",
+   "risk": "expert",
+   "description": "OPDataOptimization Doesn't contain any services and I've never seen it run."
+  },
+  {
+   "packageName": "com.oneplus.deskclock",
+   "risk": "caution",
+   "description": "Clock The stock Oneplus clock app."
+  },
+  {
+   "packageName": "com.oneplus.deskclock.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Clock app?"
+  },
+  {
+   "packageName": "com.oneplus.deskclock.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Clock app?"
+  },
+  {
+   "packageName": "com.oneplus.diagnosemanager",
+   "risk": "caution",
+   "description": "Logging app for diagnosis/troubleshooting when the SIM card state change. Only used on devices running OxygenOS 9 and lower. Runs at boot and triggers when SIM card state change. Pithus analysis: https://beta.pithus.org/report/f4c76054795bf55012edf1f60e992b6e339085b9ca2cbe6859..."
+  },
+  {
+   "packageName": "com.oneplus.dialer",
+   "risk": "caution",
+   "description": "OnePlus Dialer used in OxygenOS 11 and lower. Note: don't forget to download another phone dialer app before removing this package."
+  },
+  {
+   "packageName": "com.oneplus.dirac.simplemanager",
+   "risk": "caution",
+   "description": "Runs in the background. Main Dirac service. Audio fidelity improvement from the Swedish company Dirac. Attempts to achieve a flat frequency response curve(i.e: fidelity). Should mainly improve speaker fidelity as it can be pre-calculated and stored as a corrective EQ curve, so..."
+  },
+  {
+   "packageName": "com.oneplus.dirac.simplemanager.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Dirac?"
+  },
+  {
+   "packageName": "com.oneplus.dirac.simplemanager.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Dirac?"
+  },
+  {
+   "packageName": "com.oneplus.dm",
+   "risk": "safe",
+   "description": "Subscriber Device Management Has only privacy online agreement activity."
+  },
+  {
+   "packageName": "com.oneplus.engmode",
+   "risk": "expert",
+   "description": "Some kind of Engineer mode? I've no clue. Contains a bunch of activities with\"info\" in their names. Contains an\"OpFloatViewService\", but I've never seen it run."
+  },
+  {
+   "packageName": "com.oneplus.faceunlock",
+   "risk": "safe",
+   "description": "Face Unlock Runs in the background as part of the system. Unlock your device by simply looking at the display. Face unlock is bad for security and privacy: https://www.ubergizmo.com/2017/03/galaxy-s8-facial-unlock-photograph/ https://www.kaspersky.com/blog/face-unlock-insecuri..."
+  },
+  {
+   "packageName": "com.oneplus.factorymode",
+   "risk": "safe",
+   "description": "FactoryMode Used in the factory to test devices. Type *#808# in the OnePlus dialer to access the hidden menu. Potential security risk: https://web.archive.org/web/20211103134620/https://twitter.com/fs0c131y/status/930115188988182531 It's possible for an app to enable root acce..."
+  },
+  {
+   "packageName": "com.oneplus.factorymode.specialtest",
+   "risk": "safe",
+   "description": "Engineering Mode Special Test Used in the factory to test devices. See com.oneplus.factorymode"
+  },
+  {
+   "packageName": "com.oneplus.filemanager",
+   "risk": "caution",
+   "description": "File manager Stock OnePlus file manager app."
+  },
+  {
+   "packageName": "com.oneplus.filemanager.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus File manager app?"
+  },
+  {
+   "packageName": "com.oneplus.filemanager.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus File manager app?"
+  },
+  {
+   "packageName": "com.oneplus.gallery",
+   "risk": "caution",
+   "description": "Oneplus Gallery (https://play.google.com/store/apps/details?id=com.oneplus.gallery) Occasionally runs in the background. Some old versions of the app (like for Oneplus 3 on Android 9) don't run in the background."
+  },
+  {
+   "packageName": "com.oneplus.gamespace",
+   "risk": "safe",
+   "description": "OnePlus Game Space Occasionally runs in the background as part of the system. Allows you to launch your game library, check game stats(such as playtime), activate game overlay features, change performance settings to tweak game/battery performance during gaming. This is the on..."
+  },
+  {
+   "packageName": "com.oneplus.gamespace.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Game Space?"
+  },
+  {
+   "packageName": "com.oneplus.gamespace.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Game Space?"
+  },
+  {
+   "packageName": "com.oneplus.geoiptime",
+   "risk": "expert",
+   "description": "Sets the Timezone (it is not an NTP client). Automatically starts at boot and connects to `checkip.amazonaws.com` and `gateway.oneplus.com`. Pithus analysis: https://beta.pithus.org/report/5e375a6b8da588a1490e42266f4e33975ce73207d79755a109101bd5fb07cc7c"
+  },
+  {
+   "packageName": "com.oneplus.iconpack.circle",
+   "risk": "caution",
+   "description": "OnePlus Icon Pack - Round (https://play.google.com/store/apps/details?id=com.oneplus.iconpack.circle)"
+  },
+  {
+   "packageName": "com.oneplus.iconpack.oneplus",
+   "risk": "caution",
+   "description": "OnePlus Icon Pack (https://play.google.com/store/apps/details?id=com.oneplus.iconpack.oneplus)"
+  },
+  {
+   "packageName": "com.oneplus.iconpack.oneplush2",
+   "risk": "safe",
+   "description": "OnePlus Hydrogen Icon Pack"
+  },
+  {
+   "packageName": "com.oneplus.iconpack.onepluso2",
+   "risk": "safe",
+   "description": "OnePlus Oxygen Icon Pack"
+  },
+  {
+   "packageName": "com.oneplus.iconpack.square",
+   "risk": "caution",
+   "description": "OnePlus Icon Pack - Square (https://play.google.com/store/apps/details?id=com.oneplus.iconpack.square)"
+  },
+  {
+   "packageName": "com.oneplus.ifaaservice",
+   "risk": "safe",
+   "description": "IFAA = (China’s) Internet Finance Authentication Alliance Provides biometric authentication for Alipay. Safe to disable if you don't use it."
+  },
+  {
+   "packageName": "com.oneplus.membership",
+   "risk": "safe",
+   "description": "Red Cable Club Battery drain if account added. https://play.google.com/store/apps/details?id=com.oneplus.membership"
+  },
+  {
+   "packageName": "com.oneplus.minidumpoptimization",
+   "risk": "safe",
+   "description": "OPMinidumpOptimization Runs in the background. Not sure what it does, but haven't noticed any negative effects from weeks of having it disabled."
+  },
+  {
+   "packageName": "com.oneplus.mms",
+   "risk": "caution",
+   "description": "OnePlus Messages (https://play.google.com/store/apps/details?id=com.oneplus.mms) Only used on OnePlus 8 / 8 Pro according to the description. Probably safe to remove, just make sure to install another SMS app to not lose that functionality; QKSMS is a good FOSS replacement for..."
+  },
+  {
+   "packageName": "com.oneplus.mms.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Dark theme overlay for Oneplus Messages app?"
+  },
+  {
+   "packageName": "com.oneplus.mms.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Light theme overlay for Oneplus Messages app?"
+  },
+  {
+   "packageName": "com.oneplus.note",
+   "risk": "caution",
+   "description": "OnePlus Notes app"
+  },
+  {
+   "packageName": "com.oneplus.note.black.overlay",
+   "risk": "expert",
+   "description": "Dark theme overlay for Oneplus Notes app?"
+  },
+  {
+   "packageName": "com.oneplus.note.white.overlay",
+   "risk": "expert",
+   "description": "Light theme overlay for Oneplus Notes app?"
+  },
+  {
+   "packageName": "com.oneplus.nroptimization",
+   "risk": "expert",
+   "description": "Optimization telephony?"
+  },
+  {
+   "packageName": "com.oneplus.odmoverlay.android",
+   "risk": "expert",
+   "description": "Android System Theme pack Guessing it's a pack of themes for some Oneplus-specific system components, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.odmoverlay.com.android.settings",
+   "risk": "expert",
+   "description": "Settings Theme pack Guessing it's a pack of themes for the settings app, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.odmoverlay.com.android.systemui",
+   "risk": "expert",
+   "description": "System UI Theme pack Guessing it's a pack of themes for some Oneplus-specific system component, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.odmoverlay.com.oneplus",
+   "risk": "expert",
+   "description": "Oneplus System Theme pack Guessing it's a pack of themes for Oneplus-specific system components, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.opbackup",
+   "risk": "expert",
+   "description": "System Update Runs in the background. Handles things related to OTA system updates. Safe to disable, but probably breaks system updates."
+  },
+  {
+   "packageName": "com.oneplus.opbackup.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for System Update?"
+  },
+  {
+   "packageName": "com.oneplus.opbackup.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for System Update?"
+  },
+  {
+   "packageName": "com.oneplus.opbugreportlite",
+   "risk": "safe",
+   "description": "OPBugReportLite Runs in the background. Runs as part of the system, even if disabled? Disabling does remove all RAM usage tho, and hopefully removes access to user data, as disable/uninstall should sever the connection to the Android user account. Silently sends, every 6 hours..."
+  },
+  {
+   "packageName": "com.oneplus.opshelf",
+   "risk": "safe",
+   "description": "OnePlus Shelf (https://play.google.com/store/apps/details?id=com.oneplus.opshelf) Widget panel accessible from swiping down on the top-right side of the screen allowing quick access to apps, meteo, spotify, memos... Pithus analysis: https://beta.pithus.org/report/a50f166c8c2fa..."
+  },
+  {
+   "packageName": "com.oneplus.opsports",
+   "risk": "safe",
+   "description": "Cricket Scores (https://play.google.com/store/apps/details?id=com.oneplus.opsports) Lets you access and follow cricket teams and tournaments."
+  },
+  {
+   "packageName": "com.oneplus.opwlb",
+   "risk": "safe",
+   "description": "Work-Life Balance Not present in most Oneplus phones? This functionality might have been superseded by other similar apps, like for example Zen Mode. Haven't tested, but probably safe to disable."
+  },
+  {
+   "packageName": "com.oneplus.opwlb.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Work-Life Balance?"
+  },
+  {
+   "packageName": "com.oneplus.opwlb.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Work-Life Balance?"
+  },
+  {
+   "packageName": "com.oneplus.orm",
+   "risk": "caution",
+   "description": "Seems to be Oneplus' Memory Management System according to a press-kit/-release they made for Android 11 (multiple sites wrote\"ORM Memory Management System\" word-for-word). Runs in the background as part of the system. Runs even if disabled? Doesn't use any RAM when disabled t..."
+  },
+  {
+   "packageName": "com.oneplus.overlay",
+   "risk": "expert",
+   "description": ""
+  },
+  {
+   "packageName": "com.oneplus.productoverlay.android",
+   "risk": "expert",
+   "description": "Android System Theme pack Guessing it's a pack of themes for some Android System component, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.productoverlay.com.android.providers.settings",
+   "risk": "expert",
+   "description": "Settings Storage Theme pack Guessing it's a pack of themes for Settings Storage, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.productoverlay.com.oneplus",
+   "risk": "expert",
+   "description": "Oneplus System Theme pack Guessing it's a pack of themes for Oneplus-specific system components, based on the name."
+  },
+  {
+   "packageName": "com.oneplus.providers.media",
+   "risk": "safe",
+   "description": "OnePlus Media Storage Runs in the background. Seems to just add recycle bin functionality to your file management (file browsers). Keep enabled if you like that function. But safe to disable if you don't want it."
+  },
+  {
+   "packageName": "com.oneplus.screenrecord",
+   "risk": "caution",
+   "description": "Screen Recorder The Android 11 screen recorder with some Oneplus modifications. Runs the\"SystemUITileService\" when you have it as one of the quicksettings tiles, but doesn't seem to run in the background outside of that. Doesn't have an app icon, but you can create a shortcut..."
+  },
+  {
+   "packageName": "com.oneplus.screenrecord.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Screenrecord?"
+  },
+  {
+   "packageName": "com.oneplus.screenrecord.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Screenrecord?"
+  },
+  {
+   "packageName": "com.oneplus.screenshot",
+   "risk": "expert",
+   "description": "Needed for Power + Volume Down screenshot."
+  },
+  {
+   "packageName": "com.oneplus.sdcardservice",
+   "risk": "expert",
+   "description": "Needed for sdcard?"
+  },
+  {
+   "packageName": "com.oneplus.security",
+   "risk": "caution",
+   "description": "Dashboard Runs\"WidgetViewService\" and\"SecureService\" in the background. Manages widget data access? Noticed no apparent ill effects on disable in Android 9."
+  },
+  {
+   "packageName": "com.oneplus.security.black.overlay",
+   "risk": "expert",
+   "description": "Dark theme overlay for com.oneplus.security?"
+  },
+  {
+   "packageName": "com.oneplus.security.white.overlay",
+   "risk": "expert",
+   "description": "Light theme overlay for com.oneplus.security?"
+  },
+  {
+   "packageName": "com.oneplus.ses",
+   "risk": "caution",
+   "description": "OPSes Apk file name: OPSesAuthentication. Contains a\"SesService\", but I've never seen it run. Related to Amazon SES?(Simple Email Service) https://aws.amazon.com/ses/"
+  },
+  {
+   "packageName": "com.oneplus.setupwizard",
+   "risk": "safe",
+   "description": "The Oneplus portion of the first-boot setup. Runs on boot, but not in the background beyond that."
+  },
+  {
+   "packageName": "com.oneplus.simcontacts",
+   "risk": "safe",
+   "description": "SimContacts Manager Runs in the background. Manages contacts and sync to SIM? Noticed no apparent ill effects on disable in Android 9."
+  },
+  {
+   "packageName": "com.oneplus.simcontacts.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Dark theme overlay for Oneplus SimContacts Manager app?"
+  },
+  {
+   "packageName": "com.oneplus.simcontacts.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Light theme overlay for Oneplus SimContacts Manager app?"
+  },
+  {
+   "packageName": "com.oneplus.skin",
+   "risk": "expert",
+   "description": "Icon styles/themes/animations and visual effects"
+  },
+  {
+   "packageName": "com.oneplus.sms.smscplugger",
+   "risk": "expert",
+   "description": "Probably related to SMS based on the name? Contains no services and I've never seen it run."
+  },
+  {
+   "packageName": "com.oneplus.sound.tuner",
+   "risk": "caution",
+   "description": "Dolby Atmos Runs in the background as part of the system. Runs even if disabled. Sound tuning for Atmos. Breaks the Dolby Atmos sound settings menu if disabled. Could in theory increase loudspeaker fidelity as it can be pre-calculated and stored as a corrective EQ curve, somet..."
+  },
+  {
+   "packageName": "com.oneplus.soundrecorder",
+   "risk": "caution",
+   "description": "Recorder OnePlus sound recording app. Requires turning on\"Allow modifying system settings\" to use for some reason? Probably tied to recording phone-calls."
+  },
+  {
+   "packageName": "com.oneplus.soundrecorder.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Soundrecorder app?"
+  },
+  {
+   "packageName": "com.oneplus.soundrecorder.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Soundrecorder app?"
+  },
+  {
+   "packageName": "com.oneplus.store",
+   "risk": "safe",
+   "description": "OnePlus Store Offers getting favorites OnePlus phones in good price. https://play.google.com/store/apps/details?id=com.oneplus.store"
+  },
+  {
+   "packageName": "com.oneplus.telephonyoptimization",
+   "risk": "expert",
+   "description": "OPTelephonyOptimization Contains a service with the same name, but I've never seen it run."
+  },
+  {
+   "packageName": "com.oneplus.twspods",
+   "risk": "safe",
+   "description": "OnePlus Buds (https://play.google.com/store/apps/details?id=com.oneplus.twspods) Companion app for Oneplus Buds. For updating firmware and changing settings."
+  },
+  {
+   "packageName": "com.oneplus.vendoroverlay.android",
+   "risk": "expert",
+   "description": "Overlay to extra kbytes adjust?"
+  },
+  {
+   "packageName": "com.oneplus.vendoroverlay.com.android.providers.settings",
+   "risk": "safe",
+   "description": "Default backup transport Google. Not needed for backup"
+  },
+  {
+   "packageName": "com.oneplus.vendoroverlay.com.android.systemui",
+   "risk": "expert",
+   "description": "It has nothing in the code."
+  },
+  {
+   "packageName": "com.oneplus.vendoroverlay.com.oneplus",
+   "risk": "expert",
+   "description": "Config to overheat?"
+  },
+  {
+   "packageName": "com.oneplus.vendoroverlay.com.oneplus.wifiapsettings",
+   "risk": "expert",
+   "description": "OP_white_mode?"
+  },
+  {
+   "packageName": "com.oneplus.wallpaper",
+   "risk": "caution",
+   "description": "Pack of live wallpapers from Oneplus."
+  },
+  {
+   "packageName": "com.oneplus.wifiapsettings",
+   "risk": "caution",
+   "description": "Wi-Fi Access Point Settings? Runs on boot. Noticed no change after disabling; Wi-Fi and related menus still seem fully functional."
+  },
+  {
+   "packageName": "com.oneplus.wifiapsettings.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Dark theme for Wi-Fi Access Point Settings?"
+  },
+  {
+   "packageName": "com.oneplus.wifiapsettings.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Light theme for Wi-Fi Access Point Settings?"
+  },
+  {
+   "packageName": "com.oplus.account",
+   "risk": "caution",
+   "description": "Account Center. Required for most OnePlus features. Removal gets rid of Login with OnePlus Account notification."
+  },
+  {
+   "packageName": "com.oplus.aicall",
+   "risk": "caution",
+   "description": "Provides AI summaries in the ODialer app"
+  },
+  {
+   "packageName": "com.oplus.aimemory",
+   "risk": "caution",
+   "description": "Mind Space (also called 'Breeno Memory') Saves and summarizes content using AI. Runs on the background, even though when you're not using it."
+  },
+  {
+   "packageName": "com.oplus.aipaint",
+   "risk": "safe",
+   "description": "AI Paint Unsure what it's used for but probably has to do with editing images."
+  },
+  {
+   "packageName": "com.oplus.aiunit",
+   "risk": "caution",
+   "description": "AIUnit System service related to the intelligence function. It's safe to remove but also breaks the Smart Cutout, AI Editor, and potentially other gallery features."
+  },
+  {
+   "packageName": "com.oplus.aiwriter",
+   "risk": "safe",
+   "description": "AI Writer Pop-up for AI text generation, often appears in places that are not text input fields."
+  },
+  {
+   "packageName": "com.oplus.android.overlay.gmsconfig.common",
+   "risk": "caution",
+   "description": "Overlay to vendor required apps? Theres google apps and some not important oppo apps on the lists, not needed."
+  },
+  {
+   "packageName": "com.oplus.android.overlay.modules.documentsui",
+   "risk": "safe",
+   "description": "Useless overlay to documentsui bools.xml: is_launcher_enabled true"
+  },
+  {
+   "packageName": "com.oplus.aod",
+   "risk": "safe",
+   "description": "Aod Multiple sources say that AOD doesnt work without tons of extra services, but on some devices it works without extra services https://droidwin.com/remove-bloatware-debloat-oneplus-10-pro-no-root/#OnePlus_10_Pro_List_of_Bloatware_Apps"
+  },
+  {
+   "packageName": "com.oplus.appdetail",
+   "risk": "safe",
+   "description": "Secure app installation"
+  },
+  {
+   "packageName": "com.oplus.apprecover",
+   "risk": "caution",
+   "description": "Recover system apps"
+  },
+  {
+   "packageName": "com.oplus.athena",
+   "risk": "expert",
+   "description": "OnePlus background process manager. It aggressively kills apps. Despite battery optimization settings it kills Chrome not in use within few seconds; and Tasker can't run long-time jobs. Removing it will disable the virtual ram expansion feature (swap RAM to disk) and the 'clos..."
+  },
+  {
+   "packageName": "com.oplus.atlas",
+   "risk": "expert",
+   "description": "atlasService Separate app sound and individual app volumes. https://beta.pithus.org/report/6d0f9433431cd34a8e9aaef99b329b3623118a1699033be36032f64653dab3d0"
+  },
+  {
+   "packageName": "com.oplus.audio.effectcenter",
+   "risk": "caution",
+   "description": "Sound effects and EQ settings, Dolby support for Chinese apps and some Google. Remove if you aren't planning to use sound effects or EQ."
+  },
+  {
+   "packageName": "com.oplus.battery",
+   "risk": "expert",
+   "description": "Battery Needed for power managment in settings? https://xdaforums.com/t/how-to-fix-oneplus-11-thermal-throttling.4560085/post-89255314 Better test it."
+  },
+  {
+   "packageName": "com.oplus.batterywarning",
+   "risk": "caution",
+   "description": "Battery warning. Uses accessbility, GPS and Wi-Fi."
+  },
+  {
+   "packageName": "com.oplus.blacklistapp",
+   "risk": "caution",
+   "description": "Block & filter Call blocking app that's tied with device caller app, contains fuction to look caller location on Google Maps, potentially untrusted."
+  },
+  {
+   "packageName": "com.oplus.blur",
+   "risk": "expert",
+   "description": "All the blur effects in the system UI will be removed and replaced with completely transparent if you remove this package."
+  },
+  {
+   "packageName": "com.oplus.bttestmode",
+   "risk": "safe",
+   "description": "BTtestmode Bluetooth SAR Signaling, Scene Test"
+  },
+  {
+   "packageName": "com.oplus.callrecorder",
+   "risk": "caution",
+   "description": "Allows you to toggle call recording in the stock Dialer app. Safe to remove?"
+  },
+  {
+   "packageName": "com.oplus.camera",
+   "risk": "expert",
+   "description": "Camera app"
+  },
+  {
+   "packageName": "com.oplus.cast",
+   "risk": "expert",
+   "description": "Screencast Phone casting (casting phone screen to other devices)."
+  },
+  {
+   "packageName": "com.oplus.cosa",
+   "risk": "caution",
+   "description": "APP Enhancement Services If enabled, connects to OPPO servers (icosa-service-eu.allawnos.com) every time a new app is installed. Seems to be mostly focused on gaming performance optimisation according to the settings description: '[...] a service that optimises phone performan..."
+  },
+  {
+   "packageName": "com.oplus.cota",
+   "risk": "expert",
+   "description": "Configuration Update Over The Air Needed for OTA updates. Likely needed to download and install system updates, device configuration, and carrier/enterprise customizations on OnePlus devices. It ensures your device stays up-to-date and compliant with carrier or company require..."
+  },
+  {
+   "packageName": "com.oplus.crashbox",
+   "risk": "safe",
+   "description": "Sends system failure data to developers. Automatically runs at boot. Pithus analysis: https://beta.pithus.org/report/6031048af7434e9cfe3435244dd105ac70e3bfe1f25ecdcca9b2a40b356590a2"
+  },
+  {
+   "packageName": "com.oplus.customize.coreapp",
+   "risk": "safe",
+   "description": "Useless frameworks"
+  },
+  {
+   "packageName": "com.oplus.deepthinker",
+   "risk": "expert",
+   "description": "Smart Capability Services seems to open some common apps in the background, which may increase power consumption. Remove it on ColorOS 12.0 or above will cause the battery menu to not show the power consumption curve. This can cause a bootloop."
+  },
+  {
+   "packageName": "com.oplus.dmp",
+   "risk": "safe",
+   "description": "Deactivate Traffic Management Fusion search service?"
+  },
+  {
+   "packageName": "com.oplus.eid",
+   "risk": "safe",
+   "description": "Eid-Service It's something about card chips or online identity? Useless. China."
+  },
+  {
+   "packageName": "com.oplus.encryption",
+   "risk": "safe",
+   "description": "Private Safe After uninstalling, the option to use the file safe in the privacy settings disappears. There is also a section left in the settings that does nothing when clicked."
+  },
+  {
+   "packageName": "com.oplus.engineercamera",
+   "risk": "safe",
+   "description": "EngineerCamera Testing camera things."
+  },
+  {
+   "packageName": "com.oplus.engineermode",
+   "risk": "safe",
+   "description": "EngineerMode Testing phone things(like audio, bluetooth, etc.)."
+  },
+  {
+   "packageName": "com.oplus.engineermodeforflipkart",
+   "risk": "safe",
+   "description": "Engineermode2 This is app for get flipkartAddress and ShowSarImeiReceiver. I found some info: This phone is part of Flipkart Smart Plan and not eligible for release till any instant advance amount availed is repaid."
+  },
+  {
+   "packageName": "com.oplus.engineernetwork",
+   "risk": "safe",
+   "description": "EngineerNetwork Testing network things."
+  },
+  {
+   "packageName": "com.oplus.exserviceui",
+   "risk": "expert",
+   "description": "Gesture Motion Services Is related to gesture navigation 'com.oplus.gesture'."
+  },
+  {
+   "packageName": "com.oplus.eyeprotect",
+   "risk": "safe",
+   "description": "Eye protection mode Safe to remove if you dont use this feature. It can be found in the settings."
+  },
+  {
+   "packageName": "com.oplus.framework.rro.oneplus",
+   "risk": "expert",
+   "description": "A runtime resource overlay (RRO) is a package that changes the resource values of a target package at runtime. For example, an app installed on the system image might change its behavior based upon the value of a resource. Rather than hardcoding the resource value at build tim..."
+  },
+  {
+   "packageName": "com.oplus.framework_bluetooth.overlay",
+   "risk": "expert",
+   "description": "Needed to bluetooth?"
+  },
+  {
+   "packageName": "com.oplus.games",
+   "risk": "safe",
+   "description": "Games (https://play.google.com/store/apps/details?id=com.oplus.games) Occasionally runs in the background as part of the system. Allows you to launch your game library, check game stats(such as playtime), activate game overlay features and performance settings to tweak game/ba..."
+  },
+  {
+   "packageName": "com.oplus.gesture",
+   "risk": "expert",
+   "description": "Always-on screen gestures."
+  },
+  {
+   "packageName": "com.oplus.hamlet",
+   "risk": "safe",
+   "description": "Vision Enhance Useless things about color maybe to wallpaper?"
+  },
+  {
+   "packageName": "com.oplus.healthservice",
+   "risk": "safe",
+   "description": "healthservice Some health function, needed for correct work of fitness trackers and pedometer from realme. When deleted, it does not seem to affect the operation of the phone."
+  },
+  {
+   "packageName": "com.oplus.interconnectcollectkit",
+   "risk": "safe",
+   "description": "InterconnectCollectKit It may have something to do with the device's fast connection by name. BUT I see only it collects system logs and it has something to com.heytap.accessory."
+  },
+  {
+   "packageName": "com.oplus.kekepay",
+   "risk": "safe",
+   "description": "Chinese pay service? Safe to remove but no documentation found online [APK NEEDED]"
+  },
+  {
+   "packageName": "com.oplus.keyguard.clock.base",
+   "risk": "expert",
+   "description": "The clock style available in the lock screen and the theme manager."
+  },
+  {
+   "packageName": "com.oplus.keyguard.clock.gallery",
+   "risk": "expert",
+   "description": "The clock style available in the lock screen and the theme manager."
+  },
+  {
+   "packageName": "com.oplus.keyguard.clock.graffiti",
+   "risk": "expert",
+   "description": "The clock style available in the lock screen and the theme manager."
+  },
+  {
+   "packageName": "com.oplus.keyguard.clock.magazine",
+   "risk": "expert",
+   "description": "The clock style available in the lock screen and the theme manager."
+  },
+  {
+   "packageName": "com.oplus.lfeh",
+   "risk": "safe",
+   "description": "Seems to be related to the the logging suite. Pithus analysis: https://beta.pithus.org/report/0542dbdbe10fd3a868ea497ec92670619670f574bbce37d949975dc109cd316f"
+  },
+  {
+   "packageName": "com.oplus.linker",
+   "risk": "caution",
+   "description": "OPSynergy Used for the Synergy app to link your phone to your PC (it doesn't work well beyond controlling your phone from your PC). This app is a dependency of screencast. Disabling will cause the screencast app to break."
+  },
+  {
+   "packageName": "com.oplus.location",
+   "risk": "safe",
+   "description": "Chinese location. Have China MCC. Useless"
+  },
+  {
+   "packageName": "com.oplus.locationproxy",
+   "risk": "safe",
+   "description": "Carrier Location Services Extra location telemetry, not related to any GPS functions."
+  },
+  {
+   "packageName": "com.oplus.logkit",
+   "risk": "safe",
+   "description": "Logs service and bug reporting app Safe to remove if you don't report bugs to OEM"
+  },
+  {
+   "packageName": "com.oplus.mediacontroller",
+   "risk": "expert",
+   "description": "Media Controller. Responsible for the Dynamic Island feature for music applications and showing the 'Now playing' notification on lockscreen."
+  },
+  {
+   "packageName": "com.oplus.melody",
+   "risk": "caution",
+   "description": "Wireless Earphones Wireless headset advanced configuration related (after uninstallation some Bluetooth headset setting options will be missing items, if you do not have headset setting problems, it is recommended to uninstall) https://play.google.com/store/apps/details?id=com..."
+  },
+  {
+   "packageName": "com.oplus.metis",
+   "risk": "safe",
+   "description": "Metis User Behavior Records. Hidden with no activities. Collects data."
+  },
+  {
+   "packageName": "com.oplus.multiapp",
+   "risk": "caution",
+   "description": "App Cloner. Allows to clone an app. Have access to all installed apps. Is bundled with OnePlus analytics Pithus analysis: https://beta.pithus.org/report/8a1d0783debb405ebadb3fc52507de5f69ecb55f499732b7331dac74ad69ffd7"
+  },
+  {
+   "packageName": "com.oplus.nas",
+   "risk": "caution",
+   "description": "NetworkAssistSys Needed for network I guess by dialogs found in code. Has location & phone permission, can read your call logs. Runs in background. After disabling, no issues occured (OxygenOS 14, OnePlus 11)."
+  },
+  {
+   "packageName": "com.oplus.ndsf",
+   "risk": "caution",
+   "description": "DSF Provides the ability to authenticate your identity when you connect your device. For the 'Device Connection Security Service' to work properly, it needs to collect information about your HeyTap account to support automatic connection to different devices with the same acco..."
+  },
+  {
+   "packageName": "com.oplus.nhs",
+   "risk": "expert",
+   "description": "NetworkHealthService (Uninstallation may cause the power saving mode optimization option of turning off 5G to be disabled, only briefly, after which it will automatically return to 5G) needs more testing."
+  },
+  {
+   "packageName": "com.oplus.nrMode",
+   "risk": "expert",
+   "description": "OplusNrModeControl Required for Smart 5G."
+  },
+  {
+   "packageName": "com.oplus.obrain",
+   "risk": "safe",
+   "description": "OBrain Log component, domestic special, the key to a MIDAS service, looking at the dex content is also to catch log."
+  },
+  {
+   "packageName": "com.oplus.oca",
+   "risk": "safe",
+   "description": "Has something related to wallet smart card"
+  },
+  {
+   "packageName": "com.oplus.ocar",
+   "risk": "safe",
+   "description": "Car+ Related to Oppo's car app [APK NEEDED]"
+  },
+  {
+   "packageName": "com.oplus.ocloud",
+   "risk": "safe",
+   "description": "Its not about cloud but a lot logs."
+  },
+  {
+   "packageName": "com.oplus.ocs",
+   "risk": "safe",
+   "description": "OpenCapabilityService Chinese unique identifier privacy hazard."
+  },
+  {
+   "packageName": "com.oplus.olc",
+   "risk": "safe",
+   "description": "Olc Logger, a new appearance in F.05, the domestic special, and all say that they are log core."
+  },
+  {
+   "packageName": "com.oplus.omoji",
+   "risk": "safe",
+   "description": "Omoji Avatar editing app."
+  },
+  {
+   "packageName": "com.oplus.onet",
+   "risk": "safe",
+   "description": "ONet Useless frameworks. To secure keyboard, grant permissions. It's not needed."
+  },
+  {
+   "packageName": "com.oplus.onetrace",
+   "risk": "safe",
+   "description": "OneTrace Logging component, may be used for feedback toolkit log capture, domestic specials."
+  },
+  {
+   "packageName": "com.oplus.oscenter",
+   "risk": "safe",
+   "description": "Useless frameworks security."
+  },
+  {
+   "packageName": "com.oplus.ota",
+   "risk": "expert",
+   "description": "Software update Provides System Updates."
+  },
+  {
+   "packageName": "com.oplus.ovoicemanager",
+   "risk": "safe",
+   "description": "Voice assistant related"
+  },
+  {
+   "packageName": "com.oplus.ovoicemanager.wakeup",
+   "risk": "safe",
+   "description": "Voice Assistant related. A component for com.oplus.ovoicemanager. https://www.apkmirror.com/apk/oneplus-ltd/ovoicemanagerskillservice-2/ovoicemanagerskillservice-1-1-13-release/ovoicemanagerskillservice-1-1-13-android-apk-download/"
+  },
+  {
+   "packageName": "com.oplus.owkservice",
+   "risk": "expert",
+   "description": "Weird app that has time sync and start/stop Monitor Wifi Connectivity, also has oplus statistics component to tracking events."
+  },
+  {
+   "packageName": "com.oplus.padconnect",
+   "risk": "caution",
+   "description": "It has pad settings and multi-screen connect."
+  },
+  {
+   "packageName": "com.oplus.pantanal.ums",
+   "risk": "caution",
+   "description": "Ubiquitous Manager Service A service required for Fluid Cloud (Dynamic Island clone) feature in OxygenOS/ColorOS/RealmeUI (Android 14). Runs in background. After disabling, no issues occurred but there's a little empty space between clock and recent notification icons on the r..."
+  },
+  {
+   "packageName": "com.oplus.pay",
+   "risk": "safe",
+   "description": "Secure Payment Lets you pay with your phone. Privacy issue aside, you should probably not trust their security: https://www.bitdefender.com/blog/hotforsecurity/hackers-attack-oneplus-again-this-time-stealing-customer-details some users cant uninstall this app"
+  },
+  {
+   "packageName": "com.oplus.phonenoareainquire",
+   "risk": "expert",
+   "description": "Number Origin Not yet uninstalled but is related to phone calling function, need to check deeply..."
+  },
+  {
+   "packageName": "com.oplus.portrait",
+   "risk": "safe",
+   "description": "Canvas An additional feature for AOD that allows you to further personalize the disabled screen. If not used, you can delete it."
+  },
+  {
+   "packageName": "com.oplus.postmanservice",
+   "risk": "safe",
+   "description": "Diagnostics For calibration of hardware"
+  },
+  {
+   "packageName": "com.oplus.powermonitor",
+   "risk": "safe",
+   "description": "Power monitor Logging component to upload temperature control logs."
+  },
+  {
+   "packageName": "com.oplus.pscanvas",
+   "risk": "expert",
+   "description": "Open Canvas Split-screen feature, see: https://community.oneplus.com/thread/1484307668276346883."
+  },
+  {
+   "packageName": "com.oplus.qualityprotect",
+   "risk": "safe",
+   "description": "QualityProtect Logs about system usage, some apps, not useful."
+  },
+  {
+   "packageName": "com.oplus.romupdate",
+   "risk": "expert",
+   "description": "Update Service Responsible for installing updates."
+  },
+  {
+   "packageName": "com.oplus.sau",
+   "risk": "expert",
+   "description": "System Upgrade Service Allows you to update your phone. Runs at boot and could cause bootloop when removed."
+  },
+  {
+   "packageName": "com.oplus.sauhelper",
+   "risk": "safe",
+   "description": "SAUHelper It's very much a placeholder app with no real functionality, but it can't be uninstalled or deactivated, and it can be SUSPENDED."
+  },
+  {
+   "packageName": "com.oplus.screenrecorder",
+   "risk": "caution",
+   "description": "Screenrecorder"
+  },
+  {
+   "packageName": "com.oplus.screenshot",
+   "risk": "expert",
+   "description": "Screenshot Needed for screenshots. Very useful app."
+  },
+  {
+   "packageName": "com.oplus.securitykeyboard",
+   "risk": "safe",
+   "description": "Secure Keyboard Keyboard that appears only when typing a password on apps and webpages, if enabled on Keyboard and Input settings"
+  },
+  {
+   "packageName": "com.oplus.smartengine",
+   "risk": "expert",
+   "description": "It appears to be an app used for testing, no internet access, very few intents, shouldn't have self-started, should run on demand. Some people have reported it as a support component for speedcards, some speedcards won't load after uninstalling."
+  },
+  {
+   "packageName": "com.oplus.sos",
+   "risk": "caution",
+   "description": "Emergency Alert service by clicking power button 5 times. It will automatically call contacts (and/or send a SMS) you designated as emergency contacts"
+  },
+  {
+   "packageName": "com.oplus.statistics.rom",
+   "risk": "safe",
+   "description": "User Experience Program Intrusive telemetry. Runs at boot and constantly stays in background Pithus analysis: https://beta.pithus.org/report/7720549a5b4bc305a15e19b3e17ba6857a52e6e12db94006677c59f2fad84331"
+  },
+  {
+   "packageName": "com.oplus.stdid",
+   "risk": "caution",
+   "description": "StdID Needed for tracking battery usage on per app basis. Dependency for GameSpace [MORE INFO NEEDED / APK NEEDED]"
+  },
+  {
+   "packageName": "com.oplus.stdsp",
+   "risk": "safe",
+   "description": "Device Security Service it's a basic service module that helps users discover security risks in their devices and generate appropriate security policies. Detect xposed, and log suite related, needless to say, deactivate."
+  },
+  {
+   "packageName": "com.oplus.studycenter",
+   "risk": "safe",
+   "description": "Study Center is an educational application officially developed by OPPO for children aged 0-12 in China. Ask for a lot of permissions. Has a lot of security issues: https://beta.pithus.org/report/e006d8b22e473e603ceb86c654889e08da460b73d609cd9b17642f49d530239a"
+  },
+  {
+   "packageName": "com.oplus.subsys",
+   "risk": "caution",
+   "description": "Its app for virtual communication. Depends on 'com.oplus.virtualcomm'."
+  },
+  {
+   "packageName": "com.oplus.synergy",
+   "risk": "caution",
+   "description": "HeySynergy Provides the screencasting feature and OPPO's PC Connect (https://connect.oppo.com/). Don't bother downloading 'PC Connect Desktop' if the 'Phone Connect' Quick Settings tile isn't available on your phone. Pithus analysis: https://beta.pithus.org/report/16d9ea536683..."
+  },
+  {
+   "packageName": "com.oplus.themestore",
+   "risk": "safe",
+   "description": "Theme Store To change fonts, wallpapers, etc. of your device. Note that you can download but you can't apply unless you have registered for/sign in with HeyTap account."
+  },
+  {
+   "packageName": "com.oplus.thirdkit",
+   "risk": "safe",
+   "description": "Compatibility problem solving Third party related."
+  },
+  {
+   "packageName": "com.oplus.trafficmonitor",
+   "risk": "caution",
+   "description": "OnePlus Data usage / OnePlus traffic monitor (monthly data usage, etc). If removed, the 'Data Usage' option under 'Mobile network' will not work. Also App Info screen's 'Data usage' option will disappear. Required to restrict an app from accessing the network via settings > ap..."
+  },
+  {
+   "packageName": "com.oplus.uiengine",
+   "risk": "expert",
+   "description": "Needed for themes? I found a lot of gameloading things, Proguard?, lists of apps idk for what. Remove it not bricks anything probably."
+  },
+  {
+   "packageName": "com.oplus.uxdesign",
+   "risk": "caution",
+   "description": "Wallpapers & style Needed for changing wallpaper."
+  },
+  {
+   "packageName": "com.oplus.vdc",
+   "risk": "caution",
+   "description": "It's an app used to convert nearby devices into virtual hardware resources for the central device. Require internet to transfer data across devices."
+  },
+  {
+   "packageName": "com.oplus.viewtalk",
+   "risk": "caution",
+   "description": "ViewTalk Application for recognizing text in an image and reading it out loud. Did not figure out how it works."
+  },
+  {
+   "packageName": "com.oplus.vip",
+   "risk": "safe",
+   "description": "My OPPO https://play.google.com/store/apps/details?id=com.oplus.vip"
+  },
+  {
+   "packageName": "com.oplus.virtualcomm",
+   "risk": "caution",
+   "description": "It's probably virtual communications. Also about these it's in the code."
+  },
+  {
+   "packageName": "com.oplus.wallpapers",
+   "risk": "caution",
+   "description": "Wallpapers Needed for wallpapers."
+  },
+  {
+   "packageName": "com.oplus.wifibackuprestore",
+   "risk": "caution",
+   "description": "Lets you backup your wifi credentials to the cloud and possibly local wifi access point backups with local backup and restore feature. This app has obviously access to your wifi credential and have the INTERNET permission. Pithus analysis: https://beta.pithus.org/report/76e43c..."
+  },
+  {
+   "packageName": "com.oplus.wifitest",
+   "risk": "safe",
+   "description": "wifitest Just a testing mode accessed through phone dialing code."
+  },
+  {
+   "packageName": "net.oneplus.commonlogtool",
+   "risk": "safe",
+   "description": "OnePlus Common Log Tool 9 permissions and given what we know about OnePlus logging apps, it's a good idea to disable this. See com.oneplus.opbugreportlite, com.oem.oemlogkit and net.oneplus.odm"
+  },
+  {
+   "packageName": "net.oneplus.forums",
+   "risk": "safe",
+   "description": "OnePlus Community (https://play.google.com/store/apps/details?id=net.oneplus.forums) Literally just their forum... in an app. Just use a Browser if you wanna access the forums."
+  },
+  {
+   "packageName": "net.oneplus.launcher",
+   "risk": "expert",
+   "description": "Oneplus Launcher Runs in the background as part of the system. Aside from obviously handling the default launcher itself, it also handles the Recents UI on Android 9, the home&recents gestures in Android 11, some submenus in the Settings app and possibly more that I'm unaware..."
+  },
+  {
+   "packageName": "net.oneplus.launcher.black.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for the Oneplus Launcher?"
+  },
+  {
+   "packageName": "net.oneplus.launcher.white.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for the Oneplus Launcher?"
+  },
+  {
+   "packageName": "net.oneplus.odm",
+   "risk": "safe",
+   "description": "\"OnePlus System Service\" Shady telemetry app. Sends loads of data to OnePlus' servers, including IMEI, phone number, MAC addresses, mobile network names and IMSI prefixes, Wi-Fi connection info, the phone's serial number and every time an app was opened. Source: https://www.ch..."
+  },
+  {
+   "packageName": "net.oneplus.odm.provider",
+   "risk": "safe",
+   "description": "Insight Provider Provider for net.oneplus.odm? (shady telemetry app) Content providers encapsulate data, providing centralized management of data shared between apps. https://developer.android.com/guide/topics/providers/content-providers.html"
+  },
+  {
+   "packageName": "net.oneplus.provider.appcategoryprovider",
+   "risk": "safe",
+   "description": "AppCategoryProvider Runs in the background. I think this categorizes apps for use with system functionality, for example: automatically adding games to Game Mode."
+  },
+  {
+   "packageName": "net.oneplus.push",
+   "risk": "safe",
+   "description": "Push OnePlus push notifications. Only used by OnePlus' pre-installed apps. Pushes\"surveys and other junk\" according to a user. https://forums.oneplus.com/threads/psa-non-root-root-stop-oneplus-push-notifications.580058/ OnePlus can remotely send push notifications: https://www..."
+  },
+  {
+   "packageName": "net.oneplus.wallpaperresources",
+   "risk": "expert",
+   "description": "Resources for some live wall papers? Not sure. Only contains a\"WallpaperResourceProvider\", no services, activities or receivers."
+  },
+  {
+   "packageName": "net.oneplus.weather",
+   "risk": "safe",
+   "description": "OnePlus Weather (https://play.google.com/store/apps/details?id=net.oneplus.weather) Occasionally runs in the background; I think it runs every now and then to change the app icon to current weather conditions."
+  },
+  {
+   "packageName": "net.oneplus.weather.basiccolorblack.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Weather app?"
+  },
+  {
+   "packageName": "net.oneplus.weather.basiccolorwhite.overlay",
+   "risk": "expert",
+   "description": "Theme overlay for Oneplus Weather app?"
+  },
+  {
+   "packageName": "net.oneplus.widget",
+   "risk": "safe",
+   "description": "OnePlus Widget Lets you use OnePlus widgets on the home screen."
+  }
+ ]
+}

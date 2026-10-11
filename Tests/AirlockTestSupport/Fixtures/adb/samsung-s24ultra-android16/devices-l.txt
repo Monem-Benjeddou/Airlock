@@ -1,0 +1,3 @@
+List of devices attached
+FIXTURESERIAL01            device usb:1048576X product:e3qxxx model:SM_S928B device:e3q transport_id:35
+

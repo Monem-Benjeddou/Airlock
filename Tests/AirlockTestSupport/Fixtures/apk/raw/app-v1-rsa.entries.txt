@@ -1,0 +1,6 @@
+AndroidManifest.xml
+resources.arsc
+classes.dex
+META-INF/RSA.SF
+META-INF/RSA.RSA
+META-INF/MANIFEST.MF

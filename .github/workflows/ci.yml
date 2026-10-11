@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-FileCopyrightText: 2026 Airlock contributors
+name: CI
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: SwiftLint (strict)
+        run: scripts/lint.sh
+      - name: REUSE licence check
+        run: pipx run --spec "reuse[charset-normalizer]" reuse lint
+
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s "$(printf '%s\n' /Applications/Xcode_16*.app | sort -V | tail -1)"
+      - name: Swift version
+        run: swift --version
+      - name: Build (warnings as errors)
+        run: swift build --build-tests
+      - name: Tests with coverage gate
+        run: scripts/coverage.sh
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+
+  app:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s "$(printf '%s\n' /Applications/Xcode_16*.app | sort -V | tail -1)"
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        run: xcodegen generate
+      - name: Build app and UI tests
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing -project Airlock.xcodeproj -scheme Airlock \
+            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" CODE_SIGN_IDENTITY=- > build.log 2>&1 \
+            || { grep -E 'error:' build.log | sort -u; tail -40 build.log; exit 1; }
+          tail -20 build.log
+      - name: Check the parser helper is embedded, sandboxed and offline
+        run: |
+          APP="$(find "$PWD/build/Build/Products" -maxdepth 2 -name Airlock.app | head -1)"
+          test -n "$APP"
+          XPC="$APP/Contents/XPCServices/AirlockParser.xpc"
+          test -d "$XPC"
+          codesign -d --entitlements :- "$XPC" > xpc.plist
+          cat xpc.plist
+          /usr/libexec/PlistBuddy -c 'Print :com.apple.security.app-sandbox' xpc.plist | grep -q true
+          if grep -q 'com.apple.security.network' xpc.plist; then echo "helper has network access"; exit 1; fi
+      - name: UI tests
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building -project Airlock.xcodeproj -scheme Airlock \
+            -destination 'platform=macOS,arch=arm64' -derivedDataPath "$PWD/build" \
+            -resultBundlePath "$PWD/ui-tests.xcresult" > ui-tests.log 2>&1 \
+            || { grep -E 'error:|failed' ui-tests.log | sort -u; tail -60 ui-tests.log; exit 1; }
+          grep -E "Test Case|Executed" ui-tests.log | tail -40
+      - name: Upload UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-tests
+          path: |
+            ui-tests.xcresult
+            ui-tests.log
