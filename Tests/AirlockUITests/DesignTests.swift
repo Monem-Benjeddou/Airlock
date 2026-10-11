@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Airlock contributors
 
 import AirlockCore
+import AirlockPairing
 @testable import AirlockUI
 import Foundation
 import Testing
@@ -107,5 +108,19 @@ struct AppsPageTests {
         environment.apps.searchText = "zzz"
         #expect(environment.apps.count(for: .all) == environment.apps.apps.count)
         #expect(environment.apps.visibleApps.isEmpty)
+    }
+}
+
+@Suite("Pairing problems")
+struct PairingProblemTests {
+    @Test func notFoundSplitsIntoAHeadlineAndTips() {
+        let error = PairingError.notFound(.noServiceSeen)
+        #expect(PairingProblem.headline(of: error) == "Your phone didn't show up")
+        #expect(PairingProblem.tips(for: error).count == 3)
+    }
+
+    @Test func otherErrorsAreOneSentence() {
+        #expect(PairingProblem.headline(of: .wrongCode) == PairingError.wrongCode.explanation)
+        #expect(PairingProblem.tips(for: .wrongCode).isEmpty)
     }
 }

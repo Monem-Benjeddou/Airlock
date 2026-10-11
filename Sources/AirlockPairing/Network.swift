@@ -82,7 +82,7 @@ public enum NetworkDiagnosis: Hashable, Sendable {
         case .macNotOnNetwork: "Your Mac is not connected to a network"
         case .discoveryUnavailable: "Device discovery is not available"
         case .differentNetworks: "Your Mac and phone are on different networks"
-        case .noServiceSeen: "Airlock cannot see your phone on this network"
+        case .noServiceSeen: "Your phone didn't show up"
         }
     }
 
@@ -97,10 +97,10 @@ public enum NetworkDiagnosis: Hashable, Sendable {
             ["Your Mac is at \(mac) and your phone at \(phone). Join both to the same Wi-Fi network.",
              "If your router has separate 2.4 GHz and 5 GHz networks, use the same one on both devices."]
         case .noServiceSeen:
-            ["Guest networks and some office or hotel networks block devices from seeing each other. "
-                + "Use your home network or a phone hotspot.",
-             "Turn off \"AP isolation\" or \"client isolation\" in your router settings if you can.",
-             "Use the pairing code option, or connect by USB and use the legacy wireless mode."]
+            ["Check that your phone shows Pair device with QR code, and scan the code again.",
+             "Your phone and Mac must be on the same Wi-Fi network. Guest, office and hotel networks often block "
+                + "devices from seeing each other; a phone hotspot or your home network works.",
+             "Or use Pairing Code, or connect by USB."]
         }
     }
 }

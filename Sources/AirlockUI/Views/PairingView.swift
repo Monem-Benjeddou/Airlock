@@ -69,9 +69,8 @@ struct PairingView: View {
                     .foregroundStyle(Palette.success)
                 Button("Pair Another Phone") { model.startQRPairing() }
             case .failed(let error):
-                Label(error.explanation, systemImage: "exclamationmark.triangle").foregroundStyle(Palette.warning)
-                    .accessibilityIdentifier("pairingError")
-                Button("Try Again") { model.startQRPairing() }
+                PairingProblem(error: error)
+                Button("Show a New QR Code") { model.startQRPairing() }
             case .idle:
                 Button("Show QR Code") { model.startQRPairing() }.accessibilityIdentifier("showQR")
             }
@@ -88,9 +87,7 @@ struct PairingView: View {
             TextField("Connect port", text: $model.connectPort, prompt: Text("Under IP address & Port"))
                 .help("The port shown under IP address & Port on the Wireless debugging screen.")
             Button("Pair") { Task { await model.pairWithCode() } }.disabled(!model.canSubmitCode)
-            if case .failed(let error) = model.state {
-                Label(error.explanation, systemImage: "exclamationmark.triangle").foregroundStyle(Palette.warning)
-            }
+            if case .failed(let error) = model.state { PairingProblem(error: error) }
         }
     }
 
@@ -144,6 +141,35 @@ public struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: 480)
         .padding()
+    }
+}
+
+/// Why pairing failed: a short headline, then what to try as a list, wrapped to the sheet's width.
+struct PairingProblem: View {
+    let error: PairingError
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: Spacing.small) {
+            Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(Palette.warning).accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: Spacing.xSmall) {
+                Text(Self.headline(of: error)).font(.headline)
+                ForEach(Self.tips(for: error), id: \.self) { tip in
+                    Text("• " + tip).foregroundStyle(.secondary)
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("pairingError")
+    }
+
+    nonisolated static func headline(of error: PairingError) -> String {
+        if case .notFound(let diagnosis) = error { diagnosis.title } else { error.explanation }
+    }
+
+    nonisolated static func tips(for error: PairingError) -> [String] {
+        if case .notFound(let diagnosis) = error { diagnosis.suggestions } else { [] }
     }
 }
 

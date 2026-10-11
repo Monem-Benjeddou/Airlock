@@ -355,7 +355,7 @@ struct PairingModelTests {
         let model = PairingModel(pairing: FakePairing(result: .failure(.notFound(.noServiceSeen))))
         model.startQRPairing()
         #expect(await eventually { model.state == .failed(.notFound(.noServiceSeen)) })
-        #expect(PairingError.notFound(.noServiceSeen).explanation.contains("Guest networks"))
+        #expect(PairingError.notFound(.noServiceSeen).explanation.contains("same Wi-Fi network"))
     }
 
     @Test func stopCancelsSilently() async throws {

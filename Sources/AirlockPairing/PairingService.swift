@@ -61,6 +61,7 @@ public struct PairingService: Sendable {
     private let adb: ADBClient
     private let network: any NetworkInspector
     private let store: any PairedDeviceStore
+    private let scanTimeout: Duration
     private let discoveryTimeout: Duration
     private let pollInterval: Duration
 
@@ -68,25 +69,32 @@ public struct PairingService: Sendable {
         adb: ADBClient,
         network: any NetworkInspector = SystemNetworkInspector(),
         store: any PairedDeviceStore = UserDefaultsPairedDeviceStore(),
+        scanTimeout: Duration = .seconds(180),
         discoveryTimeout: Duration = .seconds(10),
         pollInterval: Duration = .seconds(1)
     ) {
         self.adb = adb
         self.network = network
         self.store = store
+        self.scanTimeout = scanTimeout
         self.discoveryTimeout = discoveryTimeout
         self.pollInterval = pollInterval
     }
 
     // MARK: QR
 
-    /// Waits for the phone that scanned `session`'s QR code, pairs, then connects.
+    /// Waits for the phone that scanned `session`'s QR code, pairs, then connects. The wait for the scan is long
+    /// (`scanTimeout`): the person has to find Wireless debugging on the phone first.
     public func pairWithQR(_ session: PairingSession) async throws(PairingError) -> PairedDevice {
-        let pairingService = try await discover { $0.type == .pairing && $0.instance == session.serviceName }
+        let pairingService = try await discover(for: scanTimeout) {
+            $0.type == .pairing && $0.instance == session.serviceName
+        }
         guard let pairingService else { throw .notFound(await diagnose(phoneAddress: nil)) }
 
         let guid = try await pair(host: pairingService.host, port: pairingService.port, code: session.password)
-        let connectService = try await discover { $0.type == .connect && (guid.map($0.instance.hasPrefix) ?? true) }
+        let connectService = try await discover(for: discoveryTimeout) {
+            $0.type == .connect && (guid.map($0.instance.hasPrefix) ?? true)
+        }
         guard let connectService else { throw .pairedButNotConnected }
         return try await connect(name: connectService.instance, host: connectService.host, port: connectService.port)
     }
@@ -144,8 +152,10 @@ public struct PairingService: Sendable {
 
     // MARK: Steps
 
-    private func discover(_ matches: @Sendable (MdnsService) -> Bool) async throws(PairingError) -> MdnsService? {
-        let deadline = ContinuousClock.now + discoveryTimeout
+    private func discover(
+        for timeout: Duration, _ matches: @Sendable (MdnsService) -> Bool
+    ) async throws(PairingError) -> MdnsService? {
+        let deadline = ContinuousClock.now + timeout
         repeat {
             if Task.isCancelled { throw .cancelled }
             let services = try await adbCall { try await adb.mdnsServices() }

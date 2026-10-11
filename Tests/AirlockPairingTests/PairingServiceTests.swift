@@ -32,7 +32,10 @@ private func service(
     store: MemoryStore = MemoryStore(),
     timeout: Duration = .seconds(10)
 ) -> PairingService {
-    PairingService(adb: makeADB(fake), network: network, store: store, discoveryTimeout: timeout, pollInterval: .milliseconds(5))
+    PairingService(
+        adb: makeADB(fake), network: network, store: store,
+        scanTimeout: timeout, discoveryTimeout: timeout, pollInterval: .milliseconds(5)
+    )
 }
 
 @Suite("QR pairing payload")
