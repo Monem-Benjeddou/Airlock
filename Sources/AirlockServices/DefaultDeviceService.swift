@@ -44,16 +44,22 @@ public struct DefaultDeviceService: DeviceService {
         let props = try await channel.properties()
         let battery = try await channel.batteryLevel()
         let density = try await channel.density()
+        // Optional: an older or locked-down device without `settings` still shows its model code.
+        let ownerName = try? await channel.ownerDeviceName()
 
         let manufacturer = props["ro.product.manufacturer"] ?? ""
         let abis = (props["ro.product.cpu.abilist"] ?? "").split(separator: ",").map(String.init)
         let locale = [props["persist.sys.locale"], props["ro.product.locale"]].compactMap { $0 }.first { !$0.isEmpty } ?? "en-US"
         let serialNumber = props["ro.serialno"].flatMap { $0.isEmpty ? nil : $0 } ?? serial.rawValue
+        let model = props["ro.product.model"].flatMap { $0.isEmpty ? nil : $0 } ?? "Android device"
+        let marketName = [props["ro.product.marketname"], props["ro.product.vendor.marketname"]]
+            .compactMap { $0 }.first { !$0.isEmpty }
 
         return DeviceInfo(
             serial: serial,
             stableID: serialNumber,
-            model: props["ro.product.model"].flatMap { $0.isEmpty ? nil : $0 } ?? "Android device",
+            model: model,
+            displayName: DeviceNames.friendlyName(ownerName: ownerName, marketName: marketName, model: model),
             manufacturer: manufacturer,
             brand: DeviceBrand(manufacturer: manufacturer, brand: props["ro.product.brand"] ?? ""),
             androidVersion: props["ro.build.version.release"] ?? "?",

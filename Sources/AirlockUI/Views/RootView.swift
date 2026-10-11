@@ -112,7 +112,7 @@ struct DeviceRow: View {
                 .foregroundStyle(isSelected ? Color.accentColor : .secondary)
                 .accessibilityLabel(device.serial.isWireless ? "Wi-Fi" : "USB")
             VStack(alignment: .leading, spacing: 2) {
-                Text(info?.model ?? device.model?.replacingOccurrences(of: "_", with: " ") ?? device.serial.rawValue)
+                Text(info?.displayName ?? device.model?.replacingOccurrences(of: "_", with: " ") ?? device.serial.rawValue)
                     .fontWeight(isSelected ? .semibold : .regular)
                 Text(status).font(.caption).foregroundStyle(.secondary)
             }
@@ -122,12 +122,19 @@ struct DeviceRow: View {
     private var status: String {
         switch device.state {
         case .ready:
-            if let info { "Android \(info.androidVersion)" + (info.batteryPercent.map { " · \($0)%" } ?? "") } else { "Connected" }
+            if let info { Self.details(of: info) } else { "Connected" }
         case .unauthorized, .authorizing: "Waiting for Allow"
         case .offline: "Not responding"
         case .noPermissions: "No permission"
         case .other(let mode): mode.capitalized
         }
+    }
+
+    /// "SM-S928B · Android 16 · 87%": the model code stays visible under a friendly name.
+    nonisolated static func details(of info: DeviceInfo) -> String {
+        let model = info.displayName == info.model ? [] : [info.model]
+        let battery = info.batteryPercent.map { ["\($0)%"] } ?? []
+        return (model + ["Android \(info.androidVersion)"] + battery).joined(separator: " · ")
     }
 }
 

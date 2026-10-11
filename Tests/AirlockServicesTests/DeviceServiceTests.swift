@@ -28,6 +28,8 @@ func registerS24(_ fake: FakeADB) {
     fake.on(shell("dumpsys", "battery"), .ok(Fixture.adb(s24, "dumpsys-battery.txt")))
     fake.on(shell("wm", "density"), .ok(Fixture.adb(s24, "wm-density.txt")))
     fake.on(shell("df", "/data"), .ok(Fixture.adb(s24, "df-data.txt")))
+    // Not in the recording: the owner's name for the phone is personal, and a never-renamed S24 says this.
+    fake.on(shell("settings", "get", "global", "device_name"), .ok("Galaxy S24 Ultra\n"))
 }
 
 @Suite("DefaultDeviceService")
@@ -100,6 +102,7 @@ struct DeviceServiceTests {
         let service = DefaultDeviceService(adb: makeADB(fake))
         let info = try await service.info(for: try DeviceSerial(s24Serial))
         #expect(info.model == "SM-S928B")
+        #expect(info.displayName == "Galaxy S24 Ultra")
         #expect(info.manufacturer == "samsung")
         #expect(info.brand == .samsung)
         #expect(info.androidVersion == "16")
@@ -115,11 +118,50 @@ struct DeviceServiceTests {
         fake.on(shell("wm", "density"), .ok("Physical density: 320\n"))
         let info = try await DefaultDeviceService(adb: makeADB(fake)).info(for: try DeviceSerial(s24Serial))
         #expect(info.model == "Android device")
+        #expect(info.displayName == "Android device")
         #expect(info.stableID == s24Serial)
         #expect(info.batteryPercent == nil)
         #expect(info.brand == .other)
         #expect(info.properties.locales == ["fr-FR"])
         #expect(info.properties.abis.isEmpty)
+    }
+
+    private func displayName(getprop: String, deviceName: FakeADB.Response) async throws -> String {
+        let fake = FakeADB()
+        fake.on(shell("getprop"), .ok(getprop))
+        fake.on(shell("dumpsys", "battery"), .ok("level: 50\n"))
+        fake.on(shell("wm", "density"), .ok("Physical density: 420\n"))
+        fake.on(shell("settings", "get", "global", "device_name"), deviceName)
+        return try await DefaultDeviceService(adb: makeADB(fake)).info(for: try DeviceSerial(s24Serial)).displayName
+    }
+
+    @Test func theNameTheOwnerGaveThePhoneWins() async throws {
+        let name = try await displayName(getprop: "[ro.product.model]: [SM-S928B]\n", deviceName: .ok("Work phone\n"))
+        #expect(name == "Work phone")
+    }
+
+    @Test func anUnsetNameFallsBackToTheMarketingName() async throws {
+        let props = "[ro.product.model]: [23090RA98G]\n[ro.product.marketname]: [Redmi Note 13 Pro]\n"
+        #expect(try await displayName(getprop: props, deviceName: .ok("null\n")) == "Redmi Note 13 Pro")
+    }
+
+    @Test func theVendorMarketingNameCountsToo() async throws {
+        let props = "[ro.product.model]: [CPH2581]\n[ro.product.marketname]: []\n[ro.product.vendor.marketname]: [OnePlus 12]\n"
+        #expect(try await displayName(getprop: props, deviceName: .ok("\n")) == "OnePlus 12")
+    }
+
+    @Test func aFailingSettingsQueryFallsBackToTheBundledList() async throws {
+        let failure = FakeADB.Response.failure("cmd: Can't find service: settings")
+        let name = try await displayName(getprop: "[ro.product.model]: [SM-S928B]\n", deviceName: failure)
+        #expect(name == "Galaxy S24 Ultra")
+    }
+
+    @Test func theNameQueryIsReadOnly() async throws {
+        let fake = FakeADB()
+        registerS24(fake)
+        _ = try await DefaultDeviceService(adb: makeADB(fake)).info(for: try DeviceSerial(s24Serial))
+        let settingsCalls = fake.calls.filter { $0.contains("settings") }
+        #expect(settingsCalls == [shell("settings", "get", "global", "device_name")])
     }
 
     @Test func infoOnUnauthorizedDeviceThrows() async throws {

@@ -255,3 +255,23 @@ struct DemoRealInspectorTests {
         #expect(FileManager.default.fileExists(atPath: keep.path))
     }
 }
+
+@Suite("Device row")
+struct DeviceRowTests {
+    private func info(model: String, displayName: String?, battery: Int?) throws -> DeviceInfo {
+        DeviceInfo(
+            serial: try DeviceSerial("R58"), stableID: "R58", model: model, displayName: displayName,
+            manufacturer: "samsung", brand: .samsung, androidVersion: "16",
+            properties: DeviceProperties(abis: [], densityDPI: 0, locales: [], sdkLevel: 36), batteryPercent: battery
+        )
+    }
+
+    @Test func aFriendlyNameKeepsTheModelCodeUnderIt() throws {
+        let details = DeviceRow.details(of: try info(model: "SM-S928B", displayName: "Galaxy S24 Ultra", battery: 87))
+        #expect(details == "SM-S928B · Android 16 · 87%")
+    }
+
+    @Test func theModelCodeIsNotRepeatedWhenItIsTheName() throws {
+        #expect(DeviceRow.details(of: try info(model: "CPH2581", displayName: nil, battery: nil)) == "Android 16")
+    }
+}

@@ -8,7 +8,8 @@
 #   scripts/record-fixtures.sh <serial> <fixture-name>     e.g. R58M123 samsung-s24ultra-android16
 #
 # Raw output goes to a temp folder; sanitize_fixtures.py then strips personal data (serials,
-# third-party package names, battery serials) before anything is written to the repo.
+# third-party package names, battery serials, the name the owner gave the phone) before anything is
+# written to the repo.
 set -euo pipefail
 SERIAL="$1"; NAME="$2"
 SCRIPTS="$(cd "$(dirname "$0")" && pwd)"
@@ -32,5 +33,6 @@ a shell dumpsys package com.android.settings                            > dumpsy
 a shell cmd package query-activities --brief -a android.intent.action.MAIN -c android.intent.category.HOME > home-activities.txt
 a shell ime list -s                                                     > ime-list.txt
 a shell pm list users                                                   > pm-list-users.txt
+a shell settings get global device_name                                 > settings-device-name.txt
 python3 -I "$SCRIPTS/sanitize_fixtures.py" "$RAW" "$REPO/Tests/AirlockTestSupport/Fixtures/adb/$NAME" "$SERIAL"
 rm -rf "$RAW"

@@ -3,6 +3,12 @@
 
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **Phone names you recognise.** The sidebar shows "Galaxy S24 Ultra", or the name you gave the phone in its Settings, instead of a model code like `SM-S928B`. The model code stays underneath. The name is read from the phone, shown on screen only, and never logged or saved.
+
 ## 0.1.0
 
 The first preview. Airlock is not notarized yet, so macOS blocks the first launch until you allow it in System Settings › Privacy & Security (see Installing in the README).
