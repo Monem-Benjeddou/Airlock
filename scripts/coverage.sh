@@ -5,7 +5,9 @@
 #   90% line coverage on core services, 100% on error mapping and the critical denylist.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-swift test --enable-code-coverage --parallel "$@"
+# No --parallel: worker processes write coverage counters concurrently and can lose counts, which made
+# the 100% gates fail at random. Swift Testing already runs tests in parallel within one process.
+swift test --enable-code-coverage "$@"
 BIN_DIR="$(swift build --show-bin-path)"
 PROFDATA="$BIN_DIR/codecov/default.profdata"
 XCTEST="$(find "$BIN_DIR" -maxdepth 1 -name '*.xctest' | head -1)"
