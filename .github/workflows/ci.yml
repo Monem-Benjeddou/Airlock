@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Select Xcode
-        run: sudo xcode-select -s "$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)"
+        run: sudo xcode-select -s "$(printf '%s\n' /Applications/Xcode_16*.app | sort -V | tail -1)"
       - name: Swift version
         run: swift --version
       - name: Build (warnings as errors)
@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Select Xcode
-        run: sudo xcode-select -s "$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)"
+        run: sudo xcode-select -s "$(printf '%s\n' /Applications/Xcode_16*.app | sort -V | tail -1)"
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate project
@@ -71,7 +71,7 @@ jobs:
           codesign -d --entitlements :- "$XPC" > xpc.plist
           cat xpc.plist
           /usr/libexec/PlistBuddy -c 'Print :com.apple.security.app-sandbox' xpc.plist | grep -q true
-          ! grep -q 'com.apple.security.network' xpc.plist
+          if grep -q 'com.apple.security.network' xpc.plist; then echo "helper has network access"; exit 1; fi
       - name: UI tests
         run: |
           set -o pipefail

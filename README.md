@@ -23,7 +23,12 @@ Airlock never hosts or links to APKs and does not modify, repackage or crack app
 ## Requirements
 
 - macOS 14 Sonoma or later, Apple silicon or Intel
+- `adb` from Android platform-tools: `brew install android-platform-tools`, or Android Studio
 - An Android phone with USB debugging enabled (Airlock shows you how)
+
+## Installing
+
+Download `Airlock-<version>.zip` from [Releases](https://github.com/Monem-Benjeddou/Airlock/releases), unzip it and move Airlock to Applications. Preview builds are not notarized yet: the first time, right-click Airlock and choose Open, then Open again. If macOS still refuses, run `xattr -dr com.apple.quarantine /Applications/Airlock.app`.
 
 ## Privacy
 

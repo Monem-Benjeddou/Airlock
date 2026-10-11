@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-FileCopyrightText: 2026 Airlock contributors
+#
+# Pushing a tag like v0.1.0 builds a universal Release app, checks that the parser helper is sandboxed and
+# offline, and publishes a GitHub release with the zipped app, its SHA-256 and the CHANGELOG section.
+# Running it by hand (workflow_dispatch) is a dry run: the same build and checks, uploaded as an artifact.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s "$(printf '%s\n' /Applications/Xcode_16*.app | sort -V | tail -1)"
+      - name: Read the version and check it matches the tag and CHANGELOG
+        run: |
+          VERSION="$(sed -n 's/^ *MARKETING_VERSION: "\(.*\)"$/\1/p' project.yml)"
+          test -n "$VERSION"
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then test "$GITHUB_REF_NAME" = "v$VERSION"; fi
+          grep -q "^## $VERSION\$" CHANGELOG.md
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        run: xcodegen generate
+      - name: Build universal Release app
+        run: |
+          set -o pipefail
+          xcodebuild build -project Airlock.xcodeproj -scheme Airlock -configuration Release \
+            -destination 'generic/platform=macOS' -derivedDataPath "$PWD/build" \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY=- > build.log 2>&1 \
+            || { grep -E 'error:' build.log | sort -u; tail -40 build.log; exit 1; }
+          tail -5 build.log
+      - name: Check the bundle
+        run: |
+          APP="$PWD/build/Build/Products/Release/Airlock.app"
+          XPC="$APP/Contents/XPCServices/AirlockParser.xpc"
+          test -d "$XPC"
+          lipo -archs "$APP/Contents/MacOS/Airlock" | grep -q arm64
+          lipo -archs "$APP/Contents/MacOS/Airlock" | grep -q x86_64
+          codesign --verify --deep --strict "$APP"
+          codesign -d --entitlements - --xml "$XPC" > xpc.plist
+          /usr/libexec/PlistBuddy -c 'Print :com.apple.security.app-sandbox' xpc.plist | grep -q true
+          if grep -q 'com.apple.security.network' xpc.plist; then echo "helper has network access"; exit 1; fi
+          if grep -q 'get-task-allow' xpc.plist; then echo "helper is debuggable"; exit 1; fi
+      - name: Package
+        run: |
+          ditto -c -k --keepParent build/Build/Products/Release/Airlock.app "Airlock-$VERSION.zip"
+          shasum -a 256 "Airlock-$VERSION.zip" > "Airlock-$VERSION.zip.sha256"
+          awk -v v="## $VERSION" '$0 == v {on=1; next} /^## / {on=0} on' CHANGELOG.md > notes.md
+          cat >> notes.md <<'NOTES'
+
+          ### Installing
+
+          1. Download `Airlock-*.zip`, unzip it, and move Airlock to Applications.
+          2. Airlock is not notarized yet. The first time, right-click Airlock and choose Open, then Open again.
+             If macOS still refuses, run `xattr -dr com.apple.quarantine /Applications/Airlock.app`.
+          3. Install adb if you don't have it: `brew install android-platform-tools`.
+          NOTES
+      - name: Keep the dry-run build
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Airlock-dry-run
+          path: |
+            Airlock-*.zip*
+            notes.md
+      - name: Publish
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "Airlock-$VERSION.zip" "Airlock-$VERSION.zip.sha256" \
+            --title "Airlock $VERSION" --notes-file notes.md --prerelease --verify-tag
