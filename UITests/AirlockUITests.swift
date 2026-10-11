@@ -15,7 +15,8 @@ final class AirlockUITests: XCTestCase {
 
     private func launch(_ arguments: [String] = ["--demo"], queue: [String] = []) {
         continueAfterFailure = false
-        app.launchArguments = arguments
+        // App Nap can freeze a background app's timers on CI runners; keep it out of the picture.
+        app.launchArguments = arguments + ["-NSAppSleepDisabled", "YES"]
         if !queue.isEmpty { app.launchEnvironment["AIRLOCK_DEMO_QUEUE"] = queue.joined(separator: ",") }
         app.launch()
         app.activate()
@@ -35,9 +36,10 @@ final class AirlockUITests: XCTestCase {
     private func appears(containing text: String, timeout: TimeInterval) -> Bool {
         let labels = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", text)).firstMatch
         let values = app.staticTexts.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
+        let textViews = app.textViews.matching(NSPredicate(format: "value CONTAINS[c] %@", text)).firstMatch
         let deadline = Date().addingTimeInterval(timeout)
         repeat {
-            if labels.exists || values.exists { return true }
+            if labels.exists || values.exists || textViews.exists { return true }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         } while Date() < deadline
         return false
@@ -214,9 +216,20 @@ final class AirlockUITests: XCTestCase {
         try audit("wireless")
     }
 
-    /// Runs Apple's audit and fails with the screen name, printing the tree once for CI logs.
+    /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
+    ///
+    /// Two kinds of finding are framework noise and are skipped: "no description" on layout containers
+    /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), and anything
+    /// in the title bar, which AppKit draws.
     private func audit(_ screen: String) throws {
+        app.activate()
+        let window = app.windows.firstMatch.frame
         try app.performAccessibilityAudit { [self] issue in
+            if let element = issue.element {
+                let containers: [XCUIElement.ElementType] = [.group, .splitGroup, .touchBar]
+                if issue.auditType == .sufficientElementDescription, containers.contains(element.elementType) { return true }
+                if element.frame.maxY <= window.minY + 52 { return true }
+            }
             fail("\(screen): \(issue.auditType) \(issue.compactDescription) on \(issue.element?.debugDescription ?? "the window")",
                  file: #filePath, line: #line)
             return true

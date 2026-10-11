@@ -183,7 +183,7 @@ struct FailureView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(InstallErrorText.title(error)).fontWeight(.semibold)
-            Text(InstallErrorText.explanation(error)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            Text(InstallErrorText.explanation(error)).fixedSize(horizontal: false, vertical: true)
             if case .packageManager(let explained) = error, let fix = explained.fix {
                 Button(fix.buttonTitle) {
                     if fix == .uninstallExistingThenInstall {

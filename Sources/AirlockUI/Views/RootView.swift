@@ -39,8 +39,6 @@ public struct RootView: View {
             detail
                 .frame(minWidth: 560, minHeight: 480)
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Airlock")
         .task { await environment.devices.run() }
         .onChange(of: environment.devices.selectedSerial, initial: true) { _, serial in
             environment.installQueue.targetDevice = environment.devices.stage == .ready ? serial : nil
@@ -83,7 +81,6 @@ struct Sidebar: View {
             SwiftUI.Section("Devices") {
                 if devices.devices.isEmpty {
                     Label("No phone connected", systemImage: "iphone.slash")
-                        .foregroundStyle(.secondary)
                 }
                 ForEach(devices.devices) { device in
                     DeviceRow(device: device, info: devices.details[device.serial], isSelected: device.serial == devices.selectedSerial)
@@ -146,7 +143,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(explanation.title).font(.largeTitle.bold()).accessibilityIdentifier("onboardingTitle")
-                    Text(explanation.detail).font(.title3).foregroundStyle(.secondary)
+                    Text(explanation.detail).font(.title3)
                 }
                 Picker("Phone brand", selection: Binding(get: { shownBrand }, set: { chosenBrand = $0 })) {
                     ForEach(DeviceBrand.allCases, id: \.self) { Text(OnboardingGuide.title(for: $0)).tag($0) }
@@ -162,7 +159,7 @@ struct OnboardingView: View {
                             .accessibilityHidden(true)
                         VStack(alignment: .leading, spacing: 4) {
                             Text("\(index + 1). \(step.title)").font(.headline)
-                            Text(step.detail).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                            Text(step.detail).fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .accessibilityElement(children: .combine)
