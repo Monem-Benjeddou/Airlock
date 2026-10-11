@@ -77,7 +77,7 @@ final class AirlockUITests: XCTestCase {
 
     private func openWiFi() {
         wait(for: "connectWiFi").click()
-        wait(for: "showQR")
+        wait(for: "pairingQR")
     }
 
     private func text(of element: XCUIElement) -> String {
@@ -114,7 +114,7 @@ final class AirlockUITests: XCTestCase {
         wait(for: "devicePicker").click()
         wait(for: "device-DEMO0001")
         wait(for: "connectWiFiFromDevices").click()
-        wait(for: "showQR")
+        wait(for: "pairingQR")
         wait(for: "closeWiFi").click()
     }
 
@@ -343,11 +343,22 @@ final class AirlockUITests: XCTestCase {
 
     // MARK: F5 Wireless pairing
 
-    func testQRPairingShowsACode() {
+    func testQRPairingShowsACodeStraightAway() {
         launch()
         openWiFi()
+        wait(for: "Waiting for your phone…")
+        wait(for: "Stop").click()
         wait(for: "showQR").click()
         wait(for: "pairingQR")
-        wait(for: "Waiting for your phone…")
+    }
+
+    func testPairingCodeAndOlderPhonesAreOneTabAway() {
+        launch()
+        openWiFi()
+        let method = wait(for: "pairingMethod")
+        method.radioButtons["Pairing Code"].click()
+        wait(for: "Pairing code")
+        method.radioButtons["Android 10 and Older"].click()
+        wait(for: "Switch to Wireless")
     }
 }
