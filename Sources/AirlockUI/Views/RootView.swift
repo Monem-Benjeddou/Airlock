@@ -83,9 +83,17 @@ struct Sidebar: View {
                     Label("No phone connected", systemImage: "iphone.slash")
                 }
                 ForEach(devices.devices) { device in
-                    DeviceRow(device: device, info: devices.details[device.serial], isSelected: device.serial == devices.selectedSerial)
+                    DeviceRow(
+                        device: device, info: devices.details[device.serial],
+                        failed: devices.detailErrors[device.serial] != nil, isSelected: device.serial == devices.selectedSerial
+                    )
                         .contentShape(Rectangle())
-                        .onTapGesture { devices.selectedSerial = device.serial }
+                        .onTapGesture {
+                            devices.selectedSerial = device.serial
+                            if devices.detailErrors[device.serial] != nil {
+                                Task { await devices.loadDetails(device.serial) }
+                            }
+                        }
                         .accessibilityIdentifier("device-\(device.serial.rawValue)")
                 }
             }
@@ -104,6 +112,8 @@ struct Sidebar: View {
 struct DeviceRow: View {
     let device: ConnectedDevice
     let info: DeviceInfo?
+    /// Reading the device's details failed; the row says so and a click retries.
+    let failed: Bool
     let isSelected: Bool
 
     var body: some View {
@@ -119,10 +129,12 @@ struct DeviceRow: View {
         }
     }
 
-    private var status: String {
-        switch device.state {
+    private var status: String { Self.status(of: device.state, info: info, failed: failed) }
+
+    nonisolated static func status(of state: DeviceConnectionState, info: DeviceInfo?, failed: Bool) -> String {
+        switch state {
         case .ready:
-            if let info { Self.details(of: info) } else { "Connected" }
+            if let info { details(of: info) } else if failed { "Couldn't read details. Click to retry." } else { "Reading details…" }
         case .unauthorized, .authorizing: "Waiting for Allow"
         case .offline: "Not responding"
         case .noPermissions: "No permission"

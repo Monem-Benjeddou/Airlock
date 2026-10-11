@@ -215,10 +215,15 @@ final class AirlockUITests: XCTestCase {
 
     func testAboutPanelShowsTheVersionAndLicence() {
         // Regression: Info.plist hard-coded version 1.0, so About and Finder showed the wrong version.
+        // This bundle is built from the same MARKETING_VERSION as the app, so the test follows each release.
+        guard let version = Bundle(for: Self.self).infoDictionary?["CFBundleShortVersionString"] as? String,
+              version.first?.isNumber == true else {
+            return fail("The UI test bundle has no version to compare with", file: #filePath, line: #line)
+        }
         launch()
         app.menuBars.menuBarItems["Airlock"].click()
         app.menuBars.menuItems["About Airlock"].click()
-        if !appears(containing: "Version 0.1.0", timeout: 5) { fail("About shows the wrong version", file: #filePath, line: #line) }
+        if !appears(containing: "Version \(version)", timeout: 5) { fail("About shows the wrong version", file: #filePath, line: #line) }
         if !appears(containing: "GNU GPL 3.0", timeout: 2) { fail("About has no licence", file: #filePath, line: #line) }
     }
 

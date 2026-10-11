@@ -3,11 +3,21 @@
 
 # Changelog
 
-## Unreleased
+## 0.1.1
+
+The first full release. It is still not notarized, so the first launch needs one approval in System Settings › Privacy & Security (see Installing below).
 
 ### Added
 
 - **Phone names you recognise.** The sidebar shows "Galaxy S24 Ultra", or the name you gave the phone in its Settings, instead of a model code like `SM-S928B`. The model code stays underneath. The name is read from the phone, shown on screen only, and never logged or saved.
+
+### Fixed
+
+- A phone whose details could not be read looked the same as a working one ("Connected"). The sidebar now says "Reading details…" while it loads, and "Couldn't read details. Click to retry." if that fails. Clicking retries.
+
+### Checked
+
+- The automated device tests pass on a Galaxy S24 Ultra (Android 16, read-only) and on an Android 15 emulator, where they also install apps, push OBB data, catch a signer mismatch, cancel an install, and disable and restore an app.
 
 ## 0.1.0
 

@@ -75,6 +75,10 @@ struct ReadOnlyServiceTests {
         let serial = try #require(IntegrationEnvironment.serial)
         let info = try await DefaultDeviceService(adb: try IntegrationEnvironment.client()).info(for: serial)
         #expect(!info.model.isEmpty)
+        // A model on the bundled list always gets a friendly name. Compared as a Bool so a failure never prints
+        // the name, which can be the owner's own.
+        let hasFriendlyName = info.displayName != info.model && !info.displayName.isEmpty
+        if DeviceNames.knownName(forModel: info.model) != nil { #expect(hasFriendlyName) }
         #expect(!info.properties.abis.isEmpty)
         #expect(info.properties.densityDPI > 100)
     }
@@ -86,9 +90,11 @@ struct ReadOnlyServiceTests {
             presets: try PresetLibrary.bundled(), backupRoot: FileManager.default.temporaryDirectory
         )
         let apps = try await manager.listApps(on: serial)
+        // A clean emulator has no apps the user installed, so compare with the device rather than expect some.
+        let thirdParty = try await IntegrationEnvironment.client().device(serial).packageNames(.thirdParty)
         #expect(apps.count > 50)
         #expect(apps.contains { $0.packageName.rawValue == "com.android.settings" && $0.isSystem })
-        #expect(apps.contains { !$0.isSystem })
+        #expect(Set(apps.filter { !$0.isSystem }.map(\.packageName.rawValue)) == thirdParty)
     }
 
     /// Plans (but does not install) a real signed fixture against the real phone.
