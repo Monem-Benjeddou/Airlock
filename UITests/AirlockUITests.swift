@@ -75,6 +75,11 @@ final class AirlockUITests: XCTestCase {
         wait(for: "section-\(section)").click()
     }
 
+    private func openWiFi() {
+        wait(for: "connectWiFi").click()
+        wait(for: "showQR")
+    }
+
     private func text(of element: XCUIElement) -> String {
         (element.value as? String).flatMap { $0.isEmpty ? nil : $0 } ?? element.label
     }
@@ -97,9 +102,20 @@ final class AirlockUITests: XCTestCase {
 
     func testReadyPhoneShowsModelAndBattery() {
         launch()
-        wait(for: "Pixel 9 (demo)")
-        wait(for: "Android 16 · 82%")
+        let picker = wait(for: "devicePicker")
+        for part in ["Pixel 9 (demo)", "Android 16 · 82%", "connected by USB"] where !appears(containing: part, timeout: 5) {
+            fail("the device picker does not say \(part): \(picker.label)", file: #filePath, line: #line)
+        }
         wait(for: "chooseFiles")
+    }
+
+    func testTheDevicePickerListsPhonesAndOffersWiFi() {
+        launch()
+        wait(for: "devicePicker").click()
+        wait(for: "device-DEMO0001")
+        wait(for: "connectWiFiFromDevices").click()
+        wait(for: "showQR")
+        wait(for: "closeWiFi").click()
     }
 
     // MARK: F2 Installer and F3 safety report
@@ -231,7 +247,7 @@ final class AirlockUITests: XCTestCase {
         // Regression: images exposed SF Symbol names such as "cable.connector" and "arrow.down.app".
         launch(queue: ["notes.apk"])
         wait(for: "Installed version 3", timeout: 30)
-        wait(for: "USB")
+        if !appears(containing: "connected by USB", timeout: 5) { fail("the connection is not spoken", file: #filePath, line: #line) }
         for name in ["cable.connector", "arrow.down.app", "Arrow Down Circle", "checkmark.circle.fill"] {
             let match = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", name)).firstMatch
             XCTAssertFalse(match.exists, "VoiceOver would read \(name)")
@@ -255,9 +271,8 @@ final class AirlockUITests: XCTestCase {
         wait(for: "com.example.bloat")
         try audit("apps")
 
-        open("Wireless")
-        wait(for: "showQR")
-        try audit("wireless")
+        openWiFi()
+        try audit("wireless", within: app.sheets.firstMatch)
     }
 
     /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
@@ -323,7 +338,7 @@ final class AirlockUITests: XCTestCase {
 
     func testQRPairingShowsACode() {
         launch()
-        open("Wireless")
+        openWiFi()
         wait(for: "showQR").click()
         wait(for: "pairingQR")
         wait(for: "Waiting for your phone…")

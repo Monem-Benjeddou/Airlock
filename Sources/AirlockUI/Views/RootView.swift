@@ -2,44 +2,63 @@
 // SPDX-FileCopyrightText: 2026 Airlock contributors
 
 import AirlockCore
+import Foundation
 import SwiftUI
 
 public enum Section: String, CaseIterable, Identifiable, Hashable {
     case install = "Install"
     case apps = "Apps"
     case history = "History"
-    case wireless = "Wireless"
 
     public var id: String { rawValue }
+
+    /// The page to open on: `AIRLOCK_SECTION=apps` (any case), for screenshots and previews. Install otherwise.
+    public static func initial(_ environment: [String: String] = ProcessInfo.processInfo.environment) -> Section {
+        let wanted = environment["AIRLOCK_SECTION"]?.lowercased()
+        return allCases.first { $0.rawValue.lowercased() == wanted } ?? .install
+    }
 
     var symbol: String {
         switch self {
         case .install: "square.and.arrow.down.on.square"
         case .apps: "square.grid.2x2"
         case .history: "clock.arrow.circlepath"
-        case .wireless: "wifi"
         }
     }
 }
 
-/// The main window: devices and sections in the sidebar, the selected section on the right.
+/// The main window: pages in the sidebar, the phone in the toolbar, the selected page on the right.
 public struct RootView: View {
     let environment: AppEnvironment
-    @State private var section: Section? = .install
+    @State private var section: Section?
+    @State private var showWiFi: Bool
 
-    public init(environment: AppEnvironment) {
+    public init(environment: AppEnvironment, section: Section = .initial()) {
         self.environment = environment
+        _section = State(initialValue: section)
+        _showWiFi = State(initialValue: ProcessInfo.processInfo.environment["AIRLOCK_SHOW_WIFI"] == "1")
     }
 
     public var body: some View {
         NavigationSplitView {
-            Sidebar(devices: environment.devices, section: $section)
-                .navigationSplitViewColumnWidth(min: 220, ideal: 240)
+            Sidebar(environment: environment, section: $section) { showWiFi = true }
+                .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
         } detail: {
             detail
                 .frame(minWidth: 560, minHeight: 480)
+                .navigationTitle((section ?? .install).rawValue)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        DevicePicker(devices: environment.devices) { showWiFi = true }
+                    }
+                }
+        }
+        .sheet(isPresented: $showWiFi) {
+            let usb = environment.devices.stage == .ready ? environment.devices.selectedSerial : nil
+            WiFiSheet(model: environment.pairing, usbSerial: usb)
         }
         .task { await environment.devices.run() }
+        .task { await environment.pairing.reconnectRemembered() }
         .onChange(of: environment.devices.selectedSerial, initial: true) { _, serial in
             environment.installQueue.targetDevice = environment.devices.stage == .ready ? serial : nil
             environment.apps.device = serial
@@ -53,9 +72,6 @@ public struct RootView: View {
         if let problem = environment.startupProblem {
             ContentUnavailableView("Airlock cannot start", systemImage: "exclamationmark.triangle", description: Text(problem))
                 .accessibilityIdentifier("startupProblem")
-        } else if section == .wireless {
-            let usb = environment.devices.stage == .ready ? environment.devices.selectedSerial : nil
-            PairingView(model: environment.pairing, usbSerial: usb)
         } else if environment.devices.stage != .ready {
             OnboardingView(
                 stage: environment.devices.stage,
@@ -66,87 +82,46 @@ public struct RootView: View {
             case .install: InstallView(queue: environment.installQueue, device: environment.devices.selectedInfo)
             case .apps: AppsView(model: environment.apps, brand: environment.devices.selectedInfo?.brand ?? .other)
             case .history: HistoryView(model: environment.apps)
-            case .wireless: EmptyView()
             }
         }
     }
 }
 
+/// Pages only, each with a count, and Wi-Fi pairing at the bottom.
 struct Sidebar: View {
-    let devices: DevicesModel
+    let environment: AppEnvironment
     @Binding var section: Section?
+    let connectOverWiFi: () -> Void
 
     var body: some View {
         List(selection: $section) {
-            SwiftUI.Section("Devices") {
-                if devices.devices.isEmpty {
-                    Label("No phone connected", systemImage: "iphone.slash")
-                }
-                ForEach(devices.devices) { device in
-                    DeviceRow(
-                        device: device, info: devices.details[device.serial],
-                        failed: devices.detailErrors[device.serial] != nil, isSelected: device.serial == devices.selectedSerial
-                    )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            devices.selectedSerial = device.serial
-                            if devices.detailErrors[device.serial] != nil {
-                                Task { await devices.loadDetails(device.serial) }
-                            }
-                        }
-                        .accessibilityIdentifier("device-\(device.serial.rawValue)")
-                }
-            }
-            SwiftUI.Section("Airlock") {
-                ForEach(Section.allCases) { item in
-                    Label(item.rawValue, systemImage: item.symbol)
-                        .tag(item)
-                        .accessibilityIdentifier("section-\(item.rawValue)")
-                }
+            ForEach(Section.allCases) { item in
+                Label(item.rawValue, systemImage: item.symbol)
+                    .badge(Self.badge(for: item, environment: environment))
+                    .tag(item)
+                    .accessibilityIdentifier("section-\(item.rawValue)")
             }
         }
         .listStyle(.sidebar)
-    }
-}
-
-struct DeviceRow: View {
-    let device: ConnectedDevice
-    let info: DeviceInfo?
-    /// Reading the device's details failed; the row says so and a click retries.
-    let failed: Bool
-    let isSelected: Bool
-
-    var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: device.serial.isWireless ? "wifi" : "cable.connector")
-                .foregroundStyle(isSelected ? Color.accentColor : .secondary)
-                .accessibilityLabel(device.serial.isWireless ? "Wi-Fi" : "USB")
-            VStack(alignment: .leading, spacing: 2) {
-                Text(info?.displayName ?? device.model?.replacingOccurrences(of: "_", with: " ") ?? device.serial.rawValue)
-                    .fontWeight(isSelected ? .semibold : .regular)
-                Text(status).font(.caption).foregroundStyle(.secondary)
+        .safeAreaInset(edge: .bottom) {
+            Button(action: connectOverWiFi) {
+                Label("Connect over Wi-Fi…", systemImage: "wifi")
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .buttonStyle(.borderless)
+            .padding(Spacing.medium)
+            .accessibilityIdentifier("connectWiFi")
         }
     }
 
-    private var status: String { Self.status(of: device.state, info: info, failed: failed) }
-
-    nonisolated static func status(of state: DeviceConnectionState, info: DeviceInfo?, failed: Bool) -> String {
-        switch state {
-        case .ready:
-            if let info { details(of: info) } else if failed { "Couldn't read details. Click to retry." } else { "Reading details…" }
-        case .unauthorized, .authorizing: "Waiting for Allow"
-        case .offline: "Not responding"
-        case .noPermissions: "No permission"
-        case .other(let mode): mode.capitalized
+    /// Files still in the queue, apps on the phone, and recorded changes. Zero shows no badge.
+    @MainActor
+    static func badge(for section: Section, environment: AppEnvironment) -> Int {
+        switch section {
+        case .install: environment.installQueue.items.filter { !$0.state.isFinished }.count
+        case .apps: environment.apps.apps.count
+        case .history: environment.apps.history.count
         }
-    }
-
-    /// "SM-S928B · Android 16 · 87%": the model code stays visible under a friendly name.
-    nonisolated static func details(of info: DeviceInfo) -> String {
-        let model = info.displayName == info.model ? [] : [info.model]
-        let battery = info.batteryPercent.map { ["\($0)%"] } ?? []
-        return (model + ["Android \(info.androidVersion)"] + battery).joined(separator: " · ")
     }
 }
 
