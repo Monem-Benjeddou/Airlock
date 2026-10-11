@@ -134,6 +134,7 @@ final class AirlockUITests: XCTestCase {
 
     func testQueueInstallsSeveralFilesInOrder() {
         launch(queue: ["one.apk", "two.apk", "three.apk"])
+        wait(for: "3 of 3 installed", timeout: 30)
         let installed = app.staticTexts.matching(NSPredicate(format: "value == 'Installed version 3' OR label == 'Installed version 3'"))
         let deadline = Date().addingTimeInterval(20)
         while installed.count < 3, Date() < deadline { RunLoop.current.run(until: Date().addingTimeInterval(0.2)) }
@@ -245,14 +246,18 @@ final class AirlockUITests: XCTestCase {
 
     /// Runs Apple's audit on the active window and fails with the screen name, printing the tree once for CI logs.
     ///
-    /// Two kinds of finding are framework noise and are skipped: "no description" on layout containers
-    /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), and anything
-    /// in the title bar, which AppKit draws.
+    /// Three kinds of finding are framework noise and are skipped: "no description" on layout containers
+    /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), anything
+    /// in the title bar, which AppKit draws, and contrast of system-coloured sidebar text.
     private func audit(_ screen: String) throws {
         app.activate()
         let window = app.windows.firstMatch.frame
+        let sidebar = app.outlines["Sidebar"].firstMatch
         try app.performAccessibilityAudit { [self] issue in
             if let element = issue.element {
+                // The sidebar's text uses the system's own colours on its translucent material, which the audit
+                // measures against a flattened backdrop; the app does not colour it.
+                if issue.auditType == .contrast, sidebar.exists, sidebar.frame.contains(element.frame) { return true }
                 let containers: [XCUIElement.ElementType] = [.group, .splitGroup, .touchBar]
                 if issue.auditType == .sufficientElementDescription, containers.contains(element.elementType) { return true }
                 if element.frame.maxY <= window.minY + 52 { return true }

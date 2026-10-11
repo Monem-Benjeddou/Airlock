@@ -24,11 +24,26 @@ struct InstallView: View {
             if let notice = queue.notice {
                 Text(notice).font(.callout).foregroundStyle(Palette.warning).padding(.horizontal)
             }
-            List {
-                ForEach(queue.items) { item in
-                    QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
+            if let summary = queue.summary {
+                Text(summary)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .accessibilityIdentifier("queueSummary")
+            }
+            // A plain stack, not a List: List's reused table rows sometimes kept showing an old state when a
+            // row changed height (an install finishing), so a finished install still looked stuck.
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(queue.items) { item in
+                        QueueRow(item: item, queue: queue) { id, package in pendingFix = (id, package) }
+                            .padding(.horizontal)
+                            .padding(.vertical, 6)
+                        Divider().padding(.leading)
+                    }
                 }
             }
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("installQueue")
             .overlay {
                 if queue.items.isEmpty {
