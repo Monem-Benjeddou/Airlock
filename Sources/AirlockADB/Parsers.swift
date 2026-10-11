@@ -399,7 +399,8 @@ public enum MdnsServicesParser {
 }
 
 public enum PairResult: Hashable, Sendable {
-    case paired
+    /// `guid` is the phone's mDNS instance name (`adb-<serial>-<suffix>`) when adb reports it.
+    case paired(guid: String?)
     case wrongCode
     case unreachable
     case failed(String)
@@ -408,7 +409,12 @@ public enum PairResult: Hashable, Sendable {
 public enum PairOutputParser {
     public static func parse(_ output: String) -> PairResult {
         let text = output.trimmingCharacters(in: .whitespacesAndNewlines)
-        if text.contains("Successfully paired") { return .paired }
+        if text.contains("Successfully paired") {
+            let guid = text.range(of: "[guid=").flatMap { start in
+                text[start.upperBound...].split(separator: "]").first.map(String.init)
+            }
+            return .paired(guid: guid)
+        }
         if text.contains("Wrong password") { return .wrongCode }
         if text.contains("unable to connect") { return .unreachable }
         return .failed(text)

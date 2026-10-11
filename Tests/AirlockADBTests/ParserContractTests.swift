@@ -303,7 +303,8 @@ struct ParserEdgeCaseTests {
     }
 
     @Test(arguments: [
-        ("Successfully paired to 192.168.1.20:37099 [guid=adb-R58M-AbCdEf]", PairResult.paired),
+        ("Successfully paired to 192.168.1.20:37099 [guid=adb-R58M-AbCdEf]", PairResult.paired(guid: "adb-R58M-AbCdEf")),
+        ("Successfully paired to 192.168.1.20:37099", .paired(guid: nil)),
         ("Failed: Wrong password or connection was dropped.", .wrongCode),
         ("error: unable to connect for pairing", .unreachable),
         ("Something else", .failed("Something else")),

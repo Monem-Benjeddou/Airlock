@@ -67,12 +67,14 @@ struct ADBClientHostTests {
         let client = makeClient(fake)
         await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4;reboot", port: 5555, code: "123456") }
         await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4", port: 0, code: "123456") }
-        await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4", port: 37000, code: "12a456") }
+        await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4", port: 37000, code: "12 456") }
         await #expect(throws: ADBError.self) { try await client.pair(host: "-flag", port: 37000, code: "123456") }
+        await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4", port: 37000, code: "12345") }
+        await #expect(throws: ADBError.self) { try await client.pair(host: "1.2.3.4", port: 37000, code: "pässword") }
         #expect(fake.calls.isEmpty)
 
         fake.on(["pair", "192.168.1.20:37099", "123456"], .ok("Successfully paired to 192.168.1.20:37099 [guid=adb-X]"))
-        #expect(try await client.pair(host: "192.168.1.20", port: 37099, code: "123456") == .paired)
+        #expect(try await client.pair(host: "192.168.1.20", port: 37099, code: "123456") == .paired(guid: "adb-X"))
     }
 
     @Test func connectAndDisconnect() async throws {

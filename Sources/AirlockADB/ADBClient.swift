@@ -102,8 +102,10 @@ public struct ADBClient: Sendable {
         }
     }
 
+    /// Pairs with a six-digit code or the password from a QR pairing session (ASCII letters and digits).
     public func pair(host: String, port: Int, code: String) async throws(ADBError) -> PairResult {
-        guard Self.isValidHost(host), (1...65_535).contains(port), code.count == 6, code.allSatisfy(\.isNumber) else {
+        let validCode = (6...64).contains(code.count) && code.allSatisfy { $0.isASCII && ($0.isLetter || $0.isNumber) }
+        guard Self.isValidHost(host), (1...65_535).contains(port), validCode else {
             throw .invalidArgument("pair \(host):\(port)")
         }
         let result = try await run(["pair", "\(host):\(port)", code])
