@@ -99,12 +99,12 @@ struct SafetyReportView: View {
                 RiskBadge(level: report.level)
                 VStack(alignment: .leading) {
                     Text(report.packageName).font(.title2.bold())
-                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).foregroundStyle(.secondary).textSelection(.enabled)
+                    Text("SHA-256 \(report.sha256)").font(.caption.monospaced()).foregroundStyle(Palette.subdued).textSelection(.enabled)
                 }
             }
             if report.reasons.isEmpty {
                 Text("Airlock found nothing worrying. That is not a guarantee: only install apps from sources you trust.")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Palette.subdued)
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(report.reasons) { reason in
@@ -131,7 +131,7 @@ struct SafetyReportView: View {
             GroupBox("Tracking and advertising") {
                 Group {
                     if report.trackers.isEmpty {
-                        Text("No known tracker libraries found.").foregroundStyle(.secondary)
+                        Text("No known tracker libraries found.").foregroundStyle(Palette.subdued)
                     } else {
                         ForEach(report.trackers) { Text("\($0.name) (\($0.category))") }
                     }
@@ -175,9 +175,9 @@ struct SignerSummary: View {
             Text(statusText).fontWeight(.semibold)
             if let certificate = check.certificates.first {
                 Text(certificate.subject)
-                Text(certificate.sha256).font(.caption.monospaced()).foregroundStyle(.secondary).textSelection(.enabled)
+                Text(certificate.sha256).font(.caption.monospaced()).foregroundStyle(Palette.subdued).textSelection(.enabled)
             }
-            Text(matchText).foregroundStyle(.secondary)
+            Text(matchText).foregroundStyle(Palette.subdued)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -219,6 +219,6 @@ struct ReputationSummary: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Palette.subdued)
     }
 }
