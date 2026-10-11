@@ -249,14 +249,15 @@ final class AirlockUITests: XCTestCase {
     /// Three kinds of finding are framework noise and are skipped: "no description" on layout containers
     /// (SwiftUI's invisible groups, split views and the Touch Bar, which VoiceOver does not stop on), anything
     /// in the title bar, which AppKit draws, and contrast of system-coloured sidebar text.
-    /// With `region`, only findings inside it count: under a sheet, macOS dims the window on purpose.
+    /// With `region`, only findings on its own elements count: under a sheet, macOS dims the window on purpose.
     private func audit(_ screen: String, within region: XCUIElement? = nil) throws {
+        let regionFrames = try region.map { try Self.frames(in: $0.snapshot()) }
         app.activate()
         let window = app.windows.firstMatch.frame
         let sidebar = app.outlines["Sidebar"].firstMatch
         try app.performAccessibilityAudit { [self] issue in
             if let element = issue.element {
-                if let region, !region.frame.contains(element.frame) { return true }
+                if let regionFrames, !regionFrames.contains(NSStringFromRect(element.frame)) { return true }
                 // The sidebar's text uses the system's own colours on its translucent material, which the audit
                 // measures against a flattened backdrop; the app does not colour it.
                 if issue.auditType == .contrast, sidebar.exists, sidebar.frame.contains(element.frame) { return true }
@@ -268,6 +269,11 @@ final class AirlockUITests: XCTestCase {
                  file: #filePath, line: #line)
             return true
         }
+    }
+
+    /// The frames of every element in a snapshot, as strings so they can go in a set.
+    private static func frames(in snapshot: any XCUIElementSnapshot) -> Set<String> {
+        snapshot.children.reduce(into: [NSStringFromRect(snapshot.frame)]) { $0.formUnion(frames(in: $1)) }
     }
 
     // MARK: F5 Wireless pairing
