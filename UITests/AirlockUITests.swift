@@ -118,7 +118,9 @@ final class AirlockUITests: XCTestCase {
         // On macOS only the disclosure triangle expands a DisclosureGroup, not its label; the sidebar has its
         // own triangles, so look inside the sheet.
         app.sheets.firstMatch.disclosureTriangles.firstMatch.click()
-        XCTAssertTrue(appears(containing: "cdcdcdcd", timeout: 3))
+        if !appears(containing: "cdcdcdcd", timeout: 3) {
+            fail("Technical details did not show the hash", file: #filePath, line: #line)
+        }
         wait(for: "skipInstall").click()
         wait(for: "Not installed")
     }

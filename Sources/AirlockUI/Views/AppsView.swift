@@ -43,7 +43,7 @@ struct AppsView: View {
             TableColumn("App") { (app: InstalledApp) in
                 VStack(alignment: .leading) {
                     Text(app.label ?? app.packageName.rawValue)
-                    if app.label != nil { Text(app.packageName.rawValue).font(.caption).foregroundStyle(.secondary) }
+                    if app.label != nil { Text(app.packageName.rawValue).font(.caption) }
                 }
             }
             TableColumn("Version") { (app: InstalledApp) in Text(app.versionName ?? String(app.versionCode)) }.width(90)
@@ -143,7 +143,6 @@ struct PresetSheet: View {
             Text("Debloat presets").font(.title2.bold())
             Text("Lists come from the Universal Android Debloater (UAD-ng) project. Every change can be undone from History, "
                 + "and core system apps can never be removed.")
-                .foregroundStyle(.secondary)
             HStack {
                 Picker("Preset", selection: Binding(get: { preset?.id }, set: { presetID = $0; chosen = [] })) {
                     ForEach(presets) { Text("\($0.name) (\($0.entries.count))").tag(Optional($0.id)) }
@@ -165,11 +164,11 @@ struct PresetSheet: View {
                             Text(entry.risk.rawValue.capitalized).font(.caption)
                                 .padding(.horizontal, 6).background(Capsule().fill(riskColor(entry.risk).opacity(0.2)))
                         }
-                        Text(entry.description).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                        Text(entry.description).font(.caption).lineLimit(2)
                     }
                 }
             }
-            .overlay { if entries.isEmpty { Text("Nothing from this preset is active on this phone.").foregroundStyle(.secondary) } }
+            .overlay { if entries.isEmpty { Text("Nothing from this preset is active on this phone.") } }
             HStack {
                 Button("Select All") { chosen = Set(entries.map(\.packageName)) }
                 Spacer()
@@ -200,7 +199,7 @@ struct HistoryView: View {
                     Text(entry.packageName.rawValue).font(.headline)
                     let date = entry.createdAt.formatted(date: .abbreviated, time: .shortened)
                     Text("\(describe(entry.kind)) · \(date) · \(entry.status.rawValue)")
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption)
                 }
                 Spacer()
                 if entry.isRestorable {
@@ -215,7 +214,7 @@ struct HistoryView: View {
                 }
             }
         }
-        .overlay { if model.history.isEmpty { Text("Changes you make appear here and can be undone.").foregroundStyle(.secondary) } }
+        .overlay { if model.history.isEmpty { Text("Changes you make appear here and can be undone.") } }
         .navigationTitle("History")
         .task(id: model.device) { await model.reload() }
         .confirmationDialog(

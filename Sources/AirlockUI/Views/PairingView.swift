@@ -31,7 +31,6 @@ struct PairingView: View {
     @ViewBuilder private var qrSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("On your phone, open Developer options › Wireless debugging › Pair device with QR code, then scan this code.")
-                .foregroundStyle(.secondary)
             switch model.state {
             case .waitingForScan:
                 if let image = model.qrImage {
@@ -60,7 +59,7 @@ struct PairingView: View {
 
     private var codeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Tap Pair device with pairing code on your phone and enter what it shows.").foregroundStyle(.secondary)
+            Text("Tap Pair device with pairing code on your phone and enter what it shows.")
             HStack {
                 TextField("IP address", text: $model.codeHost).frame(width: 150)
                 TextField("Port", text: $model.codePort).frame(width: 70)
@@ -78,7 +77,6 @@ struct PairingView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Connect the phone by USB first. Airlock switches it to wireless mode on port 5555; "
                 + "it stays available until the phone restarts.")
-                .foregroundStyle(.secondary)
             Button("Switch to Wireless") {
                 if let usbSerial { Task { await model.enableLegacy(usb: usbSerial) } }
             }
@@ -114,7 +112,6 @@ public struct SettingsView: View {
             SwiftUI.Section("VirusTotal") {
                 Text("Airlock can look up a file's SHA-256 hash on VirusTotal with your own free API key. "
                     + "Only the hash is sent: never the file, its name or your apps.")
-                    .foregroundStyle(.secondary)
                 if model.hasKey {
                     LabeledContent("API key", value: "Saved in your keychain")
                     Button("Remove Key", role: .destructive) { model.removeKey() }
