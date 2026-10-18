@@ -5,8 +5,8 @@
 *.xcodeproj
 *.xcworkspace
 xcuserdata/
-temp_auto_push.bat
 DerivedData/
+temp_auto_push.bat
 /build
 /coverage
 *.profraw
